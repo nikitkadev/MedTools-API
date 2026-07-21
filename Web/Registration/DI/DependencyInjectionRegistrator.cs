@@ -41,6 +41,7 @@ public static class DependencyInjectionRegistrator
     private static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IInvoiceQueryRepository, InvoiceQueryRepository>();
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
 
