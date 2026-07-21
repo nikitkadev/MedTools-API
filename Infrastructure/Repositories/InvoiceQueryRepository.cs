@@ -49,12 +49,12 @@ public class InvoiceQueryRepository(
 
         await using var reader = await command.ExecuteReaderAsync();
 
-        var result = new List<InvoicesShortlyDto>();
+        var result = new List<InvoiceShortlyDto>();
 
         while (await reader.ReadAsync())
         {
             result.Add(
-                new InvoicesShortlyDto(
+                new InvoiceShortlyDto(
                     InvoiceNumber: reader.GetString(reader.GetOrdinal("nschet")),
                     InvoiceDate: reader.GetDateTime(reader.GetOrdinal("dschet")),
                     InvoiceAmount: reader.GetDecimal(reader.GetOrdinal("summav")),

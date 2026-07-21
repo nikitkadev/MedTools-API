@@ -2,7 +2,7 @@
 
 using Core.Enums;
 
-using Application.Commands.RContol;
+using Application.Commands.RContol.GetInvoicesShortlyCommand;
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;

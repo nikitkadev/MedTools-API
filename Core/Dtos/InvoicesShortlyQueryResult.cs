@@ -1,10 +1,10 @@
 ﻿namespace Core.Dtos;
 
 public record InvoicesShortlyQueryResult(
-    List<InvoicesShortlyDto> InvoicesShortlies,
+    List<InvoiceShortlyDto> InvoicesShortlies,
     int TotalRecords);
 
-public record InvoicesShortlyDto(
+public record InvoiceShortlyDto(
     string InvoiceNumber,
     DateTime InvoiceDate,
     decimal InvoiceAmount,

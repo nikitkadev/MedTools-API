@@ -4,7 +4,7 @@ using Core.Dtos;
 using Core.Common;
 using Core.Interfaces.Repositories;
 
-namespace Application.Commands.RContol;
+namespace Application.Commands.RContol.GetInvoicesShortlyCommand;
 
 public class GetInvoicesShortlyCommandHandler(
     IInvoiceQueryRepository invoiceQueryRepository) : IRequestHandler<GetInvoicesShortlyCommand, Result<InvoicesShortlyQueryResult>>

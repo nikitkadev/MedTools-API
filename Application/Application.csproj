@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Commands\Auth\Logout\" />
+	  <Folder Include="Commands\RContol\GetPeriodsCommand\" />
 	</ItemGroup>
 
 </Project>
