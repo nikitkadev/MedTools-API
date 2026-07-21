@@ -3,6 +3,7 @@
 using Core.Enums;
 
 using Application.Commands.RContol.GetInvoicesShortlyCommand;
+using Application.Commands.RContol.GetOrganizationsCommand;
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
@@ -51,7 +52,16 @@ public class RControlData : IEndpoint
         ISender sender,
         CancellationToken cancellationToken)
     {
-        return Results.Ok();
+        var result = await sender.Send(
+            request: new GetOrganizationsCommand(TargetDb: Enum.Parse<TargetDbType>(targetDbType)),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
     }
 
     private static async Task<IResult> GetBillingPeriodsAsync(

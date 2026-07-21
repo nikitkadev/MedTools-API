@@ -42,6 +42,7 @@ public static class DependencyInjectionRegistrator
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IInvoiceQueryRepository, InvoiceQueryRepository>();
+        services.AddScoped<IMedOrganizationsQueryRepository, MedOrganizationsQueryRepository>();
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
 
