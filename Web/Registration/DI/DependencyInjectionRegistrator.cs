@@ -42,6 +42,7 @@ public static class DependencyInjectionRegistrator
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IInvoiceQueryRepository, InvoiceQueryRepository>();
+        services.AddScoped<IBillingPeriodsQueryRepository, BillingPeriodsQueryRepository>();
         services.AddScoped<IMedOrganizationsQueryRepository, MedOrganizationsQueryRepository>();
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
@@ -51,7 +52,8 @@ public static class DependencyInjectionRegistrator
 
     private static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        
+        services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(ApplicationMediatrMarker).Assembly));
+
         return services;
     }
 
@@ -112,7 +114,6 @@ public static class DependencyInjectionRegistrator
                 };
             });
 
-        services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(ApplicationMediatrMarker).Assembly));
 
         services.AddAutoMapper(config =>
         {

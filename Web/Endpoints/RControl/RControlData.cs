@@ -2,8 +2,9 @@
 
 using Core.Enums;
 
-using Application.Commands.RContol.GetInvoicesShortlyCommand;
+using Application.Commands.RContol.GetPeriodsCommand;
 using Application.Commands.RContol.GetOrganizationsCommand;
+using Application.Commands.RContol.GetInvoicesShortlyCommand;
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
@@ -65,11 +66,22 @@ public class RControlData : IEndpoint
     }
 
     private static async Task<IResult> GetBillingPeriodsAsync(
-        string orgCode,
         string targetDbType,
+        string orgCode,
         ISender sender,
         CancellationToken cancellationToken)
     {
-        return Results.Ok();
+        var result = await sender.Send(
+            new GetPeriodsCommand(
+                TargetDbType: Enum.Parse<TargetDbType>(targetDbType),
+                OrgCode: orgCode),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
     }
 }
