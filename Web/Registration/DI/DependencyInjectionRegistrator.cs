@@ -19,6 +19,8 @@ using Infrastructure.Options;
 
 using Web.Mapping;
 using Web.Options;
+using Core.Interfaces.Repositories.Categories;
+using Infrastructure.Repositories.Categories;
 
 
 namespace Web.Registration.DI;
@@ -44,6 +46,11 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IInvoiceQueryRepository, InvoiceQueryRepository>();
         services.AddScoped<IBillingPeriodsQueryRepository, BillingPeriodsQueryRepository>();
         services.AddScoped<IMedOrganizationsQueryRepository, MedOrganizationsQueryRepository>();
+        services.AddScoped<IInvoiceSummaryRepository, InvoiceSummaryRepository>();
+        services.AddScoped<IFinishedCasesRepository, FinishedCasesRepository>();
+        services.AddScoped<ICasesRepository, CasesRepository>();
+        services.AddScoped<IPatientSmoCategoryRepository, PatientSmoCategoryRepository>();
+
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
 
