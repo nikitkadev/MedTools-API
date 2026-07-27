@@ -4,12 +4,10 @@ using Core.Common;
 
 namespace Core.Interfaces.Repositories;
 
-public interface IInvoiceQueryRepository
+public interface IFinishedCasesRepository
 {
-    Task<Result<InvoicesShortlyQueryResult>> GetShortlyAsync(
-        string orgCode,
-        int year,
-        int month,
+    Task<Result<FinishedCasesQueryResult>> GetFromStoredProcedureAsync(
+        int schetUid,
         TargetDbType dbType,
         int page,
         int pageSize,

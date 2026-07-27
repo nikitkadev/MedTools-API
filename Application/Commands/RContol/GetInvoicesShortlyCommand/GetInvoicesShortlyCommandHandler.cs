@@ -18,8 +18,8 @@ public class GetInvoicesShortlyCommandHandler(
             year: request.Year,
             month: request.Month,
             dbType: request.TargetDb,
-            skip: request.Skip,
-            take: request.Take,
+            page: request.Page,
+            pageSize: request.PageSize,
             searchString: request.SearchString);
     }
 }

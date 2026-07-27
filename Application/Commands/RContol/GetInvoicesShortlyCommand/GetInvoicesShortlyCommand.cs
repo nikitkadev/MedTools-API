@@ -10,7 +10,7 @@ public record GetInvoicesShortlyCommand(
     string OrgCode,
     int Year,
     int Month,
-    int Skip,
-    int Take,
+    int Page,
+    int PageSize,
     TargetDbType TargetDb,
     string SearchString) : IRequest<Result<InvoicesShortlyQueryResult>>;
