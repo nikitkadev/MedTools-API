@@ -69,9 +69,10 @@ public class PatientSmoCategoryRepository(
 
         }
 
-        return Result<PatientSmoQueryResult>.Success(new PatientSmoQueryResult(
-            Patient: patients[0],
-            SMO: smo[0]));
+        return Result<PatientSmoQueryResult>.Success(
+            new PatientSmoQueryResult(
+                Patient: patients[0],
+                SMO: smo[0]));
 
     }
 }

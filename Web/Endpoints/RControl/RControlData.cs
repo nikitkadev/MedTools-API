@@ -8,10 +8,12 @@ using Application.Commands.RContol.GetFinishedCasesCommand;
 using Application.Commands.RContol.GetInvoiceSummaryCommand;
 using Application.Commands.RContol.GetInvoicesShortlyCommand;
 
-using Web.Dtos.Requests.RConrtol;
-using Web.Registration.Endpoints;
 using Application.Commands.RContol.GetCasesCommand;
 using Application.Commands.RContol.Categories.GetPatientSmoDataCommand;
+using Application.Commands.RContol.Categories.GetCasesDataCommand;
+
+using Web.Dtos.Requests.RConrtol;
+using Web.Registration.Endpoints;
 
 namespace Web.Endpoints.RControl;
 
@@ -19,9 +21,7 @@ public class RControlData : IEndpoint
 {
     public void Register(IEndpointRouteBuilder endpointsBuilder)
     {
-        var group = endpointsBuilder
-            .MapGroup("/rcontrol")
-            .WithTags("RControlData");
+        var group = endpointsBuilder.MapGroup("/rcontrol").WithTags("RControlData");
 
         group.MapGet("/med-organizations", GetMedOrganizationsAsync);
         group.MapGet("/billing-periods", GetBillingPeriodsAsync);
@@ -30,6 +30,7 @@ public class RControlData : IEndpoint
         group.MapPost("/finished-cases", GetFinishedCasesAsync);
         group.MapGet("/cases", GetCasesAsync);
         group.MapGet("/categories/patient-smo", GetPatientSmoCategoryDataAsync);
+        group.MapGet("/categories/cases", GetCasesCategoryDataAsync);
     }
 
     private static async Task<IResult> GetInvoicesShortlyAsync(
@@ -163,6 +164,26 @@ public class RControlData : IEndpoint
     {
         var result = await sender.Send(
             request: new GetPatientSmoDataCommand(
+                SluchUid: sluchUid,
+                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetCasesCategoryDataAsync(
+        int sluchUid,
+        string targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetCasesDataCommand(
                 SluchUid: sluchUid,
                 TargetDb: Enum.Parse<TargetDbType>(targetDb)),
             cancellationToken: cancellationToken);
