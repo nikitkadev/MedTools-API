@@ -1,0 +1,71 @@
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+
+using Core.Enums;
+using Core.Common;
+using Core.Dtos.Categories.Oncology;
+using Core.Interfaces.Repositories.Categories;
+
+using Infrastructure.Factories;
+
+namespace Infrastructure.Repositories.Categories;
+
+public class OncologyCategoryRepository(
+    DbContextFactory dbContextFactory) : IOncologyCategoryRepository
+{
+    public async Task<Result<ConsultationsQueryResult>> GetConsultationFromStoredProcedureAsync(
+        int sluchUid, 
+        TargetDbType targetDb)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+        
+        string expression = "EXEC sp26_onk_category_get_consultations @sluchUid";
+
+        var records = await dbContext.Consultations.FromSqlRaw(expression, [new SqlParameter("@sluchUid", sluchUid)]).ToListAsync();
+
+        return Result<ConsultationsQueryResult>.Success(new ConsultationsQueryResult(records));
+    }
+
+
+    public async Task<Result<OncSluchQueryResult>> GetOnkologyCaseFromStoredProcedureAsync(
+        int sluchUid,
+        TargetDbType targetDb)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        string expression = "EXEC sp26_onk_category_get_onk_sluch @sluchUid";
+
+        var records = await dbContext.OncCases.FromSqlRaw(expression, [new SqlParameter("@sluchUid", sluchUid)]).ToListAsync();
+        var record = records.FirstOrDefault();
+
+        if (record is null)
+        {
+            return Result<OncSluchQueryResult>.Failure("Данных не найдено!");
+        }
+
+        return Result<OncSluchQueryResult>.Success(new OncSluchQueryResult(record));
+    }
+
+
+    public async Task<Result<DetailedOncSluchQueryResult>> GetDetailedOncSluchFromStoredProcedureAsync(
+        int oncSluchUid, 
+        TargetDbType targetDb)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        string expressionForServices = "EXEC sp26_onk_category_get_onk_usls @onkSluchUid";
+        string expressionForСontraindications = "EXEC sp26_onk_category_get_contraindications @onkSluchUid";
+        string expressionForDiags = "EXEC sp26_onk_category_get_diags @onkSluchUid";
+
+        var services = await dbContext.OncologyServices.FromSqlRaw(expressionForServices, [new SqlParameter("@onkSluchUid", oncSluchUid)]).ToListAsync();
+        var contraindications = await dbContext.Сontraindications.FromSqlRaw(expressionForСontraindications, [new SqlParameter("@onkSluchUid", oncSluchUid)]).ToListAsync();
+        var diags = await dbContext.Diags.FromSqlRaw(expressionForDiags, [new SqlParameter("@onkSluchUid", oncSluchUid)]).ToListAsync();
+
+        return Result<DetailedOncSluchQueryResult>.Success(
+            new DetailedOncSluchQueryResult(
+                Services: services,
+                Diags: diags,
+                Contraindications: contraindications));
+
+    }
+}

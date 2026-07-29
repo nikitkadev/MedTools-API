@@ -1,0 +1,11 @@
+﻿using MediatR;
+
+using Core.Enums;
+using Core.Common;
+using Core.Dtos.Categories.Oncology;
+
+namespace Application.Commands.RContol.Categories.Oncology.GetConsultationCommand;
+
+public record GetConsultationCommand(
+    int SluchUid,
+    TargetDbType TargetDb) : IRequest<Result<ConsultationsQueryResult>>;

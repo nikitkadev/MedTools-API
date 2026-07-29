@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using Core.Dtos.Categories.Onkology;
+using Core.Dtos.Categories.Oncology;
 
 using Infrastructure.Database.Enitites.Auth;
 
@@ -14,7 +14,11 @@ public abstract class MedToolsDbContext(
 
     public DbSet<UserEntity> Users { get; set; }
 
-    public DbSet<OnkSluchDto> OnkCases { get; set; }
+    public DbSet<OncSluchDto> OncCases { get; set; }
+    public DbSet<ConsultationDto> Consultations { get; set; }
+    public DbSet<OncologyServiceDto> OncologyServices { get; set; }
+    public DbSet<OncologyContraindicationDto> Сontraindications { get; set; }
+    public DbSet<DiagDto> Diags { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

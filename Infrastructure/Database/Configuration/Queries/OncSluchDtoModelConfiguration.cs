@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using Core.Dtos.Categories.Onkology;
+using Core.Dtos.Categories.Oncology;
 
 namespace Infrastructure.Database.Configuration.Queries;
 
-public class OnkSluchDtoModelConfiguration : IEntityTypeConfiguration<OnkSluchDto>
+public class OncSluchDtoModelConfiguration : IEntityTypeConfiguration<OncSluchDto>
 {
-    public void Configure(EntityTypeBuilder<OnkSluchDto> builder)
+    public void Configure(EntityTypeBuilder<OncSluchDto> builder)
     {
         builder.HasNoKey();
 

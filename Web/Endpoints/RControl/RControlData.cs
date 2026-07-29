@@ -9,13 +9,15 @@ using Application.Commands.RContol.GetInvoiceSummaryCommand;
 using Application.Commands.RContol.GetInvoicesShortlyCommand;
 
 using Application.Commands.RContol.GetCasesCommand;
-using Application.Commands.RContol.Categories.GetPatientSmoDataCommand;
 using Application.Commands.RContol.Categories.GetCasesDataCommand;
+using Application.Commands.RContol.Categories.GetPatientSmoDataCommand;
+using Application.Commands.RContol.Categories.Oncology.GetOncSluchCommand;
+using Application.Commands.RContol.Categories.Oncology.GetConsultationCommand;
+using Application.Commands.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
 
-using Application.Commands.RContol.Categories.Onkology.GetOnkSluchCommand;
 
 namespace Web.Endpoints.RControl;
 
@@ -33,7 +35,10 @@ public class RControlData : IEndpoint
         group.MapGet("/cases", GetCasesAsync);
         group.MapGet("/categories/patient-smo", GetPatientSmoCategoryDataAsync);
         group.MapGet("/categories/cases", GetCasesCategoryDataAsync);
-        group.MapGet("/categories/onkology/onk-sluch", GetOnkologyCategoryOnkCaseAsync);
+        group.MapGet("/categories/oncology/onc-sluch", GetOncologyCategoryOnkCaseAsync);
+        group.MapGet("/categories/oncology/consultations", GetOncologyCategoryConsultationsAsync);
+        group.MapGet("/categories/oncology/onc-sluch-detailed", GetOncologyCategoryOncSluchDetailed);
+        
     }
 
     private static async Task<IResult> GetInvoicesShortlyAsync(
@@ -199,14 +204,14 @@ public class RControlData : IEndpoint
         return Results.Ok(result);
     }
 
-    private static async Task<IResult> GetOnkologyCategoryOnkCaseAsync(
+    private static async Task<IResult> GetOncologyCategoryOnkCaseAsync(
         int sluchUid,
         string targetDb,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetOnkSluchCommand(
+            request: new GetOncSluchCommand(
                 SluchUid: sluchUid,
                 TargetDb: Enum.Parse<TargetDbType>(targetDb)),
             cancellationToken: cancellationToken);
@@ -218,4 +223,45 @@ public class RControlData : IEndpoint
 
         return Results.Ok(result);
     }
+
+    private static async Task<IResult> GetOncologyCategoryConsultationsAsync(
+        int sluchUid,
+        string targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetConsultationCommand(
+                SluchUid: sluchUid,
+                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetOncologyCategoryOncSluchDetailed(
+        int oncSluchUid,
+        string targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDetailedOncSluchCommand(
+                OncSluchUid: oncSluchUid,
+                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
 }

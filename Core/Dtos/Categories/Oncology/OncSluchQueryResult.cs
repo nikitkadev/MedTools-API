@@ -1,11 +1,9 @@
-﻿using System.Diagnostics.Contracts;
+﻿namespace Core.Dtos.Categories.Oncology;
 
-namespace Core.Dtos.Categories.Onkology;
+public record OncSluchQueryResult(
+    OncSluchDto OncSluch);
 
-public record OnkSluchQueryResult(
-    OnkSluchDto OnkSluch);
-
-public class OnkSluchDto
+public class OncSluchDto
 {
     public int Uid { get; set; }
     public int SluchUid { get; set; }
