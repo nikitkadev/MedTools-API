@@ -1,6 +1,9 @@
 ﻿using System.Reflection;
 
 using Microsoft.EntityFrameworkCore;
+
+using Core.Dtos.Categories.Onkology;
+
 using Infrastructure.Database.Enitites.Auth;
 
 namespace Infrastructure.Database;
@@ -10,6 +13,8 @@ public abstract class MedToolsDbContext(
 {
 
     public DbSet<UserEntity> Users { get; set; }
+
+    public DbSet<OnkSluchDto> OnkCases { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

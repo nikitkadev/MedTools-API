@@ -15,6 +15,8 @@ using Application.Commands.RContol.Categories.GetCasesDataCommand;
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
 
+using Application.Commands.RContol.Categories.Onkology.GetOnkSluchCommand;
+
 namespace Web.Endpoints.RControl;
 
 public class RControlData : IEndpoint
@@ -31,6 +33,7 @@ public class RControlData : IEndpoint
         group.MapGet("/cases", GetCasesAsync);
         group.MapGet("/categories/patient-smo", GetPatientSmoCategoryDataAsync);
         group.MapGet("/categories/cases", GetCasesCategoryDataAsync);
+        group.MapGet("/categories/onkology/onk-sluch", GetOnkologyCategoryOnkCaseAsync);
     }
 
     private static async Task<IResult> GetInvoicesShortlyAsync(
@@ -184,6 +187,26 @@ public class RControlData : IEndpoint
     {
         var result = await sender.Send(
             request: new GetCasesDataCommand(
+                SluchUid: sluchUid,
+                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetOnkologyCategoryOnkCaseAsync(
+        int sluchUid,
+        string targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetOnkSluchCommand(
                 SluchUid: sluchUid,
                 TargetDb: Enum.Parse<TargetDbType>(targetDb)),
             cancellationToken: cancellationToken);
