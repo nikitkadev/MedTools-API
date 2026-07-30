@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Core.Dtos.Categories.Oncology;
 
-namespace Infrastructure.Database.Configuration.Queries;
+namespace Infrastructure.Database.Configuration.StoredProcedureModel;
 
 public class ConsultationDtoModelConfiguration : IEntityTypeConfiguration<ConsultationDto>
 {

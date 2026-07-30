@@ -3,20 +3,21 @@
 using Core.Enums;
 
 using Application.Commands.RContol.Filters.GetPeriodsCommand;
+using Application.Commands.RContol.MainField.GetCasesCommand;
+using Application.Commands.RContol.Categories.GetCasesDataCommand;
 using Application.Commands.RContol.Filters.GetOrganizationsCommand;
 using Application.Commands.RContol.MainField.GetFinishedCasesCommand;
 using Application.Commands.RContol.MainField.GetInvoiceSummaryCommand;
-using Application.Commands.RContol.MainField.GetInvoicesShortlyCommand;
-using Application.Commands.RContol.MainField.GetCasesCommand;
-using Application.Commands.RContol.Categories.GetCasesDataCommand;
 using Application.Commands.RContol.Categories.GetPatientSmoDataCommand;
+using Application.Commands.RContol.MainField.GetInvoicesShortlyCommand;
 using Application.Commands.RContol.Categories.Oncology.GetOncSluchCommand;
+using Application.Commands.RContol.Categories.Oncology.GetMedicamentsCommand;
 using Application.Commands.RContol.Categories.Oncology.GetConsultationCommand;
 using Application.Commands.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
-using Application.Commands.RContol.Categories.Oncology.GetMedicamentsCommand;
+using Application.Commands.RContol.Categories.Oncology.GetInjectionsCommand;
 
 
 namespace Web.Endpoints.RControl;
@@ -39,6 +40,7 @@ public class RControlData : IEndpoint
         group.MapGet("/categories/oncology/consultations", GetOncologyCategoryConsultationsAsync);
         group.MapGet("/categories/oncology/onc-sluch-detailed", GetOncologyCategoryOncSluchDetailed);
         group.MapGet("/categories/oncology/medicaments", GetOncologyCategoryMedicamentsAsync);
+        group.MapGet("/categories/oncology/injections", GetOncologyCategoryInjectionsAsync);
         
     }
 
@@ -284,5 +286,25 @@ public class RControlData : IEndpoint
 
         return Results.Ok(result);
 
+    }
+
+    private static async Task<IResult> GetOncologyCategoryInjectionsAsync(
+        int medicamentUid,
+        string targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetInjectionsCommand(
+                MedicamentUid: medicamentUid,
+                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
     }
 }

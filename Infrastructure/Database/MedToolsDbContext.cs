@@ -20,6 +20,8 @@ public abstract class MedToolsDbContext(
     public DbSet<OncologyContraindicationDto> Сontraindications { get; set; }
     public DbSet<DiagDto> Diags { get; set; }
     public DbSet<MedicamentDto> Medicaments { get; set; }
+    public DbSet<InjDateDto> InjDates { get; set; }
+    public DbSet<InjectionDto> Injections { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

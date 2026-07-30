@@ -10,8 +10,7 @@ using Infrastructure.Factories;
 
 namespace Infrastructure.Repositories.Categories;
 
-public class OncologyCategoryRepository(
-    DbContextFactory dbContextFactory) : IOncologyCategoryRepository
+public class OncologyCategoryRepository(DbContextFactory dbContextFactory) : IOncologyCategoryRepository
 {
     public async Task<Result<ConsultationsQueryResult>> GetConsultationFromStoredProcedureAsync(
         int sluchUid, 
@@ -25,7 +24,6 @@ public class OncologyCategoryRepository(
 
         return Result<ConsultationsQueryResult>.Success(new ConsultationsQueryResult(records));
     }
-
 
     public async Task<Result<OncSluchQueryResult>> GetOnkologyCaseFromStoredProcedureAsync(
         int sluchUid,
@@ -45,7 +43,6 @@ public class OncologyCategoryRepository(
 
         return Result<OncSluchQueryResult>.Success(new OncSluchQueryResult(record));
     }
-
 
     public async Task<Result<DetailedOncSluchQueryResult>> GetDetailedOncSluchFromStoredProcedureAsync(
         int oncSluchUid, 
@@ -82,5 +79,23 @@ public class OncologyCategoryRepository(
         return Result<MedicamentsQueryResult>.Success(
             new MedicamentsQueryResult(
                 Medicaments: records));
+    }
+
+    public async Task<Result<InjectionsQueryResult>> GetInjectionDataFromStoredProcedureAsync(
+        int medicamentUid, 
+        TargetDbType targetDb)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        string expressionForInjDates = "EXEC sp26_onk_category_get_inj_dates @lekPrUid";
+        string expressionForInjections = "EXEC sp26_onk_category_get_injections @lekPrUid";
+
+        var dates = await dbContext.InjDates.FromSqlRaw(expressionForInjDates, [new SqlParameter("@lekPrUid", medicamentUid)]).ToListAsync();
+        var injectons = await dbContext.Injections.FromSqlRaw(expressionForInjections, [new SqlParameter("@lekPrUid", medicamentUid)]).ToListAsync();
+
+        return Result<InjectionsQueryResult>.Success(
+            new InjectionsQueryResult(
+                InjDates: dates,
+                Injs: injectons));
     }
 }
