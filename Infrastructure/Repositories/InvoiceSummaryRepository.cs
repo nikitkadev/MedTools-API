@@ -6,7 +6,7 @@ using Infrastructure.Factories;
 using Core.Dtos;
 using Core.Enums;
 using Core.Common;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.MainField;
 
 namespace Infrastructure.Repositories;
 

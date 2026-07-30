@@ -2,9 +2,9 @@
 
 using Core.Common;
 using Core.Dtos;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.Filters;
 
-namespace Application.Commands.RContol.GetOrganizationsCommand;
+namespace Application.Commands.RContol.Filters.GetOrganizationsCommand;
 
 public class GetOrganizationsCommandHandler(
     IMedOrganizationsQueryRepository medOrganizationsQueryRepository

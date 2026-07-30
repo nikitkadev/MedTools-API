@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Core.Interfaces.Auth;
-using Core.Interfaces.Repositories;
 
 using Application;
 
@@ -21,6 +20,9 @@ using Web.Mapping;
 using Web.Options;
 using Core.Interfaces.Repositories.Categories;
 using Infrastructure.Repositories.Categories;
+using Core.Interfaces.Repositories.Filters;
+using Core.Interfaces.Repositories.MainField;
+using Core.Interfaces.Repositories.Users;
 
 
 namespace Web.Registration.DI;

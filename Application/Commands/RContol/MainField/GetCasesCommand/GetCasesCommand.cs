@@ -4,7 +4,7 @@ using Core.Dtos;
 using Core.Enums;
 using Core.Common;
 
-namespace Application.Commands.RContol.GetCasesCommand;
+namespace Application.Commands.RContol.MainField.GetCasesCommand;
 
 public record GetCasesCommand(
     int ZSlUid,

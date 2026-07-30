@@ -2,9 +2,9 @@
 
 using Core.Dtos;
 using Core.Common;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.MainField;
 
-namespace Application.Commands.RContol.GetInvoiceSummaryCommand;
+namespace Application.Commands.RContol.MainField.GetInvoiceSummaryCommand;
 
 public class GetInvoiceSummaryCommandHandler(
     IInvoiceSummaryRepository invoiceSummaryRepository) : IRequestHandler<GetInvoiceSummaryCommand, Result<InvoiceSummaryQueryResult>>

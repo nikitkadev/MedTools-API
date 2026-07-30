@@ -2,9 +2,9 @@
 
 using Core.Dtos;
 using Core.Common;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.MainField;
 
-namespace Application.Commands.RContol.GetFinishedCasesCommand;
+namespace Application.Commands.RContol.MainField.GetFinishedCasesCommand;
 
 public class GetFinishedCasesCommandHandler(
     IFinishedCasesRepository finishedCasesRepository) : IRequestHandler<GetFinishedCasesCommand, Result<FinishedCasesQueryResult>>

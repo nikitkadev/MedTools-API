@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Core.Dtos;
 using Core.Enums;
 using Core.Common;
-using Core.Interfaces.Repositories;
 
 using Infrastructure.Factories;
+using Core.Interfaces.Repositories.MainField;
 
 
 namespace Infrastructure.Repositories;

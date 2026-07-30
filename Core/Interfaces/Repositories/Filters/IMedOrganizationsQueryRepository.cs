@@ -2,7 +2,7 @@
 using Core.Dtos;
 using Core.Enums;
 
-namespace Core.Interfaces.Repositories;
+namespace Core.Interfaces.Repositories.Filters;
 
 public interface IMedOrganizationsQueryRepository
 {

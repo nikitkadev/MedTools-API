@@ -5,10 +5,10 @@ using AutoMapper;
 using Core.Enums;
 using Core.Common;
 using Core.Entities;
-using Core.Interfaces.Repositories;
 
 using Infrastructure.Factories;
 using Infrastructure.Database.Enitites.Auth;
+using Core.Interfaces.Repositories.Users;
 
 namespace Infrastructure.Repositories;
 

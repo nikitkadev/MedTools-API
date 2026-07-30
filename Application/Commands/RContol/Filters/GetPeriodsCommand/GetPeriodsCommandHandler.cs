@@ -2,9 +2,9 @@
 
 using Core.Dtos;
 using Core.Common;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.Filters;
 
-namespace Application.Commands.RContol.GetPeriodsCommand;
+namespace Application.Commands.RContol.Filters.GetPeriodsCommand;
 
 public class GetPeriodsCommandHandler(
     IBillingPeriodsQueryRepository billingPeriodsQueryRepository) : IRequestHandler<GetPeriodsCommand, Result<BillingPeriodsQueryResult>>

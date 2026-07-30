@@ -4,7 +4,7 @@ using Core.Dtos;
 using Core.Enums;
 using Core.Common;
 
-namespace Application.Commands.RContol.GetPeriodsCommand;
+namespace Application.Commands.RContol.Filters.GetPeriodsCommand;
 
 public record GetPeriodsCommand(
     TargetDbType TargetDbType,

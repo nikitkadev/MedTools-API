@@ -2,7 +2,7 @@
 using Core.Enums;
 using Core.Common;
 
-namespace Core.Interfaces.Repositories;
+namespace Core.Interfaces.Repositories.Filters;
 
 public interface IBillingPeriodsQueryRepository
 {

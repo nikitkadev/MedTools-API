@@ -2,9 +2,9 @@
 
 using Core.Common;
 using Core.Dtos;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.MainField;
 
-namespace Application.Commands.RContol.GetCasesCommand;
+namespace Application.Commands.RContol.MainField.GetCasesCommand;
 
 public class GetCasesCommandHandler(
     ICasesRepository casesRepository) : IRequestHandler<GetCasesCommand, Result<CasesQueryResult>>

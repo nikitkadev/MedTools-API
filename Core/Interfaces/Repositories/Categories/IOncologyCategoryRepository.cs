@@ -17,4 +17,8 @@ public interface IOncologyCategoryRepository
     Task<Result<DetailedOncSluchQueryResult>> GetDetailedOncSluchFromStoredProcedureAsync(
         int oncSluchUid,
         TargetDbType targetDb);
+
+    Task<Result<MedicamentsQueryResult>> GetMedicamentsFromStoredProcedureAsync(
+        int oncServiceUid,
+        TargetDbType targetDb);
 }

@@ -4,7 +4,7 @@ using Core.Enums;
 using Core.Common;
 using Core.Entities;
 using Core.Interfaces.Auth;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.Users;
 
 namespace Application.Commands.UserManagment.UserRegistration;
 

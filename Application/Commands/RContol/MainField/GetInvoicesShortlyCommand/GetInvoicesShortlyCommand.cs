@@ -4,7 +4,7 @@ using Core.Common;
 using Core.Dtos;
 using Core.Enums;
 
-namespace Application.Commands.RContol.GetInvoicesShortlyCommand;
+namespace Application.Commands.RContol.MainField.GetInvoicesShortlyCommand;
 
 public record GetInvoicesShortlyCommand(
     string OrgCode,

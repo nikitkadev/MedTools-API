@@ -2,13 +2,12 @@
 
 using Core.Enums;
 
-using Application.Commands.RContol.GetPeriodsCommand;
-using Application.Commands.RContol.GetOrganizationsCommand;
-using Application.Commands.RContol.GetFinishedCasesCommand;
-using Application.Commands.RContol.GetInvoiceSummaryCommand;
-using Application.Commands.RContol.GetInvoicesShortlyCommand;
-
-using Application.Commands.RContol.GetCasesCommand;
+using Application.Commands.RContol.Filters.GetPeriodsCommand;
+using Application.Commands.RContol.Filters.GetOrganizationsCommand;
+using Application.Commands.RContol.MainField.GetFinishedCasesCommand;
+using Application.Commands.RContol.MainField.GetInvoiceSummaryCommand;
+using Application.Commands.RContol.MainField.GetInvoicesShortlyCommand;
+using Application.Commands.RContol.MainField.GetCasesCommand;
 using Application.Commands.RContol.Categories.GetCasesDataCommand;
 using Application.Commands.RContol.Categories.GetPatientSmoDataCommand;
 using Application.Commands.RContol.Categories.Oncology.GetOncSluchCommand;
@@ -17,6 +16,7 @@ using Application.Commands.RContol.Categories.Oncology.GetDetailedOncSluchComman
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
+using Application.Commands.RContol.Categories.Oncology.GetMedicamentsCommand;
 
 
 namespace Web.Endpoints.RControl;
@@ -38,6 +38,7 @@ public class RControlData : IEndpoint
         group.MapGet("/categories/oncology/onc-sluch", GetOncologyCategoryOnkCaseAsync);
         group.MapGet("/categories/oncology/consultations", GetOncologyCategoryConsultationsAsync);
         group.MapGet("/categories/oncology/onc-sluch-detailed", GetOncologyCategoryOncSluchDetailed);
+        group.MapGet("/categories/oncology/medicaments", GetOncologyCategoryMedicamentsAsync);
         
     }
 
@@ -264,4 +265,24 @@ public class RControlData : IEndpoint
         return Results.Ok(result);
     }
 
+    private static async Task<IResult> GetOncologyCategoryMedicamentsAsync(
+        int oncServiceUid,
+        string targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicamentsCommand(
+                OncServiceUid: oncServiceUid,
+                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+
+    }
 }

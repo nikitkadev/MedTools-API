@@ -2,7 +2,7 @@
 
 using Core.Common;
 using Core.Interfaces.Auth;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.Users;
 
 namespace Application.Commands.Auth.Login;
 

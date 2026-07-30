@@ -1,7 +1,7 @@
 ﻿using Core.Common;
 using Core.Entities;
 
-namespace Core.Interfaces.Repositories;
+namespace Core.Interfaces.Repositories.Users;
 
 public interface IUserRepository
 {
