@@ -9,4 +9,8 @@ public interface IKsgVmpCategoryRepository
     Task<Result<KsgVmpCardsDataQueryResult>> GetCardsDataAsync(
         int sluchUid,
         TargetDbType targetDb);
+
+    Task<Result<KsgVmpTablesQueryResult>> GetTablesDataAsync(
+        int ksgKpgUid,
+        TargetDbType targetDb);
 }

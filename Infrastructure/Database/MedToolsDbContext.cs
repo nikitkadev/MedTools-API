@@ -2,11 +2,11 @@
 
 using Microsoft.EntityFrameworkCore;
 
+using Core.Dtos.Categories.KsgVmp;
 using Core.Dtos.Categories.Oncology;
 using Core.Dtos.Categories.ProvidedServices;
 
 using Infrastructure.Database.Enitites.Auth;
-using Core.Dtos.Categories.KsgVmp;
 
 namespace Infrastructure.Database;
 
@@ -28,6 +28,8 @@ public abstract class MedToolsDbContext(
     public DbSet<MedDevDto> MedDevs { get; set; }
     public DbSet<KsgKpgDto> KsgKpgs { get; set; }
     public DbSet<VmpDto> Vmps { get; set; }
+    public DbSet<CritDto> Crits { get; set; }
+    public DbSet<SlKoefDto> SlKoefs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

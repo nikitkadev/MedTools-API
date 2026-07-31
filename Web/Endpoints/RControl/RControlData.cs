@@ -21,6 +21,7 @@ using Application.Commands.RContol.Categories.ProvidedServices.GetProvidedServic
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
+using Application.Commands.RContol.Categories.KsgVmp.GetKsgVmpTablesDataCommand;
 
 
 namespace Web.Endpoints.RControl;
@@ -381,6 +382,17 @@ public class RControlData : IEndpoint
         ISender sender,
         CancellationToken cancellationToken)
     {
-        return Results.Ok();
+        var result = await sender.Send(
+            request: new GetKsgVmpTablesDataCommand(
+                KsgKpgUid: ksgKpgUid,
+                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
     }
 }

@@ -37,4 +37,22 @@ public class KsgVmpCategoryRepository(
                 KsgKpg: ksgKpgRecord,
                 Vmp: vmpRecord));
     }
+
+    public async Task<Result<KsgVmpTablesQueryResult>> GetTablesDataAsync(
+        int ksgKpgUid, 
+        TargetDbType targetDb)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        string expressionForCrits = "EXEC sp26_ksgvmp_category_get_crits @ksgKpgUid";
+        string expressionForSlKoefs = "EXEC sp26_ksgvmp_category_get_sl_koefs @ksgKpgUid";
+
+        var crits = await dbContext.Crits.FromSqlRaw(expressionForCrits, [new SqlParameter("@ksgKpgUid", ksgKpgUid)]).ToListAsync();
+        var slKoefs = await dbContext.SlKoefs.FromSqlRaw(expressionForSlKoefs, [new SqlParameter("@ksgKpgUid", ksgKpgUid)]).ToListAsync();
+
+        return Result<KsgVmpTablesQueryResult>.Success(
+            new KsgVmpTablesQueryResult(
+                Crits: crits,
+                SlKoefs: slKoefs));
+    }
 }
