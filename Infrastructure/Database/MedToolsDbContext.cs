@@ -6,6 +6,7 @@ using Core.Dtos.Categories.Oncology;
 using Core.Dtos.Categories.ProvidedServices;
 
 using Infrastructure.Database.Enitites.Auth;
+using Core.Dtos.Categories.KsgVmp;
 
 namespace Infrastructure.Database;
 
@@ -25,6 +26,8 @@ public abstract class MedToolsDbContext(
     public DbSet<InjectionDto> Injections { get; set; }
     public DbSet<ProvidedServiceDto> ProvidedServices { get; set; }
     public DbSet<MedDevDto> MedDevs { get; set; }
+    public DbSet<KsgKpgDto> KsgKpgs { get; set; }
+    public DbSet<VmpDto> Vmps { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

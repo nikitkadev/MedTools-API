@@ -14,12 +14,13 @@ using Application.Commands.RContol.Categories.Oncology.GetOncSluchCommand;
 using Application.Commands.RContol.Categories.Oncology.GetInjectionsCommand;
 using Application.Commands.RContol.Categories.Oncology.GetMedicamentsCommand;
 using Application.Commands.RContol.Categories.Oncology.GetConsultationCommand;
+using Application.Commands.RContol.Categories.KsgVmp.GetKsgVmpCardsDataCommand;
+using Application.Commands.RContol.Categories.ProvidedServices.GetMedDevsCommand;
 using Application.Commands.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
 using Application.Commands.RContol.Categories.ProvidedServices.GetProvidedServicesCommand;
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
-using Application.Commands.RContol.Categories.ProvidedServices.GetMedDevsCommand;
 
 
 namespace Web.Endpoints.RControl;
@@ -45,6 +46,8 @@ public class RControlData : IEndpoint
         group.MapGet("/categories/oncology/injections", GetOncologyCategoryInjectionsAsync);
         group.MapGet("/categories/provided-services/services", GetProvidedServicesAsync);
         group.MapGet("/categories/provided-services/med-devs", GetMedDevsAsync);
+        group.MapGet("/categories/ksg-vmp/cards-data", GetKsgVmpCardsData);
+        group.MapGet("/categories/ksg-vmp/tables-data", GetKsgVmpTablesData);
         
     }
 
@@ -350,5 +353,34 @@ public class RControlData : IEndpoint
         }
 
         return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetKsgVmpCardsData(
+        int sluchUid,
+        string targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetKsgVmpCardsDataCommand(
+                SluchUid: sluchUid,
+                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetKsgVmpTablesData(
+        int ksgKpgUid,
+        string targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        return Results.Ok();
     }
 }

@@ -55,6 +55,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<ICasesCategoryRepository, CasesCategoryRepository>();
         services.AddScoped<IOncologyCategoryRepository, OncologyCategoryRepository>();
         services.AddScoped<IProvidedServicesCategoryRepository, ProvidedServicesCategoryRepository>();
+        services.AddScoped<IKsgVmpCategoryRepository, KsgVmpCategoryRepository>();
 
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
