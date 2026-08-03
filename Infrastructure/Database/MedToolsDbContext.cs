@@ -8,6 +8,7 @@ using Core.Dtos.Categories.Oncology;
 using Core.Dtos.Categories.ProvidedServices;
 
 using Infrastructure.Database.Enitites.Auth;
+using Core.Dtos.Categories.DefectsSanks;
 
 namespace Infrastructure.Database;
 
@@ -32,6 +33,7 @@ public abstract class MedToolsDbContext(
     public DbSet<SlKoefDto> SlKoefs { get; set; }
     public DbSet<PurposeDto> Purposes { get; set; }
     public DbSet<DirectionDto> Directions { get; set; }
+    public DbSet<SankDto> Sanks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
