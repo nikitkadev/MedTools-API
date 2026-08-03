@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Core.Dtos.Categories.KsgVmp;
 using Core.Dtos.Categories.NazNapr;
 using Core.Dtos.Categories.Oncology;
+using Core.Dtos.Categories.DefectsSanks;
 using Core.Dtos.Categories.ProvidedServices;
 
 using Infrastructure.Database.Enitites.Auth;
-using Core.Dtos.Categories.DefectsSanks;
 
 namespace Infrastructure.Database;
 
@@ -34,6 +34,7 @@ public abstract class MedToolsDbContext(
     public DbSet<PurposeDto> Purposes { get; set; }
     public DbSet<DirectionDto> Directions { get; set; }
     public DbSet<SankDto> Sanks { get; set; }
+    public DbSet<DefectDto> Defects { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

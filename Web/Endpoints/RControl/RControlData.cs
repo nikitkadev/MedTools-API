@@ -16,14 +16,15 @@ using Application.Commands.RContol.Categories.NazNapr.GetNazNaprDataCommand;
 using Application.Commands.RContol.Categories.Oncology.GetMedicamentsCommand;
 using Application.Commands.RContol.Categories.Oncology.GetConsultationCommand;
 using Application.Commands.RContol.Categories.KsgVmp.GetKsgVmpCardsDataCommand;
+using Application.Commands.RContol.Categories.DefectsSanks.GetSanksDataCommand;
 using Application.Commands.RContol.Categories.KsgVmp.GetKsgVmpTablesDataCommand;
 using Application.Commands.RContol.Categories.ProvidedServices.GetMedDevsCommand;
+using Application.Commands.RContol.Categories.DefectsSanks.GetDefectsDataCommand;
 using Application.Commands.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
 using Application.Commands.RContol.Categories.ProvidedServices.GetProvidedServicesCommand;
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
-using Application.Commands.RContol.Categories.DefectsSanks.GetSanksDataCommand;
 
 
 namespace Web.Endpoints.RControl;
@@ -52,7 +53,8 @@ public class RControlData : IEndpoint
         group.MapGet("/categories/ksg-vmp/cards-data", GetKsgVmpCardsData);
         group.MapGet("/categories/ksg-vmp/tables-data", GetKsgVmpTablesData);
         group.MapGet("/categories/naz-napr", GetNazNaprCategoryData);
-        group.MapGet("/categories/defects-sanks/sanks", GetSanksCategoryData);
+        group.MapGet("/categories/defects-sanks/sanks", GetSanksDataAsync);
+        group.MapGet("/categories/defects-sanks/defects", GetDefectsDataAsync);
         
     }
 
@@ -420,7 +422,7 @@ public class RControlData : IEndpoint
         return Results.Ok(result);
     }
 
-    private static async Task<IResult> GetSanksCategoryData(
+    private static async Task<IResult> GetSanksDataAsync(
         int sluchUid,
         string targetDb,
         ISender sender,
@@ -430,6 +432,30 @@ public class RControlData : IEndpoint
            request: new GetSanksDataCommand(
                SluchUid: sluchUid,
                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
+           cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetDefectsDataAsync(
+        int sluchUid,
+        string targetDb,
+        int page,
+        int pageSize,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+           request: new GetDefectsDataCommand(
+               SluchUid: sluchUid,
+               TargetDb: Enum.Parse<TargetDbType>(targetDb),
+               Page: page,
+               PageSize: pageSize),
            cancellationToken: cancellationToken);
 
         if (result.IsFailure)
