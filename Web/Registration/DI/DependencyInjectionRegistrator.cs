@@ -5,7 +5,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Core.Interfaces.Auth;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.Filters;
+using Core.Interfaces.Repositories.MainField;
+using Core.Interfaces.Repositories.Users;
+using Core.Interfaces.Repositories.Categories;
 
 using Application;
 
@@ -13,12 +16,13 @@ using Infrastructure.Mapping;
 using Infrastructure.Services;
 using Infrastructure.Database;
 using Infrastructure.Repositories;
-
+using Infrastructure.Repositories.Categories;
 using Infrastructure.Factories;
 using Infrastructure.Options;
 
 using Web.Mapping;
 using Web.Options;
+
 
 
 namespace Web.Registration.DI;
@@ -41,6 +45,20 @@ public static class DependencyInjectionRegistrator
     private static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IInvoiceQueryRepository, InvoiceQueryRepository>();
+        services.AddScoped<IBillingPeriodsQueryRepository, BillingPeriodsQueryRepository>();
+        services.AddScoped<IMedOrganizationsQueryRepository, MedOrganizationsQueryRepository>();
+        services.AddScoped<IInvoiceSummaryRepository, InvoiceSummaryRepository>();
+        services.AddScoped<IFinishedCasesRepository, FinishedCasesRepository>();
+        services.AddScoped<ICasesRepository, CasesRepository>();
+        services.AddScoped<IPatientSmoCategoryRepository, PatientSmoCategoryRepository>();
+        services.AddScoped<ICasesCategoryRepository, CasesCategoryRepository>();
+        services.AddScoped<IOncologyCategoryRepository, OncologyCategoryRepository>();
+        services.AddScoped<IProvidedServicesCategoryRepository, ProvidedServicesCategoryRepository>();
+        services.AddScoped<IKsgVmpCategoryRepository, KsgVmpCategoryRepository>();
+        services.AddScoped<INazNaprCategoryRepository, NazNaprCategoryRepository>();
+        services.AddScoped<IDefectsSanksCategoryRepository, DefectsSanksCategoryRepository>();
+
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
 
@@ -49,7 +67,8 @@ public static class DependencyInjectionRegistrator
 
     private static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        
+        services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(ApplicationMediatrMarker).Assembly));
+
         return services;
     }
 
@@ -110,7 +129,6 @@ public static class DependencyInjectionRegistrator
                 };
             });
 
-        services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(ApplicationMediatrMarker).Assembly));
 
         services.AddAutoMapper(config =>
         {

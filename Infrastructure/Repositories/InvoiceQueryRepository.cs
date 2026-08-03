@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Core.Dtos;
 using Core.Enums;
 using Core.Common;
-using Core.Interfaces.Repositories;
 
 using Infrastructure.Factories;
+using Core.Interfaces.Repositories.MainField;
 
 namespace Infrastructure.Repositories;
 
@@ -18,8 +18,8 @@ public class InvoiceQueryRepository(
         int year, 
         int month, 
         TargetDbType dbType, 
-        int skip, 
-        int take, 
+        int page, 
+        int pageSize, 
         string searchString)
     {
         using var dbContext = dbContextFactory.CreateDbContext(dbType);
@@ -42,30 +42,34 @@ public class InvoiceQueryRepository(
         command.Parameters.Add(new SqlParameter("code_mo", orgCode));
         command.Parameters.Add(new SqlParameter("year", year));
         command.Parameters.Add(new SqlParameter("month", month));
-        command.Parameters.Add(new SqlParameter("skip", skip));
-        command.Parameters.Add(new SqlParameter("take", take));
+        command.Parameters.Add(new SqlParameter("skip", (page * pageSize) - pageSize));
+        command.Parameters.Add(new SqlParameter("take", pageSize));
         command.Parameters.Add(new SqlParameter("globalSearchString", searchString));
         command.Parameters.Add(outputTotal);
 
         await using var reader = await command.ExecuteReaderAsync();
 
-        var result = new List<InvoicesShortlyDto>();
+        var result = new List<InvoiceShortlyDto>();
 
         while (await reader.ReadAsync())
         {
             result.Add(
-                new InvoicesShortlyDto(
+                new InvoiceShortlyDto(
+                    InvoiceUid: reader.GetInt32(reader.GetOrdinal("schet_uid")),
                     InvoiceNumber: reader.GetString(reader.GetOrdinal("nschet")),
                     InvoiceDate: reader.GetDateTime(reader.GetOrdinal("dschet")),
                     InvoiceAmount: reader.GetDecimal(reader.GetOrdinal("summav")),
                     Cases: reader.GetInt32(reader.GetOrdinal("sd_z")),
-                    Status: reader.GetInt16(reader.GetOrdinal("status"))));
+                    Status: reader.GetInt16(reader.GetOrdinal("stat"))));
         }
+
+        await reader.CloseAsync();
 
         return Result<InvoicesShortlyQueryResult>.Success(
             new InvoicesShortlyQueryResult(
                 InvoicesShortlies: result,
-                TotalRecords: (int)outputTotal.Value));
+                TotalRecords: (int)outputTotal.Value,
+                CurrentPage: page));
 
     }
 }

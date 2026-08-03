@@ -24,9 +24,9 @@ public class Startup
         app.UseCors(
             policy =>
             {
-                policy.AllowAnyOrigin();
-                policy.AllowAnyMethod();
-                policy.AllowAnyHeader();
+                policy.AllowAnyOrigin(); //Затычка для dev-среды
+                policy.AllowAnyMethod(); //Затычка для dev-среды
+                policy.AllowAnyHeader(); //Затычка для dev-среды
             });
 
         app.UseRouting();
