@@ -3,6 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using Core.Dtos.Categories.KsgVmp;
+using Core.Dtos.Categories.NazNapr;
 using Core.Dtos.Categories.Oncology;
 using Core.Dtos.Categories.ProvidedServices;
 
@@ -15,7 +16,6 @@ public abstract class MedToolsDbContext(
 {
 
     public DbSet<UserEntity> Users { get; set; }
-
     public DbSet<OncSluchDto> OncCases { get; set; }
     public DbSet<ConsultationDto> Consultations { get; set; }
     public DbSet<OncologyServiceDto> OncologyServices { get; set; }
@@ -30,6 +30,8 @@ public abstract class MedToolsDbContext(
     public DbSet<VmpDto> Vmps { get; set; }
     public DbSet<CritDto> Crits { get; set; }
     public DbSet<SlKoefDto> SlKoefs { get; set; }
+    public DbSet<PurposeDto> Purposes { get; set; }
+    public DbSet<DirectionDto> Directions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
