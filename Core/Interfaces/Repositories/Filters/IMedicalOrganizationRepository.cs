@@ -5,7 +5,7 @@ namespace Core.Interfaces.Repositories.Filters;
 
 public interface IMedicalOrganizationRepository
 {
-    Task<IReadOnlyCollection<MedicalOrganizationDto>> GetMedicalOrgnizationsAsyn(
+    Task<IReadOnlyCollection<MedicalOrganizationDto>> GetMedicalOrganizationsAsync(
         TargetDbType targetDb,
         CancellationToken cancellationToken);
 }

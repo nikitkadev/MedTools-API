@@ -5,14 +5,14 @@ using Core.Interfaces.Repositories.Filters;
 
 namespace Application.Queries.RContol.Filters.GetMedicalOrganizationsQuery;
 
-public class GetMedicalOrganizationsQueryHandler(
-    IMedicalOrganizationRepository medOrganizationsQueryRepository) : IRequestHandler<GetMedicalOrganizationsQuery, Result<GetMedicalOrganizationsResult>>
+public sealed class GetMedicalOrganizationsQueryHandler(
+    IMedicalOrganizationRepository medicalOrganizationRepository) : IRequestHandler<GetMedicalOrganizationsQuery, Result<GetMedicalOrganizationsResult>>
 {
     public async Task<Result<GetMedicalOrganizationsResult>> Handle(
         GetMedicalOrganizationsQuery request, 
         CancellationToken cancellationToken)
     {
-        var medicalOrganizations = await medOrganizationsQueryRepository.GetMedicalOrgnizationsAsyn(request.TargetDb, cancellationToken);
+        var medicalOrganizations = await medicalOrganizationRepository.GetMedicalOrganizationsAsync(request.TargetDb, cancellationToken);
 
         return Result<GetMedicalOrganizationsResult>.Success(
             new GetMedicalOrganizationsResult(
