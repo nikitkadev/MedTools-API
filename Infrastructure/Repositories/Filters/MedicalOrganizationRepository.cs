@@ -10,7 +10,7 @@ namespace Infrastructure.Repositories.Filters;
 
 public class MedicalOrganizationRepository(DbContextFactory dbContextFactory) : IMedicalOrganizationRepository
 {
-    public async Task<IReadOnlyCollection<MedicalOrganizationDto>> GetMedicalOrgnizationsAsyn(
+    public async Task<IReadOnlyCollection<MedicalOrganizationDto>> GetMedicalOrganizationsAsync(
         TargetDbType targetDb, 
         CancellationToken cancellationToken)
     {

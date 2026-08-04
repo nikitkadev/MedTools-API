@@ -4,7 +4,7 @@ using AutoMapper;
 using Web.Registration.Endpoints;
 using Web.Dtos.Requests;
 using Application.Queries.UserManagment.UserRegistration;
-using Application.Queries.Auth.Login;
+using Application.Commands.Auth.Login;
 
 
 namespace Web.Endpoints.Users;

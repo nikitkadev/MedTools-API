@@ -1,6 +1,6 @@
-﻿namespace Application.Queries.Auth.Login;
+﻿namespace Application.Commands.Auth.Login;
 
-public record LoginCommandResponse(
+public record LoginCommandResult(
     string AccessToken,
     string RefreshToken,
     int Uid,

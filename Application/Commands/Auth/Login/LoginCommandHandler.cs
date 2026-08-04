@@ -4,34 +4,34 @@ using Core.Common;
 using Core.Interfaces.Auth;
 using Core.Interfaces.Repositories.Users;
 
-namespace Application.Queries.Auth.Login;
+namespace Application.Commands.Auth.Login;
 
 public class LoginCommandHandler(
     ITokenGenerationService generationService,
     IPasswordHasherService passwordHasher,
-    IUserRepository userRepository) : IRequestHandler<LoginCommand, Result<LoginCommandResponse>>
+    IUserRepository userRepository) : IRequestHandler<LoginCommand, Result<LoginCommandResult>>
 {
-    public async Task<Result<LoginCommandResponse>> Handle(
+    public async Task<Result<LoginCommandResult>> Handle(
         LoginCommand request, 
         CancellationToken cancellationToken)
     {
         var result = await userRepository.GetUserByEmail(request.Email);
         if (!result.IsSuccess)
         {
-            return Result<LoginCommandResponse>.Failure(result.Error);
+            return Result<LoginCommandResult>.Failure(result.Error);
         }
 
         var user = result.Value!;
 
         if (!user.CanLogin())
         {
-            return Result<LoginCommandResponse>.Failure("Ваша учетная запись отключена, либо заблокирована");
+            return Result<LoginCommandResult>.Failure("Ваша учетная запись отключена, либо заблокирована");
         }
 
         var passwordMatch = passwordHasher.VerifyPassword(request.Password, user.PasswordHash);
         if (!passwordMatch)
         {
-            return Result<LoginCommandResponse>.Failure("Неверный логин или пароль");
+            return Result<LoginCommandResult>.Failure("Неверный логин или пароль");
         }
 
         var accessToken = generationService.GenerateAccessToken(user);
@@ -39,7 +39,7 @@ public class LoginCommandHandler(
 
         user.SetRefreshToken(refreshToken);
 
-        var response = new LoginCommandResponse(
+        var response = new LoginCommandResult(
             AccessToken: accessToken,
             RefreshToken: refreshToken,
             Uid: user.Uid,
@@ -47,6 +47,6 @@ public class LoginCommandHandler(
             Username: user.Username,
             Role: user.Role.ToString());
 
-        return Result<LoginCommandResponse>.Success(response);
+        return Result<LoginCommandResult>.Success(response);
     }
 }

@@ -16,7 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Queries\Auth\Logout\" />
+	  <Folder Include="Commands\Auth\Logout\" />
 	</ItemGroup>
 
 </Project>
