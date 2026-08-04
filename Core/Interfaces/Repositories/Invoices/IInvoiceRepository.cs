@@ -6,7 +6,7 @@ namespace Core.Interfaces.Repositories.Invoices;
 
 public interface IInvoiceRepository
 {
-    Task<PagedResult<IReadOnlyCollection<InvoiceDto>>> GetInvoicesAsync(
+    Task<PagedResult<InvoiceDto>> GetInvoicesAsync(
         string medicalOrganizationCode,
         int year,
         int month,
@@ -14,5 +14,9 @@ public interface IInvoiceRepository
         int pageSize,
         TargetDbType targetDb,
         CancellationToken cancellationToken);
+
+    InvoiceSummaryDto? GetInvoiceSummary(
+        int invoiceUid,
+        TargetDbType targetDb);
 
 }

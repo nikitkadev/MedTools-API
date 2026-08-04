@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories.Invoices;
 
 public class InvoiceRepository(DbContextFactory dbContextFactory) : IInvoiceRepository
 {
-    public async Task<PagedResult<IReadOnlyCollection<InvoiceDto>>> GetInvoicesAsync(
+    public async Task<PagedResult<InvoiceDto>> GetInvoicesAsync(
         string medicalOrganizationCode, 
         int year, 
         int month, 
@@ -44,8 +44,24 @@ public class InvoiceRepository(DbContextFactory dbContextFactory) : IInvoiceRepo
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return new PagedResult<IReadOnlyCollection<InvoiceDto>>(
+        return new PagedResult<InvoiceDto>(
             Records: invoices,
-            Count: (int)totalParam.Value);
+            TotalCount: (int)totalParam.Value);
+    }
+
+    public InvoiceSummaryDto? GetInvoiceSummary(
+        int invoiceUid, 
+        TargetDbType targetDb)
+    {
+        using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var invoiceSummary = dbContext
+            .Set<InvoiceSummaryDto>()
+            .FromSqlInterpolated($"EXEC sp26_get_z_slsvod @schet_uid={invoiceUid}")
+            .AsNoTracking()
+            .AsEnumerable()
+            .FirstOrDefault();
+
+        return invoiceSummary;
     }
 }

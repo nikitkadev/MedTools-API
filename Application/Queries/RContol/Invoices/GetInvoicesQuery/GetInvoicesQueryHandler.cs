@@ -23,6 +23,6 @@ public class GetInvoicesQueryHandler(IInvoiceRepository invoiceRepository) : IRe
         return Result<GetInvoicesResult>.Success(
             new GetInvoicesResult(
                 Invoices: invoices.Records,
-                RecordsCount: invoices.Count));
+                RecordsCount: invoices.TotalCount));
     }
 }

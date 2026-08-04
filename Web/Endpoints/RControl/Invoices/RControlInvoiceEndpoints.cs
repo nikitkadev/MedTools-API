@@ -2,6 +2,7 @@
 
 using Core.Enums;
 using Application.Queries.RContol.Invoices.GetInvoicesQuery;
+using Application.Queries.RContol.Invoices.GetInvoiceSummaryQuery;
 
 namespace Web.Endpoints.RControl.Invoices;
 
@@ -50,7 +51,18 @@ public static class RControlInvoiceEndpoints
         ISender sender,
         CancellationToken cancellationToken)
     {
-        return Results.Ok();
+        var result = await sender.Send(
+            request: new GetInvoiceSummaryQuery(
+                InvoiceUid: invoiceUid,
+                TargetDb: targetDb),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
     }
 
 }
