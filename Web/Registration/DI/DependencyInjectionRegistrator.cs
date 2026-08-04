@@ -23,6 +23,8 @@ using Infrastructure.Repositories.Categories;
 
 using Web.Mapping;
 using Web.Options;
+using Core.Interfaces.Repositories.Invoices;
+using Infrastructure.Repositories.Invoices;
 
 
 
@@ -46,10 +48,9 @@ public static class DependencyInjectionRegistrator
     private static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IInvoiceQueryRepository, InvoiceQueryRepository>();
+        services.AddScoped<IInvoiceRepository, InvoiceRepository>();
         services.AddScoped<IBillingPeriodRepository, BillingPeriodRepository>();
         services.AddScoped<IMedicalOrganizationRepository, MedicalOrganizationRepository>();
-        services.AddScoped<IInvoiceSummaryRepository, InvoiceSummaryRepository>();
         services.AddScoped<IFinishedCasesRepository, FinishedCasesRepository>();
         services.AddScoped<ICasesRepository, CasesRepository>();
         services.AddScoped<IPatientSmoCategoryRepository, PatientSmoCategoryRepository>();

@@ -8,22 +8,21 @@ using Infrastructure.Factories;
 
 namespace Infrastructure.Repositories.Filters;
 
-public class MedicalOrganizationRepository(DbContextFactory dbContextFactory) : IMedicalOrganizationRepository
+public class BillingPeriodRepository(DbContextFactory dbContextFactory) : IBillingPeriodRepository
 {
-    public async Task<IReadOnlyCollection<MedicalOrganizationDto>> GetMedicalOrganizationsAsync(
+    public async Task<IReadOnlyCollection<BillingPeriodDto>> GetBillingPeriodsAsync(
         TargetDbType targetDb, 
+        string medicalOrganizationCode, 
         CancellationToken cancellationToken)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
 
-        string expressionString = "EXEC sp26_get_mo";
-
-        var medicalOrganizations = await dbContext
-            .Set<MedicalOrganizationDto>()
-            .FromSqlRaw(expressionString)
+        var billingPeriods = await dbContext
+            .Set<BillingPeriodDto>()
+            .FromSqlInterpolated($"EXEC sp26_get_period @code_mo={medicalOrganizationCode}")
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return medicalOrganizations; 
+        return billingPeriods;
     }
 }

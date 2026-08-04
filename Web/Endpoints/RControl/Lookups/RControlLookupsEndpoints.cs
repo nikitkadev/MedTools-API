@@ -5,19 +5,19 @@ using Core.Enums;
 using Application.Queries.RContol.Filters.GetBillingPeriodsQuery;
 using Application.Queries.RContol.Filters.GetMedicalOrganizationsQuery;
 
-namespace Web.Endpoints.RControl.Filters;
+namespace Web.Endpoints.RControl.Lookups;
 
-public static class RControlFilterEndpoints
+public static class RControlLookupsEndpoints
 {
-    public static void MapFilters(this RouteGroupBuilder builder)
+    public static void MapLookups(this RouteGroupBuilder builder)
     {
-        var filtersGroup = builder.MapGroup("filters").WithTags("RControl Filters");
+        var filtersGroup = builder.MapGroup("lookups").WithTags("RControl Filters");
 
-        filtersGroup.MapGet("/medical-organizations", GetMedicalOrganizationsQueryHandler);
-        filtersGroup.MapGet("/billing-periods", GetBillingPeriodsQueryHandler);
+        filtersGroup.MapGet("/medical-organizations", GetMedicalOrganizationsAsync);
+        filtersGroup.MapGet("/billing-periods", GetBillingPeriodsAsync);
     }
 
-    private static async Task<IResult> GetMedicalOrganizationsQueryHandler(
+    private static async Task<IResult> GetMedicalOrganizationsAsync(
         TargetDbType targetDb,
         ISender sender,
         CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ public static class RControlFilterEndpoints
         return Results.Ok(result);
     }
 
-    private static async Task<IResult> GetBillingPeriodsQueryHandler(
+    private static async Task<IResult> GetBillingPeriodsAsync(
         string medicalOrganizationCode,
         TargetDbType targetDb,
         ISender sender,

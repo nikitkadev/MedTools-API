@@ -19,12 +19,11 @@ using Application.Queries.RContol.Categories.ProvidedServices.GetProvidedService
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
-using Web.Endpoints.RControl.Filters;
+using Web.Endpoints.RControl.Lookups;
 
 using Application.Queries.RContol.General.GetCasesCommand;
 using Application.Queries.RContol.General.GetFinishedCasesCommand;
-using Application.Queries.RContol.General.GetInvoicesShortlyCommand;
-using Application.Queries.RContol.General.GetInvoiceSummaryCommand;
+using Web.Endpoints.RControl.Invoices;
 
 namespace Web.Endpoints.RControl;
 
@@ -34,12 +33,11 @@ public class RControlEndpoints : IEndpoint
     {
         var group = endpointsBuilder.MapGroup("/rcontrol").WithTags("RControlData");
 
-        group.MapFilters();
+        group.MapLookups();
+        group.MapInvoiceEndpoints();
 
         
 
-        group.MapGet("/invoice-summary", GetInvoiceSummaryAsync);
-        group.MapPost("/invoices-shortly", GetInvoicesShortlyAsync);
         group.MapPost("/finished-cases", GetFinishedCasesAsync);
         group.MapGet("/cases", GetCasesAsync);
         group.MapGet("/categories/patient-smo", GetPatientSmoCategoryDataAsync);
@@ -59,50 +57,6 @@ public class RControlEndpoints : IEndpoint
         
     }
 
-    
-    private static async Task<IResult> GetInvoicesShortlyAsync(
-        GetInvoicesShortlyRequest request,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetInvoicesShortlyCommand(
-                OrgCode: request.OrgCode,
-                Year: request.Year,
-                Month: request.Month,
-                Page: request.Pagination.CurrentPage,
-                PageSize: request.Pagination.PageSize,
-                TargetDb: Enum.Parse<TargetDbType>(request.DbType.DbType),
-                SearchString: request.Search.GlobalSearchString ?? string.Empty), 
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
-
-    private static async Task<IResult> GetInvoiceSummaryAsync(
-        int schetUid,
-        string targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            new GetInvoiceSummaryCommand(
-                TargetDb: Enum.Parse<TargetDbType>(targetDb),
-                SchetUid: schetUid),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
 
     private static async Task<IResult> GetFinishedCasesAsync(
         GetFinishedCasesRequest request,
