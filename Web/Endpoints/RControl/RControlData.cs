@@ -2,7 +2,6 @@
 
 using Core.Enums;
 
-using Application.Queries.RContol.Filters.GetPeriodsCommand;
 using Application.Queries.RContol.Categories.GetCasesDataCommand;
 using Application.Queries.RContol.Categories.GetPatientSmoDataCommand;
 using Application.Queries.RContol.Categories.Oncology.GetOncSluchCommand;
@@ -20,11 +19,12 @@ using Application.Queries.RContol.Categories.ProvidedServices.GetProvidedService
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
+using Web.Endpoints.RControl.Filters;
+
 using Application.Queries.RContol.General.GetCasesCommand;
 using Application.Queries.RContol.General.GetFinishedCasesCommand;
 using Application.Queries.RContol.General.GetInvoicesShortlyCommand;
 using Application.Queries.RContol.General.GetInvoiceSummaryCommand;
-using Application.Queries.RContol.Filters.GetMedicalOrganizationsQuery;
 
 
 namespace Web.Endpoints.RControl;
@@ -35,9 +35,10 @@ public class RControlData : IEndpoint
     {
         var group = endpointsBuilder.MapGroup("/rcontrol").WithTags("RControlData");
 
-        group.MapGet("/medical-organizations", GetMedicalOrganizationsQueryHandler);
+        group.MapFilters();
 
-        group.MapGet("/billing-periods", GetBillingPeriodsAsync);
+        
+
         group.MapGet("/invoice-summary", GetInvoiceSummaryAsync);
         group.MapPost("/invoices-shortly", GetInvoicesShortlyAsync);
         group.MapPost("/finished-cases", GetFinishedCasesAsync);
@@ -59,23 +60,7 @@ public class RControlData : IEndpoint
         
     }
 
-    private static async Task<IResult> GetMedicalOrganizationsQueryHandler(
-        TargetDbType targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetMedicalOrganizationsQuery(TargetDb: targetDb),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
-
+    
     private static async Task<IResult> GetInvoicesShortlyAsync(
         GetInvoicesShortlyRequest request,
         ISender sender,
@@ -90,26 +75,6 @@ public class RControlData : IEndpoint
                 PageSize: request.Pagination.PageSize,
                 TargetDb: Enum.Parse<TargetDbType>(request.DbType.DbType),
                 SearchString: request.Search.GlobalSearchString ?? string.Empty), 
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
-
-    private static async Task<IResult> GetBillingPeriodsAsync(
-        string targetDbType,
-        string orgCode,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            new GetPeriodsCommand(
-                TargetDbType: Enum.Parse<TargetDbType>(targetDbType),
-                OrgCode: orgCode),
             cancellationToken: cancellationToken);
 
         if (result.IsFailure)
