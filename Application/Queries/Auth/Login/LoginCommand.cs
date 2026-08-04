@@ -1,0 +1,9 @@
+﻿using MediatR;
+
+using Core.Common;
+
+namespace Application.Queries.Auth.Login;
+
+public record LoginCommand(
+    string Email,
+    string Password) : IRequest<Result<LoginCommandResponse>>;

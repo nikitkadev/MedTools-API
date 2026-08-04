@@ -2,29 +2,29 @@
 
 using Core.Enums;
 
-using Application.Commands.RContol.Filters.GetPeriodsCommand;
-using Application.Commands.RContol.MainField.GetCasesCommand;
-using Application.Commands.RContol.Categories.GetCasesDataCommand;
-using Application.Commands.RContol.Filters.GetOrganizationsCommand;
-using Application.Commands.RContol.MainField.GetFinishedCasesCommand;
-using Application.Commands.RContol.MainField.GetInvoiceSummaryCommand;
-using Application.Commands.RContol.Categories.GetPatientSmoDataCommand;
-using Application.Commands.RContol.MainField.GetInvoicesShortlyCommand;
-using Application.Commands.RContol.Categories.Oncology.GetOncSluchCommand;
-using Application.Commands.RContol.Categories.Oncology.GetInjectionsCommand;
-using Application.Commands.RContol.Categories.NazNapr.GetNazNaprDataCommand;
-using Application.Commands.RContol.Categories.Oncology.GetMedicamentsCommand;
-using Application.Commands.RContol.Categories.Oncology.GetConsultationCommand;
-using Application.Commands.RContol.Categories.KsgVmp.GetKsgVmpCardsDataCommand;
-using Application.Commands.RContol.Categories.DefectsSanks.GetSanksDataCommand;
-using Application.Commands.RContol.Categories.KsgVmp.GetKsgVmpTablesDataCommand;
-using Application.Commands.RContol.Categories.ProvidedServices.GetMedDevsCommand;
-using Application.Commands.RContol.Categories.DefectsSanks.GetDefectsDataCommand;
-using Application.Commands.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
-using Application.Commands.RContol.Categories.ProvidedServices.GetProvidedServicesCommand;
+using Application.Queries.RContol.Filters.GetPeriodsCommand;
+using Application.Queries.RContol.Categories.GetCasesDataCommand;
+using Application.Queries.RContol.Categories.GetPatientSmoDataCommand;
+using Application.Queries.RContol.Categories.Oncology.GetOncSluchCommand;
+using Application.Queries.RContol.Categories.Oncology.GetInjectionsCommand;
+using Application.Queries.RContol.Categories.NazNapr.GetNazNaprDataCommand;
+using Application.Queries.RContol.Categories.Oncology.GetMedicamentsCommand;
+using Application.Queries.RContol.Categories.Oncology.GetConsultationCommand;
+using Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpCardsDataCommand;
+using Application.Queries.RContol.Categories.DefectsSanks.GetSanksDataCommand;
+using Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpTablesDataCommand;
+using Application.Queries.RContol.Categories.ProvidedServices.GetMedDevsCommand;
+using Application.Queries.RContol.Categories.DefectsSanks.GetDefectsDataCommand;
+using Application.Queries.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
+using Application.Queries.RContol.Categories.ProvidedServices.GetProvidedServicesCommand;
 
 using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
+using Application.Queries.RContol.General.GetCasesCommand;
+using Application.Queries.RContol.General.GetFinishedCasesCommand;
+using Application.Queries.RContol.General.GetInvoicesShortlyCommand;
+using Application.Queries.RContol.General.GetInvoiceSummaryCommand;
+using Application.Queries.RContol.Filters.GetMedicalOrganizationsQuery;
 
 
 namespace Web.Endpoints.RControl;
@@ -35,7 +35,8 @@ public class RControlData : IEndpoint
     {
         var group = endpointsBuilder.MapGroup("/rcontrol").WithTags("RControlData");
 
-        group.MapGet("/med-organizations", GetMedOrganizationsAsync);
+        group.MapGet("/medical-organizations", GetMedicalOrganizationsQueryHandler);
+
         group.MapGet("/billing-periods", GetBillingPeriodsAsync);
         group.MapGet("/invoice-summary", GetInvoiceSummaryAsync);
         group.MapPost("/invoices-shortly", GetInvoicesShortlyAsync);
@@ -58,6 +59,23 @@ public class RControlData : IEndpoint
         
     }
 
+    private static async Task<IResult> GetMedicalOrganizationsQueryHandler(
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalOrganizationsQuery(TargetDb: targetDb),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
     private static async Task<IResult> GetInvoicesShortlyAsync(
         GetInvoicesShortlyRequest request,
         ISender sender,
@@ -72,23 +90,6 @@ public class RControlData : IEndpoint
                 PageSize: request.Pagination.PageSize,
                 TargetDb: Enum.Parse<TargetDbType>(request.DbType.DbType),
                 SearchString: request.Search.GlobalSearchString ?? string.Empty), 
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
-
-    private static async Task<IResult> GetMedOrganizationsAsync(
-        string targetDbType,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetOrganizationsCommand(TargetDb: Enum.Parse<TargetDbType>(targetDbType)),
             cancellationToken: cancellationToken);
 
         if (result.IsFailure)
