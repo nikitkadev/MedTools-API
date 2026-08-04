@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Core.Dtos.Categories.DefectsSanks;
 
-namespace Infrastructure.Database.Configuration.StoredProcedureModel;
+namespace Infrastructure.Database.Configuration.StoredProcedure;
 
 public class DefectDtoModelConfiguration : IEntityTypeConfiguration<DefectDto>
 {

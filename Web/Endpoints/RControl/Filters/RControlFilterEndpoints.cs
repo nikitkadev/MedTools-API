@@ -2,8 +2,8 @@
 
 using Core.Enums;
 
+using Application.Queries.RContol.Filters.GetBillingPeriodsQuery;
 using Application.Queries.RContol.Filters.GetMedicalOrganizationsQuery;
-using Application.Queries.RContol.Filters.GetPeriodsCommand;
 
 namespace Web.Endpoints.RControl.Filters;
 
@@ -23,8 +23,8 @@ public static class RControlFilterEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetMedicalOrganizationsQuery(TargetDb: targetDb),
-            cancellationToken: cancellationToken);
+            new GetMedicalOrganizationsQuery(TargetDb: targetDb), 
+            cancellationToken);
 
         if (result.IsFailure)
         {
@@ -41,9 +41,9 @@ public static class RControlFilterEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            new GetPeriodsCommand(
-                TargetDbType: targetDb,
-                OrgCode: medicalOrganizationCode),
+            new GetBillingPeriodsQuery(
+                TargetDb: targetDb,
+                MedicalOrganizationCode: medicalOrganizationCode),
             cancellationToken: cancellationToken);
 
         if (result.IsFailure)
@@ -53,4 +53,5 @@ public static class RControlFilterEndpoints
 
         return Results.Ok(result);
     }
+
 }

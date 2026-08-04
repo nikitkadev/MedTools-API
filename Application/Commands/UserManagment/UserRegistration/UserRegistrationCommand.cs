@@ -3,7 +3,7 @@
 using Core.Enums;
 using Core.Common;
 
-namespace Application.Queries.UserManagment.UserRegistration;
+namespace Application.Commands.UserManagment.UserRegistration;
 
 public record UserRegistrationCommand(
     string Email,

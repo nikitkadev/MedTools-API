@@ -6,7 +6,7 @@ using Core.Entities;
 using Core.Interfaces.Auth;
 using Core.Interfaces.Repositories.Users;
 
-namespace Application.Queries.UserManagment.UserRegistration;
+namespace Application.Commands.UserManagment.UserRegistration;
 
 public class UserRegistrationCommandHandler(
     IUserRepository userRepository,

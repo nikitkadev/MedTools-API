@@ -47,7 +47,7 @@ public static class DependencyInjectionRegistrator
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IInvoiceQueryRepository, InvoiceQueryRepository>();
-        services.AddScoped<IBillingPeriodsQueryRepository, BillingPeriodsQueryRepository>();
+        services.AddScoped<IBillingPeriodRepository, BillingPeriodRepository>();
         services.AddScoped<IMedicalOrganizationRepository, MedicalOrganizationRepository>();
         services.AddScoped<IInvoiceSummaryRepository, InvoiceSummaryRepository>();
         services.AddScoped<IFinishedCasesRepository, FinishedCasesRepository>();

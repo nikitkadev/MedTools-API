@@ -26,10 +26,9 @@ using Application.Queries.RContol.General.GetFinishedCasesCommand;
 using Application.Queries.RContol.General.GetInvoicesShortlyCommand;
 using Application.Queries.RContol.General.GetInvoiceSummaryCommand;
 
-
 namespace Web.Endpoints.RControl;
 
-public class RControlData : IEndpoint
+public class RControlEndpoints : IEndpoint
 {
     public void Register(IEndpointRouteBuilder endpointsBuilder)
     {

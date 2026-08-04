@@ -1,6 +1,6 @@
 ﻿namespace Core.Dtos.Filters;
 
-public record MedicalOrganizationDto(
+public sealed record MedicalOrganizationDto(
     string MedicalOrganizationCode,
     string MedicalOrganizationName);
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Core.Dtos.Categories.NazNapr;
 
-namespace Infrastructure.Database.Configuration.StoredProcedureModel;
+namespace Infrastructure.Database.Configuration.StoredProcedure;
 
 public class DirectionDtoModelConfiguration : IEntityTypeConfiguration<DirectionDto>
 {
