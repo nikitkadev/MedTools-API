@@ -1,7 +1,7 @@
 ﻿using Core.Enums;
-using Core.Dtos.Filters;
+using Core.Dtos.Lookups;
 
-namespace Core.Interfaces.Repositories.Filters;
+namespace Core.Interfaces.Repositories.Lookups;
 
 public interface IMedicalOrganizationRepository
 {

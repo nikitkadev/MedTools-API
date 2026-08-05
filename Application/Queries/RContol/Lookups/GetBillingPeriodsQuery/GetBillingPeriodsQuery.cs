@@ -3,7 +3,7 @@
 using Core.Enums;
 using Core.Common;
 
-namespace Application.Queries.RContol.Filters.GetBillingPeriodsQuery;
+namespace Application.Queries.RContol.Lookups.GetBillingPeriodsQuery;
 
 public sealed record GetBillingPeriodsQuery(
     string MedicalOrganizationCode, 

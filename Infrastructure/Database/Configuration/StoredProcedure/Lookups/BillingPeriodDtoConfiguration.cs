@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Core.Dtos.Lookups;
 
-using Core.Dtos.Filters;
-
-namespace Infrastructure.Database.Configuration.StoredProcedure.Filters;
+namespace Infrastructure.Database.Configuration.StoredProcedure.Lookups;
 
 public class BillingPeriodDtoConfiguration : IEntityTypeConfiguration<BillingPeriodDto>
 {

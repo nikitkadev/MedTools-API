@@ -2,8 +2,8 @@
 
 using Core.Enums;
 
-using Application.Queries.RContol.Filters.GetBillingPeriodsQuery;
-using Application.Queries.RContol.Filters.GetMedicalOrganizationsQuery;
+using Application.Queries.RContol.Lookups.GetBillingPeriodsQuery;
+using Application.Queries.RContol.Lookups.GetMedicalOrganizationsQuery;
 
 namespace Web.Endpoints.RControl.Lookups;
 
@@ -11,10 +11,10 @@ public static class RControlLookupsEndpoints
 {
     public static void MapLookups(this RouteGroupBuilder builder)
     {
-        var filtersGroup = builder.MapGroup("lookups").WithTags("RControl Filters");
+        var group = builder.MapGroup("lookups").WithTags("RControl Filters");
 
-        filtersGroup.MapGet("/medical-organizations", GetMedicalOrganizationsAsync);
-        filtersGroup.MapGet("/billing-periods", GetBillingPeriodsAsync);
+        group.MapGet("/medical-organizations", GetMedicalOrganizationsAsync);
+        group.MapGet("/billing-periods", GetBillingPeriodsAsync);
     }
 
     private static async Task<IResult> GetMedicalOrganizationsAsync(

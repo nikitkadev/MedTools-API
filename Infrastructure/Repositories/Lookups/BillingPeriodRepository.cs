@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
-using Core.Dtos.Filters;
-using Core.Interfaces.Repositories.Filters;
 
 using Infrastructure.Factories;
+using Core.Dtos.Lookups;
+using Core.Interfaces.Repositories.Lookups;
 
-namespace Infrastructure.Repositories.Filters;
+namespace Infrastructure.Repositories.Lookups;
 
 public class BillingPeriodRepository(DbContextFactory dbContextFactory) : IBillingPeriodRepository
 {

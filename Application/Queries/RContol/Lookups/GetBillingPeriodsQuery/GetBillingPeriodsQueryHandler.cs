@@ -1,9 +1,9 @@
 ﻿using MediatR;
 
 using Core.Common;
-using Core.Interfaces.Repositories.Filters;
+using Core.Interfaces.Repositories.Lookups;
 
-namespace Application.Queries.RContol.Filters.GetBillingPeriodsQuery;
+namespace Application.Queries.RContol.Lookups.GetBillingPeriodsQuery;
 
 public class GetBillingPeriodsQueryHandler(IBillingPeriodRepository billingPeriodRepository) : IRequestHandler<GetBillingPeriodsQuery, Result<GetBillingPeriodsResult>>
 {

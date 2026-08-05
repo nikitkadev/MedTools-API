@@ -1,4 +1,4 @@
-﻿namespace Core.Dtos.Filters;
+﻿namespace Core.Dtos.Lookups;
 
 public sealed record MedicalOrganizationDto(
     string MedicalOrganizationCode,

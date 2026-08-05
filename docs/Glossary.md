@@ -40,5 +40,22 @@
 | `SMO_SANK_EKMP` | `smo_sank_ekmp` | `Insurance Company Quality of Medical Care Expertise Penalty` | `InsuranceCompanyMedicalCareQualityExpertisePenalty` | Финансовые санкции по результатам ЭКМП СМО
 
  
-### Таблица `SL`
 ### Таблица `Z_SL`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `Z_SL` | `dbo.z_sl` | `Completed Case` | `CompletedCase` | Законченный случай |
+
+### Таблица `PERS`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `FAM` | `fam` | `Patient Last Name` | `PatientLastName` | Фамилия пациента |
+| `IM` | `im` | `Patient First Name` | `PatientFirstName` | Имя пациента |
+| `OT` | `ot` | `Patient Middle Name` | `PatientMiddleName` | Отчество пациента |
+
+### Таблица `PACIENT`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `SPOLIS` | `spolis` | `Insurance Policy Series` | `InsurancePolicySeries` | Серия полиса |
+| `NPOLIS` | `npolis` | `Insurance Policy Number` | `InsurancePolicyNumber` | Номер полиса |
+
+### Таблица `SL`

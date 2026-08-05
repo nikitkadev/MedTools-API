@@ -1,6 +1,6 @@
-﻿using Core.Dtos.Filters;
+﻿using Core.Dtos.Lookups;
 
-namespace Application.Queries.RContol.Filters.GetMedicalOrganizationsQuery;
+namespace Application.Queries.RContol.Lookups.GetMedicalOrganizationsQuery;
 
 public sealed record GetMedicalOrganizationsResult(
     IReadOnlyCollection<MedicalOrganizationDto> MedicalOrganizations);

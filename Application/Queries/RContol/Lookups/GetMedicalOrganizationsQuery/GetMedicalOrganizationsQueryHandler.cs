@@ -1,9 +1,9 @@
 ﻿using MediatR;
 
 using Core.Common;
-using Core.Interfaces.Repositories.Filters;
+using Core.Interfaces.Repositories.Lookups;
 
-namespace Application.Queries.RContol.Filters.GetMedicalOrganizationsQuery;
+namespace Application.Queries.RContol.Lookups.GetMedicalOrganizationsQuery;
 
 public sealed class GetMedicalOrganizationsQueryHandler(
     IMedicalOrganizationRepository medicalOrganizationRepository) : IRequestHandler<GetMedicalOrganizationsQuery, Result<GetMedicalOrganizationsResult>>

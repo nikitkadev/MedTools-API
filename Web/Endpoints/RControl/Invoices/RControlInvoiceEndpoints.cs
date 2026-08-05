@@ -1,6 +1,7 @@
 ﻿using MediatR;
 
 using Core.Enums;
+
 using Application.Queries.RContol.Invoices.GetInvoicesQuery;
 using Application.Queries.RContol.Invoices.GetInvoiceSummaryQuery;
 
@@ -10,10 +11,10 @@ public static class RControlInvoiceEndpoints
 {
     public static void MapInvoiceEndpoints(this RouteGroupBuilder builder)
     {
-        var invoicesGroup = builder.MapGroup("/invoices").WithTags("RControl Invoices");
+        var group = builder.MapGroup("/invoices").WithTags("RControl Invoices");
 
-        invoicesGroup.MapGet("", GetInvoicesAsync);
-        invoicesGroup.MapGet("/{invoiceUid:int}/summary", GetInvoiceSummaryAsync);
+        group.MapGet("", GetInvoicesAsync);
+        group.MapGet("/{invoiceUid:int}/summary", GetInvoiceSummaryAsync);
     }
 
     private static async Task<IResult> GetInvoicesAsync(

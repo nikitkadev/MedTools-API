@@ -17,13 +17,12 @@ using Application.Queries.RContol.Categories.DefectsSanks.GetDefectsDataCommand;
 using Application.Queries.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
 using Application.Queries.RContol.Categories.ProvidedServices.GetProvidedServicesCommand;
 
-using Web.Dtos.Requests.RConrtol;
 using Web.Registration.Endpoints;
 using Web.Endpoints.RControl.Lookups;
 
-using Application.Queries.RContol.General.GetCasesCommand;
-using Application.Queries.RContol.General.GetFinishedCasesCommand;
 using Web.Endpoints.RControl.Invoices;
+using Web.Endpoints.RControl.MedicalCases;
+using Web.Endpoints.RControl.CompletedCases;
 
 namespace Web.Endpoints.RControl;
 
@@ -35,11 +34,11 @@ public class RControlEndpoints : IEndpoint
 
         group.MapLookups();
         group.MapInvoiceEndpoints();
+        group.MapCompletedCaseEndpoints();
+        group.MapMedicalCaseEndpoints();
 
         
 
-        group.MapPost("/finished-cases", GetFinishedCasesAsync);
-        group.MapGet("/cases", GetCasesAsync);
         group.MapGet("/categories/patient-smo", GetPatientSmoCategoryDataAsync);
         group.MapGet("/categories/cases", GetCasesCategoryDataAsync);
         group.MapGet("/categories/oncology/onc-sluch", GetOncologyCategoryOnkCaseAsync);
@@ -58,47 +57,7 @@ public class RControlEndpoints : IEndpoint
     }
 
 
-    private static async Task<IResult> GetFinishedCasesAsync(
-        GetFinishedCasesRequest request,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetFinishedCasesCommand(
-                SchetUid: request.SchetUid,
-                Page: request.Pagination.CurrentPage,
-                PageSize: request.Pagination.PageSize,
-                TargetDb: Enum.Parse<TargetDbType>(request.DbType.DbType),
-                SearchString: request.Search.GlobalSearchString ?? string.Empty),
-            cancellationToken: cancellationToken);
 
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
-
-    private static async Task<IResult> GetCasesAsync(
-        int zSlUid,
-        string targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetCasesCommand(
-                ZSlUid: zSlUid,
-                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
 
     private static async Task<IResult> GetPatientSmoCategoryDataAsync(
         int sluchUid,

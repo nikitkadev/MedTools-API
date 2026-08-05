@@ -2,7 +2,7 @@
 
 using Core.Common;
 
-namespace Application.Commands.Auth.Login;
+namespace Application.Commands.Auth.LoginCommand;
 
 public record LoginCommand(
     string Email,
