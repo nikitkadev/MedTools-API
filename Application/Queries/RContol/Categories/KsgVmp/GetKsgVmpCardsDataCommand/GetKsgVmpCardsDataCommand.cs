@@ -2,7 +2,7 @@
 
 using Core.Enums;
 using Core.Common;
-using Core.Dtos.Categories.KsgVmp;
+using Core.Dtos.RControl.Categories.KsgVmp;
 
 namespace Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpCardsDataCommand;
 

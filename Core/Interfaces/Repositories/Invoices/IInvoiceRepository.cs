@@ -1,6 +1,6 @@
 ﻿using Core.Enums;
 using Core.Common;
-using Core.Dtos.Invoices;
+using Core.Dtos.RControl.Workspace;
 
 namespace Core.Interfaces.Repositories.Invoices;
 

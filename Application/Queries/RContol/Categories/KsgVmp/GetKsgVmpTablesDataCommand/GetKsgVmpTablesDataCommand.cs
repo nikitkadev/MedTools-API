@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
 using Core.Common;
-using Core.Dtos.Categories.KsgVmp;
 using Core.Enums;
+using Core.Dtos.RControl.Categories.KsgVmp;
 
 namespace Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpTablesDataCommand;
 

@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
 using Core.Common;
-using Core.Dtos.Categories.KsgVmp;
 using Core.Interfaces.Repositories.Categories;
 
 using Infrastructure.Factories;
+using Core.Dtos.RControl.Categories.KsgVmp;
 
 namespace Infrastructure.Repositories.Categories;
 

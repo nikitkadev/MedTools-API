@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
 using Core.Common;
-using Core.Dtos.Categories.Oncology;
 using Core.Interfaces.Repositories.Categories;
 
 using Infrastructure.Factories;
+using Core.Dtos.RControl.Categories.Oncology;
 
 namespace Infrastructure.Repositories.Categories;
 

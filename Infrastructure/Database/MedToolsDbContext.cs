@@ -2,13 +2,12 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using Core.Dtos.Categories.KsgVmp;
-using Core.Dtos.Categories.NazNapr;
-using Core.Dtos.Categories.Oncology;
-using Core.Dtos.Categories.DefectsSanks;
-using Core.Dtos.Categories.ProvidedServices;
-
 using Infrastructure.Database.Enitites.Auth;
+using Core.Dtos.RControl.Categories.DefectsSanks;
+using Core.Dtos.RControl.Categories.KsgVmp;
+using Core.Dtos.RControl.Categories.NazNapr;
+using Core.Dtos.RControl.Categories.Oncology;
+using Core.Dtos.RControl.Categories.ProvidedServices;
 
 namespace Infrastructure.Database;
 

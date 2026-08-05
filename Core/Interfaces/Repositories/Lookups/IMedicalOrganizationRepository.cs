@@ -1,5 +1,5 @@
 ﻿using Core.Enums;
-using Core.Dtos.Lookups;
+using Core.Dtos.RControl.Lookups;
 
 namespace Core.Interfaces.Repositories.Lookups;
 

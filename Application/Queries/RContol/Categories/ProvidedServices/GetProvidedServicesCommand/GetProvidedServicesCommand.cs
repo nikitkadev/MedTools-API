@@ -2,7 +2,7 @@
 
 using Core.Enums;
 using Core.Common;
-using Core.Dtos.Categories.ProvidedServices;
+using Core.Dtos.RControl.Categories.ProvidedServices;
 
 namespace Application.Queries.RContol.Categories.ProvidedServices.GetProvidedServicesCommand;
 

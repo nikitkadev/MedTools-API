@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
 using Core.Common;
-using Core.Dtos.CompletedCases;
 using Core.Interfaces.Repositories.CompletedCases;
 
 using Infrastructure.Factories;
+using Core.Dtos.RControl.Workspace;
 
 namespace Infrastructure.Repositories.CompletedCases;
 

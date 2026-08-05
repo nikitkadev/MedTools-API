@@ -3,8 +3,8 @@
 using Core.Enums;
 
 using Infrastructure.Factories;
-using Core.Dtos.Lookups;
 using Core.Interfaces.Repositories.Lookups;
+using Core.Dtos.RControl.Lookups;
 
 namespace Infrastructure.Repositories.Lookups;
 

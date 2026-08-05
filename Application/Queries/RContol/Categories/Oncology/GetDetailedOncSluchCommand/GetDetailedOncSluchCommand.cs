@@ -2,7 +2,7 @@
 
 using Core.Enums;
 using Core.Common;
-using Core.Dtos.Categories.Oncology;
+using Core.Dtos.RControl.Categories.Oncology;
 
 namespace Application.Queries.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
 

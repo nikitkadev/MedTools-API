@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Core.Interfaces.Auth;
-using Core.Interfaces.Repositories.MainField;
 using Core.Interfaces.Repositories.Users;
 using Core.Interfaces.Repositories.Categories;
 
@@ -27,6 +26,8 @@ using Infrastructure.Repositories.Lookups;
 using Core.Interfaces.Repositories.Lookups;
 using Core.Interfaces.Repositories.CompletedCases;
 using Infrastructure.Repositories.CompletedCases;
+using Core.Interfaces.Repositories.MedicalCases;
+using Infrastructure.Repositories.MedicalCases;
 
 
 
@@ -54,8 +55,8 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IBillingPeriodRepository, BillingPeriodRepository>();
         services.AddScoped<ICompletedCaseRepository, CompletedCaseRepository>();
         services.AddScoped<IMedicalOrganizationRepository, MedicalOrganizationRepository>();
+        services.AddScoped<IMedicalCaseRepository, MedicalCaseRepository>();
 
-        services.AddScoped<ICasesRepository, CasesRepository>();
         services.AddScoped<IPatientSmoCategoryRepository, PatientSmoCategoryRepository>();
         services.AddScoped<ICasesCategoryRepository, CasesCategoryRepository>();
         services.AddScoped<IOncologyCategoryRepository, OncologyCategoryRepository>();

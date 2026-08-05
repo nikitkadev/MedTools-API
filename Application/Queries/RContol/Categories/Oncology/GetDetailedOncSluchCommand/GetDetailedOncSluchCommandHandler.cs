@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
 using Core.Common;
-using Core.Dtos.Categories.Oncology;
 using Core.Interfaces.Repositories.Categories;
+using Core.Dtos.RControl.Categories.Oncology;
 
 namespace Application.Queries.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
 

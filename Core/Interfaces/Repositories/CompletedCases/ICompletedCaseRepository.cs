@@ -1,5 +1,5 @@
 ﻿using Core.Common;
-using Core.Dtos.CompletedCases;
+using Core.Dtos.RControl.Workspace;
 using Core.Enums;
 
 namespace Core.Interfaces.Repositories.CompletedCases;

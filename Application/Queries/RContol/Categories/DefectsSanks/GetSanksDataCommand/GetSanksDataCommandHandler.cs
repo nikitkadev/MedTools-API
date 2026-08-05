@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
 using Core.Common;
-using Core.Dtos.Categories.DefectsSanks;
 using Core.Interfaces.Repositories.Categories;
+using Core.Dtos.RControl.Categories.DefectsSanks;
 
 namespace Application.Queries.RContol.Categories.DefectsSanks.GetSanksDataCommand;
 

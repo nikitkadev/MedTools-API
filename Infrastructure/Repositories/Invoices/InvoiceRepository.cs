@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
 using Core.Common;
-using Core.Dtos.Invoices;
 using Core.Interfaces.Repositories.Invoices;
 
 using Infrastructure.Factories;
+using Core.Dtos.RControl.Workspace;
 
 namespace Infrastructure.Repositories.Invoices;
 

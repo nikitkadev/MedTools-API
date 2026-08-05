@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
 using Core.Common;
-using Core.Dtos.Categories.DefectsSanks;
 using Core.Interfaces.Repositories.Categories;
 
 using Infrastructure.Factories;
+using Core.Dtos.RControl.Categories.DefectsSanks;
 
 namespace Infrastructure.Repositories.Categories;
 

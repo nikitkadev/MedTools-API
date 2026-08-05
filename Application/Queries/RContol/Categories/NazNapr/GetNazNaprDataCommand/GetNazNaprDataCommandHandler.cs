@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
 using Core.Common;
-using Core.Dtos.Categories.NazNapr;
 using Core.Interfaces.Repositories.Categories;
+using Core.Dtos.RControl.Categories.NazNapr;
 
 namespace Application.Queries.RContol.Categories.NazNapr.GetNazNaprDataCommand;
 

@@ -2,7 +2,7 @@
 
 using Core.Common;
 using Core.Enums;
-using Core.Dtos.Categories.Oncology;
+using Core.Dtos.RControl.Categories.Oncology;
 
 namespace Application.Queries.RContol.Categories.Oncology.GetInjectionsCommand;
 

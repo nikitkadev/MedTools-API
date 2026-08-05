@@ -19,10 +19,7 @@ using Application.Queries.RContol.Categories.ProvidedServices.GetProvidedService
 
 using Web.Registration.Endpoints;
 using Web.Endpoints.RControl.Lookups;
-
-using Web.Endpoints.RControl.Invoices;
-using Web.Endpoints.RControl.MedicalCases;
-using Web.Endpoints.RControl.CompletedCases;
+using Web.Endpoints.RControl.Workspace;
 
 namespace Web.Endpoints.RControl;
 

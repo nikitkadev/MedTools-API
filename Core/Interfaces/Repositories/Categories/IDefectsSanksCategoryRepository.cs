@@ -1,6 +1,6 @@
 ﻿using Core.Enums;
 using Core.Common;
-using Core.Dtos.Categories.DefectsSanks;
+using Core.Dtos.RControl.Categories.DefectsSanks;
 
 namespace Core.Interfaces.Repositories.Categories;
 

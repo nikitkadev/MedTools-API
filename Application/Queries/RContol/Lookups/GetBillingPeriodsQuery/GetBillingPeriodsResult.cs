@@ -1,4 +1,4 @@
-﻿using Core.Dtos.Lookups;
+﻿using Core.Dtos.RControl.Lookups;
 
 namespace Application.Queries.RContol.Lookups.GetBillingPeriodsQuery;
 

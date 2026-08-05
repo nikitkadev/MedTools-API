@@ -1,6 +1,6 @@
 ﻿using Core.Enums;
 using Core.Common;
-using Core.Dtos.Categories.NazNapr;
+using Core.Dtos.RControl.Categories.NazNapr;
 
 namespace Core.Interfaces.Repositories.Categories;
 

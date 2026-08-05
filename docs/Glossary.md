@@ -45,6 +45,19 @@
 | --- | --- | --- | --- | --- |
 | `Z_SL` | `dbo.z_sl` | `Completed Case` | `CompletedCase` | Законченный случай |
 
+### Таблица `SL`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `SL` | `dbo.sluch` | `Medical Case` | `MedicalCase` | Случай |
+| `PROFIL` | `profil` | `Medical Profile` | `MedicalProfile` | Профиль медицинской помощи |
+| `PRVS` | `prvs` | `Physician Specialty` | `PhysicianSpecialty` | Специальность врача |
+| `DATE_1` | `date_1` | `Treatment Start Date` | `TreatmentStartDate` | Дата начала лечения |
+| `DATE_2` | `date_2` | `Treatment End Date` | `TreatmentEndDate` | Дата окончания лечения |
+| `DS1` | `ds1` | `Primary Diagnosis ` | `PrimaryDiagnosis ` | Дата окончания лечения |
+| `ED_COL` | `ed_col` | `Paid Units` | `PaidUnits ` | Количество единиц оплаты медицинской помощи |
+| `TARIF` | `tarif` | `Unit Rate` | `UnitRate ` | Тариф |
+
+
 ### Таблица `PERS`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |
