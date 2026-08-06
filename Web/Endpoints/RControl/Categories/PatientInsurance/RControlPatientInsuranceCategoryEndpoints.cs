@@ -2,7 +2,7 @@
 
 using Core.Enums;
 
-using Application.Queries.RContol.Categories.PatientInsurance.GetPaientInsuranceQuery;
+using Application.Queries.RContol.Categories.PatientInsurance.GetPatientInsuranceQuery;
 
 namespace Web.Endpoints.RControl.Categories.PatientInsurance;
 
@@ -22,7 +22,7 @@ public static class RControlPatientInsuranceCategoryEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetPaientInsuranceQuery(
+            request: new GetPatientInsuranceQuery(
                 MedicalCaseUid: medicalCaseUid,
                 TargetDb: targetDb),
             cancellationToken: cancellationToken);

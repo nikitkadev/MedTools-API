@@ -3,13 +3,13 @@
 using Core.Common;
 using Core.Interfaces.RControl.Repositories.Categories;
 
-namespace Application.Queries.RContol.Categories.PatientInsurance.GetPaientInsuranceQuery;
+namespace Application.Queries.RContol.Categories.PatientInsurance.GetPatientInsuranceQuery;
 
-public class GetPaientInsuranceQueryHandler(
-    IPatientInsuranceRepository patientInsuranceRepository) : IRequestHandler<GetPaientInsuranceQuery, Result<GetPaientInsuranceResult>>
+public class GetPatientInsuranceQueryHandler(
+    IPatientInsuranceRepository patientInsuranceRepository) : IRequestHandler<GetPatientInsuranceQuery, Result<GetPatientInsuranceResult>>
 {
-    public async Task<Result<GetPaientInsuranceResult>> Handle(
-        GetPaientInsuranceQuery request, 
+    public async Task<Result<GetPatientInsuranceResult>> Handle(
+        GetPatientInsuranceQuery request, 
         CancellationToken cancellationToken)
     {
         var patient = patientInsuranceRepository.GetPatient(
@@ -20,8 +20,8 @@ public class GetPaientInsuranceQueryHandler(
             medicalCaseUid: request.MedicalCaseUid,
             targetDb: request.TargetDb);
 
-        return Result<GetPaientInsuranceResult>.Success(
-            new GetPaientInsuranceResult(
+        return Result<GetPatientInsuranceResult>.Success(
+            new GetPatientInsuranceResult(
                 Patient: patient,
                 Insurance: insurance));
     }
