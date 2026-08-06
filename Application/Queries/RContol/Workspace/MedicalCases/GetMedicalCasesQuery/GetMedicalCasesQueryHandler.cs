@@ -12,7 +12,7 @@ public class GetMedicalCasesQueryHandler(
         GetMedicalCasesQuery request, 
         CancellationToken cancellationToken)
     {
-        var medicalCases = await medicalCaseRepository.GetMedicalCasesAsync(
+        var medicalCases = await medicalCaseRepository.GetMedicalCaseListItemsAsync(
             completedCaseUid: request.CompletedCaseUid,
             targetDb: request.TargetDb,
             cancellationToken: cancellationToken);

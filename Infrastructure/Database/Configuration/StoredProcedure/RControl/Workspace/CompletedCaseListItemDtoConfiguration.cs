@@ -4,9 +4,9 @@ using Core.Dtos.RControl.Workspace;
 
 namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.Workspace;
 
-public class CompletedCaseDtoConfiguration : IEntityTypeConfiguration<CompletedCaseDto>
+public class CompletedCaseListItemDtoConfiguration : IEntityTypeConfiguration<CompletedCaseListItemDto>
 {
-    public void Configure(EntityTypeBuilder<CompletedCaseDto> builder)
+    public void Configure(EntityTypeBuilder<CompletedCaseListItemDto> builder)
     {
         builder.HasNoKey();
 

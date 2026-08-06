@@ -1,6 +1,6 @@
 ﻿namespace Core.Dtos.RControl.Workspace;
 
-public sealed record InvoiceDto(
+public sealed record InvoiceListItemDto(
     int InvoiceUid,
     string Number,
     DateTime BillingDate,

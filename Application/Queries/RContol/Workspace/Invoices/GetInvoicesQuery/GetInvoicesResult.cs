@@ -3,5 +3,5 @@
 namespace Application.Queries.RContol.Workspace.Invoices.GetInvoicesQuery;
 
 public sealed record GetInvoicesResult(
-    IReadOnlyCollection<InvoiceDto> Invoices,
+    IReadOnlyCollection<InvoiceListItemDto> Invoices,
     int RecordsCount);

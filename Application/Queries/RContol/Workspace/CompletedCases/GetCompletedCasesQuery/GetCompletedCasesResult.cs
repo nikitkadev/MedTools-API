@@ -3,5 +3,5 @@
 namespace Application.Queries.RContol.Workspace.CompletedCases.GetCompletedCasesQuery;
 
 public sealed record GetCompletedCasesResult(
-    IReadOnlyCollection<CompletedCaseDto> CompletedCases,
+    IReadOnlyCollection<CompletedCaseListItemDto> CompletedCases,
     int TotalCount);

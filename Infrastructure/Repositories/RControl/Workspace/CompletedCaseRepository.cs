@@ -3,17 +3,17 @@ using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
 using Core.Common;
-
-using Infrastructure.Factories;
 using Core.Dtos.RControl.Workspace;
 using Core.Interfaces.RControl.Repositories.Workspace;
+
+using Infrastructure.Factories;
 
 namespace Infrastructure.Repositories.RControl.Workspace;
 
 public class CompletedCaseRepository(
     DbContextFactory dbContextFactory) : ICompletedCaseRepository
 {
-    public async Task<PagedResult<CompletedCaseDto>> GetCompletedCasesAsync(
+    public async Task<PagedResult<CompletedCaseListItemDto>> GetCompletedCaseListItemsAsync(
         int invoiceUid, 
         int page, 
         int pageSize, 
@@ -28,7 +28,7 @@ public class CompletedCaseRepository(
         };
 
         var completedCases = await dbContext
-            .Set<CompletedCaseDto>()
+            .Set<CompletedCaseListItemDto>()
             .FromSqlRaw(
                 sql: "EXEC sp26_get_z_sl_data @schet_uid, @skip, @take, @search, @total_count OUTPUT",
                 parameters: [
@@ -41,7 +41,7 @@ public class CompletedCaseRepository(
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return new PagedResult<CompletedCaseDto>(
+        return new PagedResult<CompletedCaseListItemDto>(
             Records: completedCases,
             TotalCount: (int)totalCountParam.Value);
     }

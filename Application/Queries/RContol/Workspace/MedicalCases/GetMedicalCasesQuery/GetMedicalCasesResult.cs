@@ -2,4 +2,4 @@
 
 namespace Application.Queries.RContol.Workspace.MedicalCases.GetMedicalCasesQuery;
 
-public sealed record GetMedicalCasesResult(IReadOnlyCollection<MedicalCaseDto> MedicalCases);
+public sealed record GetMedicalCasesResult(IReadOnlyCollection<MedicalCaseListItemDto> MedicalCases);

@@ -4,9 +4,9 @@ using Core.Dtos.RControl.Workspace;
 
 namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.Workspace;
 
-public class InvoiceDtoConfiguration : IEntityTypeConfiguration<InvoiceDto>
+public class InvoiceListItemDtoConfiguration : IEntityTypeConfiguration<InvoiceListItemDto>
 {
-    public void Configure(EntityTypeBuilder<InvoiceDto> builder)
+    public void Configure(EntityTypeBuilder<InvoiceListItemDto> builder)
     {
         builder.HasNoKey();
 

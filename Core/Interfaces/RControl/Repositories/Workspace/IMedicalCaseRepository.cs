@@ -5,7 +5,7 @@ namespace Core.Interfaces.RControl.Repositories.Workspace;
 
 public interface IMedicalCaseRepository
 {
-    Task<IReadOnlyCollection<MedicalCaseDto>> GetMedicalCasesAsync(
+    Task<IReadOnlyCollection<MedicalCaseListItemDto>> GetMedicalCaseListItemsAsync(
         int completedCaseUid,
         TargetDbType targetDb,
         CancellationToken cancellationToken);

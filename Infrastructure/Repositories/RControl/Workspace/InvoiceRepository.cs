@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories.RControl.Workspace;
 
 public class InvoiceRepository(DbContextFactory dbContextFactory) : IInvoiceRepository
 {
-    public async Task<PagedResult<InvoiceDto>> GetInvoicesAsync(
+    public async Task<PagedResult<InvoiceListItemDto>> GetInvoiceListItemsAsync(
         string medicalOrganizationCode, 
         int year, 
         int month, 
@@ -29,7 +29,7 @@ public class InvoiceRepository(DbContextFactory dbContextFactory) : IInvoiceRepo
         };
 
         var invoices = await dbContext
-            .Set<InvoiceDto>()
+            .Set<InvoiceListItemDto>()
             .FromSqlRaw(
                 sql: "EXEC sp26_get_nschet @code_mo, @year, @month, @take, @skip, @search, @total OUTPUT",
                 parameters: [
@@ -44,7 +44,7 @@ public class InvoiceRepository(DbContextFactory dbContextFactory) : IInvoiceRepo
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return new PagedResult<InvoiceDto>(
+        return new PagedResult<InvoiceListItemDto>(
             Records: invoices,
             TotalCount: (int)totalParam.Value);
     }

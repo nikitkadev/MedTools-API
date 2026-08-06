@@ -14,7 +14,7 @@ public class PatientDtoConfiguration : IEntityTypeConfiguration<PatientDto>
         builder.Property(prop => prop.PatientLastName).HasColumnName("patient_last_name");
         builder.Property(prop => prop.PatientFirstName).HasColumnName("patient_first_name");
         builder.Property(prop => prop.PatientMiddleName).HasColumnName("patient_middle_name");
-        builder.Property(prop => prop.PatientBirthday).HasColumnName("patient_birthday");
+        builder.Property(prop => prop.PatientBirthDate).HasColumnName("patient_birthday");
         builder.Property(prop => prop.PatientSex).HasColumnName("patient_sex");
         builder.Property(prop => prop.DocumentTypeName).HasColumnName("document_type_name");
         builder.Property(prop => prop.DocumentTypeCode).HasColumnName("document_type_code").IsRequired(false);

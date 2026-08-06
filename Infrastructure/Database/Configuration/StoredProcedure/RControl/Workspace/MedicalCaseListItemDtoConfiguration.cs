@@ -4,9 +4,9 @@ using Core.Dtos.RControl.Workspace;
 
 namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.Workspace;
 
-public class MedicalCaseDtoConfiguration : IEntityTypeConfiguration<MedicalCaseDto>
+public class MedicalCaseListItemDtoConfiguration : IEntityTypeConfiguration<MedicalCaseListItemDto>
 {
-    public void Configure(EntityTypeBuilder<MedicalCaseDto> builder)
+    public void Configure(EntityTypeBuilder<MedicalCaseListItemDto> builder)
     {
         builder.HasNoKey();
 

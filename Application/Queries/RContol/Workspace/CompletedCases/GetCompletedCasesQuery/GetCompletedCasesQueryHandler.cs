@@ -12,7 +12,7 @@ public sealed class GetCompletedCasesQueryHandler(
         GetCompletedCasesQuery request, 
         CancellationToken cancellationToken)
     {
-        var completedCasesPaginationResult = await completedCaseRepository.GetCompletedCasesAsync(
+        var completedCasesPaginationResult = await completedCaseRepository.GetCompletedCaseListItemsAsync(
             invoiceUid: request.InvoiceUid,
             page: request.Page,
             pageSize: request.PageSize,

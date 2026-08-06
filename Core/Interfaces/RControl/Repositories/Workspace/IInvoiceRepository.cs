@@ -6,7 +6,7 @@ namespace Core.Interfaces.RControl.Repositories.Workspace;
 
 public interface IInvoiceRepository
 {
-    Task<PagedResult<InvoiceDto>> GetInvoicesAsync(
+    Task<PagedResult<InvoiceListItemDto>> GetInvoiceListItemsAsync(
         string medicalOrganizationCode,
         int year,
         int month,

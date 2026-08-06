@@ -1,6 +1,6 @@
 ﻿namespace Core.Dtos.RControl.Workspace;
 
-public sealed record MedicalCaseDto(
+public sealed record MedicalCaseListItemDto(
     int MedicalCaseUid,
     int? MedicalProfile,
     short IsPediatric,

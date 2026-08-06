@@ -6,7 +6,7 @@ namespace Core.Interfaces.RControl.Repositories.Workspace;
 
 public interface ICompletedCaseRepository
 {
-    Task<PagedResult<CompletedCaseDto>> GetCompletedCasesAsync(
+    Task<PagedResult<CompletedCaseListItemDto>> GetCompletedCaseListItemsAsync(
         int invoiceUid,
         int page,
         int pageSize,

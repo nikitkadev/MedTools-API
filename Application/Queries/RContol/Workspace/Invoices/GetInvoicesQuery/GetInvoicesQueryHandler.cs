@@ -11,7 +11,7 @@ public class GetInvoicesQueryHandler(IInvoiceRepository invoiceRepository) : IRe
         GetInvoicesQuery request,
         CancellationToken cancellationToken)
     {
-        var invoices = await invoiceRepository.GetInvoicesAsync(
+        var invoices = await invoiceRepository.GetInvoiceListItemsAsync(
             medicalOrganizationCode: request.MedicalOrganizationCode,
             year: request.BillingYear,
             month: request.BillingMonth,

@@ -4,7 +4,7 @@ public sealed record PatientDto(
     string PatientLastName,
     string PatientFirstName,
     string PatientMiddleName,
-    DateTime PatientBirthday,
+    DateTime PatientBirthDate,
     string PatientSex,
     string DocumentTypeName,
     string? DocumentTypeCode,

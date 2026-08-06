@@ -1,6 +1,6 @@
 ﻿namespace Core.Dtos.RControl.Workspace;
 
-public sealed record CompletedCaseDto(
+public sealed record CompletedCaseListItemDto(
     int CompletedCaseUid,
     long EntryNumber,
     decimal AmountBilled,
