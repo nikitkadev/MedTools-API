@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Core.Enums;
 using Core.Common;
 using Core.Dtos.RControl.Workspace;
+using Core.Dtos.RControl.Categories.MedicalCase;
 using Core.Interfaces.RControl.Repositories.Workspace;
 
 using Infrastructure.Factories;
@@ -13,6 +14,25 @@ namespace Infrastructure.Repositories.RControl.Workspace;
 public class CompletedCaseRepository(
     DbContextFactory dbContextFactory) : ICompletedCaseRepository
 {
+    public async Task<CompletedCaseDetailsDto?> GetCompletedCaseDetailsAsync(
+        int completedCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var results = await dbContext
+            .Set<CompletedCaseDetailsDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_completed_case_details @pCompletedCaseUid={completedCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        var completedCaseDetails = results.FirstOrDefault();
+
+        return completedCaseDetails;
+        
+    }
+
     public async Task<PagedResult<CompletedCaseListItemDto>> GetCompletedCaseListItemsAsync(
         int invoiceUid, 
         int page, 

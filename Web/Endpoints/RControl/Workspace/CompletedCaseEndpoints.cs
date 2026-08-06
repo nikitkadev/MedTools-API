@@ -3,6 +3,7 @@
 using Core.Enums;
 
 using Application.Queries.RContol.Workspace.CompletedCases.GetCompletedCasesQuery;
+using Application.Queries.RContol.Workspace.CompletedCases.GetCompletedCaseDetailsQuery;
 
 namespace Web.Endpoints.RControl.Workspace;
 
@@ -13,6 +14,8 @@ public static class CompletedCaseEndpoints
         var group = builder.MapGroup("/completed-cases").WithTags("RControl Completed Cases");
 
         group.MapGet("", GetCompletedCasesAsync);
+        group.MapGet("/{completedCaseUid:int}", GetCompletedCaseDetailsAsync);
+
     }
 
     private static async Task<IResult> GetCompletedCasesAsync(
@@ -30,6 +33,25 @@ public static class CompletedCaseEndpoints
                 PageSize: pageSize,
                 TargetDb: targetDb),
             cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetCompletedCaseDetailsAsync(
+        int completedCaseUid,
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetCompletedCaseDetailsQuery(
+                CompletedCaseUid: completedCaseUid,
+                TargetDb: targetDb));
 
         if (result.IsFailure)
         {

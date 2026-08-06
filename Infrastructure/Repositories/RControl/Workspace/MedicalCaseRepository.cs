@@ -2,6 +2,7 @@
 
 using Core.Enums;
 using Core.Dtos.RControl.Workspace;
+using Core.Dtos.RControl.Categories.MedicalCase;
 using Core.Interfaces.RControl.Repositories.Workspace;
 
 using Infrastructure.Factories;
@@ -11,6 +12,24 @@ namespace Infrastructure.Repositories.RControl.Workspace;
 public class MedicalCaseRepository(
     DbContextFactory dbContextFactory) : IMedicalCaseRepository
 {
+    public async Task<MedicalCaseDetailsDto?> GetMedicalCaseDetailsAsync(
+        int medicalCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var result = await dbContext
+            .Set<MedicalCaseDetailsDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_medical_case_details @pMedicalCaseUid={medicalCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        var medicalCaseDetails = result.FirstOrDefault();
+
+        return medicalCaseDetails;
+    }
+
     public async Task<IReadOnlyCollection<MedicalCaseListItemDto>> GetMedicalCaseListItemsAsync(
         int completedCaseUid, 
         TargetDbType targetDb, 

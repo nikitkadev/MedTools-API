@@ -2,7 +2,6 @@
 
 using Core.Enums;
 
-using Application.Queries.RContol.Categories.GetCasesDataCommand;
 using Application.Queries.RContol.Categories.Oncology.GetOncSluchCommand;
 using Application.Queries.RContol.Categories.Oncology.GetInjectionsCommand;
 using Application.Queries.RContol.Categories.NazNapr.GetNazNaprDataCommand;
@@ -35,7 +34,6 @@ public class RControlEndpoints : IEndpoint
 
         
 
-        group.MapGet("/categories/cases", GetCasesCategoryDataAsync);
         group.MapGet("/categories/oncology/onc-sluch", GetOncologyCategoryOnkCaseAsync);
         group.MapGet("/categories/oncology/consultations", GetOncologyCategoryConsultationsAsync);
         group.MapGet("/categories/oncology/onc-sluch-detailed", GetOncologyCategoryOncSluchDetailed);
@@ -49,27 +47,6 @@ public class RControlEndpoints : IEndpoint
         group.MapGet("/categories/defects-sanks/sanks", GetSanksDataAsync);
         group.MapGet("/categories/defects-sanks/defects", GetDefectsDataAsync);
         
-    }
-
-
-    private static async Task<IResult> GetCasesCategoryDataAsync(
-        int sluchUid,
-        string targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetCasesDataCommand(
-                SluchUid: sluchUid,
-                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
     }
 
     private static async Task<IResult> GetOncologyCategoryOnkCaseAsync(

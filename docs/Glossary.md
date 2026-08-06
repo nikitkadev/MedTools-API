@@ -44,6 +44,23 @@
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |
 | `Z_SL` | `dbo.z_sl` | `Completed Case` | `CompletedCase` | Законченный случай |
+| `LPU` | `lpu` | `Medical Organization Code` | `MedicalOrganizationCode` | Код медицинской организации |
+| `NPR_MO` | `npr_mo` | `Referring Medical Organization Code ` | `ReferringMedicalOrganizationCode` | Код медицинской организации, направившей на лечение |
+| `NPR_DATE` | `npr_date` | `Referral Date` | `ReferralDate` |  Дата направления |
+| `USL_OK` | `usl_ok` | `Care Conditions` | `CareConditions` | Условия оказания медицинской помощи |
+| `VIDPOM` | `vidpom` | `Medical Care Type` | `MedicalCareType` | Вид медицинской помощи |
+| `IDSP` | `idsp` | `Payment Method Code ` | `PaymentMethodCode` | Код способа оплаты медицинской помощи |
+| `FOR_POM` | `for_pom` | `Medical Care Form` | `MedicalCareForm` | Форма оказания медицинской помощи |
+| `DATE_Z_1` | `date_z_1` | `Treatment Start Date` | `TreatmentStartDate` | Дата начала лечения |
+| `DATE_Z_2` | `date_z_2` | `Treatment End Date` | `TreatmentEndDate` | Дата окончания лечения |
+| `KD_Z` | `kd_z` | `Hospitalization Duration` | `HospitalizationDuration` | Продолжительность госпитализации (койко-дни / пациенто-дни) |
+| `RSLT` | `rslt` | `Hospitalization Outcome` | `HospitalizationOutcome` | Результат обращения/ госпитализации |
+| `VB_P` | `vb_p` | `Is Intrahospital Transfer` | `IsIntrahospitalTransfer` | Признак внутрибольничного перевода |
+| `RSLT_D` | `rslt_d` | `Screening Result` | `ScreeningResult` | Результат диспансеризации |
+| `P_OTK` | `p_otk` | `Is Refusal` | `IsRefusal` | Признак отказа |
+| `VBR` | `vbr` | `Is Mobile Team` | `IsMobileTeam` | Признак мобильной бригады |
+| `ISHOD` | `ishod` | `Disease Outcome` | `DiseaseOutcome` | Исход заболевания |
+
 
 ### Таблица `SL`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
@@ -53,9 +70,25 @@
 | `PRVS` | `prvs` | `Physician Specialty` | `PhysicianSpecialty` | Специальность врача |
 | `DATE_1` | `date_1` | `Treatment Start Date` | `TreatmentStartDate` | Дата начала лечения |
 | `DATE_2` | `date_2` | `Treatment End Date` | `TreatmentEndDate` | Дата окончания лечения |
-| `DS1` | `ds1` | `Primary Diagnosis ` | `PrimaryDiagnosis ` | Дата окончания лечения |
-| `ED_COL` | `ed_col` | `Paid Units` | `PaidUnits ` | Количество единиц оплаты медицинской помощи |
-| `TARIF` | `tarif` | `Unit Rate` | `UnitRate ` | Тариф |
+| `DS1` | `ds1` | `Primary Diagnosis ` | `PrimaryDiagnosis` | Дата окончания лечения |
+| `ED_COL` | `ed_col` | `Paid Units` | `PaidUnits` | Количество единиц оплаты медицинской помощи |
+| `TARIF` | `tarif` | `Unit Rate` | `UnitRate` | Тариф |
+| `LPU_1` | `lpu_1` | `Department` | `Department` | Подразделение медицинской организации |
+| `PODR` | `podr` | `DepartmentCode` | `DepartmentCode` | Код отделения |
+| `DET` | `det` | `Is Pediatric` | `IsPediatric` | Признак детского профиля |
+| `P_CEL` | `p_cel` | `Visit Purpose` | `VisitPurpose` | Цель посещения |
+| `PROFIL_K` | `profil_k` | `Bed Profile` | `BedProfile` | Профиль койки |
+| `NHISTORY` | `history` | `Medical Record Number` | `MedicalRecordNumber` | Номер истории болезни/талона амбулаторного пациента/карты/карты вызова скорой медицинской помощи |
+| `P_PER` | `p_per` | `Is Admission Transfer` | `IsAdmissionTransfer` | Признак поступления/перевода |
+| `REAB` | `reab` | `Is Rehabilitation` | `IsRehabilitation` | Признак реабилитации |
+| `KD` | `kd` | `HospitalizationDuration` | `HospitalizationDuration` | Продолжительность госпитализации (койко-дни/пациенто-дни) |
+| `LPU_LEVEL` | `lpu_level` | `Facility Level` | `FacilityLevel` | Уровень (крутости) медицинской организации |
+| `DS0` | `ds0` | `Initial Diagnosis` | `InitialDiagnosis` | Диагноз первичный |
+| `DS_ONK ` | `ds_onk` | `Is Oncology Suspicion` | `IsOncologySuspicion` | Признак подозрения на злокачественное новообразование |
+| `IDDOKT` | `iddokt` | `Physician Code` | `PhysicianCode` | Код лечащего врача/врача, закрывшего талон (историю болезни) |
+| `WEI` | `wei` | `Weight` | `Weight` | Масса тела (кг) |
+| `C_ZAB` | `c_zab` | `Disease Character` | `DiseaseCharacter` | Характер основного заболевания |
+| `COMENTSL` | `comentsl` | `Internal Comment` | `InternalComment` | Служебное поле |
 
 
 ### Таблица `PERS`
