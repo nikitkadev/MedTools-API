@@ -7,7 +7,7 @@ using Application.Queries.RContol.Lookups.GetMedicalOrganizationsQuery;
 
 namespace Web.Endpoints.RControl.Lookups;
 
-public static class RControlLookupsEndpoints
+public static class LookupsEndpoints
 {
     public static void MapLookups(this RouteGroupBuilder builder)
     {

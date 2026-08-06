@@ -7,7 +7,7 @@ using Application.Queries.RContol.Workspace.Invoices.GetInvoiceSummaryQuery;
 
 namespace Web.Endpoints.RControl.Workspace;
 
-public static class RControlInvoiceEndpoints
+public static class InvoiceEndpoints
 {
     public static void MapInvoiceEndpoints(this RouteGroupBuilder builder)
     {

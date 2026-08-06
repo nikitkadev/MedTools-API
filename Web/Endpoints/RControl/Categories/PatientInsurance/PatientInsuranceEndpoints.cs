@@ -6,16 +6,16 @@ using Application.Queries.RContol.Categories.PatientInsurance.GetPatientInsuranc
 
 namespace Web.Endpoints.RControl.Categories.PatientInsurance;
 
-public static class RControlPatientInsuranceCategoryEndpoints
+public static class PatientInsuranceEndpoints
 {
-    public static void MapPatientInsuranceCategoryEndpoints(this RouteGroupBuilder builder)
+    public static void MapPatientInsuranceEndpoints(this RouteGroupBuilder builder)
     {
-        var group = builder.MapGroup("/{medicalCaseUid:int}/patient-insurance").WithTags("RControl PatientInsurance Category");
+        var group = builder.MapGroup("/{medicalCaseUid:int}/patient-insurance").WithTags("RControl Patient Insurance");
 
         group.MapGet("", GetPaientInsuranceAsync);
     }
 
-    public static async Task<IResult> GetPaientInsuranceAsync(
+    private static async Task<IResult> GetPaientInsuranceAsync(
         int medicalCaseUid,
         TargetDbType targetDb,
         ISender sender,

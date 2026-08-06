@@ -2,18 +2,20 @@
 
 using Core.Enums;
 
-using Application.Queries.RContol.Workspace.MedicalCases.GetMedicalCasesQuery;
 using Web.Endpoints.RControl.Categories.PatientInsurance;
+
+using Application.Queries.RContol.Workspace.MedicalCases.GetMedicalCasesQuery;
+
 
 namespace Web.Endpoints.RControl.Workspace;
 
-public static class RControlMedicalCaseEndpoints
+public static class MedicalCaseEndpoints
 {
     public static void MapMedicalCaseEndpoints(this RouteGroupBuilder builder)
     {
         var group = builder.MapGroup("/medical-cases").WithTags("RControl Medical Cases");
 
-        group.MapPatientInsuranceCategoryEndpoints();
+        group.MapPatientInsuranceEndpoints();
 
         group.MapGet("", GetMedicalCasesAsync);
     }

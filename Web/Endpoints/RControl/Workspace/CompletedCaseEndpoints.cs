@@ -6,7 +6,7 @@ using Application.Queries.RContol.Workspace.CompletedCases.GetCompletedCasesQuer
 
 namespace Web.Endpoints.RControl.Workspace;
 
-public static class RControlCompletedCaseEndpoints
+public static class CompletedCaseEndpoints
 {
     public static void MapCompletedCaseEndpoints(this RouteGroupBuilder builder)
     {

@@ -70,5 +70,11 @@
 | --- | --- | --- | --- | --- |
 | `SPOLIS` | `spolis` | `Insurance Policy Series` | `InsurancePolicySeries` | Серия полиса |
 | `NPOLIS` | `npolis` | `Insurance Policy Number` | `InsurancePolicyNumber` | Номер полиса |
+| `VPOLIS` | `vpolis` | `Insurance Policy Type` | `InsurancePolicyType` | Тип полиса |
+| `SMO` | `smo` | `Insurance Company Code` | `InsuranceCompanyCode` | Реестровый номер СМО |
+| `SMO_NAM` | `smo_nam` | `Insurance Company Name` | `InsuranceCompanyName` | Наименование СМО |
+| `ENP` | `enp` | `Insurance Policy Unified Number` | `InsurancePolicyUnifiedNumber` | Номер полиса |
+| `ID_PAC` | `id_pac` | `Patient Record Code` | `PatientRecordCode` | Код записи о пациенте |
+
 
 ### Таблица `SL`
