@@ -2,10 +2,10 @@
 
 using Core.Enums;
 
-using Application.Queries.RContol.Workspace.CompletedCases.GetCompletedCasesQuery;
 using Application.Queries.RContol.Workspace.CompletedCases.GetCompletedCaseDetailsQuery;
+using Application.Queries.RContol.Workspace.MedicalCases.GetMedicalCasesQuery;
 
-namespace Web.Endpoints.RControl.Workspace;
+namespace Web.Endpoints.RControl.CompletedCases;
 
 public static class CompletedCaseEndpoints
 {
@@ -13,33 +13,8 @@ public static class CompletedCaseEndpoints
     {
         var group = builder.MapGroup("/completed-cases").WithTags("RControl Completed Cases");
 
-        group.MapGet("", GetCompletedCasesAsync);
         group.MapGet("/{completedCaseUid:int}", GetCompletedCaseDetailsAsync);
-
-    }
-
-    private static async Task<IResult> GetCompletedCasesAsync(
-        int invoiceUid,
-        int page,
-        int pageSize,
-        TargetDbType targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetCompletedCasesQuery(
-                InvoiceUid: invoiceUid,
-                Page: page,
-                PageSize: pageSize,
-                TargetDb: targetDb),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
+        group.MapGet("/{completedCaseUid:int}/medical-cases", GetMedicalCasesAsync);
     }
 
     private static async Task<IResult> GetCompletedCaseDetailsAsync(
@@ -50,6 +25,25 @@ public static class CompletedCaseEndpoints
     {
         var result = await sender.Send(
             request: new GetCompletedCaseDetailsQuery(
+                CompletedCaseUid: completedCaseUid,
+                TargetDb: targetDb));
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetMedicalCasesAsync(
+        int completedCaseUid,
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalCasesQuery(
                 CompletedCaseUid: completedCaseUid,
                 TargetDb: targetDb));
 

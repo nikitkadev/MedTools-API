@@ -24,6 +24,7 @@
 
     <ItemGroup>
         <Folder Include="Endpoints\MedView\" />
+        <Folder Include="Endpoints\RControl\Oncology\" />
     </ItemGroup>
 
 </Project>
