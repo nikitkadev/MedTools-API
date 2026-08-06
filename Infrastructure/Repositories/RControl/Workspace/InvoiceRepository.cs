@@ -49,19 +49,21 @@ public class InvoiceRepository(DbContextFactory dbContextFactory) : IInvoiceRepo
             TotalCount: (int)totalParam.Value);
     }
 
-    public InvoiceSummaryDto? GetInvoiceSummary(
+    public async Task<InvoiceSummaryDto?> GetInvoiceSummaryAsync(
         int invoiceUid, 
-        TargetDbType targetDb)
+        TargetDbType targetDb,
+        CancellationToken cancellationToken)
     {
         using var dbContext = dbContextFactory.CreateDbContext(targetDb);
 
-        var invoiceSummary = dbContext
+        var result = await dbContext
             .Set<InvoiceSummaryDto>()
             .FromSqlInterpolated($"EXEC sp26_get_z_slsvod @schet_uid={invoiceUid}")
             .AsNoTracking()
-            .AsEnumerable()
-            .FirstOrDefault();
+            .ToListAsync(cancellationToken);
 
+        var invoiceSummary = result.FirstOrDefault();
+        
         return invoiceSummary;
     }
 }

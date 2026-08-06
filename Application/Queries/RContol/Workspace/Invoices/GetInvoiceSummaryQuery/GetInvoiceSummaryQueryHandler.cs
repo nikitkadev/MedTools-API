@@ -12,9 +12,10 @@ public sealed class GetInvoiceSummaryQueryHandler(
         GetInvoiceSummaryQuery request, 
         CancellationToken cancellationToken)
     {
-        var invoiceSummary = invoiceRepository.GetInvoiceSummary(
+        var invoiceSummary = await invoiceRepository.GetInvoiceSummaryAsync(
             invoiceUid: request.InvoiceUid,
-            targetDb: request.TargetDb);
+            targetDb: request.TargetDb,
+            cancellationToken: cancellationToken);
 
         if(invoiceSummary is null)
         {

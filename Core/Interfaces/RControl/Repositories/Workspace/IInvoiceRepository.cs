@@ -15,8 +15,9 @@ public interface IInvoiceRepository
         TargetDbType targetDb,
         CancellationToken cancellationToken);
 
-    InvoiceSummaryDto? GetInvoiceSummary(
+    Task<InvoiceSummaryDto?> GetInvoiceSummaryAsync(
         int invoiceUid,
-        TargetDbType targetDb);
+        TargetDbType targetDb,
+        CancellationToken cancellationToken);
 
 }
