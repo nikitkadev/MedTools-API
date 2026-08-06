@@ -2,7 +2,7 @@
 using Core.Common;
 using Core.Dtos.RControl.Workspace;
 
-namespace Core.Interfaces.Repositories.Invoices;
+namespace Core.Interfaces.RControl.Repositories.Workspace;
 
 public interface IInvoiceRepository
 {

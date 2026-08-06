@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
 using Core.Common;
-using Core.Interfaces.Repositories.Lookups;
+using Core.Interfaces.RControl.Repositories.Lookups;
 
 namespace Application.Queries.RContol.Lookups.GetBillingPeriodsQuery;
 

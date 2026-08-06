@@ -2,7 +2,7 @@
 using Core.Dtos.RControl.Workspace;
 using Core.Enums;
 
-namespace Core.Interfaces.Repositories.CompletedCases;
+namespace Core.Interfaces.RControl.Repositories.Workspace;
 
 public interface ICompletedCaseRepository
 {

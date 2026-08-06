@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 
 using Core.Entities;
+
 using Infrastructure.Database.Enitites.Auth;
 
 namespace Infrastructure.Mapping;

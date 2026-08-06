@@ -1,7 +1,7 @@
 ﻿using Core.Enums;
 using Core.Dtos.RControl.Workspace;
 
-namespace Core.Interfaces.Repositories.MedicalCases;
+namespace Core.Interfaces.RControl.Repositories.Workspace;
 
 public interface IMedicalCaseRepository
 {

@@ -20,14 +20,12 @@ using Infrastructure.Repositories.Categories;
 
 using Web.Mapping;
 using Web.Options;
-using Core.Interfaces.Repositories.Invoices;
-using Infrastructure.Repositories.Invoices;
-using Infrastructure.Repositories.Lookups;
-using Core.Interfaces.Repositories.Lookups;
-using Core.Interfaces.Repositories.CompletedCases;
-using Infrastructure.Repositories.CompletedCases;
-using Core.Interfaces.Repositories.MedicalCases;
-using Infrastructure.Repositories.MedicalCases;
+using Core.Interfaces.RControl.Repositories.Lookups;
+using Core.Interfaces.RControl.Repositories.Workspace;
+using Infrastructure.Repositories.RControl.Lookups;
+using Infrastructure.Repositories.RControl.Workspace;
+using Core.Interfaces.RControl.Repositories.Categories;
+using Infrastructure.Repositories.RControl.Categories;
 
 
 
@@ -56,8 +54,8 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<ICompletedCaseRepository, CompletedCaseRepository>();
         services.AddScoped<IMedicalOrganizationRepository, MedicalOrganizationRepository>();
         services.AddScoped<IMedicalCaseRepository, MedicalCaseRepository>();
+        services.AddScoped<IPatientInsuranceRepository, PatientInsuranceRepository>();
 
-        services.AddScoped<IPatientSmoCategoryRepository, PatientSmoCategoryRepository>();
         services.AddScoped<ICasesCategoryRepository, CasesCategoryRepository>();
         services.AddScoped<IOncologyCategoryRepository, OncologyCategoryRepository>();
         services.AddScoped<IProvidedServicesCategoryRepository, ProvidedServicesCategoryRepository>();

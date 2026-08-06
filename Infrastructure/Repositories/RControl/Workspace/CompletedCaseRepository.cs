@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
 using Core.Common;
-using Core.Interfaces.Repositories.CompletedCases;
 
 using Infrastructure.Factories;
 using Core.Dtos.RControl.Workspace;
+using Core.Interfaces.RControl.Repositories.Workspace;
 
-namespace Infrastructure.Repositories.CompletedCases;
+namespace Infrastructure.Repositories.RControl.Workspace;
 
 public class CompletedCaseRepository(
     DbContextFactory dbContextFactory) : ICompletedCaseRepository

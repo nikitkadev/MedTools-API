@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
 using Core.Common;
-using Core.Interfaces.Repositories.CompletedCases;
+using Core.Interfaces.RControl.Repositories.Workspace;
 
 namespace Application.Queries.RContol.Workspace.CompletedCases.GetCompletedCasesQuery;
 

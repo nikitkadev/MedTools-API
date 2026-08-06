@@ -1,7 +1,7 @@
 ﻿using Core.Enums;
 using Core.Dtos.RControl.Lookups;
 
-namespace Core.Interfaces.Repositories.Lookups;
+namespace Core.Interfaces.RControl.Repositories.Lookups;
 
 public interface IBillingPeriodRepository
 {

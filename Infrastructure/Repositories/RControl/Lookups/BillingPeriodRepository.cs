@@ -3,10 +3,10 @@
 using Core.Enums;
 
 using Infrastructure.Factories;
-using Core.Interfaces.Repositories.Lookups;
 using Core.Dtos.RControl.Lookups;
+using Core.Interfaces.RControl.Repositories.Lookups;
 
-namespace Infrastructure.Repositories.Lookups;
+namespace Infrastructure.Repositories.RControl.Lookups;
 
 public class BillingPeriodRepository(DbContextFactory dbContextFactory) : IBillingPeriodRepository
 {
