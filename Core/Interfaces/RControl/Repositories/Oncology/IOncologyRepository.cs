@@ -21,4 +21,9 @@ public interface IOncologyRepository
         TargetDbType targetDb,
         CancellationToken cancellationToken);
 
+    Task<IReadOnlyCollection<OncologyServiceDto>> GetOncologyServicesAsync(
+        int oncologyCaseUid,
+        TargetDbType targetDb,
+        CancellationToken cancellationToken);
+
 }

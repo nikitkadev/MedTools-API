@@ -39,7 +39,6 @@
 | `SMO_SANK_MEE` | `smo_sank_mee` | `Insurance Company Medical-Economic Expertise Penalty` | `InsuranceCompanyMedicalEconomicExpertisePenalty` | Финансовые санкции по результатам МЭЭ СМО
 | `SMO_SANK_EKMP` | `smo_sank_ekmp` | `Insurance Company Quality of Medical Care Expertise Penalty` | `InsuranceCompanyMedicalCareQualityExpertisePenalty` | Финансовые санкции по результатам ЭКМП СМО
 
- 
 ### Таблица `Z_SL`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |
@@ -60,7 +59,6 @@
 | `P_OTK` | `p_otk` | `Is Refusal` | `IsRefusal` | Признак отказа |
 | `VBR` | `vbr` | `Is Mobile Team` | `IsMobileTeam` | Признак мобильной бригады |
 | `ISHOD` | `ishod` | `Disease Outcome` | `DiseaseOutcome` | Исход заболевания |
-
 
 ### Таблица `SL`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
@@ -90,7 +88,6 @@
 | `C_ZAB` | `c_zab` | `Disease Character` | `DiseaseCharacter` | Характер основного заболевания |
 | `COMENTSL` | `comentsl` | `Internal Comment` | `InternalComment` | Служебное поле |
 
-
 ### Таблица `PERS`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |
@@ -109,8 +106,16 @@
 | `ENP` | `enp` | `Insurance Policy Unified Number` | `InsurancePolicyUnifiedNumber` | Номер полиса |
 | `ID_PAC` | `id_pac` | `Patient Record Code` | `PatientRecordCode` | Код записи о пациенте |
 
+### Таблица `ONK_USL`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `USL_TIP` | `` | `Service Type` | `ServiceType` | Тип услуги |
+| `HIR_TIP` | `` | `Surgical Treatment Type` | `SurgicalTreatmentType` | Тип хирургического лечения |
+| `LEK_TIP_L` | `` | `` | `` | Линия лекарственной терапии |
+| `LEK_TIP_V` | `` | `` | `` | Цикл лекарственной терапии |
+| `PPTR` | `` | `` | `` | Признак проведения профилактики тошноты и рвотного рефлекса |
+| `LUCH_TIP` | `` | `` | `` | Тип лучевой терапии |
 
-### Таблица `SL`
 ### Таблица `B_DIAG`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |
@@ -132,7 +137,6 @@
 | `PR_CONS` | `` | `Consultation Purpose` | `ConsultationPurpose` | Цель проведения консилиума |
 | `DT_CONS` | `` | `Consultation Date` | `ConsultationDate` | Цель проведения консилиума |
 
-
 ### Таблица `ONK_SL`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |
@@ -147,4 +151,10 @@
 | `WEI` | `` | `Weight` | `Weight` | Масса тела (кг) |
 | `HEI` | `` | `Height` | `Height` | Рост (см) |
 | `BSA` | `` | `BodySurfaceArea` | `BodySurfaceArea` | Площадь поверхности тела (м2) |
+
+
+### Таблица ``
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `` | `` | `` | `` |  |
 

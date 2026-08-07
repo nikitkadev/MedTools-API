@@ -3,6 +3,7 @@
 using Core.Enums;
 
 using Application.Queries.RContol.Oncology.GetDignosticsQuery;
+using Application.Queries.RContol.Oncology.GetOncologyServicesQuery;
 using Application.Queries.RContol.Oncology.GetContraindicationsQuery;
 
 namespace Web.Endpoints.RControl.OncologyCases;
@@ -15,6 +16,7 @@ public static class OncologyCaseEndpoints
 
         group.MapGet("/{oncologyCaseUid:int}/сontraindications", GetContraindicationsAsync);
         group.MapGet("/{oncologyCaseUid:int}/diagnostics", GetDiagnosticsAsync);
+        group.MapGet("/{oncologyCaseUid:int}/oncology-services", GetOncologyServicesAsync);
     }
 
     private static async Task<IResult> GetContraindicationsAsync(
@@ -45,6 +47,26 @@ public static class OncologyCaseEndpoints
     {
         var result = await sender.Send(
             request: new GetDignosticsQuery(
+                OncologyCaseUid: oncologyCaseUid,
+                TargetDb: targetDb),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetOncologyServicesAsync(
+        int oncologyCaseUid,
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetOncologyServicesQuery(
                 OncologyCaseUid: oncologyCaseUid,
                 TargetDb: targetDb),
             cancellationToken: cancellationToken);
