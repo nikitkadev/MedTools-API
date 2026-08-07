@@ -12,27 +12,6 @@ namespace Infrastructure.Repositories.Categories;
 
 public class OncologyCategoryRepository(DbContextFactory dbContextFactory) : IOncologyCategoryRepository
 {
-    public async Task<Result<DetailedOncSluchQueryResult>> GetDetailedOncSluchFromStoredProcedureAsync(
-        int oncSluchUid, 
-        TargetDbType targetDb)
-    {
-        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
-
-        string expressionForServices = "EXEC sp26_onk_category_get_onk_usls @onkSluchUid";
-        string expressionForСontraindications = "EXEC sp26_onk_category_get_contraindications @onkSluchUid";
-        string expressionForDiags = "EXEC sp26_onk_category_get_diags @onkSluchUid";
-
-        var services = await dbContext.OncologyServices.FromSqlRaw(expressionForServices, [new SqlParameter("@onkSluchUid", oncSluchUid)]).ToListAsync();
-        var contraindications = await dbContext.Сontraindications.FromSqlRaw(expressionForСontraindications, [new SqlParameter("@onkSluchUid", oncSluchUid)]).ToListAsync();
-        var diags = await dbContext.Diags.FromSqlRaw(expressionForDiags, [new SqlParameter("@onkSluchUid", oncSluchUid)]).ToListAsync();
-
-        return Result<DetailedOncSluchQueryResult>.Success(
-            new DetailedOncSluchQueryResult(
-                Services: services,
-                Diags: diags,
-                Contraindications: contraindications));
-
-    }
 
     public async Task<Result<MedicamentsQueryResult>> GetMedicamentsFromStoredProcedureAsync(
         int oncServiceUid, 

@@ -10,7 +10,6 @@ using Application.Queries.RContol.Categories.DefectsSanks.GetSanksDataCommand;
 using Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpTablesDataCommand;
 using Application.Queries.RContol.Categories.ProvidedServices.GetMedDevsCommand;
 using Application.Queries.RContol.Categories.DefectsSanks.GetDefectsDataCommand;
-using Application.Queries.RContol.Categories.Oncology.GetDetailedOncSluchCommand;
 using Application.Queries.RContol.Categories.ProvidedServices.GetProvidedServicesCommand;
 
 using Web.Registration.Endpoints;
@@ -18,6 +17,7 @@ using Web.Endpoints.RControl.Lookups;
 using Web.Endpoints.RControl.CompletedCases;
 using Web.Endpoints.RControl.MedicalCases;
 using Web.Endpoints.RControl.Invoices;
+using Web.Endpoints.RControl.OncologyCases;
 
 namespace Web.Endpoints.RControl;
 
@@ -29,12 +29,12 @@ public class RControlEndpoints : IEndpoint
 
         group.MapLookups();
         group.MapInvoiceEndpoints();
-        group.MapCompletedCaseEndpoints();
         group.MapMedicalCaseEndpoints();
+        group.MapOncologyCaseEndpoints();
+        group.MapCompletedCaseEndpoints();
 
         
 
-        group.MapGet("/categories/oncology/onc-sluch-detailed", GetOncologyCategoryOncSluchDetailed);
         group.MapGet("/categories/oncology/medicaments", GetOncologyCategoryMedicamentsAsync);
         group.MapGet("/categories/oncology/injections", GetOncologyCategoryInjectionsAsync);
         group.MapGet("/categories/provided-services/services", GetProvidedServicesAsync);
@@ -47,26 +47,6 @@ public class RControlEndpoints : IEndpoint
         
     }
 
-
-    private static async Task<IResult> GetOncologyCategoryOncSluchDetailed(
-        int oncSluchUid,
-        string targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetDetailedOncSluchCommand(
-                OncSluchUid: oncSluchUid,
-                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
 
     private static async Task<IResult> GetOncologyCategoryMedicamentsAsync(
         int oncServiceUid,

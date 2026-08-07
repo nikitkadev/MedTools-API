@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
+using Core.Dtos.RControl.Oncology;
 using Core.Dtos.RControl.Categories.Oncology;
 using Core.Interfaces.RControl.Repositories.Oncology;
 
@@ -27,5 +28,21 @@ public class OncologyRepository(
         var oncologyCase = result.FirstOrDefault();
 
         return oncologyCase;
+    }
+
+    public async Task<IReadOnlyCollection<ContraindicationDto>> GetContraindicationsAsync(
+        int oncologyCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var contraindications = await dbContext
+            .Set<ContraindicationDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_contraindications @pOncologyCaseUid={oncologyCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return contraindications;
     }
 }
