@@ -4,7 +4,6 @@ using Core.Enums;
 
 using Application.Queries.RContol.Categories.Oncology.GetInjectionsCommand;
 using Application.Queries.RContol.Categories.NazNapr.GetNazNaprDataCommand;
-using Application.Queries.RContol.Categories.Oncology.GetMedicamentsCommand;
 using Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpCardsDataCommand;
 using Application.Queries.RContol.Categories.DefectsSanks.GetSanksDataCommand;
 using Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpTablesDataCommand;
@@ -17,7 +16,7 @@ using Web.Endpoints.RControl.Lookups;
 using Web.Endpoints.RControl.CompletedCases;
 using Web.Endpoints.RControl.MedicalCases;
 using Web.Endpoints.RControl.Invoices;
-using Web.Endpoints.RControl.OncologyCases;
+using Web.Endpoints.RControl.Oncology;
 
 namespace Web.Endpoints.RControl;
 
@@ -32,10 +31,10 @@ public class RControlEndpoints : IEndpoint
         group.MapMedicalCaseEndpoints();
         group.MapOncologyCaseEndpoints();
         group.MapCompletedCaseEndpoints();
+        group.MapOncologyServiceEndpoints();
 
         
 
-        group.MapGet("/categories/oncology/medicaments", GetOncologyCategoryMedicamentsAsync);
         group.MapGet("/categories/oncology/injections", GetOncologyCategoryInjectionsAsync);
         group.MapGet("/categories/provided-services/services", GetProvidedServicesAsync);
         group.MapGet("/categories/provided-services/med-devs", GetMedDevsAsync);
@@ -47,27 +46,6 @@ public class RControlEndpoints : IEndpoint
         
     }
 
-
-    private static async Task<IResult> GetOncologyCategoryMedicamentsAsync(
-        int oncServiceUid,
-        string targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetMedicamentsCommand(
-                OncServiceUid: oncServiceUid,
-                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-
-    }
 
     private static async Task<IResult> GetOncologyCategoryInjectionsAsync(
         int medicamentUid,

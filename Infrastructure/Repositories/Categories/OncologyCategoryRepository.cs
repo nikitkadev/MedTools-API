@@ -13,21 +13,6 @@ namespace Infrastructure.Repositories.Categories;
 public class OncologyCategoryRepository(DbContextFactory dbContextFactory) : IOncologyCategoryRepository
 {
 
-    public async Task<Result<MedicamentsQueryResult>> GetMedicamentsFromStoredProcedureAsync(
-        int oncServiceUid, 
-        TargetDbType targetDb)
-    {
-        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
-
-        string expression = "EXEC sp26_onk_category_get_medicaments @oncSluchUid";
-
-        var records = await dbContext.Medicaments.FromSqlRaw(expression, [new SqlParameter("@oncSluchUid", oncServiceUid)]).ToListAsync();
-
-        return Result<MedicamentsQueryResult>.Success(
-            new MedicamentsQueryResult(
-                Medicaments: records));
-    }
-
     public async Task<Result<InjectionsQueryResult>> GetInjectionDataFromStoredProcedureAsync(
         int medicamentUid, 
         TargetDbType targetDb)

@@ -7,10 +7,6 @@ namespace Core.Interfaces.Repositories.Categories;
 public interface IOncologyCategoryRepository
 {
 
-    Task<Result<MedicamentsQueryResult>> GetMedicamentsFromStoredProcedureAsync(
-        int oncServiceUid,
-        TargetDbType targetDb);
-
     Task<Result<InjectionsQueryResult>> GetInjectionDataFromStoredProcedureAsync(
         int medicamentUid,
         TargetDbType targetDb);

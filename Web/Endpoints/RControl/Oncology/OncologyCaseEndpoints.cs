@@ -6,7 +6,7 @@ using Application.Queries.RContol.Oncology.GetDignosticsQuery;
 using Application.Queries.RContol.Oncology.GetOncologyServicesQuery;
 using Application.Queries.RContol.Oncology.GetContraindicationsQuery;
 
-namespace Web.Endpoints.RControl.OncologyCases;
+namespace Web.Endpoints.RControl.Oncology;
 
 public static class OncologyCaseEndpoints
 {

@@ -77,4 +77,20 @@ public class OncologyRepository(
 
         return oncologyServices;
     }
+
+    public async Task<IReadOnlyCollection<MedicationDto>> GetMedicationsAsync(
+        int oncologyServiceUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var medicaments = await dbContext
+            .Set<MedicationDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_medications @pOncologyServiceUid={oncologyServiceUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return medicaments;
+    }
 }
