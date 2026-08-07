@@ -25,25 +25,6 @@ public class OncologyCategoryRepository(DbContextFactory dbContextFactory) : IOn
         return Result<ConsultationsQueryResult>.Success(new ConsultationsQueryResult(records));
     }
 
-    public async Task<Result<OncSluchQueryResult>> GetOnkologyCaseFromStoredProcedureAsync(
-        int sluchUid,
-        TargetDbType targetDb)
-    {
-        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
-
-        string expression = "EXEC sp26_onk_category_get_onk_sluch @sluchUid";
-
-        var records = await dbContext.OncCases.FromSqlRaw(expression, [new SqlParameter("@sluchUid", sluchUid)]).ToListAsync();
-        var record = records.FirstOrDefault();
-
-        if (record is null)
-        {
-            return Result<OncSluchQueryResult>.Failure("Данных не найдено!");
-        }
-
-        return Result<OncSluchQueryResult>.Success(new OncSluchQueryResult(record));
-    }
-
     public async Task<Result<DetailedOncSluchQueryResult>> GetDetailedOncSluchFromStoredProcedureAsync(
         int oncSluchUid, 
         TargetDbType targetDb)

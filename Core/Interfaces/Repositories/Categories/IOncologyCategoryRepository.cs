@@ -6,9 +6,6 @@ namespace Core.Interfaces.Repositories.Categories;
 
 public interface IOncologyCategoryRepository
 {
-    Task<Result<OncSluchQueryResult>> GetOnkologyCaseFromStoredProcedureAsync(
-        int sluchUid,
-        TargetDbType targetDb);
 
     Task<Result<ConsultationsQueryResult>> GetConsultationFromStoredProcedureAsync(
         int sluchUid,

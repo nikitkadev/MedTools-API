@@ -26,6 +26,8 @@ using Infrastructure.Repositories.RControl.Lookups;
 using Infrastructure.Repositories.RControl.Workspace;
 using Core.Interfaces.RControl.Repositories.Categories;
 using Infrastructure.Repositories.RControl.Categories;
+using Core.Interfaces.RControl.Repositories.Oncology;
+using Infrastructure.Repositories.RControl.Oncology;
 
 
 
@@ -55,6 +57,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IMedicalOrganizationRepository, MedicalOrganizationRepository>();
         services.AddScoped<IMedicalCaseRepository, MedicalCaseRepository>();
         services.AddScoped<IPatientInsuranceRepository, PatientInsuranceRepository>();
+        services.AddScoped<IOncologyRepository, OncologyRepository>();
 
         services.AddScoped<IOncologyCategoryRepository, OncologyCategoryRepository>();
         services.AddScoped<IProvidedServicesCategoryRepository, ProvidedServicesCategoryRepository>();

@@ -111,3 +111,19 @@
 
 
 ### Таблица `SL`
+
+### Таблица `ONK_SL`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `DS1_T` | `` | `Referral Reason` | `ReferralReason` | Повод обращения |
+| `STAD` | `` | `Stage` | `Stage` | Стадия заболевания |
+| `ONK_T` | `` | `Tumor Value` | `TumorValue` | Значение Tumor |
+| `ONK_N` | `` | `Nodus Value` | `NodusValue` | Значение Nodus |
+| `ONK_M` | `` | `Metastasis Value` | `MetastasisValue` | Значение Metastasis |
+| `MTSTZ` | `` | `Is Metastasis Detected` | `IsMetastasisDetected` | Признак выявления отдалённых метастазов |
+| `SOD` | `` | `Total Focus Dose` | `TotalFocusDose` | Суммарная очаговая доза |
+| `K_FR` | `` | `Radiation Fractions Count` | `RadiationFractionsCount` | Количество фракций проведения лучевой терапии |
+| `WEI` | `` | `Weight` | `Weight` | Масса тела (кг) |
+| `HEI` | `` | `Height` | `Height` | Рост (см) |
+| `BSA` | `` | `BodySurfaceArea` | `BodySurfaceArea` | Площадь поверхности тела (м2) |
+
