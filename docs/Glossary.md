@@ -111,6 +111,20 @@
 
 
 ### Таблица `SL`
+### Таблица `B_DIAG`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `DIAG_DATE` | `` | `Specimen Collection Date` | `SpecimenCollectionDate` | Дата взятия материала |
+| `DIAG_TIP` | `` | `Diagnostic Type` | `DiagnosticType` | Тип диагностического показателя |
+| `DIAG_CODE` | `` | `Diagnostic Code` | `DiagnosticCode` | Код диагностического показателя |
+| `DIAG_RSLT` | `` | `Diagnostic Result Code` | `DiagnosticResultCode` | Код результата диагностики |
+| `REC_RSLT` | `` | `Is Result Received` | `IsResultReceived` | Признак получения результата диагностики |
+
+### Таблица `B_PROT`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `PROT` | `` | `Contraindication Code` | `ContraindicationCode` | Код противопоказания или отказа |
+| `D_PROT` | `` | `Contraindication Date` | `ContraindicationDate` | Дата регистрации противопоказания или отказа |
 
 ### Таблица `CONS`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |

@@ -45,4 +45,20 @@ public class OncologyRepository(
 
         return contraindications;
     }
+
+    public async Task<IReadOnlyCollection<DiagnosticsListItemDto>> GetDiagnosticsAsync(
+        int oncologyCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var diagnosticsRecords = await dbContext
+            .Set<DiagnosticsListItemDto>()
+            .FromSqlInterpolated($"EXEC  mt_rcontrol_get_diagnostics_records @pOncologyCaseUid={oncologyCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return diagnosticsRecords;
+    }
 }

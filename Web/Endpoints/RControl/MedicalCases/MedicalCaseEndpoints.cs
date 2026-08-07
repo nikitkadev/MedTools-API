@@ -5,7 +5,7 @@ using Core.Enums;
 using Application.Queries.RContol.Oncology.GetOncologyCaseQuery;
 using Application.Queries.RContol.Workspace.MedicalCases.GetMedicalCaseDetailsQuery;
 using Application.Queries.RContol.Categories.PatientInsurance.GetPatientInsuranceQuery;
-using Application.Queries.RContol.MedicalCases.GetConsulationsQuery;
+using Application.Queries.RContol.MedicalCases.GetConsultationsQuery;
 
 
 namespace Web.Endpoints.RControl.MedicalCases;
