@@ -14,7 +14,9 @@ public class OncologyCaseDtoConfiguration : IEntityTypeConfiguration<OncologyCas
         builder.Property(prop => prop.OncologyCaseUid).HasColumnName("uid");
         builder.Property(prop => prop.ReferralReasonCode).HasColumnName("referral_reason_code").IsRequired(false);
         builder.Property(prop => prop.ReferralReason).HasColumnName("referral_reason").IsRequired(false);
-        builder.Property(prop => prop.Stage).HasColumnName("stad").IsRequired(false);
+        builder.Property(prop => prop.StageCode).HasColumnName("stage_code").IsRequired(false);
+        builder.Property(prop => prop.Stage).HasColumnName("stage").IsRequired(false);
+        builder.Property(prop => prop.IcdDiagnosis).HasColumnName("stage_st").IsRequired(false);
         builder.Property(prop => prop.TumorValue).HasColumnName("onk_t").IsRequired(false);
         builder.Property(prop => prop.NodusValue).HasColumnName("onk_n").IsRequired(false);
         builder.Property(prop => prop.MetastasisValue).HasColumnName("onk_m").IsRequired(false);
