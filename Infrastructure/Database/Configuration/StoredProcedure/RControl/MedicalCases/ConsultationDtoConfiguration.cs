@@ -5,7 +5,7 @@ using Core.Dtos.RControl.Workspace;
 
 namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.MedicalCases;
 
-public class ConsulationDtoConfiguration : IEntityTypeConfiguration<ConsultationDto>
+public class ConsultationDtoConfiguration : IEntityTypeConfiguration<ConsultationDto>
 {
     public void Configure(EntityTypeBuilder<ConsultationDto> builder)
     {
@@ -15,5 +15,6 @@ public class ConsulationDtoConfiguration : IEntityTypeConfiguration<Consultation
         builder.Property(prop => prop.ConsultationPurposeCode).HasColumnName("consultation_purpose_code");
         builder.Property(prop => prop.ConsultationPurpose).HasColumnName("consultation_purpose").IsRequired(false);
         builder.Property(prop => prop.ConsultationDate).HasColumnName("dt_cons").IsRequired(false);
+
     }
 }

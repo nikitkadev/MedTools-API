@@ -89,7 +89,7 @@ public static class MedicalCaseEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetConsulationsQuery(
+            request: new GetConsultationsQuery(
                 MedicalCaseUid: medicalCaseUid,
                 TargetDb: targetDb),
             cancellationToken: cancellationToken);
