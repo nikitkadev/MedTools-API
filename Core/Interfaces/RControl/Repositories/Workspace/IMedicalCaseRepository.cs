@@ -15,4 +15,9 @@ public interface IMedicalCaseRepository
         int medicalCaseUid,
         TargetDbType targetDb,
         CancellationToken cancellationToken);
+
+    Task<IReadOnlyCollection<ConsultationDto>> GetConsultationsAsync(
+        int medicalCaseUid,
+        TargetDbType targetDb,
+        CancellationToken cancellationToken);
 }

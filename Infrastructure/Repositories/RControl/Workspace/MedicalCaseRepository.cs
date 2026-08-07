@@ -12,6 +12,22 @@ namespace Infrastructure.Repositories.RControl.Workspace;
 public class MedicalCaseRepository(
     DbContextFactory dbContextFactory) : IMedicalCaseRepository
 {
+    public async Task<IReadOnlyCollection<ConsultationDto>> GetConsultationsAsync(
+        int medicalCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var consulations = await dbContext
+            .Set<ConsultationDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_consulations @pMedicalCaseUid={medicalCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return consulations;
+    }
+
     public async Task<MedicalCaseDetailsDto?> GetMedicalCaseDetailsAsync(
         int medicalCaseUid, 
         TargetDbType targetDb, 

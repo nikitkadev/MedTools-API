@@ -7,10 +7,6 @@ namespace Core.Interfaces.Repositories.Categories;
 public interface IOncologyCategoryRepository
 {
 
-    Task<Result<ConsultationsQueryResult>> GetConsultationFromStoredProcedureAsync(
-        int sluchUid,
-        TargetDbType targetDb);
-
     Task<Result<DetailedOncSluchQueryResult>> GetDetailedOncSluchFromStoredProcedureAsync(
         int oncSluchUid,
         TargetDbType targetDb);

@@ -12,19 +12,6 @@ namespace Infrastructure.Repositories.Categories;
 
 public class OncologyCategoryRepository(DbContextFactory dbContextFactory) : IOncologyCategoryRepository
 {
-    public async Task<Result<ConsultationsQueryResult>> GetConsultationFromStoredProcedureAsync(
-        int sluchUid, 
-        TargetDbType targetDb)
-    {
-        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
-        
-        string expression = "EXEC sp26_onk_category_get_consultations @sluchUid";
-
-        var records = await dbContext.Consultations.FromSqlRaw(expression, [new SqlParameter("@sluchUid", sluchUid)]).ToListAsync();
-
-        return Result<ConsultationsQueryResult>.Success(new ConsultationsQueryResult(records));
-    }
-
     public async Task<Result<DetailedOncSluchQueryResult>> GetDetailedOncSluchFromStoredProcedureAsync(
         int oncSluchUid, 
         TargetDbType targetDb)
