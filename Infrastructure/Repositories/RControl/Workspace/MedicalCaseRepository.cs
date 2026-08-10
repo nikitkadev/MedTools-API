@@ -63,8 +63,8 @@ public class MedicalCaseRepository(
     }
 
     public async Task<ClinicalGroupDto?> GetClinicalGroupAsync(
-        int medicalCaseUid, 
-        TargetDbType targetDb, 
+        int medicalCaseUid,
+        TargetDbType targetDb,
         CancellationToken cancellationToken)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
@@ -80,4 +80,21 @@ public class MedicalCaseRepository(
         return clinicalGroup;
     }
 
+    public async Task<HighTechMedicalCareDto?> GetHighTechMedicalCareAsync(
+        int medicalCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var result = await dbContext
+            .Set<HighTechMedicalCareDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_high_tech_medical_care @pMedicalCaseUid={medicalCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        var highTechMedicalCare = result.FirstOrDefault();
+
+        return highTechMedicalCare;
+    }
 }

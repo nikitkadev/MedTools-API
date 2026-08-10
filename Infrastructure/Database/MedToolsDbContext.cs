@@ -16,8 +16,6 @@ public abstract class MedToolsDbContext(
 
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<InjectionDto> Injections { get; set; }
-    public DbSet<KsgKpgDto> KsgKpgs { get; set; }
-    public DbSet<VmpDto> Vmps { get; set; }
     public DbSet<CritDto> Crits { get; set; }
     public DbSet<SlKoefDto> SlKoefs { get; set; }
     public DbSet<PurposeDto> Purposes { get; set; }

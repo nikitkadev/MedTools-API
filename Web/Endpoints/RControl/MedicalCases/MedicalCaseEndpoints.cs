@@ -8,6 +8,7 @@ using Application.Queries.RContol.ProvidedServices.GetProvidedServicesQuery;
 using Application.Queries.RContol.Workspace.MedicalCases.GetMedicalCaseDetailsQuery;
 using Application.Queries.RContol.Categories.PatientInsurance.GetPatientInsuranceQuery;
 using Application.Queries.RContol.MedicalCases.GetClinicalGroupQuery;
+using Application.Queries.RContol.MedicalCases.GetHighTechMedicalCareQuery;
 
 
 namespace Web.Endpoints.RControl.MedicalCases;
@@ -24,6 +25,7 @@ public static class MedicalCaseEndpoints
         group.MapGet("/{medicalCaseUid:int}/consulations", GetConsultationsAsync);
         group.MapGet("/{medicalCaseUid:int}/provided-services", GetProvidedServicesAsync);
         group.MapGet("/{medicalCaseUid:int}/clinical-group", GetClinicalGroupAsync);
+        group.MapGet("/{medicalCaseUid:int}/high-tech-medical-care", GetHighTechMedicalCareAsync);
 
     }
 
@@ -134,6 +136,26 @@ public static class MedicalCaseEndpoints
     {
         var result = await sender.Send(
             request: new GetClinicalGroupQuery(
+                MedicalCaseUid: medicalCaseUid,
+                TargetDb: targetDb),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetHighTechMedicalCareAsync(
+        int medicalCaseUid,
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetHighTechMedicalCareQuery(
                 MedicalCaseUid: medicalCaseUid,
                 TargetDb: targetDb),
             cancellationToken: cancellationToken);

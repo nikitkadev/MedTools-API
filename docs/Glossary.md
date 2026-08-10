@@ -87,6 +87,12 @@
 | `WEI` | `wei` | `Weight` | `Weight` | Масса тела (кг) |
 | `C_ZAB` | `c_zab` | `Disease Character` | `DiseaseCharacter` | Характер основного заболевания |
 | `COMENTSL` | `comentsl` | `Internal Comment` | `InternalComment` | Служебное поле |
+| `VID_HMP` | `` | `High Tech Care Type` | `HighTechCareType` | Вид высокотехнологичной медицинской помощи |
+| `METOD_HMP` | `` | `High Tech Care Method` | `HighTechCareMethod` | Метод высокотехнологичной медицинской помощи |
+| `TAL_D` | `` | `Voucher Issue Date` | `VoucherIssueDate` | Дата выдачи талона на ВМП |
+| `TAL_NUM` | `` | `Voucher Number` | `VoucherNumber` | Номер талона на ВМП |
+| `TAL_P` | `` | `Planned Admission Date` | `PlannedAdmissionDate` | Дата планируемой госпитализации |
+
 
 ### Таблица `PERS`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
@@ -200,21 +206,21 @@
 | `CODE_MEDDEV` | `` | `Medical Device Type Code` | `MedicalDeviceTypeCode` | Код вида медицинского изделия |
 | `NUMBER_SER` | `` | `Serial Number` | `SerialNumber` | Серийный номер |
 
-### Таблица ``
+### Таблица `KSG_KPG`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |
-| `N_KSG` | `` | `` | `` | Номер КСГ |
-| `VER_KSG` | `` | `` | `` | Модель определения КСГ |
-| `KSG_PG` | `` | `` | `` | Признак использования подгруппы КСГ |
-| `N_KPG` | `` | `` | `` | Номер КПГ |
-| `KOEF_Z` | `` | `` | `` | Коэффициент затратоемкости |
-| `KOEF_UP` | `` | `` | `` | Управленческий коэффициент |
-| `BZTSZ` | `` | `` | `` | Базовая ставка |
-| `KOEF_D` | `` | `` | `` | Коэффициент дифференциации |
-| `KOEF_U` | `` | `` | `` | Коэффициент уровня/подуровня оказания медицинской помощи |
-| `K_ZP` | `` | `` | `` | Коэффициент достижения целевых показателей уровня заработной платы |
-| `SL_K` | `` | `` | `` | Признак использования КСЛП |
-| `IT_SL` | `` | `` | `` | Примененный коэффициент сложности лечения пациента |
+| `N_KSG` | `` | `Clinical Statistic Group Number` | `ClinicalStatisticGroupNumber` | Номер КСГ |
+| `VER_KSG` | `` | `Clinical Statistic Group Model Version` | `ClinicalStatisticGroupModelVersion` | Модель определения КСГ |
+| `KSG_PG` | `` | `Is Csg Subgroup Used` | `IsCsgSubgroupUsed` | Признак использования подгруппы КСГ |
+| `N_KPG` | `` | `Clinical Profile Group Number` | `ClinicalProfileGroupNumber` | Номер КПГ |
+| `KOEF_Z` | `` | `Cost Coefficient` | `CostCoefficient` | Коэффициент затратоемкости |
+| `KOEF_UP` | `` | `Management Coefficient` | `ManagementCoefficient` | Управленческий коэффициент |
+| `BZTSZ` | `` | `Base Rate` | `BaseRate` | Базовая ставка |
+| `KOEF_D` | `` | `Differentiation Coefficient` | `DifferentiationCoefficient` | Коэффициент дифференциации |
+| `KOEF_U` | `` | `Level Coefficient` | `LevelCoefficient` | Коэффициент уровня/подуровня оказания медицинской помощи |
+| `K_ZP` | `` | `` | `IsClspUsed` | Коэффициент достижения целевых показателей уровня заработной платы |
+| `SL_K` | `` | `Is ClspUsed` | `IsClspUsed` | Признак использования КСЛП |
+| `IT_SL` | `` | `Complexity Coefficient` | `ComplexityCoefficient` | Примененный коэффициент сложности лечения пациента |
 
 ### Таблица ``
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |

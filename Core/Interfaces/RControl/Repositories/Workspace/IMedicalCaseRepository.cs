@@ -25,4 +25,9 @@ public interface IMedicalCaseRepository
         int medicalCaseUid,
         TargetDbType targetDb,
         CancellationToken cancellationToken);
+
+    Task<HighTechMedicalCareDto?> GetHighTechMedicalCareAsync(
+         int medicalCaseUid,
+        TargetDbType targetDb,
+        CancellationToken cancellationToken);
 }
