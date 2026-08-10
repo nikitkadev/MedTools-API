@@ -6,10 +6,6 @@ namespace Core.Interfaces.Repositories.Categories;
 
 public interface IProvidedServicesCategoryRepository
 {
-    Task<Result<ProvidedServicesQueryResult>> GetProvidedServicesFromStoredProcedureAsync(
-        int sluchUid,
-        TargetDbType targetDb);
-
     Task<Result<MedDevsQueryResult>> GetMedDevsFromStoredProcedureAsync(
         int providedServiceUid,
         TargetDbType targetDb);

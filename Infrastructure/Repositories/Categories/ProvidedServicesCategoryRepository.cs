@@ -13,21 +13,6 @@ namespace Infrastructure.Repositories.Categories;
 public class ProvidedServicesCategoryRepository(
     DbContextFactory dbContextFactory) : IProvidedServicesCategoryRepository
 {
-    public async Task<Result<ProvidedServicesQueryResult>> GetProvidedServicesFromStoredProcedureAsync(
-        int sluchUid, 
-        TargetDbType targetDb)
-    {
-        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
-
-        string expression = "EXEC sp26_provided_services_category_get_provided_services @sluchUid";
-
-        var records = await dbContext.ProvidedServices.FromSqlRaw(expression, [new SqlParameter("@sluchUid", sluchUid)]).ToListAsync();
-
-        return Result<ProvidedServicesQueryResult>.Success(
-            new ProvidedServicesQueryResult(
-                ProvidedServices: records));
-    }
-
     public async Task<Result<MedDevsQueryResult>> GetMedDevsFromStoredProcedureAsync(
         int providedServiceUid,
         TargetDbType targetDb)

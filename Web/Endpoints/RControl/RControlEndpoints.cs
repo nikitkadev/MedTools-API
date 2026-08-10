@@ -6,9 +6,7 @@ using Application.Queries.RContol.Categories.NazNapr.GetNazNaprDataCommand;
 using Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpCardsDataCommand;
 using Application.Queries.RContol.Categories.DefectsSanks.GetSanksDataCommand;
 using Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpTablesDataCommand;
-using Application.Queries.RContol.Categories.ProvidedServices.GetMedDevsCommand;
 using Application.Queries.RContol.Categories.DefectsSanks.GetDefectsDataCommand;
-using Application.Queries.RContol.Categories.ProvidedServices.GetProvidedServicesCommand;
 
 using Web.Registration.Endpoints;
 using Web.Endpoints.RControl.Lookups;
@@ -35,55 +33,12 @@ public class RControlEndpoints : IEndpoint
 
         
 
-        group.MapGet("/categories/provided-services/services", GetProvidedServicesAsync);
-        group.MapGet("/categories/provided-services/med-devs", GetMedDevsAsync);
         group.MapGet("/categories/ksg-vmp/cards-data", GetKsgVmpCardsData);
         group.MapGet("/categories/ksg-vmp/tables-data", GetKsgVmpTablesData);
         group.MapGet("/categories/naz-napr", GetNazNaprCategoryData);
         group.MapGet("/categories/defects-sanks/sanks", GetSanksDataAsync);
         group.MapGet("/categories/defects-sanks/defects", GetDefectsDataAsync);
         
-    }
-    
-    
-    private static async Task<IResult> GetProvidedServicesAsync(
-        int sluchUid,
-        string targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetProvidedServicesCommand(
-                SluchUid: sluchUid,
-                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
-
-    private static async Task<IResult> GetMedDevsAsync(
-        int providedServiceUid,
-        string targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetMedDevsCommand(
-                ProvidedServiceUid: providedServiceUid,
-                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
     }
 
     private static async Task<IResult> GetKsgVmpCardsData(

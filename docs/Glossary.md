@@ -152,6 +152,46 @@
 | `HEI` | `` | `Height` | `Height` | Рост (см) |
 | `BSA` | `` | `BodySurfaceArea` | `BodySurfaceArea` | Площадь поверхности тела (м2) |
 
+### Таблица `LEK_PR`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `REGNUM` | `` | `Drug Identifier` | `DrugIdentifier` | Идентификатор лекарственного препарата, применяемого при проведении лекарственной противоопухолевой терапии |
+| `REGNUM_DOP` | `` | `Drug Extended Identifier` | `DrugExtendedIdentifier` | Код расширенного идентификатора МНН лекарственного препарата с указанием пути введения (в том числе с уточнением действующего вещества или формы выпуска), типа лекарственной формы по агрегатному состоянию и виду высвобождения, единиц измерения |
+| `CODE_SH` | `` | `Therapy Regimen Code` | `TherapyRegimenCode` | Код схемы лекарственной терапии |
+
+### Таблица `INJ`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `DATE_INJ` | `` | `Administration Date` | `AdministrationDate` | Дата введения лекарственного препарата |
+| `KV_INJ` | `` | `Administered Quantity` | `AdministeredQuantity` | Количество введенного лекарственного препарата (действующего вещества) |
+| `KIZ_INJ` | `` | `Consumed Quantity` | `ConsumedQuantity` | Количество израсходованного (введенного + утилизированного) лекарственного препарата (действующего вещества) |
+| `S_INJ` | `` | `Unit Cost` | `UnitCost` | Фактическая стоимость лекарственного препарата за единицу измерения действующего вещества |
+| `SV_INJ` | `` | `Administered Cost` | `AdministeredCost` | Стоимость введенного лекарственного препарата |
+| `SIZ_INJ` | `` | `Consumed Cost` | `ConsumedCost` | Стоимость израсходованного лекарственного препарата |
+| `RED_INJ` | `` | `Is Reduction Applied` | `IsReductionApplied` | Признак применения редукции для лекарственного препарата |
+
+### Таблица `USL`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `IDSERV` | `` | `` | `` | Номер записи в реестре услуг |
+| `LPU` | `lpu` | `Medical Organization Code` | `MedicalOrganizationCode` | Код медицинской организации |
+| `LPU_1` | `lpu_1` | `Department` | `Department` | Подразделение медицинской организации |
+| `PODR` | `podr` | `DepartmentCode` | `DepartmentCode` | Код отделения |
+| `PROFIL` | `profil` | `Medical Profile` | `MedicalProfile` | Профиль медицинской помощи |
+| `VID_VME` | `` | `Medical Intervention Type` | `MedicalInterventionType` | Вид медицинского вмешательства |
+| `DET` | `det` | `Is Pediatric` | `IsPediatric` | Признак детского профиля |
+| `DATE_IN` | `` | `Service Start Date` | `ServiceStartDate` | Дата начала оказания услуги |
+| `DATE_OUT` | `` | `Service End Date` | `ServiceEndDate` | Дата окончания оказания услуги |
+| `P_OTK` | `p_otk` | `Is Refusal` | `IsRefusal` | Признак отказа от услуги |
+| `DS` | `` | `Diagnosis` | `Diagnosis` | Диагноз |
+| `CODE_USL` | `` | `Service Code` | `ServiceCode` | Код услуги |
+| `KOL_USL` | `` | `Service Quantity` | `ServiceQuantity` | Количество услуг (кратность услуги) |
+| `TARIF` | `tarif` | `Unit Rate` | `UnitRate` | Тариф |
+| `SUMV_USL` | `` | `Amount Billed` | `AmountBilled` | Стоимость медицинской услуги, выставленная к оплате (руб.) |
+| `PRVS` | `prvs` | `Physician Specialty` | `PhysicianSpecialty` | Специальность медработника, выполнившего услугу |
+| `CODE_MD` | `` | `Physician Code` | `PhysicianCode` | Код медицинского работника, оказавшего медицинскую услугу |
+| `NPL` | `` | `Incomplete Volume` | `IncompleteVolume` | Неполный объем |
+| `COMENTU` | `` | `Internal Comment` | `InternalComment` | Служебное поле |
 
 ### Таблица ``
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
