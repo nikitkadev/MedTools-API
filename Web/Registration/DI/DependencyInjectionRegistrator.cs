@@ -30,6 +30,8 @@ using Core.Interfaces.RControl.Repositories.Oncology;
 using Infrastructure.Repositories.RControl.Oncology;
 using Core.Interfaces.RControl.Repositories;
 using Infrastructure.Repositories.RControl.ProvidedServices;
+using Core.Interfaces.RControl.Repositories.ClinicalGroups;
+using Infrastructure.Repositories.RControl.ClinicalGroups;
 
 
 
@@ -61,6 +63,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IPatientInsuranceRepository, PatientInsuranceRepository>();
         services.AddScoped<IOncologyRepository, OncologyRepository>();
         services.AddScoped<IProvidedServiceRepository, ProvidedServiceRepository>();
+        services.AddScoped<IClinicalGroupRepository, ClinicalGroupRepository>();
 
         services.AddScoped<IKsgVmpCategoryRepository, KsgVmpCategoryRepository>();
         services.AddScoped<INazNaprCategoryRepository, NazNaprCategoryRepository>();

@@ -9,11 +9,12 @@ using Application.Queries.RContol.Categories.DefectsSanks.GetDefectsDataCommand;
 
 using Web.Registration.Endpoints;
 using Web.Endpoints.RControl.Lookups;
-using Web.Endpoints.RControl.CompletedCases;
-using Web.Endpoints.RControl.MedicalCases;
 using Web.Endpoints.RControl.Invoices;
 using Web.Endpoints.RControl.Oncology;
+using Web.Endpoints.RControl.MedicalCases;
+using Web.Endpoints.RControl.CompletedCases;
 using Web.Endpoints.RControl.ProvidedServices;
+using Web.Endpoints.RControl.ClinicalGroups;
 
 namespace Web.Endpoints.RControl;
 
@@ -31,6 +32,7 @@ public class RControlEndpoints : IEndpoint
         group.MapCompletedCaseEndpoints();
         group.MapOncologyServiceEndpoints();
         group.MapProvidedServiceEndpoints();
+        group.MapClinicalGroupEndpoints();
 
         group.MapGet("/categories/ksg-vmp/tables-data", GetKsgVmpTablesData);
         group.MapGet("/categories/naz-napr", GetNazNaprCategoryData);

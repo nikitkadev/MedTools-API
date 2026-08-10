@@ -4,11 +4,11 @@ using Core.Enums;
 
 using Application.Queries.RContol.Oncology.GetOncologyCaseQuery;
 using Application.Queries.RContol.MedicalCases.GetConsultationsQuery;
+using Application.Queries.RContol.MedicalCases.GetClinicalGroupQuery;
+using Application.Queries.RContol.MedicalCases.GetHighTechMedicalCareQuery;
 using Application.Queries.RContol.ProvidedServices.GetProvidedServicesQuery;
 using Application.Queries.RContol.Workspace.MedicalCases.GetMedicalCaseDetailsQuery;
 using Application.Queries.RContol.Categories.PatientInsurance.GetPatientInsuranceQuery;
-using Application.Queries.RContol.MedicalCases.GetClinicalGroupQuery;
-using Application.Queries.RContol.MedicalCases.GetHighTechMedicalCareQuery;
 
 
 namespace Web.Endpoints.RControl.MedicalCases;
