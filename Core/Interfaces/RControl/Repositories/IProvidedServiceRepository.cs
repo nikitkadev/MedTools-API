@@ -9,4 +9,9 @@ public interface IProvidedServiceRepository
         int medicalCaseUid,
         TargetDbType targetDb,
         CancellationToken cancellationToken);
+
+    Task<IReadOnlyCollection<MedicalDeviceDto>> GetMedicalDevicesAsync(
+        int providedServiceUid,
+        TargetDbType targetDb,
+        CancellationToken cancellationToken);
 }

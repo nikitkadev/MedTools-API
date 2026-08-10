@@ -14,6 +14,7 @@ using Web.Endpoints.RControl.CompletedCases;
 using Web.Endpoints.RControl.MedicalCases;
 using Web.Endpoints.RControl.Invoices;
 using Web.Endpoints.RControl.Oncology;
+using Web.Endpoints.RControl.ProvidedServices;
 
 namespace Web.Endpoints.RControl;
 
@@ -30,8 +31,7 @@ public class RControlEndpoints : IEndpoint
         group.MapOncologyCaseEndpoints();
         group.MapCompletedCaseEndpoints();
         group.MapOncologyServiceEndpoints();
-
-        
+        group.MapProvidedServiceEndpoints();
 
         group.MapGet("/categories/ksg-vmp/cards-data", GetKsgVmpCardsData);
         group.MapGet("/categories/ksg-vmp/tables-data", GetKsgVmpTablesData);

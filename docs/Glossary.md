@@ -173,7 +173,7 @@
 ### Таблица `USL`
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |
-| `IDSERV` | `` | `` | `` | Номер записи в реестре услуг |
+| `IDSERV` | `` | `Service Record Id` | `ServiceRecordId` | Номер записи в реестре услуг |
 | `LPU` | `lpu` | `Medical Organization Code` | `MedicalOrganizationCode` | Код медицинской организации |
 | `LPU_1` | `lpu_1` | `Department` | `Department` | Подразделение медицинской организации |
 | `PODR` | `podr` | `DepartmentCode` | `DepartmentCode` | Код отделения |
@@ -192,6 +192,13 @@
 | `CODE_MD` | `` | `Physician Code` | `PhysicianCode` | Код медицинского работника, оказавшего медицинскую услугу |
 | `NPL` | `` | `Incomplete Volume` | `IncompleteVolume` | Неполный объем |
 | `COMENTU` | `` | `Internal Comment` | `InternalComment` | Служебное поле |
+
+### Таблица `MED_DEV`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `DATE_MED` | `` | `Implantation Date` | `ImplantationDate` | Дата установки медицинского изделия |
+| `CODE_MEDDEV` | `` | `Medical Device Type Code` | `MedicalDeviceTypeCode` | Код вида медицинского изделия |
+| `NUMBER_SER` | `` | `Serial Number` | `SerialNumber` | Серийный номер |
 
 ### Таблица ``
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using Core.Dtos.RControl.ProvidedServices;
 using Core.Enums;
+using Core.Dtos.RControl.ProvidedServices;
 using Core.Interfaces.RControl.Repositories;
 
 using Infrastructure.Factories;
@@ -25,5 +25,21 @@ public class ProvidedServiceRepository(
             .ToListAsync(cancellationToken);
 
         return providedServices;
+    }
+
+    public async Task<IReadOnlyCollection<MedicalDeviceDto>> GetMedicalDevicesAsync(
+        int providedServiceUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var medicalDevices = await dbContext
+            .Set<MedicalDeviceDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_medical_devices @pProvidedServiceUid={providedServiceUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return medicalDevices;
     }
 }
