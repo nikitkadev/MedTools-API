@@ -65,7 +65,6 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IProvidedServiceRepository, ProvidedServiceRepository>();
         services.AddScoped<IClinicalGroupRepository, ClinicalGroupRepository>();
 
-        services.AddScoped<IKsgVmpCategoryRepository, KsgVmpCategoryRepository>();
         services.AddScoped<INazNaprCategoryRepository, NazNaprCategoryRepository>();
         services.AddScoped<IDefectsSanksCategoryRepository, DefectsSanksCategoryRepository>();
 

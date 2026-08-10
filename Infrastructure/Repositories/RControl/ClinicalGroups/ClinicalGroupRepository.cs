@@ -26,4 +26,20 @@ public class ClinicalGroupRepository(
 
         return classificationCriterions;
     }
+
+    public async Task<IReadOnlyCollection<TreatmentComplexityCoefficientDto>> GetTreatmentComplexityCoefficientsAsync(
+        int clinicalGroupUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var treatmentComplexityCoefficients = await dbContext
+            .Set<TreatmentComplexityCoefficientDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_treatment_complexity_coefficients @pClinicalGroupUid={clinicalGroupUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return treatmentComplexityCoefficients;
+    }
 }

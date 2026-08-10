@@ -3,6 +3,7 @@
 using Core.Enums;
 
 using Application.Queries.RContol.ClinicalGroups.GetClassificationCriterionsQuery;
+using Application.Queries.RContol.ClinicalGroups.GetTreatmentComplexityCoefficientsQuery;
 
 namespace Web.Endpoints.RControl.ClinicalGroups;
 
@@ -13,6 +14,7 @@ public static class ClinicalGroupEndpoints
         var group = builder.MapGroup("/clinical-groups").WithTags("RControl Clinical Groups");
 
         group.MapGet("/{clinicalGroupUid:int}/classification_criterions", GetClassificationCriterionsAsync);
+        group.MapGet("/{clinicalGroupUid:int}/treatment-complexity-coefficients", GetTreatmentComplexityCoefficientsAsync);
     }
 
     private static async Task<IResult> GetClassificationCriterionsAsync(
@@ -34,4 +36,25 @@ public static class ClinicalGroupEndpoints
 
         return Results.Ok(result);
     }
+
+    private static async Task<IResult> GetTreatmentComplexityCoefficientsAsync(
+        int clinicalGroupUid,
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetTreatmentComplexityCoefficientsQuery(
+                ClinicalGroupUid: clinicalGroupUid,
+                TargetDb: targetDb),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
 }

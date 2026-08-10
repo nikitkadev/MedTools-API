@@ -4,7 +4,6 @@ using Core.Enums;
 
 using Application.Queries.RContol.Categories.NazNapr.GetNazNaprDataCommand;
 using Application.Queries.RContol.Categories.DefectsSanks.GetSanksDataCommand;
-using Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpTablesDataCommand;
 using Application.Queries.RContol.Categories.DefectsSanks.GetDefectsDataCommand;
 
 using Web.Registration.Endpoints;
@@ -34,34 +33,12 @@ public class RControlEndpoints : IEndpoint
         group.MapProvidedServiceEndpoints();
         group.MapClinicalGroupEndpoints();
 
-        group.MapGet("/categories/ksg-vmp/tables-data", GetKsgVmpTablesData);
         group.MapGet("/categories/naz-napr", GetNazNaprCategoryData);
         group.MapGet("/categories/defects-sanks/sanks", GetSanksDataAsync);
         group.MapGet("/categories/defects-sanks/defects", GetDefectsDataAsync);
         
     }
     
-
-    private static async Task<IResult> GetKsgVmpTablesData(
-        int ksgKpgUid,
-        string targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetKsgVmpTablesDataCommand(
-                KsgKpgUid: ksgKpgUid,
-                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
-
     private static async Task<IResult> GetNazNaprCategoryData(
         int sluchUid,
         string targetDb,

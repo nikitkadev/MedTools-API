@@ -9,4 +9,9 @@ public interface IClinicalGroupRepository
         int clinicalGroupUid,
         TargetDbType targetDb,
         CancellationToken cancellationToken);
+
+    Task<IReadOnlyCollection<TreatmentComplexityCoefficientDto>> GetTreatmentComplexityCoefficientsAsync(
+        int clinicalGroupUid,
+        TargetDbType targetDb,
+        CancellationToken cancellationToken);
 }
