@@ -9,8 +9,7 @@ using Infrastructure.Factories;
 
 namespace Infrastructure.Repositories.RControl.Oncology;
 
-public class OncologyRepository(
-    DbContextFactory dbContextFactory) : IOncologyRepository
+public class OncologyRepository(DbContextFactory dbContextFactory) : IOncologyRepository
 {
     public async Task<OncologyCaseDto?> GetOncologyCaseAsync(
         int medicalCaseUid, 
@@ -92,5 +91,37 @@ public class OncologyRepository(
             .ToListAsync(cancellationToken);
 
         return medicaments;
+    }
+
+    public async Task<IReadOnlyCollection<InjectionDateDto>> GetInjectionDatesAsync(
+        int medicationUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var injectionDates = await dbContext
+            .Set<InjectionDateDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_injection_dates @pMedicationUid={medicationUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return injectionDates;
+    }
+
+    public async Task<IReadOnlyCollection<InjectionDto>> GetInjectionsAsync(
+        int medicationUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var injections = await dbContext
+            .Set<InjectionDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_injections @pMedicationUid={medicationUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return injections;
     }
 }

@@ -16,7 +16,6 @@ public abstract class MedToolsDbContext(
 {
 
     public DbSet<UserEntity> Users { get; set; }
-    public DbSet<InjDateDto> InjDates { get; set; }
     public DbSet<InjectionDto> Injections { get; set; }
     public DbSet<ProvidedServiceDto> ProvidedServices { get; set; }
     public DbSet<MedDevDto> MedDevs { get; set; }

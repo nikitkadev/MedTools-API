@@ -2,7 +2,6 @@
 
 using Core.Enums;
 
-using Application.Queries.RContol.Categories.Oncology.GetInjectionsCommand;
 using Application.Queries.RContol.Categories.NazNapr.GetNazNaprDataCommand;
 using Application.Queries.RContol.Categories.KsgVmp.GetKsgVmpCardsDataCommand;
 using Application.Queries.RContol.Categories.DefectsSanks.GetSanksDataCommand;
@@ -28,6 +27,7 @@ public class RControlEndpoints : IEndpoint
 
         group.MapLookups();
         group.MapInvoiceEndpoints();
+        group.MapMedicationEndpoints();
         group.MapMedicalCaseEndpoints();
         group.MapOncologyCaseEndpoints();
         group.MapCompletedCaseEndpoints();
@@ -35,7 +35,6 @@ public class RControlEndpoints : IEndpoint
 
         
 
-        group.MapGet("/categories/oncology/injections", GetOncologyCategoryInjectionsAsync);
         group.MapGet("/categories/provided-services/services", GetProvidedServicesAsync);
         group.MapGet("/categories/provided-services/med-devs", GetMedDevsAsync);
         group.MapGet("/categories/ksg-vmp/cards-data", GetKsgVmpCardsData);
@@ -45,27 +44,7 @@ public class RControlEndpoints : IEndpoint
         group.MapGet("/categories/defects-sanks/defects", GetDefectsDataAsync);
         
     }
-
-
-    private static async Task<IResult> GetOncologyCategoryInjectionsAsync(
-        int medicamentUid,
-        string targetDb,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-            request: new GetInjectionsCommand(
-                MedicamentUid: medicamentUid,
-                TargetDb: Enum.Parse<TargetDbType>(targetDb)),
-            cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
+    
     
     private static async Task<IResult> GetProvidedServicesAsync(
         int sluchUid,

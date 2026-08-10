@@ -31,4 +31,14 @@ public interface IOncologyRepository
         TargetDbType targetDb,
         CancellationToken cancellationToken);
 
+    Task<IReadOnlyCollection<InjectionDateDto>> GetInjectionDatesAsync(
+        int medicationUid,
+        TargetDbType targetDb,
+        CancellationToken cancellationToken);
+
+    Task<IReadOnlyCollection<InjectionDto>> GetInjectionsAsync(
+        int medicationUid,
+        TargetDbType targetDb,
+        CancellationToken cancellationToken);
+
 }
