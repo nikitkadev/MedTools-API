@@ -20,4 +20,9 @@ public interface IMedicalCaseRepository
         int medicalCaseUid,
         TargetDbType targetDb,
         CancellationToken cancellationToken);
+
+    Task<ClinicalGroupDto?> GetClinicalGroupAsync(
+        int medicalCaseUid,
+        TargetDbType targetDb,
+        CancellationToken cancellationToken);
 }

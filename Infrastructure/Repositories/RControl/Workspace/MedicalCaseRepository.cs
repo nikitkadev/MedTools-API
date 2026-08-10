@@ -62,4 +62,22 @@ public class MedicalCaseRepository(
         return medicalCases;
     }
 
+    public async Task<ClinicalGroupDto?> GetClinicalGroupAsync(
+        int medicalCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var result = await dbContext
+            .Set<ClinicalGroupDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_clinical_group @pMedicalCaseUid={medicalCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        var clinicalGroup = result.FirstOrDefault();
+
+        return clinicalGroup;
+    }
+
 }

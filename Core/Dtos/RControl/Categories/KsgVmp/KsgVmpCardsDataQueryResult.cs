@@ -7,7 +7,6 @@ public record KsgVmpCardsDataQueryResult(
 public class KsgKpgDto
 {
     public int Uid { get; set; }
-    public string? Ksg { get; set; }
     public string NKsg { get; set; } = string.Empty;
     public int VerKsg { get; set; }
     public byte KsgPg { get; set; }
@@ -17,8 +16,9 @@ public class KsgKpgDto
     public decimal Bztsz { get; set; }
     public float KoefD { get; set; }
     public float KoefU { get; set; }
-    public float? ItSl { get; set; }
     public byte SlK { get; set; }
+    public float? ItSl { get; set; }
+    public string? Ksg { get; set; }
 }
 
 public class VmpDto

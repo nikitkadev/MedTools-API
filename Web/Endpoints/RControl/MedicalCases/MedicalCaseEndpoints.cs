@@ -4,9 +4,10 @@ using Core.Enums;
 
 using Application.Queries.RContol.Oncology.GetOncologyCaseQuery;
 using Application.Queries.RContol.MedicalCases.GetConsultationsQuery;
+using Application.Queries.RContol.ProvidedServices.GetProvidedServicesQuery;
 using Application.Queries.RContol.Workspace.MedicalCases.GetMedicalCaseDetailsQuery;
 using Application.Queries.RContol.Categories.PatientInsurance.GetPatientInsuranceQuery;
-using Application.Queries.RContol.ProvidedServices.GetProvidedServicesQuery;
+using Application.Queries.RContol.MedicalCases.GetClinicalGroupQuery;
 
 
 namespace Web.Endpoints.RControl.MedicalCases;
@@ -22,6 +23,7 @@ public static class MedicalCaseEndpoints
         group.MapGet("/{medicalCaseUid:int}/oncology-case", GetOncologyCaseAsync);
         group.MapGet("/{medicalCaseUid:int}/consulations", GetConsultationsAsync);
         group.MapGet("/{medicalCaseUid:int}/provided-services", GetProvidedServicesAsync);
+        group.MapGet("/{medicalCaseUid:int}/clinical-group", GetClinicalGroupAsync);
 
     }
 
@@ -112,6 +114,26 @@ public static class MedicalCaseEndpoints
     {
         var result = await sender.Send(
             request: new GetProvidedServicesQuery(
+                MedicalCaseUid: medicalCaseUid,
+                TargetDb: targetDb),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
+
+    private static async Task<IResult> GetClinicalGroupAsync(
+        int medicalCaseUid,
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetClinicalGroupQuery(
                 MedicalCaseUid: medicalCaseUid,
                 TargetDb: targetDb),
             cancellationToken: cancellationToken);
