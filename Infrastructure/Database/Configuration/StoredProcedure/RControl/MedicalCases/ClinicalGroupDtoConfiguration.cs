@@ -12,11 +12,11 @@ public class ClinicalGroupDtoConfiguration : IEntityTypeConfiguration<ClinicalGr
         builder.HasNoKey();
 
         builder.Property(prop => prop.ClinicalGroupUid).HasColumnName("uid");
-        builder.Property(prop => prop.ClinicalStatisticGroupNumber).HasColumnName("n_ksg").IsRequired(false);
+        builder.Property(prop => prop.ClinicalStatisticGroupNumber).HasColumnName("n_ksg");
         builder.Property(prop => prop.CalculatedClinicalStatisticGroupNumber).HasColumnName("ksg").IsRequired(false);
         builder.Property(prop => prop.ClinicalStatisticGroupModelVersion).HasColumnName("ver_ksg");
         builder.Property(prop => prop.IsCsgSubgroupUsed).HasColumnName("ksg_pg");
-        builder.Property(prop => prop.ClinicalProfileGroupNumber).HasColumnName("n_kpg");
+        builder.Property(prop => prop.ClinicalProfileGroupNumber).HasColumnName("n_kpg").IsRequired(false);
         builder.Property(prop => prop.CostCoefficient).HasColumnName("koef_z");
         builder.Property(prop => prop.ManagementCoefficient).HasColumnName("koef_up");
         builder.Property(prop => prop.BaseRate).HasColumnName("bztsz");
