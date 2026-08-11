@@ -1,4 +1,4 @@
-﻿using Core.Dtos.RControl.Workspace;
+﻿using Core.Dtos.RControl.MedicalCases;
 
 namespace Application.Queries.RContol.MedicalCases.GetConsultationsQuery;
 

@@ -1,6 +1,5 @@
 ﻿using MediatR;
-
-using Core.Common;
+using Core.Common.Results;
 
 namespace Application.Commands.Auth.LoginCommand;
 

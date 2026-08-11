@@ -1,4 +1,4 @@
-﻿using Core.Dtos.RControl.Categories.Oncology;
+﻿using Core.Dtos.RControl.MedicalCases;
 
 namespace Application.Queries.RContol.MedicalCases.GetOncologyCaseQuery;
 

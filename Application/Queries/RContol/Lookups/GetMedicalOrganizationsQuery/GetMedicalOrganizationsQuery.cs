@@ -1,7 +1,6 @@
 ﻿using MediatR;
-
-using Core.Enums;
-using Core.Common;
+using Core.Common.Results;
+using Core.Common.Enums;
 
 namespace Application.Queries.RContol.Lookups.GetMedicalOrganizationsQuery;
 

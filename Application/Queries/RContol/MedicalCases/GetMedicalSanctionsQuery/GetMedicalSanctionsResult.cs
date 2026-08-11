@@ -1,4 +1,4 @@
-﻿using Core.Dtos.RControl.Categories.MedicalCase;
+﻿using Core.Dtos.RControl.MedicalCases;
 
 namespace Application.Queries.RContol.MedicalCases.GetMedicalSanctionsQuery;
 

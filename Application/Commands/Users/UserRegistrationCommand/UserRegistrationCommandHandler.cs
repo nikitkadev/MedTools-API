@@ -1,10 +1,9 @@
 ﻿using MediatR;
-
-using Core.Enums;
-using Core.Common;
 using Core.Entities;
 using Core.Interfaces.Auth;
 using Core.Interfaces.Repositories.Users;
+using Core.Common.Results;
+using Core.Common.Enums;
 
 namespace Application.Commands.Users.UserRegistrationCommand;
 

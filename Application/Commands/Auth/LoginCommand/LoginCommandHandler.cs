@@ -1,8 +1,7 @@
 ﻿using MediatR;
-
-using Core.Common;
 using Core.Interfaces.Auth;
 using Core.Interfaces.Repositories.Users;
+using Core.Common.Results;
 
 namespace Application.Commands.Auth.LoginCommand;
 

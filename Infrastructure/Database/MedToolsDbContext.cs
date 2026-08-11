@@ -2,9 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using Infrastructure.Database.Enitites.Auth;
-using Core.Dtos.RControl.Categories.DefectsSanks;
-using Core.Dtos.RControl.Categories.NazNapr;
+using Infrastructure.Database.DbEntities;
 
 namespace Infrastructure.Database;
 
@@ -12,10 +10,7 @@ public abstract class MedToolsDbContext(
     DbContextOptions options) : DbContext(options)
 {
 
-    public DbSet<UserEntity> Users { get; set; }
-    public DbSet<PurposeDto> Purposes { get; set; }
-    public DbSet<DirectionDto> Directions { get; set; }
-    public DbSet<SankDto> Sanks { get; set; }
+    public DbSet<UserDbEntity> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

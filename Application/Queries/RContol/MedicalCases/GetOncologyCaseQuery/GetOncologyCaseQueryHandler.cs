@@ -1,19 +1,19 @@
 ﻿using MediatR;
 
-using Core.Common;
-using Core.Interfaces.RControl.Repositories.Oncology;
+using Core.Common.Results;
+using Core.Interfaces.Repositories.RControl;
 
 namespace Application.Queries.RContol.MedicalCases.GetOncologyCaseQuery;
 
 public class GetOncologyCaseQueryHandler(
-    IOncologyRepository oncologyRepository) : IRequestHandler<GetOncologyCaseQuery, Result<GetOncologyCaseResult>>
+    IMedicalCaseRepository medicalCaseRepository) : IRequestHandler<GetOncologyCaseQuery, Result<GetOncologyCaseResult>>
 {
     public async Task<Result<GetOncologyCaseResult>> Handle(
         GetOncologyCaseQuery request, 
         CancellationToken cancellationToken)
     {
 
-        var oncologyCase = await oncologyRepository.GetOncologyCaseAsync(
+        var oncologyCase = await medicalCaseRepository.GetOncologyCaseAsync(
             medicalCaseUid: request.MedicalCaseUid,
             targetDb: request.TargetDb,
             cancellationToken: cancellationToken);

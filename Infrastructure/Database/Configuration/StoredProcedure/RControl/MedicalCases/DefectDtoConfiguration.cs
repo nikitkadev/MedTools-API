@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-using Core.Dtos.RControl.Categories.MedicalCase;
+using Core.Dtos.RControl.MedicalCases;
 
 namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.MedicalCases;
 

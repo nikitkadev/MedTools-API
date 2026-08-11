@@ -1,17 +1,18 @@
 ﻿using MediatR;
 
-using Core.Common;
-using Core.Interfaces.RControl.Repositories.Lookups;
+using Core.Common.Results;
+using Core.Interfaces.Repositories.RControl;
 
 namespace Application.Queries.RContol.Lookups.GetBillingPeriodsQuery;
 
-public class GetBillingPeriodsQueryHandler(IBillingPeriodRepository billingPeriodRepository) : IRequestHandler<GetBillingPeriodsQuery, Result<GetBillingPeriodsResult>>
+public class GetBillingPeriodsQueryHandler(
+    ILookupsRepository lookupsRepository) : IRequestHandler<GetBillingPeriodsQuery, Result<GetBillingPeriodsResult>>
 {
     public async Task<Result<GetBillingPeriodsResult>> Handle(
         GetBillingPeriodsQuery request, 
         CancellationToken cancellationToken)
     {
-        var billingPeriods = await billingPeriodRepository.GetBillingPeriodsAsync(
+        var billingPeriods = await lookupsRepository.GetBillingPeriodsAsync(
             targetDb: request.TargetDb,
             medicalOrganizationCode: request.MedicalOrganizationCode,
             cancellationToken: cancellationToken);

@@ -1,11 +1,5 @@
 ﻿using Web.Registration.Endpoints;
-using Web.Endpoints.RControl.Lookups;
-using Web.Endpoints.RControl.Invoices;
-using Web.Endpoints.RControl.Oncology;
-using Web.Endpoints.RControl.MedicalCases;
-using Web.Endpoints.RControl.CompletedCases;
-using Web.Endpoints.RControl.ProvidedServices;
-using Web.Endpoints.RControl.ClinicalGroups;
+using Web.Endpoints.RControl.Sources;
 
 namespace Web.Endpoints.RControl;
 

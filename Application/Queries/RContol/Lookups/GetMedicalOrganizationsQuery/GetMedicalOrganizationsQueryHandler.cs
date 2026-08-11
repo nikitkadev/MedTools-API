@@ -1,18 +1,18 @@
 ﻿using MediatR;
 
-using Core.Common;
-using Core.Interfaces.RControl.Repositories.Lookups;
+using Core.Common.Results;
+using Core.Interfaces.Repositories.RControl;
 
 namespace Application.Queries.RContol.Lookups.GetMedicalOrganizationsQuery;
 
 public sealed class GetMedicalOrganizationsQueryHandler(
-    IMedicalOrganizationRepository medicalOrganizationRepository) : IRequestHandler<GetMedicalOrganizationsQuery, Result<GetMedicalOrganizationsResult>>
+    ILookupsRepository lookupsRepository) : IRequestHandler<GetMedicalOrganizationsQuery, Result<GetMedicalOrganizationsResult>>
 {
     public async Task<Result<GetMedicalOrganizationsResult>> Handle(
         GetMedicalOrganizationsQuery request, 
         CancellationToken cancellationToken)
     {
-        var medicalOrganizations = await medicalOrganizationRepository.GetMedicalOrganizationsAsync(request.TargetDb, cancellationToken);
+        var medicalOrganizations = await lookupsRepository.GetMedicalOrganizationsAsync(request.TargetDb, cancellationToken);
 
         return Result<GetMedicalOrganizationsResult>.Success(
             new GetMedicalOrganizationsResult(

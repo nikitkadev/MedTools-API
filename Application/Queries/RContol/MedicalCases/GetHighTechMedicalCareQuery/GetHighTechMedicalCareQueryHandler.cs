@@ -1,7 +1,6 @@
 ﻿using MediatR;
-
-using Core.Common;
-using Core.Interfaces.RControl.Repositories.Workspace;
+using Core.Common.Results;
+using Core.Interfaces.Repositories.RControl;
 
 namespace Application.Queries.RContol.MedicalCases.GetHighTechMedicalCareQuery;
 

@@ -1,5 +1,5 @@
-﻿using Core.Common;
-using Core.Enums;
+﻿using Core.Common.Enums;
+using Core.Common.Results;
 using MediatR;
 
 namespace Application.Queries.RContol.ClinicalGroups.GetTreatmentComplexityCoefficientsQuery;
