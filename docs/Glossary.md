@@ -250,6 +250,21 @@
 | `NAPR_DATE` | `` | `Referral Date` | `ReferralDate` | Дата направления |
 | `NAPR_MO` | `` | `Referred To Medical Organization Code` | `ReferredToMoCode` | Код МО, куда оформлено направление  |
 
+### Таблица `SANK`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `S_CODE` | `` | `Sanction Code` | `SanctionCode` | Идентификатор санкции |
+| `S_SUM` | `` | `Sanction Amount` | `SanctionAmount` | Финансовая санкция |
+| `S_TIP` | `` | `Control Type Code` | `ControlTypeCode` | Код вида контроля |
+| `S_OSN` | `` | `Refusal Reason Code` | `RefusalReasonCode` | Код причины отказа (частичной) оплаты |
+| `S_COM` | `` | `Comment` | `Comment` | Комментарий |
+| `S_IST` | `` | `Source` | `Source` | Источник |
+| `S_ED_COL` | `Units Removed` | `UnitsRemoved` | `` | Количество единиц оплаты медицинской помощи подлежащей снятию актом экспертизы |
+| `S_KSG` | `` | `Clinical Statistical Group Number` | `ClinicalStatisticalGroupNumber` | Номер КСГ |
+| `S_NACT` | `` | `ExpertiseActNumber` | `ExpertiseActNumber` | Номер акта экспертизы |
+| `S_DACT` | `` | `Expertise Act Date` | `ExpertiseActDate` | Дата акта проведения экспертизы |
+| `S_CODEX` | `` | `Expert Code` | `ExpertCode` | Код эксперта качества медицинской помощи |
+
 ### Таблица ``
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |

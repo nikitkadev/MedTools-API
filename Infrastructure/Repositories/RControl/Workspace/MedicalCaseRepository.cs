@@ -165,4 +165,20 @@ public class MedicalCaseRepository(
             Records: defects,
             TotalCount: (int)totalCountParam.Value);
     }
+
+    public async Task<IReadOnlyCollection<MedicalSanctionDto>> GetMedicalSanctionsAsync(
+        int medicalCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var medicalSanctions = await dbContext
+            .Set<MedicalSanctionDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_medical_sanctions @pMedicalCaseUid={medicalCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return medicalSanctions;
+    }
 }

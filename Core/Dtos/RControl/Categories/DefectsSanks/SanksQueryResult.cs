@@ -11,11 +11,11 @@ public class SankDto
     public decimal SSum { get; set; }
     public string STip { get; set; } = string.Empty;
     public int SOsn { get; set; }
+    public string? SCom { get; set; }
     public decimal SEDCol { get; set; }
     public DateTime SDact { get; set; }
     public string SNact { get; set; } = string.Empty;
     public string? SCodex { get; set; }
-    public string? SCom { get; set; }
     public string? Filename { get; set; }
     public int? Year { get; set; }
     public int? Month { get; set; }

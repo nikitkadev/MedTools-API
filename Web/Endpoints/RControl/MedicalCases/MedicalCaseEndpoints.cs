@@ -8,6 +8,7 @@ using Application.Queries.RContol.MedicalCases.GetOncologyCaseQuery;
 using Application.Queries.RContol.MedicalCases.GetPrescriptionsQuery;
 using Application.Queries.RContol.MedicalCases.GetConsultationsQuery;
 using Application.Queries.RContol.MedicalCases.GetClinicalGroupQuery;
+using Application.Queries.RContol.MedicalCases.GetMedicalSanctionsQuery;
 using Application.Queries.RContol.MedicalCases.GetHighTechMedicalCareQuery;
 using Application.Queries.RContol.ProvidedServices.GetProvidedServicesQuery;
 using Application.Queries.RContol.Workspace.MedicalCases.GetMedicalCaseDetailsQuery;
@@ -32,6 +33,7 @@ public static class MedicalCaseEndpoints
         group.MapGet("/{medicalCaseUid:int}/referrals", GetReferralsAsync);
         group.MapGet("/{medicalCaseUid:int}/prescriptions", GetPrescriptionsAsync);
         group.MapGet("/{medicalCaseUid:int}/defects", GetDefectsAsync);
+        group.MapGet("/{medicalCaseUid:int}/medical-sanctions", GetMedicalSanctionsAsync);
     }
 
     private static async Task<IResult> GetMedicalCaseDetailsAsync(
@@ -213,7 +215,7 @@ public static class MedicalCaseEndpoints
 
         return Results.Ok(result);
     }
-    
+
     private static async Task<IResult> GetDefectsAsync(
         int medicalCaseUid,
         TargetDbType targetDb,
@@ -238,5 +240,24 @@ public static class MedicalCaseEndpoints
         return Results.Ok(result);
     }
 
+    private static async Task<IResult> GetMedicalSanctionsAsync(
+        int medicalCaseUid,
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalSanctionsQuery(
+                MedicalCaseUid: medicalCaseUid,
+                TargetDb: targetDb),
+            cancellationToken: cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Results.BadRequest(result);
+        }
+
+        return Results.Ok(result);
+    }
 
 }
