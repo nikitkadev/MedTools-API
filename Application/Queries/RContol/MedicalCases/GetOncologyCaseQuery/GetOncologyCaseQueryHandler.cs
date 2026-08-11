@@ -3,7 +3,7 @@
 using Core.Common;
 using Core.Interfaces.RControl.Repositories.Oncology;
 
-namespace Application.Queries.RContol.Oncology.GetOncologyCaseQuery;
+namespace Application.Queries.RContol.MedicalCases.GetOncologyCaseQuery;
 
 public class GetOncologyCaseQueryHandler(
     IOncologyRepository oncologyRepository) : IRequestHandler<GetOncologyCaseQuery, Result<GetOncologyCaseResult>>

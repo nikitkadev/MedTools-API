@@ -237,6 +237,19 @@
 | `MET_ISSL` | `` | `Diagnostic Method` | `DiagnosticMethod` | Метод диагностического исследования |
 | `NAPR_USL` | `` | `Referred Service Code` | `ReferredServiceCode` | Медицинская услуга (код) указанная в направлении |
 
+### Таблица `NAZ`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `NAZ_N` | `` | `Sequence Number` | `SequenceNumber` | Номер по порядку |
+| `NAZ_R` | `` | `Prescription Type` | `PrescriptionType` | Вид назначения |
+| `NAZ_SP` | `` | `Physician Specialty` | `PhysicianSpecialty` | Специальность врача |
+| `NAZ_V` | `` | `Diagnostic Method` | `DiagnosticMethod` | Метод  диагностического исследования |
+| `NAZ_USL` | `` | `Service Code` | `ServiceCode` | Медицинская услуга (код), указанная в направлении |
+| `NAZ_PMP` | `` | `Medical Care Profile` | `MedicalCareProfile` | Профиль медицинской помощи |
+| `NAZ_PK` | `` | `Bed Profile` | `BedProfile` | Профиль койки |
+| `NAPR_DATE` | `` | `Referral Date` | `ReferralDate` | Дата направления |
+| `NAPR_MO` | `` | `Referred To Medical Organization Code` | `ReferredToMoCode` | Код МО, куда оформлено направление  |
+
 ### Таблица ``
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |

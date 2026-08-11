@@ -113,4 +113,20 @@ public class MedicalCaseRepository(
 
         return referrals;
     }
+
+    public async Task<IReadOnlyCollection<PrescriptionDto>> GetPrescriptionsAsync(
+        int medicalCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var prescriptions = await dbContext
+            .Set<PrescriptionDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_prescriptions @pMedicalCaseUid={medicalCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return prescriptions;
+    }
 }
