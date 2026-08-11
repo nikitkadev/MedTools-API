@@ -228,6 +228,15 @@
 | `IDSL` | `` | `Complexity Coefficient Number` | `ComplexityCoefficientNumber` | Номер коэффициента сложности лечения пациента |
 | `Z_SL` | `` | `Complexity Coefficient Value` | `ComplexityCoefficientValue` | Значение коэффициента сложности лечения пациента |
 
+### Таблица `NAPR`
+| Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
+| --- | --- | --- | --- | --- |
+| `NAPR_DATE` | `` | `Referral Date` | `ReferralDate` | Дата направления |
+| `NAPR_MO` | `` | `Referred To Medical Organization Code` | `ReferredToMoCode` | Код МО, куда оформлено направление |
+| `NAPR_V` | `` | `Referral Type` | `ReferralType` | Вид направления |
+| `MET_ISSL` | `` | `Diagnostic Method` | `DiagnosticMethod` | Метод диагностического исследования |
+| `NAPR_USL` | `` | `Referred Service Code` | `ReferredServiceCode` | Медицинская услуга (код) указанная в направлении |
+
 ### Таблица ``
 | Транслитерация | БД ТФОМС РХ | Доменное название | Идентификатор в коде | Наименование |
 | --- | --- | --- | --- | --- |

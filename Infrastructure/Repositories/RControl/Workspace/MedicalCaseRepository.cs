@@ -97,4 +97,20 @@ public class MedicalCaseRepository(
 
         return highTechMedicalCare;
     }
+
+    public async Task<IReadOnlyCollection<ReferralDto>> GetReferralsAsync(
+        int medicalCaseUid, 
+        TargetDbType targetDb, 
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var referrals = await dbContext
+            .Set<ReferralDto>()
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_refferals @pMedicalCaseUid={medicalCaseUid}")
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return referrals;
+    }
 }
