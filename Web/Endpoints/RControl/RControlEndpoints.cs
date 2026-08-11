@@ -4,7 +4,6 @@ using Core.Enums;
 
 using Application.Queries.RContol.Categories.NazNapr.GetNazNaprDataCommand;
 using Application.Queries.RContol.Categories.DefectsSanks.GetSanksDataCommand;
-using Application.Queries.RContol.Categories.DefectsSanks.GetDefectsDataCommand;
 
 using Web.Registration.Endpoints;
 using Web.Endpoints.RControl.Lookups;
@@ -35,7 +34,6 @@ public class RControlEndpoints : IEndpoint
 
         group.MapGet("/categories/naz-napr", GetNazNaprCategoryData);
         group.MapGet("/categories/defects-sanks/sanks", GetSanksDataAsync);
-        group.MapGet("/categories/defects-sanks/defects", GetDefectsDataAsync);
         
     }
     
@@ -78,28 +76,5 @@ public class RControlEndpoints : IEndpoint
 
         return Results.Ok(result);
     }
-
-    private static async Task<IResult> GetDefectsDataAsync(
-        int sluchUid,
-        string targetDb,
-        int page,
-        int pageSize,
-        ISender sender,
-        CancellationToken cancellationToken)
-    {
-        var result = await sender.Send(
-           request: new GetDefectsDataCommand(
-               SluchUid: sluchUid,
-               TargetDb: Enum.Parse<TargetDbType>(targetDb),
-               Page: page,
-               PageSize: pageSize),
-           cancellationToken: cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Results.BadRequest(result);
-        }
-
-        return Results.Ok(result);
-    }
+    
 }

@@ -10,9 +10,4 @@ public interface IDefectsSanksCategoryRepository
         int sluchUid,
         TargetDbType targetDb);
 
-    Task<Result<DefectsQueryResult>> GetDefectsAsync(
-        int sluchUid,
-        TargetDbType targetDb,
-        int page,
-        int pageSize);
 }

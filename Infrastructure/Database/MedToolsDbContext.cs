@@ -16,7 +16,6 @@ public abstract class MedToolsDbContext(
     public DbSet<PurposeDto> Purposes { get; set; }
     public DbSet<DirectionDto> Directions { get; set; }
     public DbSet<SankDto> Sanks { get; set; }
-    public DbSet<DefectDto> Defects { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data;
+
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 using Core.Enums;
+using Core.Common;
 using Core.Dtos.RControl.Workspace;
 using Core.Dtos.RControl.Categories.MedicalCase;
 using Core.Interfaces.RControl.Repositories.Workspace;
@@ -128,5 +132,37 @@ public class MedicalCaseRepository(
             .ToListAsync(cancellationToken);
 
         return prescriptions;
+    }
+
+    public async Task<PagedResult<DefectDto>> GetDefectsAsync(
+        int medicalCaseUid, 
+        TargetDbType targetDb,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
+
+        var totalCountParam = new SqlParameter("@totalCount", SqlDbType.Int)
+        {
+            Direction = ParameterDirection.Output
+        };
+
+        var defects = await dbContext
+            .Set<DefectDto>()
+            .FromSqlRaw(
+                sql: "EXEC mt_rcontrol_get_defects @pMedicalCaseUid, @pSkip, @pTake, @totalCount OUTPUT",
+                parameters: [
+                    new SqlParameter("@pMedicalCaseUid", medicalCaseUid),
+                    new SqlParameter("@pSkip", pageSize * (page - 1)),
+                    new SqlParameter("@pTake", pageSize),
+                    totalCountParam
+                    ])
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return new PagedResult<DefectDto>(
+            Records: defects,
+            TotalCount: (int)totalCountParam.Value);
     }
 }

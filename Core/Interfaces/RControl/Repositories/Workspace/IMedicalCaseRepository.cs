@@ -1,6 +1,8 @@
 ﻿using Core.Enums;
 using Core.Dtos.RControl.Workspace;
 using Core.Dtos.RControl.Categories.MedicalCase;
+using System.Reflection;
+using Core.Common;
 
 namespace Core.Interfaces.RControl.Repositories.Workspace;
 
@@ -39,5 +41,12 @@ public interface IMedicalCaseRepository
     Task<IReadOnlyCollection<PrescriptionDto>> GetPrescriptionsAsync(
         int medicalCaseUid,
         TargetDbType targetDb,
+        CancellationToken cancellationToken);
+
+    Task<PagedResult<DefectDto>> GetDefectsAsync(
+        int medicalCaseUid,
+        TargetDbType targetDb,
+        int page,
+        int pageSize,
         CancellationToken cancellationToken);
 }
