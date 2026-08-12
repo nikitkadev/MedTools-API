@@ -4,4 +4,4 @@ public sealed record GetBillingPeriodsResult(IReadOnlyCollection<BillingPeriodRe
 
 public sealed record BillingPeriodResponseDto(
     string BillingYear,
-    IReadOnlyCollection<string> BillingMonth);
+    IReadOnlyCollection<string> BillingMonths);
