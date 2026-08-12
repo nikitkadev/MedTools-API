@@ -12,13 +12,13 @@ public sealed class GetConsultationsQueryHandler(
         GetConsultationsQuery request, 
         CancellationToken cancellationToken)
     {
-        var consulations = await medicalCaseRepository.GetConsultationsAsync(
+        var consultations = await medicalCaseRepository.GetConsultationsAsync(
             medicalCaseUid: request.MedicalCaseUid,
             targetDb: request.TargetDb,
             cancellationToken: cancellationToken);
 
         return Result<GetConsultationsResult>.Success(
             new GetConsultationsResult(
-                Consultations: consulations));
+                Consultations: consultations));
     }
 }

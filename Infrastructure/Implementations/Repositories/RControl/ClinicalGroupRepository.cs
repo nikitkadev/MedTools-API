@@ -11,20 +11,20 @@ namespace Infrastructure.Implementations.Repositories.RControl;
 public class ClinicalGroupRepository(
     DbContextFactory dbContextFactory) : IClinicalGroupRepository
 {
-    public async Task<IReadOnlyCollection<ClassificationCriterionDto>> GetClassificationCriterionsAsync(
+    public async Task<IReadOnlyCollection<ClassificationCriterionDto>> GetClassificationCriteriaAsync(
         int clinicalGroupUid,
         TargetDbType targetDb,
         CancellationToken cancellationToken)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
 
-        var classificationCriterions = await dbContext
+        var classificationCriteria = await dbContext
             .Set<ClassificationCriterionDto>()
-            .FromSqlInterpolated($"EXEC mt_rcontrol_get_classification_criterions @pClinicalGroupUid={clinicalGroupUid}")
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_classification_criteria @pClinicalGroupUid={clinicalGroupUid}")
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return classificationCriterions;
+        return classificationCriteria;
     }
 
     public async Task<IReadOnlyCollection<TreatmentComplexityCoefficientDto>> GetTreatmentComplexityCoefficientsAsync(

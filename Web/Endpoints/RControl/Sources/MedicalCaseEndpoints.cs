@@ -27,7 +27,7 @@ public static class MedicalCaseEndpoints
         group.MapGet("/{medicalCaseUid:int}/patient", GetPatientAsync);
         group.MapGet("/{medicalCaseUid:int}/insurance", GetInsuranceAsync);
         group.MapGet("/{medicalCaseUid:int}/oncology-case", GetOncologyCaseAsync);
-        group.MapGet("/{medicalCaseUid:int}/consulations", GetConsultationsAsync);
+        group.MapGet("/{medicalCaseUid:int}/consultations", GetConsultationsAsync);
         group.MapGet("/{medicalCaseUid:int}/provided-services", GetProvidedServicesAsync);
         group.MapGet("/{medicalCaseUid:int}/clinical-group", GetClinicalGroupAsync);
         group.MapGet("/{medicalCaseUid:int}/high-tech-medical-care", GetHighTechMedicalCareAsync);

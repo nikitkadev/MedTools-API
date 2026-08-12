@@ -5,7 +5,7 @@ namespace Core.Interfaces.Repositories.RControl;
 
 public interface IClinicalGroupRepository
 {
-    Task<IReadOnlyCollection<ClassificationCriterionDto>> GetClassificationCriterionsAsync(
+    Task<IReadOnlyCollection<ClassificationCriterionDto>> GetClassificationCriteriaAsync(
         int clinicalGroupUid,
         TargetDbType targetDb,
         CancellationToken cancellationToken);

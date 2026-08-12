@@ -12,13 +12,13 @@ public sealed class GetClassificationCriteriaQueryHandler(
         GetClassificationCriteriaQuery request, 
         CancellationToken cancellationToken)
     {
-        var classificationCriterions = await clinicalGroupRepository.GetClassificationCriterionsAsync(
+        var classificationCriteria = await clinicalGroupRepository.GetClassificationCriteriaAsync(
             clinicalGroupUid: request.ClinicalGroupUid,
             targetDb: request.TargetDb,
             cancellationToken: cancellationToken);
 
         return Result<GetClassificationCriteriaResult>.Success(
             new GetClassificationCriteriaResult(
-                ClassificationCriteria: classificationCriterions));
+                ClassificationCriteria: classificationCriteria));
     }
 }

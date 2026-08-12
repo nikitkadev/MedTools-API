@@ -13,11 +13,11 @@ public static class ClinicalGroupEndpoints
     {
         var group = builder.MapGroup("/clinical-groups").WithTags("RControl Clinical Groups");
 
-        group.MapGet("/{clinicalGroupUid:int}/classification_criterions", GetClassificationCriterionsAsync);
+        group.MapGet("/{clinicalGroupUid:int}/classification_criteria", GetClassificationCriteriaAsync);
         group.MapGet("/{clinicalGroupUid:int}/treatment-complexity-coefficients", GetTreatmentComplexityCoefficientsAsync);
     }
 
-    private static async Task<IResult> GetClassificationCriterionsAsync(
+    private static async Task<IResult> GetClassificationCriteriaAsync(
         int clinicalGroupUid,
         TargetDbType targetDb,
         ISender sender,

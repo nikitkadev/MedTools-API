@@ -2,9 +2,9 @@
 
 public sealed record ClinicalGroupDto(
     int ClinicalGroupUid,
-    string ClinicalStatisticGroupNumber,
-    string? CalculatedClinicalStatisticGroupNumber,
-    int ClinicalStatisticGroupModelVersion,
+    string ClinicalStatisticalGroupNumber,
+    string? CalculatedClinicalStatisticalGroupNumber,
+    int ClinicalStatisticalGroupModelVersion,
     bool IsCsgSubgroupUsed,
     string? ClinicalProfileGroupNumber,
     float CostCoefficient,

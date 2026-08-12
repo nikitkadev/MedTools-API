@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Core.Dtos.RControl.MedicalCases;
 
 namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.MedicalCases;
@@ -11,9 +12,9 @@ public class ClinicalGroupDtoConfiguration : IEntityTypeConfiguration<ClinicalGr
         builder.HasNoKey();
 
         builder.Property(prop => prop.ClinicalGroupUid).HasColumnName("uid");
-        builder.Property(prop => prop.ClinicalStatisticGroupNumber).HasColumnName("n_ksg");
-        builder.Property(prop => prop.CalculatedClinicalStatisticGroupNumber).HasColumnName("ksg").IsRequired(false);
-        builder.Property(prop => prop.ClinicalStatisticGroupModelVersion).HasColumnName("ver_ksg");
+        builder.Property(prop => prop.ClinicalStatisticalGroupNumber).HasColumnName("n_ksg");
+        builder.Property(prop => prop.CalculatedClinicalStatisticalGroupNumber).HasColumnName("ksg").IsRequired(false);
+        builder.Property(prop => prop.ClinicalStatisticalGroupModelVersion).HasColumnName("ver_ksg");
         builder.Property(prop => prop.IsCsgSubgroupUsed).HasColumnName("ksg_pg");
         builder.Property(prop => prop.ClinicalProfileGroupNumber).HasColumnName("n_kpg").IsRequired(false);
         builder.Property(prop => prop.CostCoefficient).HasColumnName("koef_z");

@@ -92,13 +92,13 @@ public class MedicalCaseRepository(
     {
         await using var dbContext = dbContextFactory.CreateDbContext(targetDb);
 
-        var consulations = await dbContext
+        var consultations = await dbContext
             .Set<ConsultationDto>()
             .FromSqlInterpolated($"EXEC mt_rcontrol_get_consultations @pMedicalCaseUid={medicalCaseUid}")
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return consulations;
+        return consultations;
     }
 
     public async Task<ClinicalGroupDto?> GetClinicalGroupAsync(
@@ -146,7 +146,7 @@ public class MedicalCaseRepository(
 
         var referrals = await dbContext
             .Set<ReferralDto>()
-            .FromSqlInterpolated($"EXEC mt_rcontrol_get_refferals @pMedicalCaseUid={medicalCaseUid}")
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_referrals @pMedicalCaseUid={medicalCaseUid}")
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 

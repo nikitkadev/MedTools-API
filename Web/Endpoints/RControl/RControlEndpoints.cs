@@ -7,7 +7,7 @@ public class RControlEndpoints : IEndpoint
 {
     public void Register(IEndpointRouteBuilder endpointsBuilder)
     {
-        var group = endpointsBuilder.MapGroup("/rcontrol").WithTags("RControlData");
+        var group = endpointsBuilder.MapGroup("/rcontrol").WithTags("RControl");
 
         group.MapLookups();
         group.MapInvoiceEndpoints();
