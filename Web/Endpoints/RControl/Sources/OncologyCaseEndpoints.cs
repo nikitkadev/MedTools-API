@@ -14,7 +14,7 @@ public static class OncologyCaseEndpoints
     {
         var group = builder.MapGroup("/oncology-cases").WithTags("RControl Oncology Cases");
 
-        group.MapGet("/{oncologyCaseUid:int}/сontraindications", GetContraindicationsAsync);
+        group.MapGet("/{oncologyCaseUid:int}/contraindications", GetContraindicationsAsync);
         group.MapGet("/{oncologyCaseUid:int}/diagnostics", GetDiagnosticsAsync);
         group.MapGet("/{oncologyCaseUid:int}/oncology-services", GetOncologyServicesAsync);
     }
