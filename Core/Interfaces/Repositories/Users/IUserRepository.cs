@@ -1,4 +1,4 @@
-﻿using Core.Common;
+﻿using Core.Common.Results;
 using Core.Entities;
 
 namespace Core.Interfaces.Repositories.Users;

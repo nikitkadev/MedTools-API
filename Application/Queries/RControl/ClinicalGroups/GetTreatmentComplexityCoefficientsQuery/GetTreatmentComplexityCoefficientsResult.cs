@@ -1,0 +1,5 @@
+﻿using Core.Dtos.RControl.ClinicalGroups;
+
+namespace Application.Queries.RControl.ClinicalGroups.GetTreatmentComplexityCoefficientsQuery;
+
+public sealed record GetTreatmentComplexityCoefficientsResult(IReadOnlyCollection<TreatmentComplexityCoefficientDto> TreatmentComplexityCoefficients);

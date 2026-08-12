@@ -5,31 +5,27 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Core.Interfaces.Auth;
-using Core.Interfaces.Repositories.Filters;
-using Core.Interfaces.Repositories.MainField;
 using Core.Interfaces.Repositories.Users;
-using Core.Interfaces.Repositories.Categories;
+using Core.Interfaces.Repositories.RControl;
 
 using Application;
 
 using Infrastructure.Mapping;
-using Infrastructure.Services;
-using Infrastructure.Database;
-using Infrastructure.Repositories;
-using Infrastructure.Repositories.Categories;
-using Infrastructure.Factories;
 using Infrastructure.Options;
+using Infrastructure.Database;
+using Infrastructure.Database.Factories;
+using Infrastructure.Implementations.Services;
+using Infrastructure.Implementations.Repositories.Users;
+using Infrastructure.Implementations.Repositories.RControl;
 
 using Web.Mapping;
 using Web.Options;
-
-
 
 namespace Web.Registration.DI;
 
 public static class DependencyInjectionRegistrator
 {
-    public static IServiceCollection RegistrateAppServices(
+    public static IServiceCollection RegisterAppServices(
         this IServiceCollection services,
         IConfiguration configuration)
     {
@@ -44,21 +40,16 @@ public static class DependencyInjectionRegistrator
 
     private static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
+        services.AddScoped<IClinicalGroupRepository, ClinicalGroupRepository>();
+        services.AddScoped<ICompletedCaseRepository, CompletedCaseRepository>();
+        services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+        services.AddScoped<ILookupsRepository, LookupsRepository>();
+        services.AddScoped<IMedicalCaseRepository, MedicalCaseRepository>();
+        services.AddScoped<IMedicationRepository, MedicationRepository>();
+        services.AddScoped<IOncologyCaseRepository, OncologyCaseRepository>();
+        services.AddScoped<IOncologyServiceRepository, OncologyServiceRepository>();
+        services.AddScoped<IProvidedServiceRepository, ProvidedServiceRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IInvoiceQueryRepository, InvoiceQueryRepository>();
-        services.AddScoped<IBillingPeriodsQueryRepository, BillingPeriodsQueryRepository>();
-        services.AddScoped<IMedOrganizationsQueryRepository, MedOrganizationsQueryRepository>();
-        services.AddScoped<IInvoiceSummaryRepository, InvoiceSummaryRepository>();
-        services.AddScoped<IFinishedCasesRepository, FinishedCasesRepository>();
-        services.AddScoped<ICasesRepository, CasesRepository>();
-        services.AddScoped<IPatientSmoCategoryRepository, PatientSmoCategoryRepository>();
-        services.AddScoped<ICasesCategoryRepository, CasesCategoryRepository>();
-        services.AddScoped<IOncologyCategoryRepository, OncologyCategoryRepository>();
-        services.AddScoped<IProvidedServicesCategoryRepository, ProvidedServicesCategoryRepository>();
-        services.AddScoped<IKsgVmpCategoryRepository, KsgVmpCategoryRepository>();
-        services.AddScoped<INazNaprCategoryRepository, NazNaprCategoryRepository>();
-        services.AddScoped<IDefectsSanksCategoryRepository, DefectsSanksCategoryRepository>();
-
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
 

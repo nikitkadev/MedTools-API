@@ -1,0 +1,5 @@
+﻿using Core.Dtos.RControl.ClinicalGroups;
+
+namespace Application.Queries.RControl.ClinicalGroups.GetClassificationCriteriaQuery;
+
+public sealed record GetClassificationCriteriaResult(IReadOnlyCollection<ClassificationCriterionDto> ClassificationCriteria);

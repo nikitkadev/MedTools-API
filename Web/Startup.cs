@@ -15,7 +15,7 @@ public class Startup
 
         var builder = WebApplication.CreateBuilder();
 
-        builder.Services.RegistrateAppServices(builder.Configuration);
+        builder.Services.RegisterAppServices(builder.Configuration);
         builder.Host.UseSerilog();
 
         var app = builder.Build();

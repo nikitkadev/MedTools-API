@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 
-using Application.Commands.UserManagment.UserRegistration;
-using Application.Commands.Auth.Login;
-
 using Web.Dtos.Requests;
+using Application.Commands.Auth.LoginCommand;
+using Application.Commands.Users.UserRegistrationCommand;
 
 namespace Web.Mapping;
 
