@@ -20,8 +20,8 @@ public sealed class GetBillingPeriodsQueryHandler(
         var billingResponsePeriods = billingPeriods
             .GroupBy(period => period.BillingYear)
             .Select(group => new BillingPeriodResponseDto(
-                BillingYear: group.Key.ToString(),
-                BillingMonths: [.. group.Select(period => period.BillingMonth.ToString())]))
+                BillingYear: group.Key,
+                BillingMonths: [.. group.Select(period => period.BillingMonth)]))
             .OrderBy(period => period.BillingYear)
             .ToList();
             
