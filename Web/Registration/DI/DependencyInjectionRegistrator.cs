@@ -25,7 +25,7 @@ namespace Web.Registration.DI;
 
 public static class DependencyInjectionRegistrator
 {
-    public static IServiceCollection RegistrateAppServices(
+    public static IServiceCollection RegisterAppServices(
         this IServiceCollection services,
         IConfiguration configuration)
     {
