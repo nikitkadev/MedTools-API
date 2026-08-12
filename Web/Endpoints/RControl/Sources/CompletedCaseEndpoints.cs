@@ -2,8 +2,8 @@
 
 using Core.Common.Enums;
 
-using Application.Queries.RContol.CompletedCases.GetMedicalCasesQuery;
-using Application.Queries.RContol.CompletedCases.GetCompletedCaseDetailsQuery;
+using Application.Queries.RControl.CompletedCases.GetMedicalCasesQuery;
+using Application.Queries.RControl.CompletedCases.GetCompletedCaseDetailsQuery;
 
 namespace Web.Endpoints.RControl.Sources;
 

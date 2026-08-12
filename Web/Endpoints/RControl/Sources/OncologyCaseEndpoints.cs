@@ -2,9 +2,9 @@
 
 using Core.Common.Enums;
 
-using Application.Queries.RContol.OncologyCases.GetDignosticsQuery;
-using Application.Queries.RContol.OncologyCases.GetOncologyServicesQuery;
-using Application.Queries.RContol.OncologyCases.GetContraindicationsQuery;
+using Application.Queries.RControl.OncologyCases.GetDignosticsQuery;
+using Application.Queries.RControl.OncologyCases.GetOncologyServicesQuery;
+using Application.Queries.RControl.OncologyCases.GetContraindicationsQuery;
 
 namespace Web.Endpoints.RControl.Sources;
 

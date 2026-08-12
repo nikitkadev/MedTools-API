@@ -2,8 +2,8 @@
 
 using Core.Common.Enums;
 
-using Application.Queries.RContol.Lookups.GetBillingPeriodsQuery;
-using Application.Queries.RContol.Lookups.GetMedicalOrganizationsQuery;
+using Application.Queries.RControl.Lookups.GetBillingPeriodsQuery;
+using Application.Queries.RControl.Lookups.GetMedicalOrganizationsQuery;
 
 namespace Web.Endpoints.RControl.Sources;
 

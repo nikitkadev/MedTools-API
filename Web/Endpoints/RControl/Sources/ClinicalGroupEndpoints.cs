@@ -2,8 +2,8 @@
 
 using Core.Common.Enums;
 
-using Application.Queries.RContol.ClinicalGroups.GetClassificationCriterionsQuery;
-using Application.Queries.RContol.ClinicalGroups.GetTreatmentComplexityCoefficientsQuery;
+using Application.Queries.RControl.ClinicalGroups.GetClassificationCriteriaQuery;
+using Application.Queries.RControl.ClinicalGroups.GetTreatmentComplexityCoefficientsQuery;
 
 namespace Web.Endpoints.RControl.Sources;
 
@@ -24,7 +24,7 @@ public static class ClinicalGroupEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetClassificationCriterionsQuery(
+            request: new GetClassificationCriteriaQuery(
                 ClinicalGroupUid: clinicalGroupUid,
                 TargetDb: targetDb),
             cancellationToken: cancellationToken);

@@ -2,7 +2,7 @@
 
 using Core.Common.Enums;
 
-using Application.Queries.RContol.ProvidedServices.GetMedicalDevicesQuery;
+using Application.Queries.RControl.ProvidedServices.GetMedicalDevicesQuery;
 
 namespace Web.Endpoints.RControl.Sources;
 

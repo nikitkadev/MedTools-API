@@ -2,18 +2,18 @@
 
 using Core.Common.Enums;
 
-using Application.Queries.RContol.MedicalCases.GetPatientQuery;
-using Application.Queries.RContol.MedicalCases.GetDefectsQuery;
-using Application.Queries.RContol.MedicalCases.GetReferralsQuery;
-using Application.Queries.RContol.MedicalCases.GetInsuranceQuery;
-using Application.Queries.RContol.MedicalCases.GetOncologyCaseQuery;
-using Application.Queries.RContol.MedicalCases.GetPrescriptionsQuery;
-using Application.Queries.RContol.MedicalCases.GetClinicalGroupQuery;
-using Application.Queries.RContol.MedicalCases.GetConsultationsQuery;
-using Application.Queries.RContol.MedicalCases.GetMedicalSanctionsQuery;
-using Application.Queries.RContol.MedicalCases.GetProvidedServicesQuery;
-using Application.Queries.RContol.MedicalCases.GetMedicalCaseDetailsQuery;
-using Application.Queries.RContol.MedicalCases.GetHighTechMedicalCareQuery;
+using Application.Queries.RControl.MedicalCases.GetPatientQuery;
+using Application.Queries.RControl.MedicalCases.GetDefectsQuery;
+using Application.Queries.RControl.MedicalCases.GetReferralsQuery;
+using Application.Queries.RControl.MedicalCases.GetInsuranceQuery;
+using Application.Queries.RControl.MedicalCases.GetOncologyCaseQuery;
+using Application.Queries.RControl.MedicalCases.GetPrescriptionsQuery;
+using Application.Queries.RControl.MedicalCases.GetClinicalGroupQuery;
+using Application.Queries.RControl.MedicalCases.GetConsultationsQuery;
+using Application.Queries.RControl.MedicalCases.GetMedicalSanctionsQuery;
+using Application.Queries.RControl.MedicalCases.GetProvidedServicesQuery;
+using Application.Queries.RControl.MedicalCases.GetMedicalCaseDetailsQuery;
+using Application.Queries.RControl.MedicalCases.GetHighTechMedicalCareQuery;
 
 namespace Web.Endpoints.RControl.Sources;
 

@@ -2,9 +2,9 @@
 
 using Core.Common.Enums;
 
-using Application.Queries.RContol.Invoices.GetInvoicesQuery;
-using Application.Queries.RContol.Invoices.GetInvoiceSummaryQuery;
-using Application.Queries.RContol.Invoices.GetCompletedCasesQuery;
+using Application.Queries.RControl.Invoices.GetInvoicesQuery;
+using Application.Queries.RControl.Invoices.GetInvoiceSummaryQuery;
+using Application.Queries.RControl.Invoices.GetCompletedCasesQuery;
 
 namespace Web.Endpoints.RControl.Sources;
 

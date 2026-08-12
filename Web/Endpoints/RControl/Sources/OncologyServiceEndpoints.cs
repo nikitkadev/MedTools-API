@@ -2,7 +2,7 @@
 
 using Core.Common.Enums;
 
-using Application.Queries.RContol.OncologyServices.GetMedicationsQuery;
+using Application.Queries.RControl.OncologyServices.GetMedicationsQuery;
 
 namespace Web.Endpoints.RControl.Sources;
 

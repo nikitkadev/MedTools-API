@@ -2,8 +2,8 @@
 
 using Core.Common.Enums;
 
-using Application.Queries.RContol.Medications.GetInjectionDatesQuery;
-using Application.Queries.RContol.Medications.GetInjectionsQuery;
+using Application.Queries.RControl.Medications.GetInjectionDatesQuery;
+using Application.Queries.RControl.Medications.GetInjectionsQuery;
 
 namespace Web.Endpoints.RControl.Sources;
 
