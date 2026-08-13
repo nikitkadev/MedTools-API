@@ -3,7 +3,7 @@
 public sealed record MedicalCaseListItemDto(
     int MedicalCaseUid,
     int? MedicalProfile,
-    short IsPediatric,
+    bool IsPediatric,
     int PhysicianSpecialty,
     DateTime TreatmentStartDate,
     DateTime TreatmentEndDate,

@@ -21,7 +21,7 @@ public class CompletedCaseRepository(
 
         var medicalCases = await dbContext
             .Set<MedicalCaseListItemDto>()
-            .FromSqlInterpolated($"EXEC sp26_get_sl_data @zSlUid={completedCaseUid}")
+            .FromSqlInterpolated($"EXEC mt_rcontrol_get_medical_cases @pCompletedCaseUid={completedCaseUid}")
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
