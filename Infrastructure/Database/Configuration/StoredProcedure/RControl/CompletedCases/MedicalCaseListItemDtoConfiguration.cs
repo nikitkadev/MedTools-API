@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Core.Dtos.RControl.CompletedCases;
 
 namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.CompletedCases;
