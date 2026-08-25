@@ -13,7 +13,7 @@ public static class ClinicalGroupEndpoints
     {
         var group = builder.MapGroup("/clinical-groups").WithTags("RControl Clinical Groups");
 
-        group.MapGet("/{clinicalGroupUid:int}/classification_criteria", GetClassificationCriteriaAsync);
+        group.MapGet("/{clinicalGroupUid:int}/classification-criteria", GetClassificationCriteriaAsync);
         group.MapGet("/{clinicalGroupUid:int}/treatment-complexity-coefficients", GetTreatmentComplexityCoefficientsAsync);
     }
 
