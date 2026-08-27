@@ -2,4 +2,4 @@
 
 namespace Application.Queries.RControl.MedicalCases.GetClinicalGroupQuery;
 
-public sealed record GetClinicalGroupResult(ClinicalGroupDto ClinicalGroup);
+public sealed record GetClinicalGroupResult(ClinicalGroupDto? ClinicalGroup);
