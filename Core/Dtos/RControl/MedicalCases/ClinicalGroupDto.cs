@@ -12,6 +12,6 @@ public sealed record ClinicalGroupDto(
     decimal BaseRate,
     float DifferentiationCoefficient,
     float LevelCoefficient,
-    float? WageTargetCoefficient,
+    decimal? WageTargetCoefficient,
     bool IsClspUsed,
     float? ComplexityCoefficient);

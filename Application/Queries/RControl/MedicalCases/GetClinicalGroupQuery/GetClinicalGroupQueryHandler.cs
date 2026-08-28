@@ -17,11 +17,6 @@ public sealed class GetClinicalGroupQueryHandler(
             targetDb: request.TargetDb,
             cancellationToken: cancellationToken);
 
-        if(clinicalGroup is null)
-        {
-            return Result<GetClinicalGroupResult>.Failure("Не удалось найти данных о клинической группе");
-        }
-
         return Result<GetClinicalGroupResult>.Success(
             new GetClinicalGroupResult(
                 ClinicalGroup: clinicalGroup));

@@ -3,7 +3,7 @@
 public sealed record ProvidedServiceListItemDto(
     int ProvidedServiceUid,
     string ServiceCode,
-    string Service,
+    string? Service,
     string? MedicalInterventionType,
     int MedicalProfileCode,
     string MedicalProfile,

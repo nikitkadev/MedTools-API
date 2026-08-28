@@ -17,9 +17,18 @@ public sealed class GetBillingPeriodsQueryHandler(
             targetDb: request.TargetDb,
             cancellationToken: cancellationToken);
 
+        var billingResponsePeriods = billingPeriods
+            .GroupBy(period => period.BillingYear)
+            .Select(group => new BillingPeriodResponseDto(
+                BillingYear: group.Key,
+                BillingMonths: [.. group.Select(period => period.BillingMonth)]))
+            .OrderBy(period => period.BillingYear)
+            .ToList();
+            
+
         return Result<GetBillingPeriodsResult>.Success(
             new GetBillingPeriodsResult(
-                BillingPeriods: billingPeriods));
+                BillingPeriods: billingResponsePeriods));
 
     }
 }

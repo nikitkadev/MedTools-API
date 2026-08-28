@@ -1,5 +1,7 @@
-﻿using Core.Dtos.RControl.Lookups;
+﻿namespace Application.Queries.RControl.Lookups.GetBillingPeriodsQuery;
 
-namespace Application.Queries.RControl.Lookups.GetBillingPeriodsQuery;
+public sealed record GetBillingPeriodsResult(IReadOnlyCollection<BillingPeriodResponseDto> BillingPeriods);
 
-public record GetBillingPeriodsResult(IReadOnlyCollection<BillingPeriodDto> BillingPeriods);
+public sealed record BillingPeriodResponseDto(
+    int BillingYear,
+    IReadOnlyCollection<int> BillingMonths);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Core.Dtos.RControl.MedicalCases;
 
 namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.MedicalCases;
@@ -12,7 +13,7 @@ public class ProvidedServiceListItemDtoConfiguration : IEntityTypeConfiguration<
 
         builder.Property(prop => prop.ProvidedServiceUid).HasColumnName("uid");
         builder.Property(prop => prop.ServiceCode).HasColumnName("service_code");
-        builder.Property(prop => prop.Service).HasColumnName("service");
+        builder.Property(prop => prop.Service).HasColumnName("service").IsRequired(false);
         builder.Property(prop => prop.MedicalInterventionType).HasColumnName("vid_vme").IsRequired(false);
         builder.Property(prop => prop.MedicalProfileCode).HasColumnName("medical_profile_code");
         builder.Property(prop => prop.MedicalProfile).HasColumnName("medical_profile");

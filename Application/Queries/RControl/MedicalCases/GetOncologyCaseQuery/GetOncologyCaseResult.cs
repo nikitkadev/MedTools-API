@@ -2,4 +2,4 @@
 
 namespace Application.Queries.RControl.MedicalCases.GetOncologyCaseQuery;
 
-public sealed record GetOncologyCaseResult(OncologyCaseDto OncologyCase);
+public sealed record GetOncologyCaseResult(OncologyCaseDto? OncologyCase);

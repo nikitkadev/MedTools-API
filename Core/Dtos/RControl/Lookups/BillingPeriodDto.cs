@@ -2,4 +2,4 @@
 
 public sealed record BillingPeriodDto(
     int BillingYear,
-    byte BillingMonth);
+    int BillingMonth);
