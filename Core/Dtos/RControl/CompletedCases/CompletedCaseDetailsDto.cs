@@ -2,7 +2,9 @@
 
 public sealed record CompletedCaseDetailsDto(
     string MedicalOrganizationCode,
+    string MedicalOrganizationName,
     string? ReferringMedicalOrganizationCode,
+    string? ReferringMedicalOrganizationName,
     DateTime? ReferralDate,
     int CareConditions,
     int MedicalCareType,

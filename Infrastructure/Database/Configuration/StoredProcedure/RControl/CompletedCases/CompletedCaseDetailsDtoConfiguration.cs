@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Core.Dtos.RControl.CompletedCases;
 
 namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.CompletedCases;
@@ -11,7 +12,9 @@ public class CompletedCaseDetailsDtoConfiguration : IEntityTypeConfiguration<Com
         builder.HasNoKey();
 
         builder.Property(prop => prop.MedicalOrganizationCode).HasColumnName("lpu");
+        builder.Property(prop => prop.MedicalOrganizationName).HasColumnName("name_lpu");
         builder.Property(prop => prop.ReferringMedicalOrganizationCode).HasColumnName("npr_mo").IsRequired(false);
+        builder.Property(prop => prop.ReferringMedicalOrganizationName).HasColumnName("name_napr_mo").IsRequired(false);
         builder.Property(prop => prop.ReferralDate).HasColumnName("npr_date").IsRequired(false);
         builder.Property(prop => prop.CareConditions).HasColumnName("usl_ok");
         builder.Property(prop => prop.MedicalCareType).HasColumnName("vidpom");
