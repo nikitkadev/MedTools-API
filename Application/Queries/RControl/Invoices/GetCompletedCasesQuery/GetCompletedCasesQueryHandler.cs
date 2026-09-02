@@ -17,6 +17,7 @@ public sealed class GetCompletedCasesQueryHandler(
             page: request.Page,
             pageSize: request.PageSize,
             targetDb: request.TargetDb,
+            searchString: request.SearchString,
             cancellationToken: cancellationToken);
 
         return Result<GetCompletedCasesResult>.Success(

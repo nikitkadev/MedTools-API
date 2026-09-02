@@ -11,4 +11,5 @@ public sealed record GetInvoicesQuery(
     int BillingMonth,
     int Page,
     int PageSize,
+    string SearchString,
     TargetDbType TargetDb) : IRequest<Result<GetInvoicesResult>>;

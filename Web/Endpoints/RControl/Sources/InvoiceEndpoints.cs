@@ -25,6 +25,7 @@ public static class InvoiceEndpoints
         int month,
         int page,
         int pageSize,
+        string searchString,
         TargetDbType targetDb,
         ISender sender,
         CancellationToken cancellationToken)
@@ -36,6 +37,7 @@ public static class InvoiceEndpoints
                 BillingMonth: month,
                 Page: page,
                 PageSize: pageSize,
+                SearchString: searchString,
                 TargetDb: targetDb),
             cancellationToken: cancellationToken);
 
@@ -45,8 +47,8 @@ public static class InvoiceEndpoints
         }
 
         return Results.Ok(result);
-        
-    }   
+
+    }
 
     private static async Task<IResult> GetInvoiceSummaryAsync(
         int invoiceUid,
@@ -72,6 +74,7 @@ public static class InvoiceEndpoints
         int invoiceUid,
         int page,
         int pageSize,
+        string searchString,
         TargetDbType targetDb,
         ISender sender,
         CancellationToken cancellationToken)
@@ -81,6 +84,7 @@ public static class InvoiceEndpoints
                 InvoiceUid: invoiceUid,
                 Page: page,
                 PageSize: pageSize,
+                SearchString: searchString,
                 TargetDb: targetDb),
             cancellationToken: cancellationToken);
 
