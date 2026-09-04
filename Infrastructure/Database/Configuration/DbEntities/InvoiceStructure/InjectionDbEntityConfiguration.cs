@@ -1,17 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using Core.Dtos.RControl.Medications;
+using Infrastructure.Database.DbEntities.InvoiceStructure;
 
-namespace Infrastructure.Database.Configuration.StoredProcedure.RControl.Medications;
+namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure;
 
-public class InjectionDtoConfiguration : IEntityTypeConfiguration<InjectionDto>
+public sealed class InjectionDbEntityConfiguration : IEntityTypeConfiguration<InjectionDbEntity>
 {
-    public void Configure(EntityTypeBuilder<InjectionDto> builder)
+    public void Configure(EntityTypeBuilder<InjectionDbEntity> builder)
     {
-        builder.HasNoKey();
+        builder.ToTable("inj").HasKey(entity => entity.Uid);
 
-        builder.Property(prop => prop.InjectionUid).HasColumnName("uid");
+        builder.Property(prop => prop.Uid).HasColumnName("uid").ValueGeneratedOnAdd();
+        builder.Property(prop => prop.MedicationUid).HasColumnName("lek_pr_uid");
+
         builder.Property(prop => prop.AdministrationDate).HasColumnName("date_inj");
         builder.Property(prop => prop.AdministeredQuantity).HasColumnName("kv_inj").IsRequired(false);
         builder.Property(prop => prop.ConsumedQuantity).HasColumnName("kiz_inj").IsRequired(false);

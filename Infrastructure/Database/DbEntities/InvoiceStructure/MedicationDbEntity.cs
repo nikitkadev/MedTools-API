@@ -1,0 +1,11 @@
+﻿namespace Infrastructure.Database.DbEntities.InvoiceStructure;
+
+public sealed class MedicationDbEntity
+{
+    public int Uid { get; set; }
+    public int OncologyServiceUid { get; set; }
+
+    public string DrugIdentifier { get; set; } = string.Empty;
+    public string? DrugExtendedIdentifier { get; set; }
+    public string? TherapyRegimenCode { get; set; }
+}
