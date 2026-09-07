@@ -1,0 +1,22 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
+
+namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
+
+public sealed class ReferralDbEntityConfiguration : IEntityTypeConfiguration<ReferralDbEntity>
+{
+    public void Configure(EntityTypeBuilder<ReferralDbEntity> builder)
+    {
+        builder.ToTable("").HasKey(entity => entity.Uid);
+
+        builder.Property(prop => prop.Uid).HasColumnName("uid").ValueGeneratedOnAdd();
+        builder.Property(prop => prop.MedicalCaseUid).HasColumnName("sluch_uid");
+
+        builder.Property(prop => prop.ReferralDate).HasColumnName("napr_date");
+        builder.Property(prop => prop.ReferralType).HasColumnName("napr_v");
+        builder.Property(prop => prop.DiagnosticMethod).HasColumnName("met_issl");
+        builder.Property(prop => prop.ReferredServiceCode).HasColumnName("napr_usl");
+        builder.Property(prop => prop.ReferredToMoCode).HasColumnName("napr_mo");
+    }
+}

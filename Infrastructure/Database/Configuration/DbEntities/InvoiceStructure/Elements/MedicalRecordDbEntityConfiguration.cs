@@ -1,0 +1,21 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
+
+namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
+
+public sealed class MedicalRecordDbEntityConfiguration : IEntityTypeConfiguration<MedicalRecordDbEntity>
+{
+    public void Configure(EntityTypeBuilder<MedicalRecordDbEntity> builder)
+    {
+        builder.ToTable("").HasKey(entity => entity.Uid);
+
+        builder.Property(prop => prop.Uid).HasColumnName("uid");
+        builder.Property(prop => prop.MedicalRegistryUid).HasColumnName("zl_list_uid");
+        builder.Property(prop => prop.PatientUid).HasColumnName("pacient");
+
+        builder.Property(prop => prop.RecordSequenceNumber).HasColumnName("n_zap");
+        builder.Property(prop => prop.IsRevisedRecord).HasColumnName("pr_nov");
+    }
+}
