@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -37,5 +38,10 @@ public sealed class PersonDbEntityConfiguration : IEntityTypeConfiguration<Perso
         builder.Property(prop => prop.InternalComment).HasColumnName("comentp").IsRequired(false);
         builder.Property(prop => prop.DocumentIssueDate).HasColumnName("docdate").IsRequired(false);
         builder.Property(prop => prop.IssuedBy).HasColumnName("docorg").IsRequired(false);
+
+        builder
+            .HasOne(person => person.PersonRegistry)
+            .WithMany(personRegistry => personRegistry.Persons)
+            .HasForeignKey(person => person.PersonRegistryUid);
     }
 }

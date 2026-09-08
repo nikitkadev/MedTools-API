@@ -6,4 +6,6 @@ public sealed class ClassificationCriterionDbEntity
     public int ClinicalGroupUid { get; set; }
 
     public string? ClassificationCriterionName { get; set; }
+
+    public ClinicalGroupDbEntity ClinicalGroup { get; set; } = null!;
 }

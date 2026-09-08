@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -24,5 +25,10 @@ public sealed class OncologyCaseDbEntityConfiguration : IEntityTypeConfiguration
         builder.Property(prop => prop.Weight).HasColumnName("wei").IsRequired(false);
         builder.Property(prop => prop.Height).HasColumnName("hei").IsRequired(false);
         builder.Property(prop => prop.BodySurfaceArea).HasColumnName("bsa").IsRequired(false);
+
+        builder
+            .HasOne(oncologyCase => oncologyCase.MedicalCase)
+            .WithOne(medicalCase => medicalCase.OncologyCase)
+            .HasForeignKey<OncologyCaseDbEntity>(oncologyCase => oncologyCase.MedicalCaseUid);
     }
 }

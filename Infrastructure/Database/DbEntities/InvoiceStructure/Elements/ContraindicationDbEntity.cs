@@ -7,4 +7,6 @@ public sealed class ContraindicationDbEntity
 
     public byte ContraindicationCode { get; set; }
     public DateTime ContraindicationDate { get; set; }
+
+    public OncologyCaseDbEntity OncologyCase{ get; set; } = null!;
 }

@@ -6,4 +6,6 @@ public sealed class InjectionDateDbEntity
     public int MedicationUid { get; set; }
 
     public DateTime InjectionDate { get; set; }
+
+    public MedicationDbEntity Medication { get; set; } = null!;
 }

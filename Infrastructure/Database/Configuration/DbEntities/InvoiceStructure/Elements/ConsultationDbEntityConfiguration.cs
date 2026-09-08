@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -15,5 +16,10 @@ public sealed class ConsultationDbEntityConfiguration : IEntityTypeConfiguration
 
         builder.Property(prop => prop.ConsultationPurposeCode).HasColumnName("pr_cons");
         builder.Property(prop => prop.ConsultationDate).HasColumnName("dt_cons").IsRequired(false);
+
+        builder
+            .HasOne(consultation => consultation.MedicalCase)
+            .WithMany(medicalCase => medicalCase.Consultations)
+            .HasForeignKey(consultation => consultation.MedicalCaseUid);
     }
 }

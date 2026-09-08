@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -18,5 +19,10 @@ public sealed class ReferralDbEntityConfiguration : IEntityTypeConfiguration<Ref
         builder.Property(prop => prop.DiagnosticMethod).HasColumnName("met_issl");
         builder.Property(prop => prop.ReferredServiceCode).HasColumnName("napr_usl");
         builder.Property(prop => prop.ReferredToMoCode).HasColumnName("napr_mo");
+
+        builder
+            .HasOne(referral => referral.MedicalCase)
+            .WithMany(medicalCase => medicalCase.Referrals)
+            .HasForeignKey(referral => referral.MedicalCaseUid);
     }
 }

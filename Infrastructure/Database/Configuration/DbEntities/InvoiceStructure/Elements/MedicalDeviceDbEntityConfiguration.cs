@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -16,5 +17,10 @@ public sealed class MedicalDeviceDbEntityConfiguration : IEntityTypeConfiguratio
         builder.Property(prop => prop.ImplantationDate).HasColumnName("date_med");
         builder.Property(prop => prop.MedicalDeviceTypeCode).HasColumnName("code_meddev");
         builder.Property(prop => prop.SerialNumber).HasColumnName("number_ser");
+
+        builder
+            .HasOne(medicalDevice => medicalDevice.ProvidedService)
+            .WithMany(providedService => providedService.MedicalDevices)
+            .HasForeignKey(medicalDevice => medicalDevice.ProvidedServiceUid);
     }
 }

@@ -11,4 +11,5 @@ public sealed class ReferralDbEntity
     public string? ReferredServiceCode { get; set; }
     public string? ReferredToMoCode { get; set; }
 
+    public MedicalCaseDbEntity MedicalCase { get; set; } = null!;
 }

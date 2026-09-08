@@ -7,4 +7,6 @@ public sealed class ConsultationDbEntity
 
     public byte ConsultationPurposeCode { get; set; }
     public DateTime? ConsultationDate { get; set; }
+
+    public MedicalCaseDbEntity MedicalCase { get; set; } = null!;
 }

@@ -11,6 +11,8 @@ public sealed class MedicalRecordDbEntity
     public long RecordSequenceNumber { get; set; }
     public byte IsRevisedRecord { get; set; }
 
+    public CompletedCaseDbEntity CompletedCase { get; set; } = null!;
     public MedicalRegistryDbEntity MedicalRegistry { get; set; } = null!;
+    public PatientDbEntity Patient { get; set; } = null!;
 
 }

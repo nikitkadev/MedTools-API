@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
+﻿using Infrastructure.Database.DbEntities.InvoiceStructure.Roots;
+
+namespace Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 public sealed class PersonDbEntity
 {
@@ -29,5 +31,7 @@ public sealed class PersonDbEntity
     public string? InternalComment { get; set; }
     public DateTime? DocumentIssueDate { get; set; }
     public string? IssuedBy { get; set; }
+
+    public PersonRegistryDbEntity PersonRegistry { get; set; } = null!;
 
 }

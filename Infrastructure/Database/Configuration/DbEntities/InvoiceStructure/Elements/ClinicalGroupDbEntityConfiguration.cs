@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -30,5 +31,10 @@ public sealed class ClinicalGroupDbEntityConfiguration : IEntityTypeConfiguratio
         builder.Property(prop => prop.WageTargetCoefficient).HasColumnName("k_zp").IsRequired(false);
         builder.Property(prop => prop.InterruptedCasePaymentReason).HasColumnName("pr_pr").IsRequired(false);
         builder.Property(prop => prop.InterruptedCasePaymentShare).HasColumnName("koef_pr").IsRequired(false);
+
+        builder
+            .HasOne(clinicalGroup => clinicalGroup.MedicalCase)
+            .WithOne(medicalCase => medicalCase.ClinicalGroup)
+            .HasForeignKey<ClinicalGroupDbEntity>(clinicalGroup => clinicalGroup.MedicalCaseUid);
     }
 }

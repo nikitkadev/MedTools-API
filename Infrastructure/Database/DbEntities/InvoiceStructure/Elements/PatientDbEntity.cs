@@ -22,4 +22,6 @@ public sealed class PatientDbEntity
     public string? PrimaryCareMedicalOrganizationCode { get; set; }
     public string? EmploymentType { get; set; }
     public int? PatientStatus { get; set; }
+
+    public MedicalRecordDbEntity MedicalRecord { get; set; } = null!;
 }

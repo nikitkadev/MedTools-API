@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -22,5 +23,10 @@ public sealed class PrescriptionDbEntityConfiguration : IEntityTypeConfiguration
         builder.Property(prop => prop.ServiceCode).HasColumnName("naz_usl");
         builder.Property(prop => prop.ReferralDate).HasColumnName("napr_date");
         builder.Property(prop => prop.ReferredToMoCode).HasColumnName("napr_mo");
+
+        builder
+            .HasOne(prescription => prescription.MedicalCase)
+            .WithMany(medicalCase => medicalCase.Prescriptions)
+            .HasForeignKey(prescription => prescription.MedicalCaseUid);
     }
 }

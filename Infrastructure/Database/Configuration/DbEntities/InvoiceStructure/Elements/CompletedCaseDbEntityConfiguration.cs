@@ -12,7 +12,7 @@ public sealed class CompletedCaseDbEntityConfiguration : IEntityTypeConfiguratio
         builder.ToTable("z_sl").HasKey(entity => entity.Uid);
 
         builder.Property(prop => prop.Uid).HasColumnName("uid").ValueGeneratedOnAdd();
-        builder.Property(prop => prop.RecordUid).HasColumnName("zap_uid");
+        builder.Property(prop => prop.MedicalRecordUid).HasColumnName("zap_uid");
 
         builder.Property(prop => prop.CaseRecordNumber).HasColumnName("idcase");
         builder.Property(prop => prop.CareConditions).HasColumnName("usl_ok");
@@ -41,5 +41,10 @@ public sealed class CompletedCaseDbEntityConfiguration : IEntityTypeConfiguratio
         builder.Property(prop => prop.InsuranceCompanyPenaltyAmount).HasColumnName("smo_sank_it").IsRequired(false);
         builder.Property(prop => prop.IsEveningVisit).HasColumnName("evening_time").IsRequired(false);
         builder.Property(prop => prop.ReferralNumber).HasColumnName("npr_num").IsRequired(false);
+
+        builder
+            .HasOne(completedCase => completedCase.MedicalRecord)
+            .WithOne(medicalRecord => medicalRecord.CompletedCase)
+            .HasForeignKey<CompletedCaseDbEntity>(completedCase => completedCase.MedicalRecordUid);
     }
 }

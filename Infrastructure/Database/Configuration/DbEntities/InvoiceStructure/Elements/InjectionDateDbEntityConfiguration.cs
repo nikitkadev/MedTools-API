@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -14,5 +15,10 @@ public sealed class InjectionDateDbEntityConfiguration : IEntityTypeConfiguratio
         builder.Property(prop => prop.MedicationUid).HasColumnName("lek_pr_uid");
 
         builder.Property(prop => prop.InjectionDate).HasColumnName("date_inj");
+
+        builder
+            .HasOne(injectionDate => injectionDate.Medication)
+            .WithMany(medication => medication.InjectionDates)
+            .HasForeignKey(injectionDate => injectionDate.MedicationUid);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -20,5 +21,10 @@ public sealed class InjectionDbEntityConfiguration : IEntityTypeConfiguration<In
         builder.Property(prop => prop.AdministeredCost).HasColumnName("sv_inj").IsRequired(false);
         builder.Property(prop => prop.ConsumedCost).HasColumnName("siz_inj").IsRequired(false);
         builder.Property(prop => prop.IsReductionApplied).HasColumnName("red_inj").IsRequired(false);
+
+        builder
+            .HasOne(injection => injection.Medication)
+            .WithMany(medication => medication.Injections)
+            .HasForeignKey(injection => injection.MedicationUid);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Database.DbEntities.InvoiceStructure.Headings;
+﻿using Infrastructure.Database.DbEntities.InvoiceStructure.Roots;
+
+namespace Infrastructure.Database.DbEntities.InvoiceStructure.Headings;
 
 public sealed class PersonRegistryHeadingDbEntity
 {
@@ -8,4 +10,6 @@ public sealed class PersonRegistryHeadingDbEntity
     public DateTime? Date { get; set; }
     public string? PersonRegistryFilename { get; set; }
     public string? MedicalRegistryFilename { get; set; }
+
+    public PersonRegistryDbEntity PersonRegistry { get; set; } = null!;
 }

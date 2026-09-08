@@ -18,5 +18,9 @@ public sealed class PersonRegistryHeadingDbEntityConfiguration : IEntityTypeConf
         builder.Property(prop => prop.PersonRegistryFilename).HasColumnName("filename").IsRequired(false);
         builder.Property(prop => prop.MedicalRegistryFilename).HasColumnName("filename1").IsRequired(false);
 
+        builder
+            .HasOne(personRegistryHeading => personRegistryHeading.PersonRegistry)
+            .WithOne(personRegistry => personRegistry.PersonRegistryHeading)
+            .HasForeignKey<PersonRegistryHeadingDbEntity>(personRegistryHeading => personRegistryHeading.PersonRegistryUid);
     }
 }

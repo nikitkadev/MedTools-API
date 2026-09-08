@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -19,5 +20,10 @@ public sealed class OncologyServiceDbEntityConfiguration : IEntityTypeConfigurat
         builder.Property(prop => prop.DrugTherapyCycleCode).HasColumnName("lek_tip_v").IsRequired(false);
         builder.Property(prop => prop.IsAntiemeticProphylaxis).HasColumnName("pptr").IsRequired(false);
         builder.Property(prop => prop.RadioTherapyTypeCode).HasColumnName("luch_tip").IsRequired(false);
+
+        builder
+            .HasOne(oncologyService => oncologyService.OncologyCase)
+            .WithMany(oncologyCase => oncologyCase.OncologyServices)
+            .HasForeignKey(oncologyService => oncologyService.OncologyCaseUid);
     }
 }

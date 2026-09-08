@@ -33,5 +33,10 @@ public sealed class ProvidedServiceDbEntityConfiguration : IEntityTypeConfigurat
         builder.Property(prop => prop.PhysicianCode).HasColumnName("code_md");
         builder.Property(prop => prop.IncompleteVolume).HasColumnName("npl").IsRequired(false);
         builder.Property(prop => prop.InternalComment).HasColumnName("comentu").IsRequired(false);
+
+        builder
+            .HasOne(providedService => providedService.MedicalCase)
+            .WithMany(medicalCase => medicalCase.ProvidedServices)
+            .HasForeignKey(providedService => providedService.MedicalCaseUid);
     }
 }

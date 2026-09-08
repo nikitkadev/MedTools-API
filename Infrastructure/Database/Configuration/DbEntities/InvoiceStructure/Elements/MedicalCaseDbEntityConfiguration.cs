@@ -60,5 +60,9 @@ public sealed class MedicalCaseDbEntityConfiguration : IEntityTypeConfiguration<
         builder.Property(prop => prop.PreventiveCareMoCode).HasColumnName("prof_m").IsRequired(false);
         builder.Property(prop => prop.EncounterMoCode).HasColumnName("mop").IsRequired(false);
 
+        builder
+            .HasOne(medicalCase => medicalCase.CompletedCase)
+            .WithMany(completedCase => completedCase.MedicalCases)
+            .HasForeignKey(medicalCase => medicalCase.CompletedCaseUid);
     }
 }

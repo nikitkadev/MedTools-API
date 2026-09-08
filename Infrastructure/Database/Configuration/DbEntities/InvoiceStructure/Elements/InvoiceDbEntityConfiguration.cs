@@ -1,7 +1,7 @@
-﻿using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
-using Infrastructure.Database.DbEntities.InvoiceStructure.Headings;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
 

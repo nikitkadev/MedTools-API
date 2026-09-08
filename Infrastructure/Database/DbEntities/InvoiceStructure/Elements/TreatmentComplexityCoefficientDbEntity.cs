@@ -7,4 +7,6 @@ public sealed class TreatmentComplexityCoefficientDbEntity
 
     public string? ComplexityCoefficientNumber { get; set; }
     public float ComplexityCoefficientValue { get; set; }
+
+    public ClinicalGroupDbEntity ClinicalGroup { get; set; } = null!;
 }

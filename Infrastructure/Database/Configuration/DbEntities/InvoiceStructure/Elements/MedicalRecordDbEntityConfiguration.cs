@@ -22,5 +22,10 @@ public sealed class MedicalRecordDbEntityConfiguration : IEntityTypeConfiguratio
             .HasOne(medicalRecord => medicalRecord.MedicalRegistry)
             .WithMany(medicalRegistry => medicalRegistry.MedicalRecords)
             .HasForeignKey(medicalRecord => medicalRecord.MedicalRegistryUid);
+
+        builder
+            .HasOne(medicalRecord => medicalRecord.Patient)
+            .WithOne(patient => patient.MedicalRecord)
+            .HasForeignKey<MedicalRecordDbEntity>(medicalRecord => medicalRecord.PatientUid);
     }
 }

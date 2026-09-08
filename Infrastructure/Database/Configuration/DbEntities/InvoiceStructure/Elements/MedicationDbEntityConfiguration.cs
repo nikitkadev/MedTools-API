@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -17,5 +18,9 @@ public sealed class MedicationDbEntityConfiguration : IEntityTypeConfiguration<M
         builder.Property(prop => prop.DrugExtendedIdentifier).HasColumnName("regnum_dop").IsRequired(false);
         builder.Property(prop => prop.TherapyRegimenCode).HasColumnName("code_sh").IsRequired(false);
 
+        builder
+            .HasOne(medication => medication.OncologyService)
+            .WithMany(oncologyService => oncologyService.Medications)
+            .HasForeignKey(medication => medication.OncologyServiceUid);
     }
 }

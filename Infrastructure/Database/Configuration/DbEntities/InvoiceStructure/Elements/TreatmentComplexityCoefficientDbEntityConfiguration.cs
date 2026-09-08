@@ -16,5 +16,10 @@ public sealed class TreatmentComplexityCoefficientDbEntityConfiguration : IEntit
 
         builder.Property(prop => prop.ComplexityCoefficientNumber).HasColumnName("idsl").IsRequired(false);
         builder.Property(prop => prop.ComplexityCoefficientValue).HasColumnName("z_sl");
+
+        builder
+            .HasOne(treatmentComplexityCoefficient => treatmentComplexityCoefficient.ClinicalGroup)
+            .WithMany(clinicalGroup => clinicalGroup.TreatmentComplexityCoefficients)
+            .HasForeignKey(treatmentComplexityCoefficient => treatmentComplexityCoefficient.ClinicalGroupUid);
     }
 }

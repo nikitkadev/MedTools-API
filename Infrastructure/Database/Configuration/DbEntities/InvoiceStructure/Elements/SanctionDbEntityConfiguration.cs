@@ -26,5 +26,10 @@ public sealed class SanctionDbEntityConfiguration : IEntityTypeConfiguration<San
         builder.Property(prop => prop.ExpertiseActNumber).HasColumnName("s_nact");
         builder.Property(prop => prop.ExpertiseActDate).HasColumnName("s_dact");
         builder.Property(prop => prop.ExpertCode).HasColumnName("s_codex");
+
+        builder
+            .HasOne(sanction => sanction.MedicalCase)
+            .WithMany(medicalCase => medicalCase.Sanctions)
+            .HasForeignKey(sanction => sanction.MedicalCaseUid);
     }
 }

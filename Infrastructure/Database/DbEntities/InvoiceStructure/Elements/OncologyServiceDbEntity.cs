@@ -11,4 +11,7 @@ public sealed class OncologyServiceDbEntity
     public byte? DrugTherapyCycleCode { get; set; }
     public bool? IsAntiemeticProphylaxis { get; set; }
     public byte? RadioTherapyTypeCode { get; set; }
+
+    public OncologyCaseDbEntity OncologyCase { get; set; } = null!;
+    public IReadOnlyCollection<MedicationDbEntity> Medications { get; set; } = [];
 }

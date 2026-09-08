@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -15,5 +16,10 @@ public sealed class ContraindicationDbEntityConfiguration : IEntityTypeConfigura
 
         builder.Property(prop => prop.ContraindicationCode).HasColumnName("prot");
         builder.Property(prop => prop.ContraindicationDate).HasColumnName("d_prot");
+
+        builder
+            .HasOne(contraindication => contraindication.OncologyCase)
+            .WithMany(oncologyCase => oncologyCase.Contraindications)
+            .HasForeignKey(contraindication => contraindication.OncologyCaseUid);
     }
 }

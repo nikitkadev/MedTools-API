@@ -24,4 +24,7 @@ public sealed class ProvidedServiceDbEntity
     public string PhysicianCode { get; set; } = string.Empty;
     public int? IncompleteVolume { get; set; }
     public string? InternalComment { get; set; }
+
+    public MedicalCaseDbEntity MedicalCase { get; set; } = null!;
+    public IReadOnlyCollection<MedicalDeviceDbEntity> MedicalDevices { get; set; } = [];
 }

@@ -18,4 +18,6 @@ public sealed class SanctionDbEntity
     public DateTime ExpertiseActDate { get; set; }
     public string? ExpertCode { get; set; }
 
+    public MedicalCaseDbEntity MedicalCase { get; set; } = null!;
+
 }

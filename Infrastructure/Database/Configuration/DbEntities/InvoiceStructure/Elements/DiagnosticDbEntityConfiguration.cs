@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
@@ -18,5 +19,10 @@ public sealed class DiagnosticDbEntityConfiguration : IEntityTypeConfiguration<D
         builder.Property(prop => prop.DiagnosticResultCode).HasColumnName("diag_rslt").IsRequired(false);
         builder.Property(prop => prop.SpecimenCollectionDate).HasColumnName("diag_date").IsRequired(false);
         builder.Property(prop => prop.IsResultReceived).HasColumnName("rec_rslt").IsRequired(false);
+
+        builder
+            .HasOne(diagnostic => diagnostic.OncologyCase)
+            .WithMany(oncologyCase => oncologyCase.Diagnostics)
+            .HasForeignKey(diagnostic => diagnostic.OncologyCaseUid);
     }
 }

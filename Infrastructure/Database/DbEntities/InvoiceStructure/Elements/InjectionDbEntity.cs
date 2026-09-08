@@ -13,4 +13,6 @@ public sealed class InjectionDbEntity
     public decimal? ConsumedCost { get; set; }
     public bool? IsReductionApplied { get; set; }
 
+    public MedicationDbEntity Medication { get; set; } = null!;
+ 
 }

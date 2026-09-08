@@ -3,7 +3,7 @@
 public sealed class CompletedCaseDbEntity
 {
     public int Uid { get; set; }
-    public int RecordUid { get; set; }
+    public int MedicalRecordUid { get; set; }
 
     public long CaseRecordNumber { get; set; }
     public int CareConditions { get; set; }
@@ -33,4 +33,6 @@ public sealed class CompletedCaseDbEntity
     public byte? IsEveningVisit { get; set; }
     public string? ReferralNumber { get; set; }
 
+    public MedicalRecordDbEntity MedicalRecord { get; set; } = null!;
+    public IReadOnlyCollection<MedicalCaseDbEntity> MedicalCases { get; set; } = [];
 }

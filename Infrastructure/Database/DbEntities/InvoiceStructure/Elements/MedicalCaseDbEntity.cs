@@ -50,4 +50,13 @@ public sealed class MedicalCaseDbEntity
     public decimal? Weight { get; set; }
     public byte? PreventiveCareMoCode { get; set; }
     public string? EncounterMoCode { get; set; }
+
+    public CompletedCaseDbEntity CompletedCase { get; set; } = null!;
+    public ClinicalGroupDbEntity ClinicalGroup { get; set; } = null!;
+    public OncologyCaseDbEntity OncologyCase { get; set; } = null!;
+    public IReadOnlyCollection<ProvidedServiceDbEntity> ProvidedServices { get; set; } = [];
+    public IReadOnlyCollection<SanctionDbEntity> Sanctions { get; set; } = [];
+    public IReadOnlyCollection<ReferralDbEntity> Referrals { get; set; } = [];
+    public IReadOnlyCollection<PrescriptionDbEntity> Prescriptions { get; set; } = [];
+    public IReadOnlyCollection<ConsultationDbEntity> Consultations { get; set; } = [];
 }
