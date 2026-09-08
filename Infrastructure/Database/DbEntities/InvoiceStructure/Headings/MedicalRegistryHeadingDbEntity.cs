@@ -10,4 +10,6 @@ public sealed class MedicalRegistryHeadingDbEntity
     public DateTime? Date { get; set; }
     public string? Filename { get; set; }
     public int? TotalRecordCount { get; set; }
+
+    public MedicalRegistryDbEntity MedicalRegistry { get; set; } = null!;
 }

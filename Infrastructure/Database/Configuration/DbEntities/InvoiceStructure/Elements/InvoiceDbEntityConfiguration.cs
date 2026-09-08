@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
+using Infrastructure.Database.DbEntities.InvoiceStructure.Headings;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-using Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Elements;
 
@@ -32,5 +32,10 @@ public sealed class InvoiceDbEntityConfiguration : IEntityTypeConfiguration<Invo
         builder.Property(prop => prop.InsuranceCompanyMedicalEconomicExpertisePenalty).HasColumnName("smo_sank_mee").IsRequired(false);
         builder.Property(prop => prop.InsuranceCompanyMedicalCareQualityExpertisePenalty).HasColumnName("smo_sank_ekmp").IsRequired(false);
         builder.Property(prop => prop.PreventiveExaminationType).HasColumnName("disp").IsRequired(false);
+
+        builder
+            .HasOne(invoice => invoice.MedicalRegistry)
+            .WithOne(medicalRegistry => medicalRegistry.Invoice)
+            .HasForeignKey<InvoiceDbEntity>(invoice => invoice.MedicalRegistryUid);
     }
 }

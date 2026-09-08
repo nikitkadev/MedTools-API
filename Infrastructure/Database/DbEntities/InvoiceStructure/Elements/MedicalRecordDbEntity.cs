@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
+﻿using Infrastructure.Database.DbEntities.InvoiceStructure.Roots;
+
+namespace Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 public sealed class MedicalRecordDbEntity
 {
@@ -8,5 +10,7 @@ public sealed class MedicalRecordDbEntity
 
     public long RecordSequenceNumber { get; set; }
     public byte IsRevisedRecord { get; set; }
+
+    public MedicalRegistryDbEntity MedicalRegistry { get; set; } = null!;
 
 }

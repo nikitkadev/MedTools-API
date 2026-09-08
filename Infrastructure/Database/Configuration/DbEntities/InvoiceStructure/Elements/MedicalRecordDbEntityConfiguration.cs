@@ -17,5 +17,10 @@ public sealed class MedicalRecordDbEntityConfiguration : IEntityTypeConfiguratio
 
         builder.Property(prop => prop.RecordSequenceNumber).HasColumnName("n_zap");
         builder.Property(prop => prop.IsRevisedRecord).HasColumnName("pr_nov");
+
+        builder
+            .HasOne(medicalRecord => medicalRecord.MedicalRegistry)
+            .WithMany(medicalRegistry => medicalRegistry.MedicalRecords)
+            .HasForeignKey(medicalRecord => medicalRecord.MedicalRegistryUid);
     }
 }

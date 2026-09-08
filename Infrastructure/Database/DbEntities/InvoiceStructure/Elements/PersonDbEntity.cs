@@ -3,7 +3,7 @@
 public sealed class PersonDbEntity
 {
     public int Uid { get; set; }
-    public int PersonRegisrtyUid { get; set; }
+    public int PersonRegistryUid { get; set; }
 
     public string PatientRecordCode { get; set; } = string.Empty;
     public string PatientLastName { get; set; } = string.Empty;

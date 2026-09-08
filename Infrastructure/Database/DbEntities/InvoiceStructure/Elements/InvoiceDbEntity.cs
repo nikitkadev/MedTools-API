@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
+﻿using Infrastructure.Database.DbEntities.InvoiceStructure.Roots;
+
+namespace Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
 
 public sealed class InvoiceDbEntity
 {
@@ -23,4 +25,6 @@ public sealed class InvoiceDbEntity
     public decimal? InsuranceCompanyMedicalEconomicExpertisePenalty { get; set; }
     public decimal? InsuranceCompanyMedicalCareQualityExpertisePenalty { get; set; }
     public string? PreventiveExaminationType { get; set; }
+
+    public MedicalRegistryDbEntity MedicalRegistry { get; set; } = null!;
 }

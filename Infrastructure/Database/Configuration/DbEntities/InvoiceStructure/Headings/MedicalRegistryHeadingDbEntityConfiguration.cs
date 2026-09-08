@@ -17,5 +17,10 @@ public sealed class MedicalRegistryHeadingDbEntityConfiguration : IEntityTypeCon
         builder.Property(prop => prop.Date).HasColumnName("data").IsRequired(false);
         builder.Property(prop => prop.Filename).HasColumnName("filename").IsRequired(false);
         builder.Property(prop => prop.TotalRecordCount).HasColumnName("sd_z").IsRequired(false);
+
+        builder
+            .HasOne(medicalRegistryHeading => medicalRegistryHeading.MedicalRegistry)
+            .WithOne(medicalRegistry => medicalRegistry.MedicalRegistryHeading)
+            .HasForeignKey<MedicalRegistryHeadingDbEntity>(medicalRegistryHeading => medicalRegistryHeading.MedicalRegistryUid);
     }
 }
