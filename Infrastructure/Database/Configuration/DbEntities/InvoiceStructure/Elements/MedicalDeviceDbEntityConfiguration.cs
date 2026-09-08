@@ -8,7 +8,7 @@ public sealed class MedicalDeviceDbEntityConfiguration : IEntityTypeConfiguratio
 {
     public void Configure(EntityTypeBuilder<MedicalDeviceDbEntity> builder)
     {
-        builder.ToTable("").HasKey(entity => entity.Uid);
+        builder.ToTable("med_dev").HasKey(entity => entity.Uid);
 
         builder.Property(prop => prop.Uid).HasColumnName("uid").ValueGeneratedOnAdd();
         builder.Property(prop => prop.ProvidedServiceUid).HasColumnName("usl_uid");

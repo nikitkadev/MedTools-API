@@ -8,7 +8,7 @@ public sealed class MedicationDbEntityConfiguration : IEntityTypeConfiguration<M
 {
     public void Configure(EntityTypeBuilder<MedicationDbEntity> builder)
     {
-        builder.ToTable("").HasKey(entity => entity.Uid);
+        builder.ToTable("lek_pr").HasKey(entity => entity.Uid);
 
         builder.Property(prop => prop.Uid).HasColumnName("uid").ValueGeneratedOnAdd();
         builder.Property(prop => prop.OncologyServiceUid).HasColumnName("onk_usl_uid");

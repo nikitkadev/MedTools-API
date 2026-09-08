@@ -17,10 +17,5 @@
 		<PackageReference Include="Isopoh.Cryptography.Argon2" Version="2.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
 	</ItemGroup>
-	
-	<ItemGroup>
-	  <Folder Include="Database\Configuration\DbEntities\InvoiceStructure\Roots\" />
-	  <Folder Include="Database\DbEntities\InvoiceStructure\Roots\" />
-	</ItemGroup>
 
 </Project>

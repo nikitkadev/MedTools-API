@@ -1,0 +1,21 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using Infrastructure.Database.DbEntities.InvoiceStructure.Headings;
+
+namespace Infrastructure.Database.Configuration.DbEntities.InvoiceStructure.Headings;
+
+public sealed class MedicalRegistryHeadingDbEntityConfiguration : IEntityTypeConfiguration<MedicalRegistryHeadingDbEntity>
+{
+    public void Configure(EntityTypeBuilder<MedicalRegistryHeadingDbEntity> builder)
+    {
+        builder.ToTable("zglv").HasKey(entity => entity.MedicalRegistryUid);
+
+        builder.Property(prop => prop.MedicalRegistryUid).HasColumnName("zl_list_uid");
+
+        builder.Property(prop => prop.Version).HasColumnName("version").IsRequired(false);
+        builder.Property(prop => prop.Date).HasColumnName("data").IsRequired(false);
+        builder.Property(prop => prop.Filename).HasColumnName("filename").IsRequired(false);
+        builder.Property(prop => prop.TotalRecordCount).HasColumnName("sd_z").IsRequired(false);
+    }
+}

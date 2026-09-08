@@ -8,7 +8,7 @@ public sealed class ReferralDbEntityConfiguration : IEntityTypeConfiguration<Ref
 {
     public void Configure(EntityTypeBuilder<ReferralDbEntity> builder)
     {
-        builder.ToTable("").HasKey(entity => entity.Uid);
+        builder.ToTable("napr").HasKey(entity => entity.Uid);
 
         builder.Property(prop => prop.Uid).HasColumnName("uid").ValueGeneratedOnAdd();
         builder.Property(prop => prop.MedicalCaseUid).HasColumnName("sluch_uid");

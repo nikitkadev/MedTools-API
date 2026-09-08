@@ -9,9 +9,9 @@ public sealed class MedicalRecordDbEntityConfiguration : IEntityTypeConfiguratio
 {
     public void Configure(EntityTypeBuilder<MedicalRecordDbEntity> builder)
     {
-        builder.ToTable("").HasKey(entity => entity.Uid);
+        builder.ToTable("zap").HasKey(entity => entity.Uid);
 
-        builder.Property(prop => prop.Uid).HasColumnName("uid");
+        builder.Property(prop => prop.Uid).HasColumnName("uid").ValueGeneratedOnAdd();
         builder.Property(prop => prop.MedicalRegistryUid).HasColumnName("zl_list_uid");
         builder.Property(prop => prop.PatientUid).HasColumnName("pacient");
 

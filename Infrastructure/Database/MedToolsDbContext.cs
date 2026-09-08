@@ -9,7 +9,6 @@ namespace Infrastructure.Database;
 public abstract class MedToolsDbContext(
     DbContextOptions options) : DbContext(options)
 {
-
     public DbSet<UserDbEntity> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -11,7 +11,7 @@ public sealed class PersonDbEntityConfiguration : IEntityTypeConfiguration<Perso
         builder.ToTable("pers").HasKey(entity => entity.Uid);
 
         builder.Property(prop => prop.Uid).HasColumnName("uid").ValueGeneratedOnAdd();
-        builder.Property(prop => prop.PersonListItemUid).HasColumnName("pers_list_uid");
+        builder.Property(prop => prop.PersonRegisrtyUid).HasColumnName("pers_list_uid");
 
         builder.Property(prop => prop.PatientRecordCode).HasColumnName("id_pac");
         builder.Property(prop => prop.PatientLastName).HasColumnName("fam");
