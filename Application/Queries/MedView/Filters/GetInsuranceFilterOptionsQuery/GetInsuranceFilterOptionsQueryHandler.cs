@@ -1,29 +1,30 @@
 ﻿using MediatR;
 
-using Core.Common.Enums;
 using Core.Common.Results;
 using Core.Dtos.MedView.Filters;
-using Core.Interfaces.Providers.MedView.AvailableOrganizationsProvider;
+using Core.Interfaces.Providers.MedView.AvailableKeysProviders;
+using Core.Interfaces.Providers.MedView.ReferenceDataProviders;
 
 namespace Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
 
 public sealed class GetInsuranceFilterOptionsQueryHandler(
-    IAvailableMedicalOrganizationsProvider availableMedicalOrganizationsProvider) : IRequestHandler<GetInsuranceFilterOptionsQuery, Result<GetInsuranceFilterOptionsQueryResult>>
+    IAvailableMedicalOrganizationKeysProvider availableMedicalOrganizationKeysProvider,
+    IInsuranceReferenceDataProvider insuranceReferenceDataProvider) : IRequestHandler<GetInsuranceFilterOptionsQuery, Result<GetInsuranceFilterOptionsQueryResult>>
 {
     public async Task<Result<GetInsuranceFilterOptionsQueryResult>> Handle(
         GetInsuranceFilterOptionsQuery request, 
         CancellationToken cancellationToken)
     {
-        var availableInsurance = await availableMedicalOrganizationsProvider.GetInsuranceAsync(
-            targetDb: TargetDbType.SMODB18, 
+        var insurancesKeys = await availableMedicalOrganizationKeysProvider.GetInsuranceOrganizationsKeysAsync(
+            targetDb: request.TargetDb, 
             cancellationToken: cancellationToken);
 
-        var filterOptions = availableInsurance
-            .Select(x => new InsuranceFilterOptionsDto(Code: x.Code, Shortname: x.Name))
-            .ToList();
+        var insurancesReferenceData = await insuranceReferenceDataProvider.GetByKeysAsync(
+            keys: insurancesKeys, 
+            cancellationToken: cancellationToken);
 
         return Result<GetInsuranceFilterOptionsQueryResult>.Success(
             new GetInsuranceFilterOptionsQueryResult(
-                InsuranceFilterOptions: filterOptions));
+                InsuranceFilterOptions: [.. insurancesReferenceData.Select(x => new InsuranceFilterOptionsDto(Code: x.Code, Shortname: x.Name))]));
     }
 }
