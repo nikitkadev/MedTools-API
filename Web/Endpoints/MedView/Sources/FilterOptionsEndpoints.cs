@@ -1,0 +1,50 @@
+﻿using MediatR;
+
+using Core.Common.Enums;
+
+using Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
+
+namespace Web.Endpoints.MedView.Sources;
+
+public static class FilterOptionsEndpoints
+{
+    public static void MapFilterOptionsEndpoints(this RouteGroupBuilder builder)
+    {
+        var group = builder.MapGroup("/filter-options").WithTags("Filter Options");
+
+        group.MapGet("/available-insurance", GetAvailableInsuranceFilterOptionsAsync);
+        group.MapGet("/policy-types", GetInsurancePolicyTypeFilterOptions);
+    }
+
+    public async static Task<IResult> GetAvailableInsuranceFilterOptionsAsync(
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(new GetInsuranceFilterOptionsQuery(targetDb), cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetInsurancePolicyTypeFilterOptions(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetInsurancePolicyTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+}

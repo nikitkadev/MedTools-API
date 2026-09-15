@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Core.Interfaces.Auth;
 using Core.Interfaces.Repositories.Users;
 using Core.Interfaces.Repositories.RControl;
+using Core.Interfaces.Providers.MedView.AvailableKeysProviders;
+using Core.Interfaces.Providers.MedView.ReferenceDataProviders;
 
 using Application;
 
@@ -17,13 +19,11 @@ using Infrastructure.Database.Factories;
 using Infrastructure.Implementations.Services;
 using Infrastructure.Implementations.Repositories.Users;
 using Infrastructure.Implementations.Repositories.RControl;
+using Infrastructure.Implementations.Providers.MedView.AvailableKeysProviders;
+using Infrastructure.Implementations.Providers.MedView.ReferenceDataProviders;
 
 using Web.Mapping;
 using Web.Options;
-using Core.Interfaces.Providers.MedView.AvailableKeysProviders;
-using Infrastructure.Implementations.Providers.MedView.AvailableKeysProviders;
-using Core.Interfaces.Providers.MedView.ReferenceDataProviders;
-using Infrastructure.Implementations.Providers.MedView.ReferenceDataProviders;
 
 namespace Web.Registration.DI;
 
@@ -56,6 +56,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IAvailableMedicalOrganizationKeysProvider, AvailableMedicalOrganizationKeysProvider>();
         services.AddScoped<IInsuranceReferenceDataProvider, InsuranceReferenceDataProvider>();
+        services.AddScoped<IDocumentReferenceDataProvider, DocumentReferenceDataProvider>();
 
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();

@@ -9,9 +9,9 @@ namespace Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
 
 public sealed class GetInsuranceFilterOptionsQueryHandler(
     IAvailableMedicalOrganizationKeysProvider availableMedicalOrganizationKeysProvider,
-    IInsuranceReferenceDataProvider insuranceReferenceDataProvider) : IRequestHandler<GetInsuranceFilterOptionsQuery, Result<GetInsuranceFilterOptionsQueryResult>>
+    IInsuranceReferenceDataProvider insuranceReferenceDataProvider) : IRequestHandler<GetInsuranceFilterOptionsQuery, Result<GetInsuranceFilterOptionsResult>>
 {
-    public async Task<Result<GetInsuranceFilterOptionsQueryResult>> Handle(
+    public async Task<Result<GetInsuranceFilterOptionsResult>> Handle(
         GetInsuranceFilterOptionsQuery request, 
         CancellationToken cancellationToken)
     {
@@ -23,8 +23,8 @@ public sealed class GetInsuranceFilterOptionsQueryHandler(
             keys: insurancesKeys, 
             cancellationToken: cancellationToken);
 
-        return Result<GetInsuranceFilterOptionsQueryResult>.Success(
-            new GetInsuranceFilterOptionsQueryResult(
-                InsuranceFilterOptions: [.. insurancesReferenceData.Select(x => new InsuranceFilterOptionsDto(Code: x.Code, Shortname: x.Name))]));
+        return Result<GetInsuranceFilterOptionsResult>.Success(
+            new GetInsuranceFilterOptionsResult(
+                Options: [.. insurancesReferenceData.Select(x => new InsuranceFilterOptionsDto(Key: x.Code, Value: x.Name))]));
     }
 }

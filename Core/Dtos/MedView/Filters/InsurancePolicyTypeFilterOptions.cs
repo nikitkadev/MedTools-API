@@ -1,5 +1,5 @@
 ﻿namespace Core.Dtos.MedView.Filters;
 
-public sealed record InsuranceFilterOptionsDto(
+public sealed record InsurancePolicyTypeFilterOptions(
     string Key, 
     string Value);

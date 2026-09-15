@@ -4,8 +4,8 @@ using Core.Common.Enums;
 using Core.Dtos.MedView.Reference;
 using Core.Interfaces.Providers.MedView.ReferenceDataProviders;
 
-using Infrastructure.Database.DbEntities.References;
 using Infrastructure.Database.Factories;
+using Infrastructure.Database.DbEntities.References;
 
 namespace Infrastructure.Implementations.Providers.MedView.ReferenceDataProviders;
 
