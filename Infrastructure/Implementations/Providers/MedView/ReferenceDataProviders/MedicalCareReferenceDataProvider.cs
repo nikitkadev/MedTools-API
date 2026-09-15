@@ -12,7 +12,21 @@ namespace Infrastructure.Implementations.Providers.MedView.ReferenceDataProvider
 public sealed class MedicalCareReferenceDataProvider(
     DbContextFactory dbContextFactory) : IMedicalCareReferenceDataProvider
 {
-    public async Task<IReadOnlyCollection<MedicalCareProfileReferenceDto>> GetMedicalCareProfileReferencesAsync(CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyCollection<BedProfileReferenceDto>> GetBedProfileReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
+
+        return await dbContext
+            .Set<BedProfileDbEntity>()
+            .Select(x => new BedProfileReferenceDto(
+                BedProfileId: x.BedProfileId,
+                BedProfileName: x.BedProfileName))
+            .ToListAsync(cancellationToken: cancellationToken);
+    }
+
+    public async Task<IReadOnlyCollection<MedicalCareProfileReferenceDto>> GetMedicalCareProfileReferencesAsync(
+        CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
 

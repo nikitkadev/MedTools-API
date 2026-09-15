@@ -6,4 +6,7 @@ public interface IMedicalCareReferenceDataProvider
 {
     Task<IReadOnlyCollection<MedicalCareProfileReferenceDto>> GetMedicalCareProfileReferencesAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<BedProfileReferenceDto>> GetBedProfileReferencesAsync(
+        CancellationToken cancellationToken = default);
 }
