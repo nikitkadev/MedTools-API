@@ -10,9 +10,9 @@ using Infrastructure.Database.DbEntities.References;
 namespace Infrastructure.Implementations.Providers.MedView.ReferenceDataProviders;
 
 public sealed class InsuranceReferenceDataProvider(
-    DbContextFactory dbContextFactory) : IInsuranceReferenceDataProvider
+    DbContextFactory dbContextFactory) : IMedicalOrganizationReferenceDataProvider
 {
-    public async Task<IReadOnlyCollection<InsuranceReferenceDto>> GetByKeysAsync(
+    public async Task<IReadOnlyCollection<InsuranceReferenceDto>> GetInsurancesByKeysAsync(
         IReadOnlyCollection<string> keys, 
         CancellationToken cancellationToken = default)
     {
@@ -21,7 +21,24 @@ public sealed class InsuranceReferenceDataProvider(
         var result = await dbContext
             .Set<InsuranceDbEntity>()
             .Where(x => keys.Contains(x.InsuranceCode))
-            .Select(x => new InsuranceReferenceDto(x.InsuranceCode, x.InsuranceShortname))
+            .Select(x => new InsuranceReferenceDto(
+                Code: x.InsuranceCode, 
+                Name: x.InsuranceShortname))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
+    public async Task<IReadOnlyCollection<VisitPlaceReferenceDto>> GetVisitPlaceReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<VisitPlaceDbEntity>()
+            .Select(x => new VisitPlaceReferenceDto(
+                Id: x.VisitPlaceId,
+                Name: x.VisitPlaceName))
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

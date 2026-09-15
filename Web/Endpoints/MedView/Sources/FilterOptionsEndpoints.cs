@@ -11,6 +11,7 @@ using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQue
 
 using Infrastructure.Database.Factories;
 using Infrastructure.Database.DbEntities.References;
+using Application.Queries.MedView.Filters.GetVisitPlaceFilterOptionsQuery;
 
 namespace Web.Endpoints.MedView.Sources;
 
@@ -24,6 +25,7 @@ public static class FilterOptionsEndpoints
         group.MapGet("/policy-types", GetInsurancePolicyTypeFilterOptions);
         group.MapGet("/medical-care-profiles", GetMedicalCareProfileFilterOptions);
         group.MapGet("/bed-profiles", GetBedProfileFilterOptions);
+        group.MapGet("/visit-places", GetVisitPlaceFilterOptions);
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -101,4 +103,21 @@ public static class FilterOptionsEndpoints
 
         return Results.Ok(result);
     }
+
+    public async static Task<IResult> GetVisitPlaceFilterOptions(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetVisitPlaceFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
 }

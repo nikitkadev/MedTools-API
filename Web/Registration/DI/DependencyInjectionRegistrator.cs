@@ -55,7 +55,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IProvidedServiceRepository, ProvidedServiceRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IAvailableMedicalOrganizationKeysProvider, AvailableMedicalOrganizationKeysProvider>();
-        services.AddScoped<IInsuranceReferenceDataProvider, InsuranceReferenceDataProvider>();
+        services.AddScoped<IMedicalOrganizationReferenceDataProvider, InsuranceReferenceDataProvider>();
         services.AddScoped<IDocumentReferenceDataProvider, DocumentReferenceDataProvider>();
         services.AddScoped<IMedicalCareReferenceDataProvider,  MedicalCareReferenceDataProvider>();
 

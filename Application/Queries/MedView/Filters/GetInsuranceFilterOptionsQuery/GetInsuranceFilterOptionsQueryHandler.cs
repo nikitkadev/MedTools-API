@@ -9,7 +9,7 @@ namespace Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
 
 public sealed class GetInsuranceFilterOptionsQueryHandler(
     IAvailableMedicalOrganizationKeysProvider availableMedicalOrganizationKeysProvider,
-    IInsuranceReferenceDataProvider insuranceReferenceDataProvider) : IRequestHandler<GetInsuranceFilterOptionsQuery, Result<GetInsuranceFilterOptionsResult>>
+    IMedicalOrganizationReferenceDataProvider medicalOrganizationReferenceDataProvider) : IRequestHandler<GetInsuranceFilterOptionsQuery, Result<GetInsuranceFilterOptionsResult>>
 {
     public async Task<Result<GetInsuranceFilterOptionsResult>> Handle(
         GetInsuranceFilterOptionsQuery request, 
@@ -19,7 +19,7 @@ public sealed class GetInsuranceFilterOptionsQueryHandler(
             targetDb: request.TargetDb, 
             cancellationToken: cancellationToken);
 
-        var insurancesReferenceData = await insuranceReferenceDataProvider.GetByKeysAsync(
+        var insurancesReferenceData = await medicalOrganizationReferenceDataProvider.GetInsurancesByKeysAsync(
             keys: insurancesKeys, 
             cancellationToken: cancellationToken);
 
