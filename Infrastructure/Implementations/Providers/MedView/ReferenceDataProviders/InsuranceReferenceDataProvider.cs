@@ -18,19 +18,11 @@ public sealed class InsuranceReferenceDataProvider(
     {
         await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
 
-        var insuranceReferences = await dbContext
+        var result = await dbContext
             .Set<InsuranceDbEntity>()
+            .Where(x => keys.Contains(x.InsuranceCode))
+            .Select(x => new InsuranceReferenceDto(x.InsuranceCode, x.InsuranceShortname))
             .ToListAsync(cancellationToken: cancellationToken);
-
-        var result = keys
-            .Join(
-                insuranceReferences,
-                code => code,
-                insurance => insurance.InsuranceCode,
-                (code, insurance) => new InsuranceReferenceDto(
-                    Code: code, 
-                    Name: insurance.InsuranceShortname))
-            .ToList();
 
         return result;
     }
