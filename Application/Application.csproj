@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Commands\Auth\LogoutCommand\" />
+	  <Folder Include="Queries\MedView\Filters\Новая папка\" />
 	</ItemGroup>
 
 </Project>

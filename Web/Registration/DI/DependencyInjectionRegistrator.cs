@@ -57,6 +57,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IAvailableMedicalOrganizationKeysProvider, AvailableMedicalOrganizationKeysProvider>();
         services.AddScoped<IInsuranceReferenceDataProvider, InsuranceReferenceDataProvider>();
         services.AddScoped<IDocumentReferenceDataProvider, DocumentReferenceDataProvider>();
+        services.AddScoped<IMedicalCareReferenceDataProvider,  MedicalCareReferenceDataProvider>();
 
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();

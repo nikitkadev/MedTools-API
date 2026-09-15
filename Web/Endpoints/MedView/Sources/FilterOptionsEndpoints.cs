@@ -3,6 +3,7 @@
 using Core.Common.Enums;
 
 using Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalCareProfileFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
 
 namespace Web.Endpoints.MedView.Sources;
@@ -15,6 +16,8 @@ public static class FilterOptionsEndpoints
 
         group.MapGet("/available-insurance", GetAvailableInsuranceFilterOptionsAsync);
         group.MapGet("/policy-types", GetInsurancePolicyTypeFilterOptions);
+        group.MapGet("/medical-care-profiles", GetMedicalCareProgileFilterOptions);
+        group.MapGet("/bed-profiles", () => { });
     }
 
     public async static Task<IResult> GetAvailableInsuranceFilterOptionsAsync(
@@ -38,6 +41,22 @@ public static class FilterOptionsEndpoints
     {
         var result = await sender.Send(
             request: new GetInsurancePolicyTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalCareProgileFilterOptions(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalCareProfileFilterOptionsQuery(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
