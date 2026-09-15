@@ -17,8 +17,6 @@ public abstract class MedToolsDbContext(
     }
 }
 
-public class SMODbContext(
-    DbContextOptions<SMODbContext> options) : MedToolsDbContext(options);
-
-public class InogorodDbContext(
-    DbContextOptions<InogorodDbContext> options) : MedToolsDbContext(options);
+public class SMODbContext(DbContextOptions<SMODbContext> options) : MedToolsDbContext(options);
+public class InogorodDbContext(DbContextOptions<InogorodDbContext> options) : MedToolsDbContext(options);
+public class MedSprDbContenxt(DbContextOptions<MedSprDbContenxt> options) : MedToolsDbContext(options);

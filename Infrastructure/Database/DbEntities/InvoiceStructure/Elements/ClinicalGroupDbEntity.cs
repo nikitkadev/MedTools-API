@@ -24,6 +24,6 @@ public sealed class ClinicalGroupDbEntity
     public decimal? InterruptedCasePaymentShare { get; set; }
 
     public MedicalCaseDbEntity MedicalCase { get; set; } = null!;
-    public IReadOnlyCollection<TreatmentComplexityCoefficientDbEntity> TreatmentComplexityCoefficients { get; set; } = [];
-    public IReadOnlyCollection<ClassificationCriterionDbEntity> ClassificationCriteria { get; set; } = [];
+    public List<TreatmentComplexityCoefficientDbEntity> TreatmentComplexityCoefficients { get; set; } = [];
+    public List<ClassificationCriterionDbEntity> ClassificationCriteria { get; set; } = [];
 }

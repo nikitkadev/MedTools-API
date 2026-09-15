@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Core.Interfaces.Auth;
 using Core.Interfaces.Repositories.Users;
 using Core.Interfaces.Repositories.RControl;
+using Core.Interfaces.Providers.MedView.AvailableOrganizationsProvider;
 
 using Application;
 
@@ -17,6 +18,7 @@ using Infrastructure.Database.Factories;
 using Infrastructure.Implementations.Services;
 using Infrastructure.Implementations.Repositories.Users;
 using Infrastructure.Implementations.Repositories.RControl;
+using Infrastructure.Implementations.Providers.MedView.AvailableMedicalOrganizationsProvider;
 
 using Web.Mapping;
 using Web.Options;
@@ -50,6 +52,8 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IOncologyServiceRepository, OncologyServiceRepository>();
         services.AddScoped<IProvidedServiceRepository, ProvidedServiceRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IAvailableMedicalOrganizationsProvider, AvailableMedicalOrganizationsProvider>();
+
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
 
@@ -84,6 +88,11 @@ public static class DependencyInjectionRegistrator
                 options.UseSqlServer(connectionString.INOGOROD18);
 
             });
+
+        services.AddDbContextFactory<MedSprDbContenxt>(options =>
+        {
+            options.UseSqlServer(connectionString.MEDSPR18);
+        });
 
         services.AddAutoMapper(config =>
         {

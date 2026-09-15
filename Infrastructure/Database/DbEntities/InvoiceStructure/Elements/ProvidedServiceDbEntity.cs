@@ -26,5 +26,5 @@ public sealed class ProvidedServiceDbEntity
     public string? InternalComment { get; set; }
 
     public MedicalCaseDbEntity MedicalCase { get; set; } = null!;
-    public IReadOnlyCollection<MedicalDeviceDbEntity> MedicalDevices { get; set; } = [];
+    public List<MedicalDeviceDbEntity> MedicalDevices { get; set; } = [];
 }

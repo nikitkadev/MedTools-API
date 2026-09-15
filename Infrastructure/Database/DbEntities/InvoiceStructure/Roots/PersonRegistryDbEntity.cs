@@ -12,5 +12,5 @@ public sealed class PersonRegistryDbEntity
     public short? Status { get; set; }
 
     public PersonRegistryHeadingDbEntity PersonRegistryHeading { get; set; } = null!;
-    public IReadOnlyCollection<PersonDbEntity> Persons { get; set; } = [];
+    public List<PersonDbEntity> Persons { get; set; } = [];
 }

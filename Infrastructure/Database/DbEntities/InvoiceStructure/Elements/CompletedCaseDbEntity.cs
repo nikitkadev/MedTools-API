@@ -34,5 +34,5 @@ public sealed class CompletedCaseDbEntity
     public string? ReferralNumber { get; set; }
 
     public MedicalRecordDbEntity MedicalRecord { get; set; } = null!;
-    public IReadOnlyCollection<MedicalCaseDbEntity> MedicalCases { get; set; } = [];
+    public List<MedicalCaseDbEntity> MedicalCases { get; set; } = [];
 }

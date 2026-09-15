@@ -54,9 +54,9 @@ public sealed class MedicalCaseDbEntity
     public CompletedCaseDbEntity CompletedCase { get; set; } = null!;
     public ClinicalGroupDbEntity ClinicalGroup { get; set; } = null!;
     public OncologyCaseDbEntity OncologyCase { get; set; } = null!;
-    public IReadOnlyCollection<ProvidedServiceDbEntity> ProvidedServices { get; set; } = [];
-    public IReadOnlyCollection<SanctionDbEntity> Sanctions { get; set; } = [];
-    public IReadOnlyCollection<ReferralDbEntity> Referrals { get; set; } = [];
-    public IReadOnlyCollection<PrescriptionDbEntity> Prescriptions { get; set; } = [];
-    public IReadOnlyCollection<ConsultationDbEntity> Consultations { get; set; } = [];
+    public List<ProvidedServiceDbEntity> ProvidedServices { get; set; } = [];
+    public List<SanctionDbEntity> Sanctions { get; set; } = [];
+    public List<ReferralDbEntity> Referrals { get; set; } = [];
+    public List<PrescriptionDbEntity> Prescriptions { get; set; } = [];
+    public List<ConsultationDbEntity> Consultations { get; set; } = [];
 }

@@ -13,5 +13,5 @@ public sealed class MedicalRegistryDbEntity
 
     public MedicalRegistryHeadingDbEntity MedicalRegistryHeading { get; set; } = null!;
     public InvoiceDbEntity Invoice { get; set; } = null!;
-    public IReadOnlyCollection<MedicalRecordDbEntity> MedicalRecords { get; set; } = [];
+    public List<MedicalRecordDbEntity> MedicalRecords { get; set; } = [];
 }

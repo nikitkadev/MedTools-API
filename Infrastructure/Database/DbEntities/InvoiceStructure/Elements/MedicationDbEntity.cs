@@ -10,6 +10,6 @@ public sealed class MedicationDbEntity
     public string? TherapyRegimenCode { get; set; }
 
     public OncologyServiceDbEntity OncologyService { get; set; } = null!;
-    public IReadOnlyCollection<InjectionDateDbEntity> InjectionDates { get; set; } = [];
-    public IReadOnlyCollection<InjectionDbEntity> Injections { get; set; } = [];
+    public List<InjectionDateDbEntity> InjectionDates { get; set; } = [];
+    public List<InjectionDbEntity> Injections { get; set; } = [];
 }

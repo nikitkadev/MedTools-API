@@ -18,7 +18,7 @@ public sealed class OncologyCaseDbEntity
     public float? BodySurfaceArea { get; set; }
 
     public MedicalCaseDbEntity MedicalCase { get; set; } = null!;
-    public IReadOnlyCollection<OncologyServiceDbEntity> OncologyServices { get; set; } = [];
-    public IReadOnlyCollection<DiagnosticDbEntity> Diagnostics { get; set; } = [];
-    public IReadOnlyCollection<ContraindicationDbEntity> Contraindications { get; set; } = [];
+    public List<OncologyServiceDbEntity> OncologyServices { get; set; } = [];
+    public List<DiagnosticDbEntity> Diagnostics { get; set; } = [];
+    public List<ContraindicationDbEntity> Contraindications { get; set; } = [];
 }

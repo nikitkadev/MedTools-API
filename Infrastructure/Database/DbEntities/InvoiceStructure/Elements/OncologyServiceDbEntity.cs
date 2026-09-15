@@ -13,5 +13,5 @@ public sealed class OncologyServiceDbEntity
     public byte? RadioTherapyTypeCode { get; set; }
 
     public OncologyCaseDbEntity OncologyCase { get; set; } = null!;
-    public IReadOnlyCollection<MedicationDbEntity> Medications { get; set; } = [];
+    public List<MedicationDbEntity> Medications { get; set; } = [];
 }

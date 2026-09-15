@@ -19,7 +19,7 @@ public sealed class MedicalCaseDbEntityConfiguration : IEntityTypeConfiguration<
         builder.Property(prop => prop.HighTechCareMethod).HasColumnName("metod_hmp").IsRequired(false);
         builder.Property(prop => prop.Division).HasColumnName("lpu_1").IsRequired(false);
         builder.Property(prop => prop.DepartmentCode).HasColumnName("podr").IsRequired(false);
-        builder.Property(prop => prop.MedicalProfile).HasColumnName("profil").IsRequired(false);
+        builder.Property(prop => prop.MedicalProfile).HasColumnName("profil");
         builder.Property(prop => prop.BedProfile).HasColumnName("profil_k").IsRequired(false);
         builder.Property(prop => prop.IsPediatric).HasColumnName("det");
         builder.Property(prop => prop.VoucherIssueDate).HasColumnName("tal_d").IsRequired(false);
