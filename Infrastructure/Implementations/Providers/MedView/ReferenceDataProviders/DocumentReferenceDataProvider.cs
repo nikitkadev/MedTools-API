@@ -4,8 +4,8 @@ using Core.Common.Enums;
 using Core.Dtos.MedView.Reference;
 using Core.Interfaces.Providers.MedView.ReferenceDataProviders;
 
-using Infrastructure.Database.DbEntities.References;
 using Infrastructure.Database.Factories;
+using Infrastructure.Database.DbEntities.References;
 
 namespace Infrastructure.Implementations.Providers.MedView.ReferenceDataProviders;
 
@@ -19,9 +19,11 @@ public sealed class DocumentReferenceDataProvider(
 
         var insurancePolicyTypes = await dbContext
             .Set<InsurancePolicyTypeDbEntity>()
+            .Select(x => new InsurancePolicyTypeReferenceDto(
+                TypeId: x.DocumentId, 
+                Name: x.DocumentName))
             .ToListAsync(cancellationToken: cancellationToken);
-
-        return [.. insurancePolicyTypes
-            .Select(x => new InsurancePolicyTypeReferenceDto(TypeId: x.DocumentId, Name: x.DocumentName))];
+        
+        return insurancePolicyTypes;
     }
 }

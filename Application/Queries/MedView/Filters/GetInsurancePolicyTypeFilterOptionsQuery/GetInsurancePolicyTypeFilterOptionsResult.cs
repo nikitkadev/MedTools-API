@@ -1,5 +1,5 @@
-﻿using Core.Dtos.MedView.Filters;
+﻿using Core.Common.Dtos;
 
 namespace Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
 
-public sealed record GetInsurancePolicyTypeFilterOptionsResult(IReadOnlyCollection<InsurancePolicyTypeFilterOptions> Options);
+public sealed record GetInsurancePolicyTypeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);

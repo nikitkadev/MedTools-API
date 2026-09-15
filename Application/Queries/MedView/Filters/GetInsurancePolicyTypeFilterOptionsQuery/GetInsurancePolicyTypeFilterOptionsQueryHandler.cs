@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
+using Core.Common.Dtos;
 using Core.Common.Results;
-using Core.Dtos.MedView.Filters;
 using Core.Interfaces.Providers.MedView.ReferenceDataProviders;
 
 namespace Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
@@ -17,6 +17,8 @@ public sealed class GetInsurancePolicyTypeFilterOptionsQueryHandler(
 
         return Result<GetInsurancePolicyTypeFilterOptionsResult>.Success(
             new GetInsurancePolicyTypeFilterOptionsResult(
-                Options: [.. policyTypes.Select(x => new InsurancePolicyTypeFilterOptions(Key: x.TypeId, Value: x.Name))]));
+                Options: [.. policyTypes.Select(x => new FilterOptionDto(
+                    Key: x.TypeId, 
+                    Value: x.Name))]));
     }
 }
