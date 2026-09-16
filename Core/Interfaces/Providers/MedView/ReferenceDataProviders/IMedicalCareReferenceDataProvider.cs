@@ -9,4 +9,15 @@ public interface IMedicalCareReferenceDataProvider
 
     Task<IReadOnlyCollection<BedProfileReferenceDto>> GetBedProfileReferencesAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<PhysicianSpecialtyReferenceDto>> GetPhysicianSpecialtyReferencesAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<CareConditionReferenceDto>> GetCareConditionReferencesAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<MedicalCareTypeReferenceDto>> GetMedicalCareTypeReferencesAsync(
+        CancellationToken cancellationToken = default);
+    Task<IReadOnlyCollection<CareFormReferenceDto>> GetCareFormReferencesAsync(
+        CancellationToken cancellationToken = default);
 }

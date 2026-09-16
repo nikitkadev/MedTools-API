@@ -6,5 +6,10 @@ public interface IAvailableMedicalOrganizationKeysProvider
 {
     Task<IReadOnlyCollection<string>> GetInsuranceOrganizationsKeysAsync(
         TargetDbType targetDb, 
-        CancellationToken cancellationToken = default); 
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<string>> GetMedicalOrganizationsKeysAsync(
+        TargetDbType targetDb,
+        MedicalOrgsKeysFrom medicalOrgsKeysFrom,
+        CancellationToken cancellationToken = default);
 }

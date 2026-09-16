@@ -1,17 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-using MediatR;
-
-using Core.Common.Enums;
-
+﻿using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetCareConditionFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetCareFormFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetMedicalCareProfileFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
-
-using Infrastructure.Database.Factories;
-using Infrastructure.Database.DbEntities.References;
+using Application.Queries.MedView.Filters.GetMedicalCareProfileFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalCareTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalOrganizationFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetPhysicianSpecialityFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPlaceFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetVisitPurposeFilterOptionsQuery;
+using Core.Common.Enums;
+using Infrastructure.Database.DbEntities.References;
+using Infrastructure.Database.Factories;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web.Endpoints.MedView.Sources;
 
@@ -22,10 +25,21 @@ public static class FilterOptionsEndpoints
         var group = builder.MapGroup("/filter-options").WithTags("Filter Options");
 
         group.MapGet("/available-insurance", GetAvailableInsuranceFilterOptionsAsync);
-        group.MapGet("/policy-types", GetInsurancePolicyTypeFilterOptions);
-        group.MapGet("/medical-care-profiles", GetMedicalCareProfileFilterOptions);
-        group.MapGet("/bed-profiles", GetBedProfileFilterOptions);
-        group.MapGet("/visit-places", GetVisitPlaceFilterOptions);
+        group.MapGet("/policy-types", GetInsurancePolicyTypeFilterOptionsAsync);
+        group.MapGet("/medical-care-profiles", GetMedicalCareProfileFilterOptionsAsync);
+        group.MapGet("/bed-profiles", GetBedProfileFilterOptionsAsync);
+        group.MapGet("/visit-places", GetVisitPlaceFilterOptionsAsync);
+        group.MapGet("/visit-purposes", GetVisitPurposesFilterOptionsAsync);
+        group.MapGet("/disease-characters", GetDiseaseCharacterFilterOptionsAsync);
+        group.MapGet("/physician-specialities", GetPhysicianSpecialityFilterOptionsAsync);
+        group.MapGet("/medical-organizations", GetMedicalOrganizationFilterOptionsAsync);
+        group.MapGet("/care-conditions", GetCareConditionFilterOptionsAsync);
+        group.MapGet("/medical-care-types", GetMedicalCareTypeFilterOptionsAsync);
+        group.MapGet("/medical-care-forms", GetMedicalCareFormFilterOptionsAsync);
+        group.MapGet("/disease-outcomes", GetDiseaseOutcomeFilterOptionsAsync);
+        group.MapGet("/screening-results", GetScreeningResultFilterOptionsAsync);
+        group.MapGet("/hospitalization-outcomes", GetHospitalizationOutcomeFilterOptionsAsync);
+        group.MapGet("/payment-methods", GetPaymentMethodFilterOptionsAsync);
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -56,7 +70,7 @@ public static class FilterOptionsEndpoints
         return Results.Ok(result);
     }
 
-    public async static Task<IResult> GetInsurancePolicyTypeFilterOptions(
+    public async static Task<IResult> GetInsurancePolicyTypeFilterOptionsAsync(
         ISender sender,
         CancellationToken cancellationToken)
     {
@@ -72,7 +86,7 @@ public static class FilterOptionsEndpoints
         return Results.Ok(result);
     }
 
-    public async static Task<IResult> GetMedicalCareProfileFilterOptions(
+    public async static Task<IResult> GetMedicalCareProfileFilterOptionsAsync(
         ISender sender,
         CancellationToken cancellationToken)
     {
@@ -88,7 +102,7 @@ public static class FilterOptionsEndpoints
         return Results.Ok(result);
     }
 
-    public async static Task<IResult> GetBedProfileFilterOptions(
+    public async static Task<IResult> GetBedProfileFilterOptionsAsync(
         ISender sender,
         CancellationToken cancellationToken)
     {
@@ -104,12 +118,192 @@ public static class FilterOptionsEndpoints
         return Results.Ok(result);
     }
 
-    public async static Task<IResult> GetVisitPlaceFilterOptions(
+    public async static Task<IResult> GetVisitPlaceFilterOptionsAsync(
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
             request: new GetVisitPlaceFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetVisitPurposesFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetVisitPurposeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseCharacterFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseCharacterFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetPhysicianSpecialityFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetPhysicianSpecialityFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalOrganizationFilterOptionsAsync(
+        TargetDbType targetDb,
+        MedicalOrgsKeysFrom medicalOrgsKeysFrom,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalOrganizationFilterOptionsQuery(
+                TargetDb: targetDb,
+                MedicalOrgsKeysFrom: medicalOrgsKeysFrom),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetCareConditionFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetCareConditionFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalCareTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalCareTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalCareFormFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetCareFormFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseOutcomeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetScreeningResultFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetHospitalizationOutcomeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetPaymentMethodFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
