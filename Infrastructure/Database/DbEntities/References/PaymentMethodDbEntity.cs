@@ -2,7 +2,7 @@
 
 public sealed class PaymentMethodDbEntity
 {
-    public int Uid { get; set; }
+    public short Uid { get; set; }
 
     public string PaymentMethodName { get; set; } = string.Empty;
 }

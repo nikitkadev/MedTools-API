@@ -1,20 +1,29 @@
-﻿using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetCareConditionFilterOptionsQuery;
+﻿using Microsoft.EntityFrameworkCore;
+
+using MediatR;
+
+using Core.Common.Enums;
+
 using Application.Queries.MedView.Filters.GetCareFormFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetMedicalCareProfileFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetMedicalCareTypeFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetMedicalOrganizationFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetPhysicianSpecialityFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPlaceFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPurposeFilterOptionsQuery;
-using Core.Common.Enums;
-using Infrastructure.Database.DbEntities.References;
+using Application.Queries.MedView.Filters.GetPaymentMethodFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetCareConditionFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseOutcomeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalCareTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetScreeningResultFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalCareProfileFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalOrganizationFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetPhysicianSpecialityFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetHospitalizationOutcomeFilterOptionsQuery;
+
 using Infrastructure.Database.Factories;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Infrastructure.Database.DbEntities.References;
+
 
 namespace Web.Endpoints.MedView.Sources;
 
@@ -255,7 +264,7 @@ public static class FilterOptionsEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new(),
+            request: new GetDiseaseOutcomeFilterOptionsQuery(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -271,7 +280,7 @@ public static class FilterOptionsEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new(),
+            request: new GetScreeningResultFilterOptionsQuery(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -287,7 +296,7 @@ public static class FilterOptionsEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new(),
+            request: new GetHospitalizationOutcomeFilterOptionsQuery(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -303,7 +312,7 @@ public static class FilterOptionsEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new(),
+            request: new GetPaymentMethodFilterOptionsQuery(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -313,5 +322,4 @@ public static class FilterOptionsEndpoints
 
         return Results.Ok(result);
     }
-
 }

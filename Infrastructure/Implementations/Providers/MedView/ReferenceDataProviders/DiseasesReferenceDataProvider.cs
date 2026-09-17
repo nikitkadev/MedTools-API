@@ -27,4 +27,19 @@ public sealed class DiseasesReferenceDataProvider(
 
         return result;
     }
+
+    public async Task<IReadOnlyCollection<DiseaseOutcomeReferenceDto>> GetDiseaseOutcomeReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<DiseaseOutcomeDbEntity>()
+            .Select(x => new DiseaseOutcomeReferenceDto(
+                Id: x.OutcomeId,
+                Name: x.OutcomeName))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
 }

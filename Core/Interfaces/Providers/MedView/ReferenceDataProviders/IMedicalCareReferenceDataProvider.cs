@@ -18,6 +18,13 @@ public interface IMedicalCareReferenceDataProvider
 
     Task<IReadOnlyCollection<MedicalCareTypeReferenceDto>> GetMedicalCareTypeReferencesAsync(
         CancellationToken cancellationToken = default);
+
     Task<IReadOnlyCollection<CareFormReferenceDto>> GetCareFormReferencesAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<ScreeningResultReferenceDto>> GetScreeningResultReferencesAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<HospitalizationOutcomeReferenceDto>> GetHospitalizationOutcomeReferencesAsync(
         CancellationToken cancellationToken = default);
 }

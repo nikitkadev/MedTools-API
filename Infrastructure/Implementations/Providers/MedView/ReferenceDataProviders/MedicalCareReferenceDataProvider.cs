@@ -58,6 +58,22 @@ public sealed class MedicalCareReferenceDataProvider(
         return result;
     }
 
+    public async Task<IReadOnlyCollection<HospitalizationOutcomeReferenceDto>> GetHospitalizationOutcomeReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<HospitalizationOutcomeDbEntity>()
+            .Select(x => new HospitalizationOutcomeReferenceDto(
+                Id: x.HospitalizationOutcomeId,
+                CareConditionId: x.CareConditionId,
+                Name: x.HospitalizationOutcomeName))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<MedicalCareProfileReferenceDto>> GetMedicalCareProfileReferencesAsync(
         CancellationToken cancellationToken = default)
     {
@@ -98,6 +114,22 @@ public sealed class MedicalCareReferenceDataProvider(
             .Select(x => new PhysicianSpecialtyReferenceDto(
                 Id: x.SpecialityId,
                 Name: x.SpecialityPostname == null || x.SpecialityPostname == string.Empty ? x.SpecialityName : $"{x.SpecialityName}" + " " + $"({x.SpecialityPostname})"))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
+    public async Task<IReadOnlyCollection<ScreeningResultReferenceDto>> GetScreeningResultReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<ScreeningResultDbEntity>()
+            .Where(x => x.ScreeningResultName != null)
+            .Select(x => new ScreeningResultReferenceDto(
+                Id: x.ScreeningResultId,
+                Name: x.ScreeningResultName!))
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

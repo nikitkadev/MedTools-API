@@ -57,8 +57,9 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IAvailableMedicalOrganizationKeysProvider, AvailableMedicalOrganizationKeysProvider>();
         services.AddScoped<IMedicalOrganizationReferenceDataProvider, MedicalOrganizationReferenceDataProvider>();
         services.AddScoped<IDocumentReferenceDataProvider, DocumentReferenceDataProvider>();
-        services.AddScoped<IMedicalCareReferenceDataProvider,  MedicalCareReferenceDataProvider>();
+        services.AddScoped<IMedicalCareReferenceDataProvider, MedicalCareReferenceDataProvider>();
         services.AddScoped<IDiseasesReferenceDataProvider, DiseasesReferenceDataProvider>();
+        services.AddScoped<IPaymentReferenceDataProvider, PaymentReferenceDataProvider>();
 
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
@@ -77,7 +78,7 @@ public static class DependencyInjectionRegistrator
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        
+
         var connectionString = new ConnectionString();
 
         configuration.GetSection("ConnectionString").Bind(connectionString);
