@@ -9,9 +9,11 @@ using Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPlaceFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPurposeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseStageFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetPaymentMethodFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetCareConditionFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetDiseaseOutcomeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetReferralReasonFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetMedicalCareTypeFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetScreeningResultFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
@@ -49,6 +51,8 @@ public static class FilterOptionsEndpoints
         group.MapGet("/screening-results", GetScreeningResultFilterOptionsAsync);
         group.MapGet("/hospitalization-outcomes", GetHospitalizationOutcomeFilterOptionsAsync);
         group.MapGet("/payment-methods", GetPaymentMethodFilterOptionsAsync);
+        group.MapGet("/referral-reasons", GetReferralReasonsFilterOptionsAsync);
+        group.MapGet("/disease-stages", GetDiseaseStageFilterOptionsAsync);
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -322,4 +326,37 @@ public static class FilterOptionsEndpoints
 
         return Results.Ok(result);
     }
+
+    public async static Task<IResult> GetReferralReasonsFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetReferralReasonFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseStageFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseStageFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
 }

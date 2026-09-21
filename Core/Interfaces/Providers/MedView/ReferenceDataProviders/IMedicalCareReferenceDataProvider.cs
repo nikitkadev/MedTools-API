@@ -27,4 +27,7 @@ public interface IMedicalCareReferenceDataProvider
 
     Task<IReadOnlyCollection<HospitalizationOutcomeReferenceDto>> GetHospitalizationOutcomeReferencesAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<ReferralReasonReferenceDto>> GetReferralReasonReferencesAsync(
+        CancellationToken cancellationToken = default);
 }

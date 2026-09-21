@@ -9,4 +9,7 @@ public interface IDiseasesReferenceDataProvider
 
     Task<IReadOnlyCollection<DiseaseOutcomeReferenceDto>> GetDiseaseOutcomeReferencesAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<DiseaseStageReferenceDto>> GetDiseaseStageReferencesAsync(
+        CancellationToken cancellationToken = default);
 }

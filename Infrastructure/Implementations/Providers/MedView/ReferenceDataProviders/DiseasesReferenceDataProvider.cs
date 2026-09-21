@@ -42,4 +42,20 @@ public sealed class DiseasesReferenceDataProvider(
 
         return result;
     }
+
+    public async Task<IReadOnlyCollection<DiseaseStageReferenceDto>> GetDiseaseStageReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<DiseaseStageDbEntity>()
+            .Where(x => x.StageName != null && x.StageName != "Нет")
+            .Select(x => new DiseaseStageReferenceDto(
+                Id: x.StageId,
+                Name: x.StageId + " : " + x.StageName))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
 }

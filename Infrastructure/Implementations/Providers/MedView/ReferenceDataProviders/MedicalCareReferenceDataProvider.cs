@@ -119,6 +119,22 @@ public sealed class MedicalCareReferenceDataProvider(
         return result;
     }
 
+    public async Task<IReadOnlyCollection<ReferralReasonReferenceDto>> GetReferralReasonReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<ReferralReasonDbEntity>()
+            .Where(x => x.ReferralReasonName != null)
+            .Select(x => new ReferralReasonReferenceDto(
+                Id: x.ReferralReasonId,
+                Name: x.ReferralReasonName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<ScreeningResultReferenceDto>> GetScreeningResultReferencesAsync(
         CancellationToken cancellationToken = default)
     {
