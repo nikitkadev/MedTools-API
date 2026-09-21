@@ -14,17 +14,22 @@ using Application.Queries.MedView.Filters.GetPaymentMethodFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetCareConditionFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetDiseaseOutcomeFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetReferralReasonFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDrugTherapyLineFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetMedicalCareTypeFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetScreeningResultFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetRadioTherapyTypeFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetMedicalCareProfileFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetMedicalOrganizationFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetPhysicianSpecialityFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetOncologyServiceTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetSurgicalTreatmentTypeFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetHospitalizationOutcomeFilterOptionsQuery;
 
 using Infrastructure.Database.Factories;
 using Infrastructure.Database.DbEntities.References;
+using Application.Queries.MedView.Filters.GetDrugTherapyCycleFilterOptionsQuery;
 
 
 namespace Web.Endpoints.MedView.Sources;
@@ -53,6 +58,12 @@ public static class FilterOptionsEndpoints
         group.MapGet("/payment-methods", GetPaymentMethodFilterOptionsAsync);
         group.MapGet("/referral-reasons", GetReferralReasonsFilterOptionsAsync);
         group.MapGet("/disease-stages", GetDiseaseStageFilterOptionsAsync);
+        group.MapGet("/oncology-service-types", GetOncologyServiceTypeFilterOptionsAsync);
+        group.MapGet("/surgical-treatment-types", GetSurgicalTreatmentTypeFilterOptionsAsync);
+        group.MapGet("/radio-therapy-types", GetRadioTherapyTypeFilterOptionsAsync);
+        group.MapGet("/drug-therapy-lines", GetDrugTherapyLineFilterOptionsAsync);
+        group.MapGet("/drug-therapy-cycles", GetDrugTherapyCycleFilterOptionsAsync);
+
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -349,6 +360,86 @@ public static class FilterOptionsEndpoints
     {
         var result = await sender.Send(
             request: new GetDiseaseStageFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetOncologyServiceTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetOncologyServiceTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetSurgicalTreatmentTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetSurgicalTreatmentTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetRadioTherapyTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetRadioTherapyTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDrugTherapyLineFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDrugTherapyLineFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDrugTherapyCycleFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDrugTherapyCycleFilterOptionsQuery(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)

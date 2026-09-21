@@ -60,6 +60,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IMedicalCareReferenceDataProvider, MedicalCareReferenceDataProvider>();
         services.AddScoped<IDiseasesReferenceDataProvider, DiseasesReferenceDataProvider>();
         services.AddScoped<IPaymentReferenceDataProvider, PaymentReferenceDataProvider>();
+        services.AddScoped<IMedicalServiceReferenceDataProvider, MedicalServiceReferenceDataProvider>();
 
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
