@@ -12,6 +12,22 @@ namespace Infrastructure.Implementations.Providers.MedView.ReferenceDataProvider
 public sealed class MedicalServiceReferenceDataProvider(
     DbContextFactory dbContextFactory) : IMedicalServiceReferenceDataProvider
 {
+    public async Task<IReadOnlyCollection<DrugIdentifierReferenceDto>> GetDrugIdentifierReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<DrugIdentifierDbEntity>()
+            .Where(x => x.DrugIdentifierId != null && x.DrugIdentifierName != null)
+            .Select(x => new DrugIdentifierReferenceDto(
+                Id: x.DrugIdentifierId!,
+                Name: x.DrugIdentifierName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<DrugTherapyCycleReferenceDto>> GetDrugTherapyCycleReferencesAsync(
         CancellationToken cancellationToken = default)
     {
@@ -88,6 +104,22 @@ public sealed class MedicalServiceReferenceDataProvider(
             .Select(x => new SurgicalTreatmentTypeReferenceDto(
                 Id: x.SurgicalTreatmentTypeId,
                 Name: x.SurgicalTreatmentTypeName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
+    public async Task<IReadOnlyCollection<TherapyRegimenReferenceDto>> GetTherapyRegimenReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<TherapyRegimenDbEntity>()
+            .Where(x => x.TherapyRegimenName != null)
+            .Select(x => new TherapyRegimenReferenceDto(
+                Id: x.TherapyRegimenId,
+                Name: x.TherapyRegimenName!))
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

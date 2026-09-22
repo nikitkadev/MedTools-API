@@ -1,35 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-using MediatR;
-
-using Core.Common.Enums;
-
+﻿using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetCareConditionFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetCareFormFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseOutcomeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseStageFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDrugIdentifierFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDrugTherapyCycleFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDrugTherapyLineFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetHospitalizationOutcomeFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalCareProfileFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalCareTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalOrganizationFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetOncologyServiceTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetPaymentMethodFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetPhysicianSpecialityFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetRadioTherapyTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetReferralReasonFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetScreeningResultFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetSurgicalTreatmentTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetTherapyRegimenFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPlaceFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPurposeFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetDiseaseStageFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetPaymentMethodFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetCareConditionFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetDiseaseOutcomeFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetReferralReasonFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetDrugTherapyLineFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetMedicalCareTypeFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetScreeningResultFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetRadioTherapyTypeFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetMedicalCareProfileFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetMedicalOrganizationFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetPhysicianSpecialityFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetOncologyServiceTypeFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetSurgicalTreatmentTypeFilterOptionsQuery;
-using Application.Queries.MedView.Filters.GetHospitalizationOutcomeFilterOptionsQuery;
-
-using Infrastructure.Database.Factories;
+using Core.Common.Enums;
 using Infrastructure.Database.DbEntities.References;
-using Application.Queries.MedView.Filters.GetDrugTherapyCycleFilterOptionsQuery;
+using Infrastructure.Database.Factories;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Web.Endpoints.MedView.Sources;
@@ -63,7 +61,8 @@ public static class FilterOptionsEndpoints
         group.MapGet("/radio-therapy-types", GetRadioTherapyTypeFilterOptionsAsync);
         group.MapGet("/drug-therapy-lines", GetDrugTherapyLineFilterOptionsAsync);
         group.MapGet("/drug-therapy-cycles", GetDrugTherapyCycleFilterOptionsAsync);
-
+        group.MapGet("/drug-identifiers", GetDrugIdentifierFilterOptionsAsync);
+        group.MapGet("/therapy-regimens", GetTherapyRegimenFilterOptionsAsync);
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -450,4 +449,35 @@ public static class FilterOptionsEndpoints
         return Results.Ok(result);
     }
 
+    public async static Task<IResult> GetDrugIdentifierFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDrugIdentifierFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetTherapyRegimenFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetTherapyRegimenFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
 }
