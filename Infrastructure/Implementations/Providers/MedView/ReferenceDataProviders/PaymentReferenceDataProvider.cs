@@ -45,6 +45,22 @@ public sealed class PaymentReferenceDataProvider(
         return result;
     }
 
+    public async Task<IReadOnlyCollection<ControlTypeCodeReferenceDto>> GetControlTypeCodeReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<ControlTypeCodeDbEntity>()
+            .Where(x => x.ControlTypeCodeName != null)
+            .Select(x => new ControlTypeCodeReferenceDto(
+                Id: x.ControlTypeCodeId,
+                Name: x.ControlTypeCodeName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<PaymentMethodReferenceDto>> GetPaymentMethodReferencesAsync(
         CancellationToken cancellationToken = default)
     {
@@ -55,6 +71,21 @@ public sealed class PaymentReferenceDataProvider(
             .Select(x => new PaymentMethodReferenceDto(
                 Id: x.Uid,
                 Name: x.PaymentMethodName))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
+    public async Task<IReadOnlyCollection<RefusalReasonCodeReferenceDto>> GetRefusalReasonCodeReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<RefusalReasonCodeDbEntity>()
+            .Select(x => new RefusalReasonCodeReferenceDto(
+                Id: x.RefusalReasonCodeId,
+                Name: x.RefusalReasonCodeName))
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

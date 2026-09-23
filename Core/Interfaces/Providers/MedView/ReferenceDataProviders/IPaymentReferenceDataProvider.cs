@@ -12,4 +12,10 @@ public interface IPaymentReferenceDataProvider
 
     Task<IReadOnlyCollection<ComplexityCoefficientReferenceDto>> GetComplexityCoefficientReferencesAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<ControlTypeCodeReferenceDto>> GetControlTypeCodeReferencesAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<RefusalReasonCodeReferenceDto>> GetRefusalReasonCodeReferencesAsync(
+        CancellationToken cancellationToken = default);
 }

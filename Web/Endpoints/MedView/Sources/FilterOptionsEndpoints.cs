@@ -37,10 +37,12 @@ using Application.Queries.MedView.Filters.GetInterruptedCasePaymentReasonFilterO
 using Application.Queries.MedView.Filters.GetComplexityCoefficientOptionsQuery;
 using Application.Queries.MedView.Filters.GetHighTechCareFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetHighTechCareMethodFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetProvidedServiceFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetControlTypeCodeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetRefusalReasonCodeFilterOptionsQuery;
 
 using Infrastructure.Database.Factories;
 using Infrastructure.Database.DbEntities.References;
-using Application.Queries.MedView.Filters.GetProvidedServiceFilterOptionsQuery;
 
 
 namespace Web.Endpoints.MedView.Sources;
@@ -85,6 +87,8 @@ public static class FilterOptionsEndpoints
         group.MapGet("/high-tech-care-types", GetHighTechCareTypeFilterOptionsAsync);
         group.MapGet("/high-tech-care-methods", GetHighTechCareMethodsFilterOptionsAsync);
         group.MapGet("/provided-services", GetProvidedServiceFilterOptionsAsync);
+        group.MapGet("/control-type-codes", GetControlTypeCodeFilterOptionsAsync);
+        group.MapGet("/refusal-reason-codes", GetRefusalReasonCodesFilterOptionsAsync);
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -637,6 +641,38 @@ public static class FilterOptionsEndpoints
     {
         var result = await sender.Send(
             request: new GetProvidedServiceFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetControlTypeCodeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetControlTypeCodeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetRefusalReasonCodesFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetRefusalReasonCodeFilterOptionsQuery(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
