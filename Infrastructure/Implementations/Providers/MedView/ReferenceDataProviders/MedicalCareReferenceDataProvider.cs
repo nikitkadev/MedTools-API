@@ -58,6 +58,22 @@ public sealed class MedicalCareReferenceDataProvider(
         return result;
     }
 
+    public async Task<IReadOnlyCollection<DiagnosticMethodReferenceDto>> GetDiagnosticMethodReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<DiagnosticMethodDbEntity>()
+            .Where(x => x.DiagnosticMethodName != null)
+            .Select(x => new DiagnosticMethodReferenceDto(
+                Id: x.DiagnosticMethodId,
+                Name: x.DiagnosticMethodName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<HospitalizationOutcomeReferenceDto>> GetHospitalizationOutcomeReferencesAsync(
         CancellationToken cancellationToken = default)
     {

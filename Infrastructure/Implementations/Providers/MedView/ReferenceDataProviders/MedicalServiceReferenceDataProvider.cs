@@ -61,6 +61,23 @@ public sealed class MedicalServiceReferenceDataProvider(
             
     }
 
+    public async Task<IReadOnlyCollection<MedicalServiceReferenceDto>> GetMedicalServiceReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<MedicalServiceDbEntity>()
+            .Where(x => x.ServiceName != null)
+            .Select(x => new MedicalServiceReferenceDto(
+                Id: x.ServiceId,
+                Code: x.ServiceCode,
+                Name: x.ServiceName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<OncologyServiceTypeReferenceDto>> GetOncologyServiceTypeReferencesAsync(
         CancellationToken cancellationToken = default)
     {
@@ -88,6 +105,22 @@ public sealed class MedicalServiceReferenceDataProvider(
             .Select(x => new RadioTherapyTypeReferenceDto(
                 Id: x.RadioTherapyTypeId,
                 Name: x.RadioTherapyTypeName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
+    public async Task<IReadOnlyCollection<ReferralTypeReferenceDto>> GetReferralTypeReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<ReferralTypeDbEntity>()
+            .Where(x => x.ReferralName != null)
+            .Select(x => new ReferralTypeReferenceDto(
+                Id: x.ReferralId,
+                Name: x.ReferralName!))
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

@@ -24,4 +24,10 @@ public interface IMedicalServiceReferenceDataProvider
 
     Task<IReadOnlyCollection<TherapyRegimenReferenceDto>> GetTherapyRegimenReferencesAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<MedicalServiceReferenceDto>> GetMedicalServiceReferencesAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<ReferralTypeReferenceDto>> GetReferralTypeReferencesAsync(
+        CancellationToken cancellationToken = default);
 }

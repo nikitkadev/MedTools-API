@@ -12,7 +12,7 @@ public sealed class AvailableMedicalOrganizationKeysProvider(
     DbContextFactory dbContextFactory) : IAvailableMedicalOrganizationKeysProvider
 {
     public async Task<IReadOnlyCollection<string>> GetMedicalOrganizationsKeysAsync(
-        TargetDbType targetDb, 
+        TargetDbType targetDb,
         MedicalOrgsKeysFrom keysFrom,
         CancellationToken cancellationToken = default)
     {
@@ -21,23 +21,38 @@ public sealed class AvailableMedicalOrganizationKeysProvider(
         return keysFrom switch
         {
             MedicalOrgsKeysFrom.CompletedCaseMedicalOrgs => await dbContext
-                                .Set<CompletedCaseDbEntity>()
-                                .Select(patient => patient.MedicalOrganizationCode)
-                                .Distinct()
-                                .ToListAsync(cancellationToken: cancellationToken),
+                .Set<CompletedCaseDbEntity>()
+                .Select(patient => patient.MedicalOrganizationCode)
+                .Distinct()
+                .ToListAsync(cancellationToken: cancellationToken),
 
             MedicalOrgsKeysFrom.CompletedCaseReferringMedicalOrgs => await dbContext
-                               .Set<CompletedCaseDbEntity>()
-                               .Where(x => x.ReferringMedicalOrganizationCode != null)
-                               .Select(patient => patient.ReferringMedicalOrganizationCode!)
-                               .Distinct()
-                               .ToListAsync(cancellationToken: cancellationToken),
+                .Set<CompletedCaseDbEntity>()
+                .Where(x => x.ReferringMedicalOrganizationCode != null)
+                .Select(patient => patient.ReferringMedicalOrganizationCode!)
+                .Distinct()
+                .ToListAsync(cancellationToken: cancellationToken),
+
+            MedicalOrgsKeysFrom.PrescriptionReferredToMedicalOrgs => await dbContext
+                .Set<PrescriptionDbEntity>()
+                .Where(x => x.ReferredToMoCode != null)
+                .Select(prescription => prescription.ReferredToMoCode!)
+                .Distinct()
+                .ToListAsync(cancellationToken: cancellationToken),
+
+            MedicalOrgsKeysFrom.ReferralMedicalOrgs => await dbContext
+                .Set<ReferralDbEntity>()
+                .Where(x => x.ReferredToMoCode != null)
+                .Select(x => x.ReferredToMoCode!)
+                .Distinct()
+                .ToListAsync(cancellationToken: cancellationToken),
+
             _ => [],
         };
     }
 
     public async Task<IReadOnlyCollection<string>> GetInsuranceOrganizationsKeysAsync(
-        TargetDbType targetDb, 
+        TargetDbType targetDb,
         CancellationToken cancellationToken = default)
     {
         using var dbContext = dbContextFactory.CreateDbContext(targetDb: targetDb);

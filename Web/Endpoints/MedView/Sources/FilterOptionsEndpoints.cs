@@ -1,4 +1,10 @@
-﻿using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
+﻿using Microsoft.EntityFrameworkCore;
+
+using MediatR;
+
+using Core.Common.Enums;
+
+using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetCareConditionFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetCareFormFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
@@ -23,11 +29,12 @@ using Application.Queries.MedView.Filters.GetSurgicalTreatmentTypeFilterOptionsQ
 using Application.Queries.MedView.Filters.GetTherapyRegimenFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPlaceFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPurposeFilterOptionsQuery;
-using Core.Common.Enums;
+using Application.Queries.MedView.Filters.GetDiagnosticMethodFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalServiceFilterOptionsQuery;
+
 using Infrastructure.Database.DbEntities.References;
 using Infrastructure.Database.Factories;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Application.Queries.MedView.Filters.GetReferralTypeFilterOptionsQuery;
 
 
 namespace Web.Endpoints.MedView.Sources;
@@ -63,6 +70,9 @@ public static class FilterOptionsEndpoints
         group.MapGet("/drug-therapy-cycles", GetDrugTherapyCycleFilterOptionsAsync);
         group.MapGet("/drug-identifiers", GetDrugIdentifierFilterOptionsAsync);
         group.MapGet("/therapy-regimens", GetTherapyRegimenFilterOptionsAsync);
+        group.MapGet("/diagnostic-methods", GetDiagnosticMethodsFilterOptionsAsync);
+        group.MapGet("/medical-services", GetMedicalServiceFilterOptionsAsync);
+        group.MapGet("/referral-types", GetReferralTypeFilterOptionsAsync);
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -480,4 +490,53 @@ public static class FilterOptionsEndpoints
 
         return Results.Ok(result);
     }
+
+    public async static Task<IResult> GetDiagnosticMethodsFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiagnosticMethodFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalServiceFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalServiceFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetReferralTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetReferralTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
 }
