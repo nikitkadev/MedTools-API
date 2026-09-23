@@ -13,6 +13,38 @@ namespace Infrastructure.Implementations.Providers.MedView.ReferenceDataProvider
 public sealed class PaymentReferenceDataProvider(
     DbContextFactory dbContextFactory) : IPaymentReferenceDataProvider
 {
+    public async Task<IReadOnlyCollection<ClinicalGroupReferenceDto>> GetClinicalGroupReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<ClinicalGroupDbEntity>()
+            .Where(x => x.ClinicalGroupName != null)
+            .Select(x => new ClinicalGroupReferenceDto(
+                Id: x.ClinicalGroupId,
+                Name: x.ClinicalGroupName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
+    public async Task<IReadOnlyCollection<ComplexityCoefficientReferenceDto>> GetComplexityCoefficientReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<ComplexityCoefficientDbEntity>()
+            .Where(x => x.ComplexityCoefficientName != null)
+            .Select(x => new ComplexityCoefficientReferenceDto(
+                Id: x.ComplexityCoefficientId,
+                Name: x.ComplexityCoefficientName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<PaymentMethodReferenceDto>> GetPaymentMethodReferencesAsync(
         CancellationToken cancellationToken = default)
     {

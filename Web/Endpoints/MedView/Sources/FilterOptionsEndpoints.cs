@@ -31,10 +31,15 @@ using Application.Queries.MedView.Filters.GetVisitPlaceFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetVisitPurposeFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetDiagnosticMethodFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetMedicalServiceFilterOptionsQuery;
-
-using Infrastructure.Database.DbEntities.References;
-using Infrastructure.Database.Factories;
 using Application.Queries.MedView.Filters.GetReferralTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetClinicalGroupFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetInterruptedCasePaymentReasonFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetComplexityCoefficientOptionsQuery;
+using Application.Queries.MedView.Filters.GetHighTechCareFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetHighTechCareMethodFilterOptionsQuery;
+
+using Infrastructure.Database.Factories;
+using Infrastructure.Database.DbEntities.References;
 
 
 namespace Web.Endpoints.MedView.Sources;
@@ -73,6 +78,11 @@ public static class FilterOptionsEndpoints
         group.MapGet("/diagnostic-methods", GetDiagnosticMethodsFilterOptionsAsync);
         group.MapGet("/medical-services", GetMedicalServiceFilterOptionsAsync);
         group.MapGet("/referral-types", GetReferralTypeFilterOptionsAsync);
+        group.MapGet("/clinical-groups", GetClinicalGroupFilterOptionsAsync);
+        group.MapGet("/interrupted-case-payment-reasons", GetInterruptedCasePaymentReasonFilterOptionsQuery);
+        group.MapGet("/complexity-coefficients", GetComplexityCoefficientFilterOptionsAsync);
+        group.MapGet("/high-tech-care-types", GetHighTechCareTypeFilterOptionsAsync);
+        group.MapGet("/high-tech-care-methods", GetHighTechCareMethodsFilterOptionsAsync);
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -529,6 +539,86 @@ public static class FilterOptionsEndpoints
     {
         var result = await sender.Send(
             request: new GetReferralTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetClinicalGroupFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetClinicalGroupFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetInterruptedCasePaymentReasonFilterOptionsQuery(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetInterruptedCasePaymentReasonFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetComplexityCoefficientFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetComplexityCoefficientOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetHighTechCareTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetHighTechCareFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetHighTechCareMethodsFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetHighTechCareMethodFilterOptionsQuery(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)

@@ -58,7 +58,23 @@ public sealed class MedicalServiceReferenceDataProvider(
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;
-            
+
+    }
+
+    public async Task<IReadOnlyCollection<InterruptedCasePaymentReasonReferenceDto>> GetInterruptedCasePaymentReasonReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<InterruptedCasePaymentReasonDbEntity>()
+            .Where(x => x.InterruptedCasePaymentReasonName != null)
+            .Select(x => new InterruptedCasePaymentReasonReferenceDto(
+                Id: x.InterruptedCasePaymentReasonId,
+                Name: x.InterruptedCasePaymentReasonName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
     }
 
     public async Task<IReadOnlyCollection<MedicalServiceReferenceDto>> GetMedicalServiceReferencesAsync(

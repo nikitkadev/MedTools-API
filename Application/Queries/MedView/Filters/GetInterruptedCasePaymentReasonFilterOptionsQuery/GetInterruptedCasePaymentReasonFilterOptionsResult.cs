@@ -1,0 +1,5 @@
+﻿using Core.Common.Dtos;
+
+namespace Application.Queries.MedView.Filters.GetInterruptedCasePaymentReasonFilterOptionsQuery;
+
+public sealed record GetInterruptedCasePaymentReasonFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);

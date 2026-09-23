@@ -30,4 +30,7 @@ public interface IMedicalServiceReferenceDataProvider
 
     Task<IReadOnlyCollection<ReferralTypeReferenceDto>> GetReferralTypeReferencesAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<InterruptedCasePaymentReasonReferenceDto>> GetInterruptedCasePaymentReasonReferencesAsync(
+        CancellationToken cancellationToken = default);
 }

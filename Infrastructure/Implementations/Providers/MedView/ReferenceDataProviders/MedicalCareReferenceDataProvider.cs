@@ -74,6 +74,38 @@ public sealed class MedicalCareReferenceDataProvider(
         return result;
     }
 
+    public async Task<IReadOnlyCollection<HighTechCareMethodReferenceDto>> GetHighTechCareMethodReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<HighTechCareMethodDbEntity>()
+            .Where(x => x.HighTechCareMethodId != null)
+            .Select(x => new HighTechCareMethodReferenceDto(
+                Id: x.HighTechCareMethodId!,
+                Name: x.HighTechCareMethodName))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
+    public async Task<IReadOnlyCollection<HighTechCareTypeReferenceDto>> GetHighTechCareTypeReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<HighTechCareTypeDbEntity>()
+            .Where(x => x.HighTechCareTypeId != null && x.HighTechCareTypeName != null)
+            .Select(x => new HighTechCareTypeReferenceDto(
+                Id: x.HighTechCareTypeId!,
+                Name: x.HighTechCareTypeName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<HospitalizationOutcomeReferenceDto>> GetHospitalizationOutcomeReferencesAsync(
         CancellationToken cancellationToken = default)
     {
@@ -166,6 +198,4 @@ public sealed class MedicalCareReferenceDataProvider(
 
         return result;
     }
-
-    
 }
