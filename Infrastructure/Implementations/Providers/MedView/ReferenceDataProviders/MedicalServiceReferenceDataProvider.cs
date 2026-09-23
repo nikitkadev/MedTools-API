@@ -110,6 +110,22 @@ public sealed class MedicalServiceReferenceDataProvider(
         return result;
     }
 
+    public async Task<IReadOnlyCollection<ProvidedServiceReferenceDto>> GetProvidedServiceReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<ProvidedServiceDbEntity>()
+            .Where(x => x.ProvidedServiceId != null && x.ProvidedServiceName != null)
+            .Select(x => new ProvidedServiceReferenceDto(
+                Id: x.ProvidedServiceId!,
+                Name: x.ProvidedServiceName!))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<RadioTherapyTypeReferenceDto>> GetRadioTherapyTypeReferencesAsync(
         CancellationToken cancellationToken = default)
     {

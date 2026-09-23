@@ -40,6 +40,7 @@ using Application.Queries.MedView.Filters.GetHighTechCareMethodFilterOptionsQuer
 
 using Infrastructure.Database.Factories;
 using Infrastructure.Database.DbEntities.References;
+using Application.Queries.MedView.Filters.GetProvidedServiceFilterOptionsQuery;
 
 
 namespace Web.Endpoints.MedView.Sources;
@@ -83,6 +84,7 @@ public static class FilterOptionsEndpoints
         group.MapGet("/complexity-coefficients", GetComplexityCoefficientFilterOptionsAsync);
         group.MapGet("/high-tech-care-types", GetHighTechCareTypeFilterOptionsAsync);
         group.MapGet("/high-tech-care-methods", GetHighTechCareMethodsFilterOptionsAsync);
+        group.MapGet("/provided-services", GetProvidedServiceFilterOptionsAsync);
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -619,6 +621,22 @@ public static class FilterOptionsEndpoints
     {
         var result = await sender.Send(
             request: new GetHighTechCareMethodFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetProvidedServiceFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetProvidedServiceFilterOptionsQuery(),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
