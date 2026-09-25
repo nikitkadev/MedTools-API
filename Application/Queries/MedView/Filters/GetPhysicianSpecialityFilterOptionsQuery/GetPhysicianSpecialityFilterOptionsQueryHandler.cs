@@ -18,8 +18,8 @@ public class GetPhysicianSpecialityFilterOptionsQueryHandler(
 
         return Result<GetPhysicianSpecialityFilterOptionsResult>.Success(
             new GetPhysicianSpecialityFilterOptionsResult(
-                Options: [.. physicianSpecialities.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. physicianSpecialities.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

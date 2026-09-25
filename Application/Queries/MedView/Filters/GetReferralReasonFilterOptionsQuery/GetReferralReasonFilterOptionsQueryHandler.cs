@@ -18,8 +18,8 @@ public sealed class GetReferralReasonFilterOptionsQueryHandler(
 
         return Result<GetReferralReasonFilterOptionsResult>.Success(
             new GetReferralReasonFilterOptionsResult(
-                Options: [.. referralReasons.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. referralReasons.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetControlTypeCodeFilterOptionsQuery;
 
-public sealed record GetControlTypeCodeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetControlTypeCodeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

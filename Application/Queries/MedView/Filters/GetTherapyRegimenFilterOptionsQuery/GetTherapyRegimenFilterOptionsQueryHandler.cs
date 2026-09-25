@@ -18,8 +18,8 @@ public sealed class GetTherapyRegimenFilterOptionsQueryHandler(
 
         return Result<GetTherapyRegimenFilterOptionsResult>.Success(
             new GetTherapyRegimenFilterOptionsResult(
-                Options: [.. therapyRegimens.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. therapyRegimens.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

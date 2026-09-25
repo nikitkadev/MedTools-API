@@ -18,8 +18,8 @@ public sealed class GetControlTypeCodeFilterOptionsQueryHandler(
 
         return Result<GetControlTypeCodeFilterOptionsResult>.Success(
             new GetControlTypeCodeFilterOptionsResult(
-                Options: [.. controlTypeCodes.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. controlTypeCodes.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

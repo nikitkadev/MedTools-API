@@ -18,8 +18,8 @@ public sealed class GetComplexityCoefficientOptionsQueryHandler(
 
         return Result<GetComplexityCoefficientOptionsResult>.Success(
             new GetComplexityCoefficientOptionsResult(
-                Options: [.. complexityCoefficients.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. complexityCoefficients.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetSurgicalTreatmentTypeFilterOptionsQuery;
 
-public sealed record GetSurgicalTreatmentTypeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetSurgicalTreatmentTypeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

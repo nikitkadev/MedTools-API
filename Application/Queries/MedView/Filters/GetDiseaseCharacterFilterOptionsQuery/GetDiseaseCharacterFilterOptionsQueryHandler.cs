@@ -18,8 +18,8 @@ public sealed class GetDiseaseCharacterFilterOptionsQueryHandler(
 
         return Result<GetDiseaseCharacterFilterOptionsResult>.Success(
             new GetDiseaseCharacterFilterOptionsResult(
-                Options: [.. diseaseCharacters.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. diseaseCharacters.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

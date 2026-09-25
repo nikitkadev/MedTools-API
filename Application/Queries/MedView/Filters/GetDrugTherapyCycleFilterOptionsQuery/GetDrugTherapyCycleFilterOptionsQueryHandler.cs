@@ -18,8 +18,8 @@ public sealed class GetDrugTherapyCycleFilterOptionsQueryHandler(
 
         return Result<GetDrugTherapyCycleFilterOptionsResult>.Success(
             new GetDrugTherapyCycleFilterOptionsResult(
-                Options: [.. drugTherapyCycles.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. drugTherapyCycles.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

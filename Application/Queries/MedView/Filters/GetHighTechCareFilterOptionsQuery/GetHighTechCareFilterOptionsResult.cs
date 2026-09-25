@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetHighTechCareFilterOptionsQuery;
 
-public sealed record GetHighTechCareFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetHighTechCareFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

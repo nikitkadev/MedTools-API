@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
 
-public sealed record GetBedProfileFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetBedProfileFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

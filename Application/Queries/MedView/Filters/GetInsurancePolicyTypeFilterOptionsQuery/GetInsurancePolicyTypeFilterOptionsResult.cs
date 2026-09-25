@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
 
-public sealed record GetInsurancePolicyTypeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetInsurancePolicyTypeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

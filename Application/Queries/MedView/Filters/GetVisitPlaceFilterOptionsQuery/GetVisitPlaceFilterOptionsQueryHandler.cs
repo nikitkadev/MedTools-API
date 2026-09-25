@@ -18,8 +18,8 @@ public sealed class GetVisitPlaceFilterOptionsQueryHandler(
 
         return Result<GetVisitPlaceFilterOptionsResult>.Success(
             new GetVisitPlaceFilterOptionsResult(
-                Options: [.. visitPlaces.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. visitPlaces.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

@@ -21,8 +21,8 @@ public sealed class GetHospitalizationOutcomeFilterOptionsQueryHandler(
 
         return Result<GetHospitalizationOutcomeFilterOptionsResult>.Success(
             new GetHospitalizationOutcomeFilterOptionsResult(
-                Options: [.. hospitalizationOutcomes.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: $"{x.Name} ({careConditions.Where(careCondition => careCondition.Id == x.CareConditionId).Select(x => x.Name).First()})"))]));
+                FilterOptions: [.. hospitalizationOutcomes.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: $"{x.Name} ({careConditions.Where(careCondition => careCondition.Id == x.CareConditionId).Select(x => x.Name).First()})"))]));
     }
 }

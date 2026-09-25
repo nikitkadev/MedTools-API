@@ -18,8 +18,8 @@ public sealed class GetScreeningResultFilterOptionsQueryHandler(
 
         return Result<GetScreeningResultFilterOptionsResult>.Success(
             new GetScreeningResultFilterOptionsResult(
-                Options: [.. screeningResults.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. screeningResults.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

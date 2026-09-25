@@ -18,8 +18,8 @@ public sealed class GetRefusalReasonCodeFilterOptionsQueryHandler(
 
         return Result<GetRefusalReasonCodeFilterOptionsResult>.Success(
             new GetRefusalReasonCodeFilterOptionsResult(
-                Options: [.. refusalReasonCodes.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. refusalReasonCodes.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

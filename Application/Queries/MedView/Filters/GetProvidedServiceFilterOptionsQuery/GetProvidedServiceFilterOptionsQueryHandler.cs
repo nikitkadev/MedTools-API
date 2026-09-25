@@ -18,8 +18,8 @@ public sealed class GetProvidedServiceFilterOptionsQueryHandler(
 
         return Result<GetProvidedServiceFilterOptionsResult>.Success(
             new GetProvidedServiceFilterOptionsResult(
-                Options: [.. providedServices.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. providedServices.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

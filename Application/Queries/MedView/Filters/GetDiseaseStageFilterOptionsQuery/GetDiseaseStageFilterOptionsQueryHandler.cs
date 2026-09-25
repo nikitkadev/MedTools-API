@@ -16,8 +16,8 @@ public sealed class GetDiseaseStageFilterOptionsQueryHandler(
 
         return Result<GetDiseaseStageFilterOptionsResult>.Success(
             new GetDiseaseStageFilterOptionsResult(
-                Options: [.. diseaseStages.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. diseaseStages.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

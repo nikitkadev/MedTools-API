@@ -18,8 +18,8 @@ public sealed class GetMedicalCareProfileFilterOptionsQueryHandler(
 
         return Result<GetMedicalCareProfileFilterOptionsResult>.Success(
             new GetMedicalCareProfileFilterOptionsResult(
-                Options: [.. medicalCareProfiles.Select(x => new FilterOptionDto(
-                    Key: x.ProfileId.ToString(),
-                    Value: x.ProfileName))]));
+                FilterOptions: [.. medicalCareProfiles.Select(x => new FilterOptionDto(
+                    Value: x.ProfileId.ToString(),
+                    Label: x.ProfileName))]));
     }
 }

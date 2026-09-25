@@ -18,8 +18,8 @@ public sealed class GetPaymentMethodFilterOptionsQueryHandler(
 
         return Result<GetPaymentMethodFilterOptionsResult>.Success(
             new GetPaymentMethodFilterOptionsResult(
-                Options: [.. paymentMethods.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. paymentMethods.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

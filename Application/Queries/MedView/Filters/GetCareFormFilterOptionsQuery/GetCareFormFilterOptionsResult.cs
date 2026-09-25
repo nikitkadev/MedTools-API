@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetCareFormFilterOptionsQuery;
 
-public sealed record GetCareFormFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetCareFormFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

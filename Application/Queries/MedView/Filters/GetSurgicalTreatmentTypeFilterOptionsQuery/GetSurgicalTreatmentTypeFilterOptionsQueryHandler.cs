@@ -18,8 +18,8 @@ public sealed class GetSurgicalTreatmentTypeFilterOptionsQueryHandler(
 
         return Result<GetSurgicalTreatmentTypeFilterOptionsResult>.Success(
             new GetSurgicalTreatmentTypeFilterOptionsResult(
-                Options: [.. surgicalTreatmentTypes.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. surgicalTreatmentTypes.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

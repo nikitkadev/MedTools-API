@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetComplexityCoefficientOptionsQuery;
 
-public sealed record GetComplexityCoefficientOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetComplexityCoefficientOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

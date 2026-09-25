@@ -18,8 +18,8 @@ public class GetDrugTherapyLineFilterOptionsQueryHandler(
 
         return Result<GetDrugTherapyLineFilterOptionsResult>.Success(
             new GetDrugTherapyLineFilterOptionsResult(
-                Options: [.. drugTherapyLines.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. drugTherapyLines.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

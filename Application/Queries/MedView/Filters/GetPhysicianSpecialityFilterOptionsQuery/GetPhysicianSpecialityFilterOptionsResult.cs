@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetPhysicianSpecialityFilterOptionsQuery;
 
-public sealed record GetPhysicianSpecialityFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetPhysicianSpecialityFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

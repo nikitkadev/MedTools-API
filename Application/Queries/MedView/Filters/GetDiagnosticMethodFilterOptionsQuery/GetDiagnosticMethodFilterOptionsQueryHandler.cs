@@ -18,8 +18,8 @@ public sealed class GetDiagnosticMethodFilterOptionsQueryHandler(
 
         return Result<GetDiagnosticMethodFilterOptionsResult>.Success(
             new GetDiagnosticMethodFilterOptionsResult(
-                Options: [.. diagnosticMethods.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. diagnosticMethods.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

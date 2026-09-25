@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
 
-public sealed record GetDiseaseCharacterFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetDiseaseCharacterFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

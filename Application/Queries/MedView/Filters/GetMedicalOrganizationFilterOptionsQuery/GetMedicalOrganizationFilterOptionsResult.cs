@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetMedicalOrganizationFilterOptionsQuery;
 
-public sealed record GetMedicalOrganizationFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetMedicalOrganizationFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

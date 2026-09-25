@@ -18,8 +18,8 @@ public sealed class GetDrugIdentifierFilterOptionsQueryHandler(
 
         return Result<GetDrugIdentifierFilterOptionsResult>.Success(
             new GetDrugIdentifierFilterOptionsResult(
-                Options: [.. drugIdentifiers.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. drugIdentifiers.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

@@ -25,8 +25,8 @@ public sealed class GetInsuranceFilterOptionsQueryHandler(
 
         return Result<GetInsuranceFilterOptionsResult>.Success(
             new GetInsuranceFilterOptionsResult(
-                Options: [.. insurancesReferenceData.Select(x => new FilterOptionDto(
-                    Key: x.Code, 
-                    Value: x.Name))]));
+                FilterOptions: [.. insurancesReferenceData.Select(x => new FilterOptionDto(
+                    Value: x.Code,
+                    Label: x.Name))]));
     }
 }

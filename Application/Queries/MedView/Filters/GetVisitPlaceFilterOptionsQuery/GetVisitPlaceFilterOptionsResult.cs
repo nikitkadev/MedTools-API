@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetVisitPlaceFilterOptionsQuery;
 
-public sealed record GetVisitPlaceFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetVisitPlaceFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

@@ -18,8 +18,8 @@ public class GetCareConditionFilterOptionsQueryHandler(
 
         return Result<GetCareConditionFilterOptionsResult>.Success(
             new GetCareConditionFilterOptionsResult(
-                Options: [.. careConditions.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. careConditions.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

@@ -18,8 +18,8 @@ public sealed class GetHighTechCareFilterOptionsQueryHandler(
 
         return Result<GetHighTechCareFilterOptionsResult>.Success(
             new GetHighTechCareFilterOptionsResult(
-                Options: [.. highTechCareTypes.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. highTechCareTypes.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

@@ -18,8 +18,8 @@ public sealed class GetVisitPurposeFilterOptionsQueryHandler(
 
         return Result<GetVisitPurposeFilterOptionsResult>.Success(
             new GetVisitPurposeFilterOptionsResult(
-                Options: [.. visitPurposes.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. visitPurposes.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

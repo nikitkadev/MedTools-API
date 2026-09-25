@@ -18,8 +18,8 @@ public sealed class GetInterruptedCasePaymentReasonFilterOptionsQueryHandler(
 
         return Result<GetInterruptedCasePaymentReasonFilterOptionsResult>.Success(
             new GetInterruptedCasePaymentReasonFilterOptionsResult(
-                Options: [.. interruptedCasePaymentReasons.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. interruptedCasePaymentReasons.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

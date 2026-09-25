@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetReferralTypeFilterOptionsQuery;
 
-public sealed record GetReferralTypeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetReferralTypeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

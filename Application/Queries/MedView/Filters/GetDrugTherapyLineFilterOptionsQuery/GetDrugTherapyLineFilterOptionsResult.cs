@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetDrugTherapyLineFilterOptionsQuery;
 
-public sealed record GetDrugTherapyLineFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetDrugTherapyLineFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

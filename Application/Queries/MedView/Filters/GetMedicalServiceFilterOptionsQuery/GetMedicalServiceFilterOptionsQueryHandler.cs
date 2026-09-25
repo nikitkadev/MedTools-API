@@ -18,8 +18,8 @@ public sealed class GetMedicalServiceFilterOptionsQueryHandler(
 
         return Result<GetMedicalServiceFilterOptionsResult>.Success(
             new GetMedicalServiceFilterOptionsResult(
-                Options: [.. medicalServices.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: $"{x.Code} — {x.Name}" ))]));
+                FilterOptions: [.. medicalServices.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: $"{x.Code} — {x.Name}" ))]));
     }
 }

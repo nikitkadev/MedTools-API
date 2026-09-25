@@ -18,8 +18,8 @@ public sealed class GetOncologyServiceTypeFilterOptionsQueryHandler(
 
         return Result<GetOncologyServiceTypeFilterOptionsResult>.Success(
             new GetOncologyServiceTypeFilterOptionsResult(
-                Options: [.. oncologyServiceTypes.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. oncologyServiceTypes.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

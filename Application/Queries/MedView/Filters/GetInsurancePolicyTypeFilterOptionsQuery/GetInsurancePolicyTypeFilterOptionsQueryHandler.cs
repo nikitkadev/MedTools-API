@@ -17,8 +17,8 @@ public sealed class GetInsurancePolicyTypeFilterOptionsQueryHandler(
 
         return Result<GetInsurancePolicyTypeFilterOptionsResult>.Success(
             new GetInsurancePolicyTypeFilterOptionsResult(
-                Options: [.. policyTypes.Select(x => new FilterOptionDto(
-                    Key: x.TypeId, 
-                    Value: x.Name))]));
+                FilterOptions: [.. policyTypes.Select(x => new FilterOptionDto(
+                    Value: x.TypeId, 
+                    Label: x.Name))]));
     }
 }

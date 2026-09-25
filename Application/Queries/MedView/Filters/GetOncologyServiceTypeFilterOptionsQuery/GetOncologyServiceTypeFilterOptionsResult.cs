@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetOncologyServiceTypeFilterOptionsQuery;
 
-public sealed record GetOncologyServiceTypeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetOncologyServiceTypeFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

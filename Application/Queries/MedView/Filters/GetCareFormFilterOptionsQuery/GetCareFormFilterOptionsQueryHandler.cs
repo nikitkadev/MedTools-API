@@ -18,8 +18,8 @@ public sealed class GetCareFormFilterOptionsQueryHandler(
 
         return Result<GetCareFormFilterOptionsResult>.Success(
             new GetCareFormFilterOptionsResult(
-                Options: [.. careForms.Select(x => new FilterOptionDto(
-                    Key: x.Id.ToString(),
-                    Value: x.Name))]));
+                FilterOptions: [.. careForms.Select(x => new FilterOptionDto(
+                    Value: x.Id.ToString(),
+                    Label: x.Name))]));
     }
 }

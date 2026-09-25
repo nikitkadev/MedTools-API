@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetScreeningResultFilterOptionsQuery;
 
-public sealed record GetScreeningResultFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetScreeningResultFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

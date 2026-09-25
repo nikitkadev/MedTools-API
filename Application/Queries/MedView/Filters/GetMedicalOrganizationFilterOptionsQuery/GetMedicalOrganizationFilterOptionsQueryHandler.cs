@@ -26,9 +26,9 @@ public sealed class GetMedicalOrganizationFilterOptionsQueryHandler(
 
         return Result<GetMedicalOrganizationFilterOptionsResult>.Success(
             new GetMedicalOrganizationFilterOptionsResult(
-                Options: [.. medicalOrganizations.Select(x => new FilterOptionDto(
-                    Key: x.Code,
-                    Value: x.Name))]));
+                FilterOptions: [.. medicalOrganizations.Select(x => new FilterOptionDto(
+                    Value: x.Code,
+                    Label: x.Name))]));
 
     }
 }

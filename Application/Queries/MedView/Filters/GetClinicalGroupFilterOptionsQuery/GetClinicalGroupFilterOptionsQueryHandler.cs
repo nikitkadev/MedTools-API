@@ -18,8 +18,8 @@ public sealed class GetClinicalGroupFilterOptionsQueryHandler(
 
         return Result<GetClinicalGroupFilterOptionsResult>.Success(
             new GetClinicalGroupFilterOptionsResult(
-                Options: [.. clinicalGroups.Select(x => new FilterOptionDto(
-                    Key: x.Id,
-                    Value: x.Name))]));
+                FilterOptions: [.. clinicalGroups.Select(x => new FilterOptionDto(
+                    Value: x.Id,
+                    Label: x.Name))]));
     }
 }

@@ -2,4 +2,4 @@
 
 namespace Application.Queries.MedView.Filters.GetInterruptedCasePaymentReasonFilterOptionsQuery;
 
-public sealed record GetInterruptedCasePaymentReasonFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> Options);
+public sealed record GetInterruptedCasePaymentReasonFilterOptionsResult(IReadOnlyCollection<FilterOptionDto> FilterOptions);

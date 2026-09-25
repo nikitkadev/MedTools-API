@@ -10,7 +10,7 @@ public sealed class GetBedProfileFilterOptionsQueryHandler(
     IMedicalCareReferenceDataProvider medicalCareReferenceDataProvider) : IRequestHandler<GetBedProfileFilterOptionsQuery, Result<GetBedProfileFilterOptionsResult>>
 {
     public async Task<Result<GetBedProfileFilterOptionsResult>> Handle(
-        GetBedProfileFilterOptionsQuery request, 
+        GetBedProfileFilterOptionsQuery request,
         CancellationToken cancellationToken)
     {
         var bedProfiles = await medicalCareReferenceDataProvider.GetBedProfileReferencesAsync(
@@ -18,8 +18,8 @@ public sealed class GetBedProfileFilterOptionsQueryHandler(
 
         return Result<GetBedProfileFilterOptionsResult>.Success(
             new GetBedProfileFilterOptionsResult(
-                Options: [.. bedProfiles.Select(x => new FilterOptionDto(
-                    Key: x.BedProfileId,
-                    Value: x.BedProfileName))]));
+                FilterOptions: [.. bedProfiles.Select(x => new FilterOptionDto(
+                    Value: x.BedProfileId,
+                    Label: x.BedProfileName))]));
     }
 }
