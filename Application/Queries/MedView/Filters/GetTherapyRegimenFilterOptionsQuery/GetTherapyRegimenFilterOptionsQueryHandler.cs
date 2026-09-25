@@ -14,6 +14,7 @@ public sealed class GetTherapyRegimenFilterOptionsQueryHandler(
         CancellationToken cancellationToken)
     {
         var therapyRegimens = await medicalServiceReferenceDataProvider.GetTherapyRegimenReferencesAsync(
+            search: request.Search,
             cancellationToken: cancellationToken);
 
         return Result<GetTherapyRegimenFilterOptionsResult>.Success(

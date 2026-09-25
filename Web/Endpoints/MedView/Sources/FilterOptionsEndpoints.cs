@@ -380,11 +380,12 @@ public static class FilterOptionsEndpoints
     }
 
     public async static Task<IResult> GetDiseaseStageFilterOptionsAsync(
+        string search,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetDiseaseStageFilterOptionsQuery(),
+            request: new GetDiseaseStageFilterOptionsQuery(Search: search),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -476,11 +477,12 @@ public static class FilterOptionsEndpoints
     }
 
     public async static Task<IResult> GetDrugIdentifierFilterOptionsAsync(
+        string search,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetDrugIdentifierFilterOptionsQuery(),
+            request: new GetDrugIdentifierFilterOptionsQuery(Search: search),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -492,11 +494,12 @@ public static class FilterOptionsEndpoints
     }
 
     public async static Task<IResult> GetTherapyRegimenFilterOptionsAsync(
+        string search,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetTherapyRegimenFilterOptionsQuery(),
+            request: new GetTherapyRegimenFilterOptionsQuery(Search: search),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -524,11 +527,12 @@ public static class FilterOptionsEndpoints
     }
 
     public async static Task<IResult> GetMedicalServiceFilterOptionsAsync(
+        string search,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetMedicalServiceFilterOptionsQuery(),
+            request: new GetMedicalServiceFilterOptionsQuery(Search: search),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -556,11 +560,12 @@ public static class FilterOptionsEndpoints
     }
 
     public async static Task<IResult> GetClinicalGroupFilterOptionsAsync(
+        string search,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetClinicalGroupFilterOptionsQuery(),
+            request: new GetClinicalGroupFilterOptionsQuery(Search: search),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -604,11 +609,12 @@ public static class FilterOptionsEndpoints
     }
 
     public async static Task<IResult> GetHighTechCareTypeFilterOptionsAsync(
+        string search,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetHighTechCareFilterOptionsQuery(),
+            request: new GetHighTechCareFilterOptionsQuery(Search: search),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -620,11 +626,12 @@ public static class FilterOptionsEndpoints
     }
 
     public async static Task<IResult> GetHighTechCareMethodsFilterOptionsAsync(
+        string search,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetHighTechCareMethodFilterOptionsQuery(),
+            request: new GetHighTechCareMethodFilterOptionsQuery(Search: search),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -636,11 +643,12 @@ public static class FilterOptionsEndpoints
     }
 
     public async static Task<IResult> GetProvidedServiceFilterOptionsAsync(
+        string search,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetProvidedServiceFilterOptionsQuery(),
+            request: new GetProvidedServiceFilterOptionsQuery(Search: search),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)
@@ -668,11 +676,12 @@ public static class FilterOptionsEndpoints
     }
 
     public async static Task<IResult> GetRefusalReasonCodesFilterOptionsAsync(
+        string search,
         ISender sender,
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(
-            request: new GetRefusalReasonCodeFilterOptionsQuery(),
+            request: new GetRefusalReasonCodeFilterOptionsQuery(Search: search),
             cancellationToken: cancellationToken);
 
         if (!result.IsSuccess)

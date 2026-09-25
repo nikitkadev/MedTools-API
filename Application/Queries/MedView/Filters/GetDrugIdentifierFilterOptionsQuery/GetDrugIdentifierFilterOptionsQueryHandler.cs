@@ -14,6 +14,7 @@ public sealed class GetDrugIdentifierFilterOptionsQueryHandler(
         CancellationToken cancellationToken)
     {
         var drugIdentifiers = await medicalServiceReferenceDataProvider.GetDrugIdentifierReferencesAsync(
+            search: request.Search,
             cancellationToken: cancellationToken);
 
         return Result<GetDrugIdentifierFilterOptionsResult>.Success(

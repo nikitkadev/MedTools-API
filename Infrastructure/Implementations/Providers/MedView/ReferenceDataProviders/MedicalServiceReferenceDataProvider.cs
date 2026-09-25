@@ -13,16 +13,18 @@ public sealed class MedicalServiceReferenceDataProvider(
     DbContextFactory dbContextFactory) : IMedicalServiceReferenceDataProvider
 {
     public async Task<IReadOnlyCollection<DrugIdentifierReferenceDto>> GetDrugIdentifierReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
 
         var result = await dbContext
             .Set<DrugIdentifierDbEntity>()
-            .Where(x => x.DrugIdentifierId != null && x.DrugIdentifierName != null)
+            .Where(x => x.DrugIdentifierId != null && x.DrugIdentifierName != null && x.DrugIdentifierName.StartsWith(search))
             .Select(x => new DrugIdentifierReferenceDto(
                 Id: x.DrugIdentifierId!,
                 Name: x.DrugIdentifierName!))
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;
@@ -78,17 +80,19 @@ public sealed class MedicalServiceReferenceDataProvider(
     }
 
     public async Task<IReadOnlyCollection<MedicalServiceReferenceDto>> GetMedicalServiceReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
 
         var result = await dbContext
             .Set<MedicalServiceDbEntity>()
-            .Where(x => x.ServiceName != null)
+            .Where(x => x.ServiceName != null && (x.ServiceName.StartsWith(search) || x.ServiceCode.StartsWith(search)))
             .Select(x => new MedicalServiceReferenceDto(
                 Id: x.ServiceId,
                 Code: x.ServiceCode,
                 Name: x.ServiceName!))
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;
@@ -111,16 +115,18 @@ public sealed class MedicalServiceReferenceDataProvider(
     }
 
     public async Task<IReadOnlyCollection<ProvidedServiceReferenceDto>> GetProvidedServiceReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
 
         var result = await dbContext
             .Set<ProvidedServiceDbEntity>()
-            .Where(x => x.ProvidedServiceId != null && x.ProvidedServiceName != null)
+            .Where(x => x.ProvidedServiceId != null && x.ProvidedServiceName != null && (x.ProvidedServiceId.StartsWith(search) || x.ProvidedServiceName.StartsWith(search)))
             .Select(x => new ProvidedServiceReferenceDto(
                 Id: x.ProvidedServiceId!,
-                Name: x.ProvidedServiceName!))
+                Name: $"{x.ProvidedServiceId!} — {x.ProvidedServiceName!}"))
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;
@@ -175,16 +181,18 @@ public sealed class MedicalServiceReferenceDataProvider(
     }
 
     public async Task<IReadOnlyCollection<TherapyRegimenReferenceDto>> GetTherapyRegimenReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
 
         var result = await dbContext
             .Set<TherapyRegimenDbEntity>()
-            .Where(x => x.TherapyRegimenName != null)
+            .Where(x => x.TherapyRegimenName != null && x.TherapyRegimenName.StartsWith(search))
             .Select(x => new TherapyRegimenReferenceDto(
                 Id: x.TherapyRegimenId,
                 Name: x.TherapyRegimenName!))
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

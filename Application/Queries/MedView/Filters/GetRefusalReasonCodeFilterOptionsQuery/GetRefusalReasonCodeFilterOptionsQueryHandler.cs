@@ -14,6 +14,7 @@ public sealed class GetRefusalReasonCodeFilterOptionsQueryHandler(
         CancellationToken cancellationToken)
     {
         var refusalReasonCodes = await paymentReferenceDataProvider.GetRefusalReasonCodeReferencesAsync(
+            search: request.Search,
             cancellationToken: cancellationToken);
 
         return Result<GetRefusalReasonCodeFilterOptionsResult>.Success(

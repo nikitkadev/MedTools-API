@@ -14,16 +14,18 @@ public sealed class PaymentReferenceDataProvider(
     DbContextFactory dbContextFactory) : IPaymentReferenceDataProvider
 {
     public async Task<IReadOnlyCollection<ClinicalGroupReferenceDto>> GetClinicalGroupReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
 
         var result = await dbContext
             .Set<ClinicalGroupDbEntity>()
-            .Where(x => x.ClinicalGroupName != null)
+            .Where(x => x.ClinicalGroupName != null && x.ClinicalGroupId.StartsWith(search))
             .Select(x => new ClinicalGroupReferenceDto(
                 Id: x.ClinicalGroupId,
-                Name: x.ClinicalGroupName!))
+                Name: $"{x.ClinicalGroupId} — {x.ClinicalGroupName!}"))
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;
@@ -77,15 +79,18 @@ public sealed class PaymentReferenceDataProvider(
     }
 
     public async Task<IReadOnlyCollection<RefusalReasonCodeReferenceDto>> GetRefusalReasonCodeReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
 
         var result = await dbContext
             .Set<RefusalReasonCodeDbEntity>()
+            .Where(x => x.RefusalReasonCodeName.StartsWith(search))
             .Select(x => new RefusalReasonCodeReferenceDto(
                 Id: x.RefusalReasonCodeId,
                 Name: x.RefusalReasonCodeName))
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

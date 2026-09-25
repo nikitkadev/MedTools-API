@@ -14,6 +14,7 @@ public sealed class GetClinicalGroupFilterOptionsQueryHandler(
         CancellationToken cancellationToken)
     {
         var clinicalGroups = await paymentReferenceDataProvider.GetClinicalGroupReferencesAsync(
+            search: request.Search,
             cancellationToken: cancellationToken);
 
         return Result<GetClinicalGroupFilterOptionsResult>.Success(

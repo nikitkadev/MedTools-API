@@ -12,12 +12,13 @@ public sealed class GetDiseaseStageFilterOptionsQueryHandler(
     public async Task<Result<GetDiseaseStageFilterOptionsResult>> Handle(GetDiseaseStageFilterOptionsQuery request, CancellationToken cancellationToken)
     {
         var diseaseStages = await diseasesReferenceDataProvider.GetDiseaseStageReferencesAsync(
+            search: request.Search,
             cancellationToken: cancellationToken);
 
         return Result<GetDiseaseStageFilterOptionsResult>.Success(
             new GetDiseaseStageFilterOptionsResult(
                 FilterOptions: [.. diseaseStages.Select(x => new FilterOptionDto(
-                    Value: x.Id.ToString(),
-                    Label: x.Name))]));
+                    Value: x.Id,
+                    Label: x.Id))]));
     }
 }

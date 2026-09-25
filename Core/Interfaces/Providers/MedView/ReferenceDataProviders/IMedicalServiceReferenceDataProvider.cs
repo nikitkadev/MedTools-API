@@ -20,12 +20,15 @@ public interface IMedicalServiceReferenceDataProvider
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyCollection<DrugIdentifierReferenceDto>> GetDrugIdentifierReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyCollection<TherapyRegimenReferenceDto>> GetTherapyRegimenReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyCollection<MedicalServiceReferenceDto>> GetMedicalServiceReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyCollection<ReferralTypeReferenceDto>> GetReferralTypeReferencesAsync(
@@ -35,5 +38,6 @@ public interface IMedicalServiceReferenceDataProvider
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyCollection<ProvidedServiceReferenceDto>> GetProvidedServiceReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default);
 }

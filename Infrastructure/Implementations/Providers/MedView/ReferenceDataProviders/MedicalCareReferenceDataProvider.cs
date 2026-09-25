@@ -75,32 +75,36 @@ public sealed class MedicalCareReferenceDataProvider(
     }
 
     public async Task<IReadOnlyCollection<HighTechCareMethodReferenceDto>> GetHighTechCareMethodReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
 
         var result = await dbContext
             .Set<HighTechCareMethodDbEntity>()
-            .Where(x => x.HighTechCareMethodId != null)
+            .Where(x => x.HighTechCareMethodId != null && x.HighTechCareMethodName.StartsWith(search))
             .Select(x => new HighTechCareMethodReferenceDto(
                 Id: x.HighTechCareMethodId!,
                 Name: x.HighTechCareMethodName))
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;
     }
 
     public async Task<IReadOnlyCollection<HighTechCareTypeReferenceDto>> GetHighTechCareTypeReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(targetDb: TargetDbType.MEDSPR18);
 
         var result = await dbContext
             .Set<HighTechCareTypeDbEntity>()
-            .Where(x => x.HighTechCareTypeId != null && x.HighTechCareTypeName != null)
+            .Where(x => x.HighTechCareTypeId != null && x.HighTechCareTypeName != null && (x.HighTechCareTypeId.StartsWith(search) || x.HighTechCareTypeName.StartsWith(search)))
             .Select(x => new HighTechCareTypeReferenceDto(
                 Id: x.HighTechCareTypeId!,
-                Name: x.HighTechCareTypeName!))
+                Name: $"{x.HighTechCareTypeId} — {x.HighTechCareTypeName!}"))
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

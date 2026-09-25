@@ -35,8 +35,10 @@ public interface IMedicalCareReferenceDataProvider
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyCollection<HighTechCareTypeReferenceDto>> GetHighTechCareTypeReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyCollection<HighTechCareMethodReferenceDto>> GetHighTechCareMethodReferencesAsync(
+        string search,
         CancellationToken cancellationToken = default);
 }

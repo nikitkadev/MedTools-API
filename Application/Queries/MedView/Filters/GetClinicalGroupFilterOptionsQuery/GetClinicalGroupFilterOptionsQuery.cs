@@ -4,4 +4,4 @@ using Core.Common.Results;
 
 namespace Application.Queries.MedView.Filters.GetClinicalGroupFilterOptionsQuery;
 
-public sealed record GetClinicalGroupFilterOptionsQuery : IRequest<Result<GetClinicalGroupFilterOptionsResult>>;
+public sealed record GetClinicalGroupFilterOptionsQuery(string Search) : IRequest<Result<GetClinicalGroupFilterOptionsResult>>;

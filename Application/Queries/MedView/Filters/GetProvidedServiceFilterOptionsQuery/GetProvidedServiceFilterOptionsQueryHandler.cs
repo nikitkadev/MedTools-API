@@ -14,6 +14,7 @@ public sealed class GetProvidedServiceFilterOptionsQueryHandler(
         CancellationToken cancellationToken)
     {
         var providedServices = await medicalServiceReferenceDataProvider.GetProvidedServiceReferencesAsync(
+            search: request.Search,
             cancellationToken: cancellationToken);
 
         return Result<GetProvidedServiceFilterOptionsResult>.Success(

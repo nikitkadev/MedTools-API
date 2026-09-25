@@ -44,16 +44,18 @@ public sealed class DiseasesReferenceDataProvider(
     }
 
     public async Task<IReadOnlyCollection<DiseaseStageReferenceDto>> GetDiseaseStageReferencesAsync(
+        string Search,
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
 
         var result = await dbContext
             .Set<DiseaseStageDbEntity>()
-            .Where(x => x.StageName != null && x.StageName != "Нет")
+            .Where(x => x.StageName != null && x.StageName != "Нет" && x.StageName.StartsWith(Search))
             .Select(x => new DiseaseStageReferenceDto(
-                Id: x.StageId,
-                Name: x.StageId + " : " + x.StageName))
+                Id: x.StageName!))
+            .Distinct()
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

@@ -1,5 +1,3 @@
 ﻿namespace Core.Dtos.MedView.Reference;
 
-public sealed record DiseaseStageReferenceDto(
-    int Id,
-    string Name);
+public sealed record DiseaseStageReferenceDto(string Id);

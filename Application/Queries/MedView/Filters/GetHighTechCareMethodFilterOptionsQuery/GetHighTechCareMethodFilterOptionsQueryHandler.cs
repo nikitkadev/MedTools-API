@@ -14,6 +14,7 @@ public sealed class GetHighTechCareMethodFilterOptionsQueryHandler(
         CancellationToken cancellationToken)
     {
         var highTechCareMethods = await medicalCareReferenceDataProvider.GetHighTechCareMethodReferencesAsync(
+            search: request.Search,
             cancellationToken: cancellationToken);
 
         return Result<GetHighTechCareMethodFilterOptionsResult>.Success(
