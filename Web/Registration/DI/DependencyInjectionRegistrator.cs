@@ -24,6 +24,8 @@ using Infrastructure.Implementations.Providers.MedView.ReferenceDataProviders;
 
 using Web.Mapping;
 using Web.Options;
+using Core.Interfaces.Repositories.MedView;
+using Infrastructure.Implementations.Repositories.MedVIew;
 
 namespace Web.Registration.DI;
 
@@ -61,6 +63,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IDiseasesReferenceDataProvider, DiseasesReferenceDataProvider>();
         services.AddScoped<IPaymentReferenceDataProvider, PaymentReferenceDataProvider>();
         services.AddScoped<IMedicalServiceReferenceDataProvider, MedicalServiceReferenceDataProvider>();
+        services.AddScoped<IMedViewCompletedCasesRepository, MedViewCompletedCasesRepository>();
 
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();

@@ -10,6 +10,7 @@ public class MedViewEndpoints : IEndpoint
         var group = endpointsBuilder.MapGroup("/med-view").WithTags("MedView");
 
         group.MapFilterOptionsEndpoints();
+        group.MapCompletedCaseEndpoints();
     }
     
 }
