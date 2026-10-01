@@ -15,7 +15,7 @@ public sealed class CompletedCaseDbEntityConfiguration : IEntityTypeConfiguratio
         builder.Property(prop => prop.MedicalRecordUid).HasColumnName("zap_uid");
 
         builder.Property(prop => prop.CaseRecordNumber).HasColumnName("idcase");
-        builder.Property(prop => prop.CareConditions).HasColumnName("usl_ok");
+        builder.Property(prop => prop.CareCondition).HasColumnName("usl_ok");
         builder.Property(prop => prop.MedicalCareType).HasColumnName("vidpom");
         builder.Property(prop => prop.CareForm).HasColumnName("for_pom");
         builder.Property(prop => prop.ReferringMedicalOrganizationCode).HasColumnName("npr_mo").IsRequired(false);

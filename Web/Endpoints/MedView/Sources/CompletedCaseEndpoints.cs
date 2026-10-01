@@ -1,5 +1,6 @@
-﻿using Application.Queries.MedView.CompletedCases.GetCompletedCasesQuery;
-using MediatR;
+﻿using MediatR;
+
+using Application.Queries.MedView.CompletedCases.GetCompletedCasesQuery;
 
 using Web.Dtos.Requests.MedView;
 
@@ -20,8 +21,10 @@ public static class CompletedCaseEndpoints
         CancellationToken cancellationToken)
     {
         var result = await sender.Send(new GetCompletedCasesQuery(
-                TargetDb: Core.Common.Enums.TargetDbType.SMODB18,
-                request.Filters),
+                TargetDb: request.TargetDb,
+                Filters: request.Filters,
+                Page: request.Pagination.Page,
+                PageSize: request.Pagination.PageSize),
             cancellationToken: cancellationToken);
 
         if (result.IsFailure)

@@ -15,11 +15,13 @@ public sealed class GetCompletedCasesQueryHandler(
         var completedCasesPaginationResult = await medViewCompletedCasesRepository.GetCompletedCaseListItemsAsync(
             targetDb: request.TargetDb,
             filters: request.Filters,
+            page: request.Page,
+            pageSize: request.PageSize,
             cancellationToken: cancellationToken);
 
         return Result<GetCompletedCasesResult>.Success(
             new GetCompletedCasesResult(
-                CompletedCaseListItems: completedCasesPaginationResult.Records,
+                CompletedCases: completedCasesPaginationResult.Records,
                 TotalCount: completedCasesPaginationResult.TotalCount));
     }
 }

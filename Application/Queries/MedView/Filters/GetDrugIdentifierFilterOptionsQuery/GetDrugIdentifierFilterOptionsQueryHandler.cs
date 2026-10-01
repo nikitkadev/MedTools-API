@@ -21,6 +21,6 @@ public sealed class GetDrugIdentifierFilterOptionsQueryHandler(
             new GetDrugIdentifierFilterOptionsResult(
                 FilterOptions: [.. drugIdentifiers.Select(x => new FilterOptionDto(
                     Value: x.Id,
-                    Label: x.Name))]));
+                    Label: $"{x.Id} — {x.Name}"))]));
     }
 }

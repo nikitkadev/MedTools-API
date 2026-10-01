@@ -3,5 +3,5 @@
 namespace Application.Queries.MedView.CompletedCases.GetCompletedCasesQuery;
 
 public sealed record GetCompletedCasesResult(
-    IReadOnlyCollection<CompletedCaseListItemDto> CompletedCaseListItems,
+    IReadOnlyCollection<CompletedCaseListItemDto> CompletedCases,
     int TotalCount);

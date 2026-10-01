@@ -6,7 +6,7 @@ public sealed class CompletedCaseDbEntity
     public int MedicalRecordUid { get; set; }
 
     public long CaseRecordNumber { get; set; }
-    public int CareConditions { get; set; }
+    public int CareCondition { get; set; }
     public int MedicalCareType { get; set; }
     public byte CareForm { get; set; }
     public string? ReferringMedicalOrganizationCode { get; set; }

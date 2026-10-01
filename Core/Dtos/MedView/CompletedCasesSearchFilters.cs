@@ -59,14 +59,14 @@ public sealed class MedicalCaseDetailsFilters
 
 public sealed class BaseMedicalCaseDetailsFilters
 {
-    public List<string> BedProfiles { get; set; } = [];
-    public List<string> DiseaseCharacters { get; set; } = [];
+    public List<int> MedicalProfiles { get; set; } = [];
+    public List<int> BedProfiles { get; set; } = [];
+    public List<byte> DiseaseCharacters { get; set; } = [];
     public string Division { get; set; } = string.Empty;
     public List<string> EncounterMedicalOrganizations { get; set; } = [];
-    public List<string> MedicalProfiles { get; set; } = [];
     public string MedicalRecordNumber { get; set; } = string.Empty;
-    public List<string> PhysicianSpecialties { get; set; } = [];
-    public string PreventiveCarePlace { get; set; } = string.Empty;
+    public List<int> PhysicianSpecialties { get; set; } = [];
+    public List<byte> PreventiveCarePlaces { get; set; } = [];
     public DateTime? TreatmentEndDate { get; set; }
     public DateTime? TreatmentStartDate { get; set; }
     public List<string> VisitPurposes { get; set; } = [];
@@ -75,15 +75,15 @@ public sealed class BaseMedicalCaseDetailsFilters
 
 public sealed class CompletedCaseDetailsFilters
 {
-    public List<string> CareConditions { get; set; } = [];
-    public List<string> CareForms { get; set; } = [];
-    public List<string> DiseaseOutcomes { get; set; } = [];
-    public List<string> HospitalizationOutcomes { get; set; } = [];
-    public List<string> MedicalCareTypes { get; set; } = [];
+    public List<int> CareConditions { get; set; } = [];
+    public List<byte> CareForms { get; set; } = [];
+    public List<int> DiseaseOutcomes { get; set; } = [];
+    public List<int> HospitalizationOutcomes { get; set; } = [];
+    public List<int> MedicalCareTypes { get; set; } = [];
     public List<string> MedicalOrganizations { get; set; } = [];
-    public List<string> PaymentMethods { get; set; } = [];
+    public List<short> PaymentMethods { get; set; } = [];
     public List<string> ReferringMedicalOrganizations { get; set; } = [];
-    public List<string> ScreeningResults { get; set; } = [];
+    public List<int> ScreeningResults { get; set; } = [];
     public DateTime? TreatmentEndDate { get; set; }
     public DateTime? TreatmentStartDate { get; set; }
 }
@@ -100,16 +100,16 @@ public sealed class OncologyFilters
 public sealed class OncologyCaseFilters
 {
     public List<string> Stages { get; set; } = [];
-    public List<string> ReferralReasons { get; set; } = [];
+    public List<byte> ReferralReasons { get; set; } = [];
 }
 
 public sealed class OncologyServiceFilters
 {
-    public List<string> DrugTherapyCycles { get; set; } = [];
+    public List<byte> DrugTherapyCycles { get; set; } = [];
     public List<string> DrugTherapyLines { get; set; } = [];
-    public List<string> RadioTherapyTypes { get; set; } = [];
-    public List<string> ServiceTypes { get; set; } = [];
-    public List<string> SurgicalTreatmentTypes { get; set; } = [];
+    public List<byte> RadioTherapyTypes { get; set; } = [];
+    public List<byte> ServiceTypes { get; set; } = [];
+    public List<byte> SurgicalTreatmentTypes { get; set; } = [];
 }
 
 public sealed class MedicationFilters

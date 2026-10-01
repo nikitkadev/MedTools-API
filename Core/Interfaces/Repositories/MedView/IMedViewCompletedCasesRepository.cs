@@ -10,5 +10,7 @@ public interface IMedViewCompletedCasesRepository
     Task<PagedResult<CompletedCaseListItemDto>> GetCompletedCaseListItemsAsync(
         TargetDbType targetDb,
         CompletedCasesSearchFilters filters,
+        int pageSize,
+        int page,
         CancellationToken cancellationToken = default);
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Core.Interfaces.Auth;
 using Core.Interfaces.Repositories.Users;
+using Core.Interfaces.Repositories.MedView;
 using Core.Interfaces.Repositories.RControl;
 using Core.Interfaces.Providers.MedView.AvailableKeysProviders;
 using Core.Interfaces.Providers.MedView.ReferenceDataProviders;
@@ -18,14 +19,13 @@ using Infrastructure.Database;
 using Infrastructure.Database.Factories;
 using Infrastructure.Implementations.Services;
 using Infrastructure.Implementations.Repositories.Users;
+using Infrastructure.Implementations.Repositories.MedVIew;
 using Infrastructure.Implementations.Repositories.RControl;
 using Infrastructure.Implementations.Providers.MedView.AvailableKeysProviders;
 using Infrastructure.Implementations.Providers.MedView.ReferenceDataProviders;
 
 using Web.Mapping;
 using Web.Options;
-using Core.Interfaces.Repositories.MedView;
-using Infrastructure.Implementations.Repositories.MedVIew;
 
 namespace Web.Registration.DI;
 
@@ -57,6 +57,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IProvidedServiceRepository, ProvidedServiceRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IAvailableMedicalOrganizationKeysProvider, AvailableMedicalOrganizationKeysProvider>();
+        services.AddScoped<IAvaliableKeysHelper, AvaliableKeysHelper>();
         services.AddScoped<IMedicalOrganizationReferenceDataProvider, MedicalOrganizationReferenceDataProvider>();
         services.AddScoped<IDocumentReferenceDataProvider, DocumentReferenceDataProvider>();
         services.AddScoped<IMedicalCareReferenceDataProvider, MedicalCareReferenceDataProvider>();
@@ -147,7 +148,8 @@ public static class DependencyInjectionRegistrator
         });
 
         services.AddOptions<JwtSettings>().Bind(configuration.GetSection("JwtSettings"));
-
+        
         return services;
     }
 }
+

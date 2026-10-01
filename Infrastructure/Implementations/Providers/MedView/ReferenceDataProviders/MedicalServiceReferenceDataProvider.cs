@@ -20,10 +20,13 @@ public sealed class MedicalServiceReferenceDataProvider(
 
         var result = await dbContext
             .Set<DrugIdentifierDbEntity>()
-            .Where(x => x.DrugIdentifierId != null && x.DrugIdentifierName != null && x.DrugIdentifierName.StartsWith(search))
+            .Where(x => x.DrugIdentifierId != null
+                && x.DrugIdentifierName != null
+                && (x.DrugIdentifierName.StartsWith(search) || x.DrugIdentifierId.StartsWith(search)))
             .Select(x => new DrugIdentifierReferenceDto(
                 Id: x.DrugIdentifierId!,
                 Name: x.DrugIdentifierName!))
+            .Distinct()
             .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
@@ -188,10 +191,11 @@ public sealed class MedicalServiceReferenceDataProvider(
 
         var result = await dbContext
             .Set<TherapyRegimenDbEntity>()
-            .Where(x => x.TherapyRegimenName != null && x.TherapyRegimenName.StartsWith(search))
+            .Where(x => x.TherapyRegimenId.StartsWith(search))
             .Select(x => new TherapyRegimenReferenceDto(
                 Id: x.TherapyRegimenId,
-                Name: x.TherapyRegimenName!))
+                Name: x.TherapyRegimenId))
+            .Distinct()
             .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 

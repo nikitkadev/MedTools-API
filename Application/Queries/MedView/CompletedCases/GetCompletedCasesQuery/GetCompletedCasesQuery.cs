@@ -8,4 +8,6 @@ namespace Application.Queries.MedView.CompletedCases.GetCompletedCasesQuery;
 
 public sealed record GetCompletedCasesQuery(
     TargetDbType TargetDb,
-    CompletedCasesSearchFilters Filters) : IRequest<Result<GetCompletedCasesResult>>;
+    CompletedCasesSearchFilters Filters,
+    int Page,
+    int PageSize) : IRequest<Result<GetCompletedCasesResult>>;
