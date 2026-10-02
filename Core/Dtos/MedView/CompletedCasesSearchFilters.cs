@@ -130,9 +130,9 @@ public sealed class PrescriptionFilters
 public sealed class BasePrescriptionFilters
 {
     public List<string> BedProfiles { get; set; } = [];
-    public List<string> DiagnosticMethods { get; set; } = [];
-    public List<string> MedicalCareProfiles { get; set; } = [];
-    public List<string> PrescriptionTypes { get; set; } = [];
+    public List<byte> DiagnosticMethods { get; set; } = [];
+    public List<int> MedicalCareProfiles { get; set; } = [];
+    public List<byte> PrescriptionTypes { get; set; } = [];
     public DateTime? ReferralDate { get; set; }
     public List<string> ReferredToMedicalOrganizations { get; set; } = [];
     public List<string> Services { get; set; } = [];
@@ -140,9 +140,9 @@ public sealed class BasePrescriptionFilters
 
 public sealed class ReferralFilters
 {
-    public List<string> DiagnosticMethods { get; set; } = [];
+    public List<byte> DiagnosticMethods { get; set; } = [];
     public DateTime? ReferralDate { get; set; }
-    public List<string> ReferralTypes { get; set; } = [];
+    public List<byte> ReferralTypes { get; set; } = [];
     public List<string> ReferredServices { get; set; } = [];
     public List<string> ReferredToMedicalOrganizations { get; set; } = [];
 
@@ -185,7 +185,7 @@ public sealed class SanctionFilters
 {
     public List<string> ControlTypeCodes { get; set; } = [];
     public string ExpertiseActNumber { get; set; } = string.Empty;
-    public List<string> RefusalReasons { get; set; } = [];
+    public List<int> RefusalReasons { get; set; } = [];
     public DateTime? ExpertiseActDate { get; set; }
 }
 #endregion

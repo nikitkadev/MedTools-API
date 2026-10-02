@@ -86,10 +86,11 @@ public sealed class PaymentReferenceDataProvider(
 
         var result = await dbContext
             .Set<RefusalReasonCodeDbEntity>()
-            .Where(x => x.RefusalReasonCodeName.StartsWith(search))
+            .Where(x => x.RefusalReasonCodeName.StartsWith(search) || x.RefusalReasonCodeId.ToString().StartsWith(search))
             .Select(x => new RefusalReasonCodeReferenceDto(
                 Id: x.RefusalReasonCodeId,
-                Name: x.RefusalReasonCodeName))
+                Name: $"{x.RefusalReasonCodeId} — основание {x.RefusalReasonCodeName}"))
+            .Distinct()
             .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 

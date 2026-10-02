@@ -13,4 +13,14 @@ public interface IDiseasesReferenceDataProvider
     Task<IReadOnlyCollection<DiseaseStageReferenceDto>> GetDiseaseStageReferencesAsync(
         string search,
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<DiseaseReferenceDto>> GetDiseaseReferencesAsync(
+        string search,
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<DiseaseClassReferenceDto>> GetDiseaseClassReferencesAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<DiseaseSubClassReferenceDto>> GetDiseaseSubClassReferencesAsync(
+        CancellationToken cancellationToken = default);
 }

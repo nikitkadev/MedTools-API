@@ -28,6 +28,25 @@ public sealed class DiseasesReferenceDataProvider(
         return result;
     }
 
+    public async Task<IReadOnlyCollection<DiseaseClassReferenceDto>> GetDiseaseClassReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<DiseaseClassDbEntity>()
+            .Where(x => x.ClassName != null
+                && x.StartingDiseasePrefix != null
+                && x.EndingDiseasePrefix != null
+                && x.ClassName != "Нет")
+            .Select(x => new DiseaseClassReferenceDto(
+                Id: x.Uid,
+                Name: $"{x.StartingDiseasePrefix!}..{x.EndingDiseasePrefix!} — {x.ClassName!}"))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
     public async Task<IReadOnlyCollection<DiseaseOutcomeReferenceDto>> GetDiseaseOutcomeReferencesAsync(
         CancellationToken cancellationToken = default)
     {
@@ -38,6 +57,26 @@ public sealed class DiseasesReferenceDataProvider(
             .Select(x => new DiseaseOutcomeReferenceDto(
                 Id: x.OutcomeId,
                 Name: x.OutcomeName))
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
+    public async Task<IReadOnlyCollection<DiseaseReferenceDto>> GetDiseaseReferencesAsync(
+        string search,
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<DiseaseDbEntity>()
+            .Where(x => (x.DiseaseCode != null && x.DiseaseCode != "000")
+                && x.DiseaseName != null
+                && (x.DiseaseCode.StartsWith(search) || x.DiseaseName.StartsWith(search)))
+            .Select(x => new DiseaseReferenceDto(
+                Id: x.DiseaseCode!,
+                Name: x.DiseaseName!))
+            .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;
@@ -56,6 +95,24 @@ public sealed class DiseasesReferenceDataProvider(
                 Id: x.StageName!))
             .Distinct()
             .Take(30)
+            .ToListAsync(cancellationToken: cancellationToken);
+
+        return result;
+    }
+
+    public async Task<IReadOnlyCollection<DiseaseSubClassReferenceDto>> GetDiseaseSubClassReferencesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+
+        var result = await dbContext
+            .Set<DiseaseSubClassDbEntity>()
+            .Where(x => x.SubClassName != null 
+                && x.StartingDiseasePrefix != null 
+                && x.EndingDiseasePrefix != null)
+            .Select(x => new DiseaseSubClassReferenceDto(
+                Id: x.Uid,
+                Name: $"{x.StartingDiseasePrefix}..{x.EndingDiseasePrefix} — {x.SubClassName}"))
             .ToListAsync(cancellationToken: cancellationToken);
 
         return result;

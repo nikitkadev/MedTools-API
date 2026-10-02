@@ -40,6 +40,9 @@ using Application.Queries.MedView.Filters.GetHighTechCareMethodFilterOptionsQuer
 using Application.Queries.MedView.Filters.GetProvidedServiceFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetControlTypeCodeFilterOptionsQuery;
 using Application.Queries.MedView.Filters.GetRefusalReasonCodeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseClassFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseSubClassFilterOptionsQuery;
 
 using Infrastructure.Database.Factories;
 using Infrastructure.Database.DbEntities.References;
@@ -89,6 +92,9 @@ public static class FilterOptionsEndpoints
         group.MapGet("/provided-services", GetProvidedServiceFilterOptionsAsync);
         group.MapGet("/control-type-codes", GetControlTypeCodeFilterOptionsAsync);
         group.MapGet("/refusal-reason-codes", GetRefusalReasonCodesFilterOptionsAsync);
+        group.MapGet("/diseases", GetDiseaseFilterOptionsAsync);
+        group.MapGet("/disease-classes", GetDiseaseClasseFilterOptionsAsync);
+        group.MapGet("/disease-sub-classes", GetDiseaseSubClasseFilterOptionsAsync);
 
         group.MapGet("/test", TestThisShitAsync);
     }
@@ -690,6 +696,57 @@ public static class FilterOptionsEndpoints
         }
 
         return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseClasseFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseClassFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+
+    }
+
+    public async static Task<IResult> GetDiseaseSubClasseFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseSubClassFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+
     }
 
 }

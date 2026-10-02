@@ -91,13 +91,23 @@ public static class DependencyInjectionRegistrator
         services.AddDbContextFactory<SMODbContext>(
             options =>
             {
-                options.UseSqlServer(connectionString.SMODB18);
+                options.UseSqlServer(connectionString.SMODB18, providerOptions =>
+                {
+                    providerOptions.CommandTimeout(300);
+                });
+
+                options.EnableDetailedErrors();
             });
 
         services.AddDbContextFactory<InogorodDbContext>(
             options =>
             {
-                options.UseSqlServer(connectionString.INOGOROD18);
+                options.UseSqlServer(connectionString.INOGOROD18, providerOptions =>
+                {
+                    providerOptions.CommandTimeout(300);
+                });
+
+                options.EnableDetailedErrors();
 
             });
 

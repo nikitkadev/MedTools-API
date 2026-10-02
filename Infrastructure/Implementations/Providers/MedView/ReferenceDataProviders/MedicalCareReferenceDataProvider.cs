@@ -100,10 +100,11 @@ public sealed class MedicalCareReferenceDataProvider(
 
         var result = await dbContext
             .Set<HighTechCareTypeDbEntity>()
-            .Where(x => x.HighTechCareTypeId != null && x.HighTechCareTypeName != null && (x.HighTechCareTypeId.StartsWith(search) || x.HighTechCareTypeName.StartsWith(search)))
+            .Where(x => x.HighTechCareTypeId != null && (x.HighTechCareTypeId.StartsWith(search)))
             .Select(x => new HighTechCareTypeReferenceDto(
                 Id: x.HighTechCareTypeId!,
-                Name: $"{x.HighTechCareTypeId} — {x.HighTechCareTypeName!}"))
+                Name: x.HighTechCareTypeId!))
+            .Distinct()
             .Take(30)
             .ToListAsync(cancellationToken: cancellationToken);
 

@@ -61,6 +61,11 @@ public sealed class MedViewCompletedCasesRepository(
         query = ApplyPersonFilters(query, filters);
         query = ApplyMedicalDetailsFilters(query, filters);
         query = await ApplyOncologyFiltersAsync(query, filters);
+        query = ApplyPrescriptionFilters(query, filters);
+        query = ApplyClinicalGroupFilters(query, filters);
+        query = ApplyProvidedServiceFilters(query, filters);
+        query = ApplySanctionFilters(query, filters);
+        query = ApplyInternalFilters(query, filters);
 
         var count = await query.CountAsync(cancellationToken: cancellationToken);
         var records = await query
@@ -428,4 +433,268 @@ public sealed class MedViewCompletedCasesRepository(
         return query;
     }
 
+    private static IQueryable<CompletedCaseSearchRow> ApplyPrescriptionFilters(
+        IQueryable<CompletedCaseSearchRow> query,
+        CompletedCasesSearchFilters filters)
+    {
+        if (filters.Prescription.BasePrescription.PrescriptionTypes.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Prescriptions.Any(
+                        prescription => filters.Prescription.BasePrescription.PrescriptionTypes.Contains(prescription.PrescriptionType))));
+        }
+
+        if (filters.Prescription.BasePrescription.DiagnosticMethods.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Prescriptions.Any(
+                        prescription => prescription.DiagnosticMethod.HasValue
+                        && filters.Prescription.BasePrescription.DiagnosticMethods.Contains(prescription.DiagnosticMethod.Value))));
+        }
+
+        if (filters.Prescription.BasePrescription.ReferralDate is not null)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Prescriptions.Any(
+                        prescription => prescription.ReferralDate != null
+                        && prescription.ReferralDate == filters.Prescription.BasePrescription.ReferralDate)));
+        }
+
+        if (filters.Prescription.BasePrescription.ReferredToMedicalOrganizations.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Prescriptions.Any(
+                        prescription => prescription.ReferredToMoCode != null
+                        && filters.Prescription.BasePrescription.ReferredToMedicalOrganizations.Contains(prescription.ReferredToMoCode))));
+        }
+
+        if (filters.Prescription.BasePrescription.MedicalCareProfiles.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Prescriptions.Any(
+                        prescription => prescription.MedicalCareProfile.HasValue
+                        && filters.Prescription.BasePrescription.MedicalCareProfiles.Contains(prescription.MedicalCareProfile.Value))));
+        }
+
+        if (filters.Prescription.BasePrescription.BedProfiles.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Prescriptions.Any(
+                        prescription => prescription.BedProfile != null
+                        && filters.Prescription.BasePrescription.BedProfiles.Contains(prescription.BedProfile))));
+        }
+
+        if (filters.Prescription.BasePrescription.Services.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Prescriptions.Any(
+                        prescription => prescription.ServiceCode != null
+                        && filters.Prescription.BasePrescription.Services.Contains(prescription.ServiceCode))));
+        }
+
+
+        if (filters.Prescription.Referral.ReferralTypes.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Referrals.Any(
+                        referral => filters.Prescription.Referral.ReferralTypes.Contains(referral.ReferralType))));
+        }
+
+        if (filters.Prescription.Referral.DiagnosticMethods.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Referrals.Any(
+                        referral => referral.DiagnosticMethod.HasValue
+                        && filters.Prescription.Referral.DiagnosticMethods.Contains(referral.DiagnosticMethod.Value))));
+        }
+
+        if (filters.Prescription.Referral.ReferralDate is not null)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Referrals.Any(
+                        referral => referral.ReferralDate == filters.Prescription.Referral.ReferralDate)));
+        }
+
+        if (filters.Prescription.Referral.ReferredToMedicalOrganizations.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Referrals.Any(
+                        referral => referral.ReferredToMoCode != null
+                        && filters.Prescription.Referral.ReferredToMedicalOrganizations.Contains(referral.ReferredToMoCode))));
+        }
+
+        if (filters.Prescription.Referral.ReferredServices.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Referrals.Any(
+                        prescription => prescription.ReferredServiceCode != null
+                        && filters.Prescription.Referral.ReferredServices.Contains(prescription.ReferredServiceCode))));
+        }
+
+        return query;
+    }
+
+    private static IQueryable<CompletedCaseSearchRow> ApplyClinicalGroupFilters(
+        IQueryable<CompletedCaseSearchRow> query,
+        CompletedCasesSearchFilters filters)
+    {
+        if (filters.ClinicalGroup.BaseClinicalGroup.ClinicalStatisticGroupNumbers.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => filters.ClinicalGroup.BaseClinicalGroup.ClinicalStatisticGroupNumbers.Contains(
+                        medicalCase.ClinicalGroup.ClinicalStatisticGroupNumber)));
+        }
+
+        if (filters.ClinicalGroup.BaseClinicalGroup.ComplexityCoefficientNumbers.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.ClinicalGroup.TreatmentComplexityCoefficients.Any(
+                        coefficient => coefficient.ComplexityCoefficientNumber != null
+                        && filters.ClinicalGroup.BaseClinicalGroup.ComplexityCoefficientNumbers.Contains(coefficient.ComplexityCoefficientNumber))));
+        }
+
+        if (filters.ClinicalGroup.BaseClinicalGroup.InterruptedCasePaymentReasons.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.ClinicalGroup.InterruptedCasePaymentReason != null
+                    && filters.ClinicalGroup.BaseClinicalGroup.InterruptedCasePaymentReasons.Contains(medicalCase.ClinicalGroup.InterruptedCasePaymentReason)));
+        }
+
+
+        if (filters.ClinicalGroup.HighTechMedicalCare.HighTechCareTypes.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.HighTechCareType != null
+                    && filters.ClinicalGroup.HighTechMedicalCare.HighTechCareTypes.Contains(medicalCase.HighTechCareType)));
+        }
+
+        if (filters.ClinicalGroup.HighTechMedicalCare.HighTechCareMethods.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.HighTechCareMethod != null
+                    && filters.ClinicalGroup.HighTechMedicalCare.HighTechCareMethods.Contains(medicalCase.HighTechCareMethod)));
+        }
+
+        if (filters.ClinicalGroup.HighTechMedicalCare.VoucherIssueDate is not null)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.VoucherIssueDate == filters.ClinicalGroup.HighTechMedicalCare.VoucherIssueDate));
+        }
+
+        if (!string.IsNullOrWhiteSpace(filters.ClinicalGroup.HighTechMedicalCare.VoucherNumber))
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.VoucherNumber != null
+                    && medicalCase.VoucherNumber == filters.ClinicalGroup.HighTechMedicalCare.VoucherNumber));
+        }
+
+        if (filters.ClinicalGroup.HighTechMedicalCare.PlannedAdmissionDate is not null)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.PlannedAdmissionDate == filters.ClinicalGroup.HighTechMedicalCare.PlannedAdmissionDate));
+        }
+
+
+        return query;
+    }
+
+    private static IQueryable<CompletedCaseSearchRow> ApplyProvidedServiceFilters(
+        IQueryable<CompletedCaseSearchRow> query,
+        CompletedCasesSearchFilters filters)
+    {
+        if (filters.ProvidedService.ProvidedServices.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.ProvidedServices.Any(
+                        providedService => filters.ProvidedService.ProvidedServices.Contains(providedService.ServiceCode))));
+        }
+
+        return query;
+    }
+
+    private static IQueryable<CompletedCaseSearchRow> ApplySanctionFilters(
+        IQueryable<CompletedCaseSearchRow> query,
+        CompletedCasesSearchFilters filters)
+    {
+        if (filters.Sanction.ControlTypeCodes.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Sanctions.Any(
+                        sanction => filters.Sanction.ControlTypeCodes.Contains(sanction.ControlTypeCode))));
+        }
+
+        if (filters.Sanction.RefusalReasons.Count > 0)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Sanctions.Any(
+                        sanction => filters.Sanction.RefusalReasons.Contains(sanction.RefusalReasonCode))));
+        }
+
+        if (!string.IsNullOrWhiteSpace(filters.Sanction.ExpertiseActNumber))
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Sanctions.Any(
+                        sanction => sanction.ExpertiseActNumber == filters.Sanction.ExpertiseActNumber)));
+        }
+
+        if (filters.Sanction.ExpertiseActDate is not null)
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Sanctions.Any(
+                        sanction => sanction.ExpertiseActDate == filters.Sanction.ExpertiseActDate)));
+        }
+
+        return query;
+    }
+
+    private static IQueryable<CompletedCaseSearchRow> ApplyInternalFilters(
+        IQueryable<CompletedCaseSearchRow> query,
+        CompletedCasesSearchFilters filters)
+    {
+        if (!string.IsNullOrWhiteSpace(filters.InternalService.PatientUid) && Int32.TryParse(filters.InternalService.PatientUid, out int patientUid))
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalRecord.Patient.Uid == patientUid);
+        }
+
+        if (!string.IsNullOrWhiteSpace(filters.InternalService.MedicalCaseUid) && Int32.TryParse(filters.InternalService.MedicalCaseUid, out int medicalCaseUid))
+        {
+            query = query.Where(
+                x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => medicalCase.Uid == medicalCaseUid));
+        }
+
+        if (!string.IsNullOrWhiteSpace(filters.InternalService.CompletedCaseUid) && Int32.TryParse(filters.InternalService.CompletedCaseUid, out int completedCaseUid))
+        {
+            query = query.Where(
+                x => x.CompletedCase.Uid == completedCaseUid);
+        }
+
+        return query;
+    }
 }
