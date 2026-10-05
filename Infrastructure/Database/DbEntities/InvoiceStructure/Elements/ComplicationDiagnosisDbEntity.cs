@@ -1,0 +1,11 @@
+﻿namespace Infrastructure.Database.DbEntities.InvoiceStructure.Elements;
+
+public sealed class ComplicationDiagnosisDbEntity
+{
+    public int Uid { get; set; }
+    public int MedicalCaseUid { get; set; }
+
+    public string DiagnosisName { get; set; } = string.Empty;
+
+    public MedicalCaseDbEntity MedicalCase { get; set; } = new();
+}

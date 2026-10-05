@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using Core.Common.Enums;
-using Core.Dtos.MedView;
 using Core.Common.Results;
+using Core.Dtos.MedView;
 using Core.Dtos.RControl.Invoices;
+using Core.Interfaces.Providers.MedView;
 using Core.Interfaces.Repositories.MedView;
 using Core.Interfaces.Providers.MedView.AvailableKeysProviders;
+
 
 using Infrastructure.Internal;
 using Infrastructure.Database.Factories;
@@ -15,6 +17,7 @@ namespace Infrastructure.Implementations.Repositories.MedVIew;
 
 public sealed class MedViewCompletedCasesRepository(
     IAvaliableKeysHelper avaliableKeysHelper,
+    IDiseasesDataProvider diseasesDataProvider,
     DbContextFactory dbContextFactory) : IMedViewCompletedCasesRepository
 {
     public async Task<PagedResult<CompletedCaseListItemDto>> GetCompletedCaseListItemsAsync(
@@ -65,6 +68,7 @@ public sealed class MedViewCompletedCasesRepository(
         query = ApplyClinicalGroupFilters(query, filters);
         query = ApplyProvidedServiceFilters(query, filters);
         query = ApplySanctionFilters(query, filters);
+        query = await ApplyDiseaseFiltersAsync(query, filters, cancellationToken);
         query = ApplyInternalFilters(query, filters);
 
         var count = await query.CountAsync(cancellationToken: cancellationToken);
@@ -667,6 +671,71 @@ public sealed class MedViewCompletedCasesRepository(
                 x => x.CompletedCase.MedicalCases.Any(
                     medicalCase => medicalCase.Sanctions.Any(
                         sanction => sanction.ExpertiseActDate == filters.Sanction.ExpertiseActDate)));
+        }
+
+        return query;
+    }
+
+    private async Task<IQueryable<CompletedCaseSearchRow>> ApplyDiseaseFiltersAsync(
+        IQueryable<CompletedCaseSearchRow> query,
+        CompletedCasesSearchFilters filters,
+        CancellationToken cancellationToken)
+    {
+        if (filters.Diseases.BaseDisease.PrimaryDiagnoses.Count > 0)
+        {
+            query = query.Where(x => x.CompletedCase.MedicalCases.Any(
+                medicalCase => filters.Diseases.BaseDisease.PrimaryDiagnoses.Contains(medicalCase.PrimaryDiagnosis)));
+        }
+
+        if (filters.Diseases.BaseDisease.DiagnosisClasses.Count > 0)
+        {
+            var diseasesByClasses = await diseasesDataProvider.GetDiseasesByClassUidsAsync(
+                filters.Diseases.BaseDisease.DiagnosisClasses,
+                cancellationToken: cancellationToken);
+
+            if (diseasesByClasses.Count > 0)
+            {
+                query = query.Where(x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => diseasesByClasses.Contains(medicalCase.PrimaryDiagnosis)));
+            }
+        }
+
+        if (filters.Diseases.BaseDisease.DiagnosisSubClasses.Count > 0)
+        {
+            var diseasesBySubClasses = await diseasesDataProvider.GetDiseasesBySubClassUidsAsync(
+                filters.Diseases.BaseDisease.DiagnosisSubClasses,
+                cancellationToken: cancellationToken);
+
+            if (diseasesBySubClasses.Count > 0)
+            {
+                query = query.Where(x => x.CompletedCase.MedicalCases.Any(
+                    medicalCase => diseasesBySubClasses.Contains(medicalCase.PrimaryDiagnosis)));
+            }
+        }
+
+
+        if (filters.Diseases.AdditionalDisease.InitialDiagnoses.Count > 0)
+        {
+            query = query.Where(x => x.CompletedCase.MedicalCases.Any(
+                medicalCase => medicalCase.InitialDiagnosis != null
+                    && filters.Diseases.AdditionalDisease.InitialDiagnoses.Contains(
+                        medicalCase.InitialDiagnosis)));
+        }
+
+        if (filters.Diseases.AdditionalDisease.ConcomitantDiagnoses.Count > 0)
+        {
+            query = query.Where(x => x.CompletedCase.MedicalCases.Any(
+                medicalCase => medicalCase.ConcomitantDiagnoses.Any(
+                    concomitantDiagnosis => filters.Diseases.AdditionalDisease.ConcomitantDiagnoses.Contains(
+                        concomitantDiagnosis.DiagnosisName))));
+        }
+
+        if (filters.Diseases.AdditionalDisease.ComplicationDiagnoses.Count > 0)
+        {
+            query = query.Where(x => x.CompletedCase.MedicalCases.Any(
+                medicalCase => medicalCase.ComplicationDiagnoses.Any(
+                    complicationDiagnosis => filters.Diseases.AdditionalDisease.ComplicationDiagnoses.Contains(
+                        complicationDiagnosis.DiagnosisName))));
         }
 
         return query;

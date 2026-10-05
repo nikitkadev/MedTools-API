@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Core.Interfaces.Auth;
+using Core.Interfaces.Providers.MedView;
 using Core.Interfaces.Repositories.Users;
 using Core.Interfaces.Repositories.MedView;
 using Core.Interfaces.Repositories.RControl;
@@ -18,6 +19,7 @@ using Infrastructure.Options;
 using Infrastructure.Database;
 using Infrastructure.Database.Factories;
 using Infrastructure.Implementations.Services;
+using Infrastructure.Implementations.Providers.MedView;
 using Infrastructure.Implementations.Repositories.Users;
 using Infrastructure.Implementations.Repositories.MedVIew;
 using Infrastructure.Implementations.Repositories.RControl;
@@ -65,6 +67,7 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IPaymentReferenceDataProvider, PaymentReferenceDataProvider>();
         services.AddScoped<IMedicalServiceReferenceDataProvider, MedicalServiceReferenceDataProvider>();
         services.AddScoped<IMedViewCompletedCasesRepository, MedViewCompletedCasesRepository>();
+        services.AddScoped<IDiseasesDataProvider, DiseasesDataProvider>();
 
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
@@ -158,7 +161,7 @@ public static class DependencyInjectionRegistrator
         });
 
         services.AddOptions<JwtSettings>().Bind(configuration.GetSection("JwtSettings"));
-        
+
         return services;
     }
 }

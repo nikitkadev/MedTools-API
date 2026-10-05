@@ -59,4 +59,6 @@ public sealed class MedicalCaseDbEntity
     public List<ReferralDbEntity> Referrals { get; set; } = [];
     public List<PrescriptionDbEntity> Prescriptions { get; set; } = [];
     public List<ConsultationDbEntity> Consultations { get; set; } = [];
+    public List<ConcomitantDiagnosisDbEntity> ConcomitantDiagnoses { get; set; } = [];
+    public List<ComplicationDiagnosisDbEntity> ComplicationDiagnoses { get; set; } = [];
 }

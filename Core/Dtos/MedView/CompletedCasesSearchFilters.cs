@@ -9,6 +9,7 @@ public sealed class CompletedCasesSearchFilters
     public ClinicalGroupFilters ClinicalGroup { get; set; } = new();
     public ProvidedServiceFilters ProvidedService { get; set; } = new();
     public SanctionFilters Sanction { get; set; } = new();
+    public DiseaseFilters Diseases { get; set; } = new();
     public InternalServiceFilters InternalService { get; set; } = new();
 }
 
@@ -187,6 +188,28 @@ public sealed class SanctionFilters
     public string ExpertiseActNumber { get; set; } = string.Empty;
     public List<int> RefusalReasons { get; set; } = [];
     public DateTime? ExpertiseActDate { get; set; }
+}
+#endregion
+
+#region Diseases
+public sealed class DiseaseFilters
+{
+    public AdditionalDiseaseFilters AdditionalDisease { get; set; } = new();
+    public BaseDiseaseFilters BaseDisease { get; set; } = new();
+}
+
+public sealed class AdditionalDiseaseFilters
+{
+    public List<string> InitialDiagnoses { get; set; } = [];
+    public List<string> ConcomitantDiagnoses { get; set; } = [];
+    public List<string> ComplicationDiagnoses { get; set; } = [];
+}
+
+public sealed class BaseDiseaseFilters
+{
+    public List<string> PrimaryDiagnoses { get; set; } = [];
+    public List<int> DiagnosisClasses { get; set; } = [];
+    public List<int> DiagnosisSubClasses { get; set; } = [];
 }
 #endregion
 
