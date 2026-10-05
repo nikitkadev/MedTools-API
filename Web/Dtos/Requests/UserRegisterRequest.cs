@@ -7,5 +7,4 @@ public record UserRegisterRequest(
     string FirstName,
     string LastName,
     string PhoneNumber,
-    int Role,
     string? MiddleName = null);

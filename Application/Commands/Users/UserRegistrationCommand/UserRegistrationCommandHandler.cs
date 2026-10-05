@@ -3,7 +3,6 @@ using Core.Entities;
 using Core.Interfaces.Auth;
 using Core.Interfaces.Repositories.Users;
 using Core.Common.Results;
-using Core.Common.Enums;
 
 namespace Application.Commands.Users.UserRegistrationCommand;
 
@@ -24,9 +23,7 @@ public class UserRegistrationCommandHandler(
             request.FirstName,
             request.LastName,
             request.MiddleName,
-            request.PhoneNumber,
-            request.Role,
-            UserStatus.Active);
+            request.PhoneNumber);
 
         return await userRepository.AddUserAsync(user);
     }

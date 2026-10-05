@@ -12,9 +12,4 @@ public class UserDbEntity
     public string? MiddleName { get; set; }
     public string PhoneNumber { get; set; } = string.Empty;
 
-    public string Role { get; set; } = string.Empty;
-    public string Status { get; set; } = string.Empty;
-
-    public string? RefreshToken { get; set; }
-    public DateTime? RefreshTokenExpiry { get; set; }
 }

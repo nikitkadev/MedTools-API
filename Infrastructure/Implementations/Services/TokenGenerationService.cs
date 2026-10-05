@@ -21,7 +21,6 @@ public class TokenGenerationService(
         {
             new(ClaimTypes.Name, user.Username),
             new(ClaimTypes.Email, user.Email),
-            new(ClaimTypes.MobilePhone, user.PhoneNumber)
         };
 
         var jwt = new JwtSecurityToken(
@@ -32,10 +31,5 @@ public class TokenGenerationService(
             signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.Value.Secret)), SecurityAlgorithms.HmacSha256));
 
         return new JwtSecurityTokenHandler().WriteToken(jwt);
-    }
-
-    public string GenerateRefreshToken()
-    {
-        return "123123";
     }
 }
