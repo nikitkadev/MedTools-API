@@ -9,4 +9,5 @@ public sealed record GetCompletedCasesQuery(
     int InvoiceUid,
     int Page,
     int PageSize,
+    string SearchString,
     TargetDbType TargetDb) : IRequest<Result<GetCompletedCasesResult>>; 

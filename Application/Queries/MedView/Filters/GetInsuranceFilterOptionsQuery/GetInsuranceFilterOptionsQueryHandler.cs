@@ -1,0 +1,32 @@
+﻿using MediatR;
+
+using Core.Common.Dtos;
+using Core.Common.Results;
+using Core.Interfaces.Providers.MedView.AvailableKeysProviders;
+using Core.Interfaces.Providers.MedView.ReferenceDataProviders;
+
+namespace Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
+
+public sealed class GetInsuranceFilterOptionsQueryHandler(
+    IAvailableMedicalOrganizationKeysProvider availableMedicalOrganizationKeysProvider,
+    IMedicalOrganizationReferenceDataProvider medicalOrganizationReferenceDataProvider) : IRequestHandler<GetInsuranceFilterOptionsQuery, Result<GetInsuranceFilterOptionsResult>>
+{
+    public async Task<Result<GetInsuranceFilterOptionsResult>> Handle(
+        GetInsuranceFilterOptionsQuery request, 
+        CancellationToken cancellationToken)
+    {
+        var insurancesKeys = await availableMedicalOrganizationKeysProvider.GetInsuranceOrganizationsKeysAsync(
+            targetDb: request.TargetDb, 
+            cancellationToken: cancellationToken);
+
+        var insurancesReferenceData = await medicalOrganizationReferenceDataProvider.GetInsurancesByKeysAsync(
+            keys: insurancesKeys, 
+            cancellationToken: cancellationToken);
+
+        return Result<GetInsuranceFilterOptionsResult>.Success(
+            new GetInsuranceFilterOptionsResult(
+                FilterOptions: [.. insurancesReferenceData.Select(x => new FilterOptionDto(
+                    Value: x.Code,
+                    Label: x.Name))]));
+    }
+}

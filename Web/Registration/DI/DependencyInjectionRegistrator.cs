@@ -5,8 +5,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Core.Interfaces.Auth;
+using Core.Interfaces.Providers.MedView;
 using Core.Interfaces.Repositories.Users;
+using Core.Interfaces.Repositories.MedView;
 using Core.Interfaces.Repositories.RControl;
+using Core.Interfaces.Providers.MedView.AvailableKeysProviders;
+using Core.Interfaces.Providers.MedView.ReferenceDataProviders;
 
 using Application;
 
@@ -15,8 +19,12 @@ using Infrastructure.Options;
 using Infrastructure.Database;
 using Infrastructure.Database.Factories;
 using Infrastructure.Implementations.Services;
+using Infrastructure.Implementations.Providers.MedView;
 using Infrastructure.Implementations.Repositories.Users;
+using Infrastructure.Implementations.Repositories.MedVIew;
 using Infrastructure.Implementations.Repositories.RControl;
+using Infrastructure.Implementations.Providers.MedView.AvailableKeysProviders;
+using Infrastructure.Implementations.Providers.MedView.ReferenceDataProviders;
 
 using Web.Mapping;
 using Web.Options;
@@ -50,6 +58,17 @@ public static class DependencyInjectionRegistrator
         services.AddScoped<IOncologyServiceRepository, OncologyServiceRepository>();
         services.AddScoped<IProvidedServiceRepository, ProvidedServiceRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IAvailableMedicalOrganizationKeysProvider, AvailableMedicalOrganizationKeysProvider>();
+        services.AddScoped<IAvaliableKeysHelper, AvaliableKeysHelper>();
+        services.AddScoped<IMedicalOrganizationReferenceDataProvider, MedicalOrganizationReferenceDataProvider>();
+        services.AddScoped<IDocumentReferenceDataProvider, DocumentReferenceDataProvider>();
+        services.AddScoped<IMedicalCareReferenceDataProvider, MedicalCareReferenceDataProvider>();
+        services.AddScoped<IDiseasesReferenceDataProvider, DiseasesReferenceDataProvider>();
+        services.AddScoped<IPaymentReferenceDataProvider, PaymentReferenceDataProvider>();
+        services.AddScoped<IMedicalServiceReferenceDataProvider, MedicalServiceReferenceDataProvider>();
+        services.AddScoped<IMedViewCompletedCasesRepository, MedViewCompletedCasesRepository>();
+        services.AddScoped<IDiseasesDataProvider, DiseasesDataProvider>();
+
         services.AddSingleton<IPasswordHasherService, Argon2PasswordHasherService>();
         services.AddSingleton<ITokenGenerationService, TokenGenerationService>();
 
@@ -67,7 +86,7 @@ public static class DependencyInjectionRegistrator
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        
+
         var connectionString = new ConnectionString();
 
         configuration.GetSection("ConnectionString").Bind(connectionString);
@@ -75,15 +94,30 @@ public static class DependencyInjectionRegistrator
         services.AddDbContextFactory<SMODbContext>(
             options =>
             {
-                options.UseSqlServer(connectionString.SMODB18);
+                options.UseSqlServer(connectionString.SMODB18, providerOptions =>
+                {
+                    providerOptions.CommandTimeout(300);
+                });
+
+                options.EnableDetailedErrors();
             });
 
         services.AddDbContextFactory<InogorodDbContext>(
             options =>
             {
-                options.UseSqlServer(connectionString.INOGOROD18);
+                options.UseSqlServer(connectionString.INOGOROD18, providerOptions =>
+                {
+                    providerOptions.CommandTimeout(300);
+                });
+
+                options.EnableDetailedErrors();
 
             });
+
+        services.AddDbContextFactory<MedSprDbContenxt>(options =>
+        {
+            options.UseSqlServer(connectionString.MEDSPR18);
+        });
 
         services.AddAutoMapper(config =>
         {
@@ -131,3 +165,4 @@ public static class DependencyInjectionRegistrator
         return services;
     }
 }
+

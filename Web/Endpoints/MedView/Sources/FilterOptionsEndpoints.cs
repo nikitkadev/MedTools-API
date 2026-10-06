@@ -1,0 +1,752 @@
+﻿using Microsoft.EntityFrameworkCore;
+
+using MediatR;
+
+using Core.Common.Enums;
+
+using Application.Queries.MedView.Filters.GetBedProfileFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetCareConditionFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetCareFormFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseCharacterFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseOutcomeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseStageFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDrugIdentifierFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDrugTherapyCycleFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDrugTherapyLineFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetHospitalizationOutcomeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetInsuranceFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetInsurancePolicyTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalCareProfileFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalCareTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalOrganizationFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetOncologyServiceTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetPaymentMethodFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetPhysicianSpecialityFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetRadioTherapyTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetReferralReasonFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetScreeningResultFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetSurgicalTreatmentTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetTherapyRegimenFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetVisitPlaceFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetVisitPurposeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiagnosticMethodFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetMedicalServiceFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetReferralTypeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetClinicalGroupFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetInterruptedCasePaymentReasonFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetComplexityCoefficientOptionsQuery;
+using Application.Queries.MedView.Filters.GetHighTechCareFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetHighTechCareMethodFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetProvidedServiceFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetControlTypeCodeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetRefusalReasonCodeFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseClassFilterOptionsQuery;
+using Application.Queries.MedView.Filters.GetDiseaseSubClassFilterOptionsQuery;
+
+using Infrastructure.Database.Factories;
+using Infrastructure.Database.DbEntities.References;
+
+
+namespace Web.Endpoints.MedView.Sources;
+
+public static class FilterOptionsEndpoints
+{
+    public static void MapFilterOptionsEndpoints(this RouteGroupBuilder builder)
+    {
+        var group = builder.MapGroup("/filter-options").WithTags("Filter Options");
+
+        group.MapGet("/available-insurance", GetAvailableInsuranceFilterOptionsAsync);
+        group.MapGet("/policy-types", GetInsurancePolicyTypeFilterOptionsAsync);
+        group.MapGet("/medical-care-profiles", GetMedicalCareProfileFilterOptionsAsync);
+        group.MapGet("/bed-profiles", GetBedProfileFilterOptionsAsync);
+        group.MapGet("/visit-places", GetVisitPlaceFilterOptionsAsync);
+        group.MapGet("/visit-purposes", GetVisitPurposesFilterOptionsAsync);
+        group.MapGet("/disease-characters", GetDiseaseCharacterFilterOptionsAsync);
+        group.MapGet("/physician-specialities", GetPhysicianSpecialityFilterOptionsAsync);
+        group.MapGet("/medical-organizations", GetMedicalOrganizationFilterOptionsAsync);
+        group.MapGet("/care-conditions", GetCareConditionFilterOptionsAsync);
+        group.MapGet("/medical-care-types", GetMedicalCareTypeFilterOptionsAsync);
+        group.MapGet("/medical-care-forms", GetMedicalCareFormFilterOptionsAsync);
+        group.MapGet("/disease-outcomes", GetDiseaseOutcomeFilterOptionsAsync);
+        group.MapGet("/screening-results", GetScreeningResultFilterOptionsAsync);
+        group.MapGet("/hospitalization-outcomes", GetHospitalizationOutcomeFilterOptionsAsync);
+        group.MapGet("/payment-methods", GetPaymentMethodFilterOptionsAsync);
+        group.MapGet("/referral-reasons", GetReferralReasonsFilterOptionsAsync);
+        group.MapGet("/disease-stages", GetDiseaseStageFilterOptionsAsync);
+        group.MapGet("/oncology-service-types", GetOncologyServiceTypeFilterOptionsAsync);
+        group.MapGet("/surgical-treatment-types", GetSurgicalTreatmentTypeFilterOptionsAsync);
+        group.MapGet("/radio-therapy-types", GetRadioTherapyTypeFilterOptionsAsync);
+        group.MapGet("/drug-therapy-lines", GetDrugTherapyLineFilterOptionsAsync);
+        group.MapGet("/drug-therapy-cycles", GetDrugTherapyCycleFilterOptionsAsync);
+        group.MapGet("/drug-identifiers", GetDrugIdentifierFilterOptionsAsync);
+        group.MapGet("/therapy-regimens", GetTherapyRegimenFilterOptionsAsync);
+        group.MapGet("/diagnostic-methods", GetDiagnosticMethodsFilterOptionsAsync);
+        group.MapGet("/medical-services", GetMedicalServiceFilterOptionsAsync);
+        group.MapGet("/referral-types", GetReferralTypeFilterOptionsAsync);
+        group.MapGet("/clinical-groups", GetClinicalGroupFilterOptionsAsync);
+        group.MapGet("/interrupted-case-payment-reasons", GetInterruptedCasePaymentReasonFilterOptionsQuery);
+        group.MapGet("/complexity-coefficients", GetComplexityCoefficientFilterOptionsAsync);
+        group.MapGet("/high-tech-care-types", GetHighTechCareTypeFilterOptionsAsync);
+        group.MapGet("/high-tech-care-methods", GetHighTechCareMethodsFilterOptionsAsync);
+        group.MapGet("/provided-services", GetProvidedServiceFilterOptionsAsync);
+        group.MapGet("/control-type-codes", GetControlTypeCodeFilterOptionsAsync);
+        group.MapGet("/refusal-reason-codes", GetRefusalReasonCodesFilterOptionsAsync);
+        group.MapGet("/diseases", GetDiseaseFilterOptionsAsync);
+        group.MapGet("/disease-classes", GetDiseaseClasseFilterOptionsAsync);
+        group.MapGet("/disease-sub-classes", GetDiseaseSubClasseFilterOptionsAsync);
+
+        group.MapGet("/test", TestThisShitAsync);
+    }
+
+    public async static Task<IResult> TestThisShitAsync(DbContextFactory dbContextFactory)
+    {
+        var dbContext = dbContextFactory.CreateDbContext(TargetDbType.MEDSPR18);
+        var result = await dbContext
+            .Set<DivisionDbEntity>()
+            .ToListAsync();
+
+        return Results.Ok(result);
+    }
+
+
+    public async static Task<IResult> GetAvailableInsuranceFilterOptionsAsync(
+        TargetDbType targetDb,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(new GetInsuranceFilterOptionsQuery(targetDb), cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetInsurancePolicyTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetInsurancePolicyTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalCareProfileFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalCareProfileFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetBedProfileFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetBedProfileFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetVisitPlaceFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetVisitPlaceFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetVisitPurposesFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetVisitPurposeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseCharacterFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseCharacterFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetPhysicianSpecialityFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetPhysicianSpecialityFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalOrganizationFilterOptionsAsync(
+        TargetDbType targetDb,
+        MedicalOrgsKeysFrom medicalOrgsKeysFrom,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalOrganizationFilterOptionsQuery(
+                TargetDb: targetDb,
+                MedicalOrgsKeysFrom: medicalOrgsKeysFrom),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetCareConditionFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetCareConditionFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalCareTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalCareTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalCareFormFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetCareFormFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseOutcomeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseOutcomeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetScreeningResultFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetScreeningResultFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetHospitalizationOutcomeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetHospitalizationOutcomeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetPaymentMethodFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetPaymentMethodFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetReferralReasonsFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetReferralReasonFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseStageFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseStageFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetOncologyServiceTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetOncologyServiceTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetSurgicalTreatmentTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetSurgicalTreatmentTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetRadioTherapyTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetRadioTherapyTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDrugTherapyLineFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDrugTherapyLineFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDrugTherapyCycleFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDrugTherapyCycleFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDrugIdentifierFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDrugIdentifierFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetTherapyRegimenFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetTherapyRegimenFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiagnosticMethodsFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiagnosticMethodFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetMedicalServiceFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetMedicalServiceFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetReferralTypeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetReferralTypeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetClinicalGroupFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetClinicalGroupFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetInterruptedCasePaymentReasonFilterOptionsQuery(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetInterruptedCasePaymentReasonFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetComplexityCoefficientFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetComplexityCoefficientOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetHighTechCareTypeFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetHighTechCareFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetHighTechCareMethodsFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetHighTechCareMethodFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetProvidedServiceFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetProvidedServiceFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetControlTypeCodeFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetControlTypeCodeFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetRefusalReasonCodesFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetRefusalReasonCodeFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseFilterOptionsAsync(
+        string search,
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseFilterOptionsQuery(Search: search),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+    }
+
+    public async static Task<IResult> GetDiseaseClasseFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseClassFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+
+    }
+
+    public async static Task<IResult> GetDiseaseSubClasseFilterOptionsAsync(
+        ISender sender,
+        CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            request: new GetDiseaseSubClassFilterOptionsQuery(),
+            cancellationToken: cancellationToken);
+
+        if (!result.IsSuccess)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(result);
+
+    }
+
+}

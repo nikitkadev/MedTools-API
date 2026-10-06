@@ -18,6 +18,7 @@ public sealed class GetInvoicesQueryHandler(
             month: request.BillingMonth,
             page: request.Page,
             pageSize: request.PageSize,
+            searchString: request.SearchString,
             targetDb: request.TargetDb,
             cancellationToken: cancellationToken);
 

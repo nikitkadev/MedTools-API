@@ -1,5 +1,6 @@
-﻿using Web.Endpoints.RControl;
-using Web.Endpoints.Users;
+﻿using Web.Endpoints.Users;
+using Web.Endpoints.MedView;
+using Web.Endpoints.RControl;
 
 namespace Web.Registration.Endpoints;
 
@@ -9,5 +10,6 @@ public static class EndpointsProvider
     {
         routeGroupBuilder.Register<UserAuthorization>();
         routeGroupBuilder.Register<RControlEndpoints>();
+        routeGroupBuilder.Register<MedViewEndpoints>();
     }
 }

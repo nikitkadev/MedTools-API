@@ -9,7 +9,6 @@ namespace Infrastructure.Database;
 public abstract class MedToolsDbContext(
     DbContextOptions options) : DbContext(options)
 {
-
     public DbSet<UserDbEntity> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -18,8 +17,6 @@ public abstract class MedToolsDbContext(
     }
 }
 
-public class SMODbContext(
-    DbContextOptions<SMODbContext> options) : MedToolsDbContext(options);
-
-public class InogorodDbContext(
-    DbContextOptions<InogorodDbContext> options) : MedToolsDbContext(options);
+public class SMODbContext(DbContextOptions<SMODbContext> options) : MedToolsDbContext(options);
+public class InogorodDbContext(DbContextOptions<InogorodDbContext> options) : MedToolsDbContext(options);
+public class MedSprDbContenxt(DbContextOptions<MedSprDbContenxt> options) : MedToolsDbContext(options);

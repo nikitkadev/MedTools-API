@@ -19,6 +19,7 @@ public class InvoiceRepository(
         int month,
         int page,
         int pageSize,
+        string searchString,
         TargetDbType targetDb,
         CancellationToken cancellationToken)
     {
@@ -39,7 +40,7 @@ public class InvoiceRepository(
                         new SqlParameter("@month", month),
                         new SqlParameter("@take", pageSize),
                         new SqlParameter("@skip", pageSize * (page - 1)),
-                        new SqlParameter("@search", string.Empty),
+                        new SqlParameter("@search", searchString),
                         totalParam
                     ])
             .AsNoTracking()
@@ -72,6 +73,7 @@ public class InvoiceRepository(
         int invoiceUid,
         int page,
         int pageSize,
+        string searchString,
         TargetDbType targetDb,
         CancellationToken cancellationToken)
     {
@@ -90,7 +92,7 @@ public class InvoiceRepository(
                         new SqlParameter("@schet_uid", invoiceUid),
                         new SqlParameter("@skip", pageSize * (page -1)),
                         new SqlParameter("@take", pageSize),
-                        new SqlParameter("@search", string.Empty),
+                        new SqlParameter("@search", searchString),
                         totalCountParam
                     ])
             .AsNoTracking()

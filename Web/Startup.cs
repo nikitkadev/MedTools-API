@@ -1,7 +1,9 @@
-using Web.Registration.DI;
-using Web.Registration.Endpoints;
+using System.Text.Json.Serialization;
 
 using Serilog;
+
+using Web.Registration.DI;
+using Web.Registration.Endpoints;
 
 namespace Web;
 
@@ -16,6 +18,10 @@ public class Startup
         var builder = WebApplication.CreateBuilder();
 
         builder.Services.RegisterAppServices(builder.Configuration);
+        builder.Services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
         builder.Host.UseSerilog();
 
         var app = builder.Build();

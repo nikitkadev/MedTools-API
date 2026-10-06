@@ -1,7 +1,8 @@
 ﻿using MediatR;
+
+using Core.Common.Results;
 using Core.Interfaces.Auth;
 using Core.Interfaces.Repositories.Users;
-using Core.Common.Results;
 
 namespace Application.Commands.Auth.LoginCommand;
 
@@ -15,6 +16,7 @@ public class LoginCommandHandler(
         CancellationToken cancellationToken)
     {
         var result = await userRepository.GetUserByEmail(request.Email);
+
         if (!result.IsSuccess)
         {
             return Result<LoginCommandResult>.Failure(result.Error);
@@ -22,29 +24,22 @@ public class LoginCommandHandler(
 
         var user = result.Value!;
 
-        if (!user.CanLogin())
-        {
-            return Result<LoginCommandResult>.Failure("Ваша учетная запись отключена, либо заблокирована");
-        }
+        var passwordMatch = passwordHasher.VerifyPassword(
+            request.Password, 
+            user.PasswordHash);
 
-        var passwordMatch = passwordHasher.VerifyPassword(request.Password, user.PasswordHash);
         if (!passwordMatch)
         {
             return Result<LoginCommandResult>.Failure("Неверный логин или пароль");
         }
 
         var accessToken = generationService.GenerateAccessToken(user);
-        var refreshToken = generationService.GenerateRefreshToken();
-
-        user.SetRefreshToken(refreshToken);
 
         var response = new LoginCommandResult(
             AccessToken: accessToken,
-            RefreshToken: refreshToken,
-            Uid: user.Uid,
+            Uid: user.Id,
             Email: user.Email,
-            Username: user.Username,
-            Role: user.Role.ToString());
+            Username: user.Username);
 
         return Result<LoginCommandResult>.Success(response);
     }
